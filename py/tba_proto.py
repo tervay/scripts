@@ -1,7 +1,10 @@
-from py.cli import expose, pprint
-from typing import Callable, List, Union, Dict
-import yaml
+import inspect
+from typing import Callable, Dict, Union
+
 import inflection
+import yaml
+
+from py.cli import expose, pprint
 
 
 class Model:
@@ -101,19 +104,93 @@ class Model:
 
 @expose
 def generate_pbs(filepath):
-    generate_models(filepath)
-
-
-def generate_models(filepath):
     content = None
     with open(filepath, "r") as f:
         content = f.readlines()
 
     content = yaml.load("".join(content), Loader=yaml.FullLoader)
-    components = content["components"]
+
+    generate_models(content)
+    generate_request_models(content)
+    generate_rpcs(content)
+
+
+def generate_models(content):
+    schemas = content["components"]["schemas"]
 
     print('syntax = "proto3";')
 
-    models = [Model(k, v) for k, v in components["schemas"].items()]
+    models = [Model(k, v) for k, v in schemas.items()]
     for m in models:
         print(m.to_proto())
+
+
+def generate_request_models(content):
+    parameters = content["components"]["parameters"]
+    print("message Parameter {")
+
+    for i, (param_name, param_data) in enumerate(parameters.items(), start=1):
+        type_ = {"string": "string", "integer": "int32"}[param_data["schema"]["type"]]
+        print(f" {type_} {inflection.underscore(param_name)} = {i};")
+
+    print("}")
+
+    print("message Response {")
+    print("  oneof response_value {")
+    print("    int32 int_value = 1;")
+    print("    string string_value = 2;")
+    print("    bool bool_value = 3;")
+    print("    double double_value = 4;")
+    print("  }")
+    print("}")
+
+
+def generate_rpcs(content):
+    print("service TPA {")
+
+    paths = content["paths"]
+
+    for path, path_data in paths.items():
+        name = path_data["get"]["operationId"]
+        comment = path_data["get"]["description"]
+
+        return_schema = path_data["get"]["responses"]["200"]["content"][
+            "application/json"
+        ]["schema"]
+
+        response_type = ""
+        if "type" in return_schema:
+            type_ = return_schema["type"]
+
+            if type_ == "array":
+                response_type = "stream "
+                if "$ref" in return_schema["items"]:
+                    type_ = return_schema["items"]["$ref"].split("/")[-1]
+                else:
+                    type_ = "Response"
+        else:
+            type_ = return_schema["$ref"].split("/")[-1]
+
+        response_type += type_
+
+        print(f"  /* {comment} */")
+        print(f"  rpc {name}(Parameter) returns ({response_type}) {{}}")
+
+    print("}")
+
+
+@expose
+def generate_server():
+    # only need to ever run once. generates py.tpa.tpa_server starting points.
+    print("from protos import *")
+    print("class TPAService(TpaBase):")
+
+    from protos import TpaBase
+
+    for method_name in dir(TpaBase):
+        if method_name.startswith("get_"):
+            print(
+                f"    async def {method_name}{inspect.signature(getattr(TpaBase, method_name))}:"
+            )
+            print(f"        print('called {method_name}')")
+            print("        return None")

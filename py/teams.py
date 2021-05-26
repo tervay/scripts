@@ -1,8 +1,9 @@
-from py.cli import expose, pprint
-from py.tba import tba, helpers
 from tqdm import tqdm
 
-from protos.tba import Team
+from py.cli import expose, pprint
+from py.tba import helpers, tba
+from py.tpa import tpa_cm
+
 
 @expose
 def about(num):
@@ -32,5 +33,7 @@ def dlf_wffa():
 
 
 @expose
-def test_pb():
-    print(Team(team_number=2791))
+async def test(n):
+    async with tpa_cm() as tpa:
+        res = await tpa.get_team(team_key=f"frc{n}")
+        print(res)

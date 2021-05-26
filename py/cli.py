@@ -33,10 +33,15 @@ def attempt_to_cast_value(s):
     return s
 
 
-def run_main(argv):
+async def run_main(argv):
     module_name, fn_name, *args = argv
     args = [attempt_to_cast_value(a) for a in args]
-    fns[module_name][fn_name](*args)
+    fn = fns[module_name][fn_name]
+
+    if inspect.iscoroutinefunction(fn):
+        await ((fn(*args)))
+    else:
+        fn(*args)
 
 
 def pprint(*args, **kwargs):

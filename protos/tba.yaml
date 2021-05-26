@@ -640,43 +640,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
       security:
         - apiKey: []
-  '/team/{team_key}/events/{year}/statuses':
-    get:
-      tags:
-        - list
-        - team
-        - event
-      description: Gets a key-value list of the event statuses for events this team has competed at in the given year.
-      operationId: getTeamEventsStatusesByYear
-      parameters:
-        - $ref: '#/components/parameters/If-Modified-Since'
-        - $ref: '#/components/parameters/team_key'
-        - $ref: '#/components/parameters/year'
-      responses:
-        '200':
-          description: Successful response
-          headers:
-            Cache-Control:
-              description: 'The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.'
-              schema:
-                type: string
-            Last-Modified:
-              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties:
-                  $ref: '#/components/schemas/Team_Event_Status'
-                description: A key-value pair of `Team_Event_Status` objects with the event key as the key.
-        '304':
-          $ref: '#/components/responses/NotModified'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-      security:
-        - apiKey: []
   '/team/{team_key}/event/{event_key}/matches':
     get:
       tags:
@@ -1623,42 +1586,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
       security:
         - apiKey: []
-  '/event/{event_key}/teams/statuses':
-    get:
-      tags:
-        - event
-        - team
-        - list
-      description: Gets a key-value list of the event statuses for teams competing at the given event.
-      operationId: getEventTeamsStatuses
-      parameters:
-        - $ref: '#/components/parameters/If-Modified-Since'
-        - $ref: '#/components/parameters/event_key'
-      responses:
-        '200':
-          description: Successful response
-          headers:
-            Cache-Control:
-              description: 'The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.'
-              schema:
-                type: string
-            Last-Modified:
-              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties:
-                  $ref: '#/components/schemas/Team_Event_Status'
-                description: A key-value pair of `Team_Event_Status` objects with the event key as the key.
-        '304':
-          $ref: '#/components/responses/NotModified'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-      security:
-        - apiKey: []
   '/event/{event_key}/matches':
     get:
       tags:
@@ -1889,43 +1816,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Match_Simple'
-        '304':
-          $ref: '#/components/responses/NotModified'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-      security:
-        - apiKey: []
-  '/match/{match_key}/timeseries':
-    get:
-      tags:
-        - match
-      description: |-
-        Gets an array of game-specific Match Timeseries objects for the given match key or an empty array if not available.
-        *WARNING:* This is *not* official data, and is subject to a significant possibility of error, or missing data. Do not rely on this data for any purpose. In fact, pretend we made it up.
-        *WARNING:* This endpoint and corresponding data models are under *active development* and may change at any time, including in breaking ways.
-      operationId: getMatchTimeseries
-      parameters:
-        - $ref: '#/components/parameters/If-Modified-Since'
-        - $ref: '#/components/parameters/match_key'
-      responses:
-        '200':
-          description: Successful response
-          headers:
-            Cache-Control:
-              description: 'The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.'
-              schema:
-                type: string
-            Last-Modified:
-              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties: {}
         '304':
           $ref: '#/components/responses/NotModified'
         '401':
