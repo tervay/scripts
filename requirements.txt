@@ -1,6 +1,6 @@
 appdirs==1.4.3
 attrs==21.2.0
-betterproto==1.2.5
+betterproto==2.0.0b3
 black==21.5b1
 CacheControl==0.12.6
 certifi==2019.11.28
