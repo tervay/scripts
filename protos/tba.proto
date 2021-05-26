@@ -1,5 +1,4 @@
 syntax = "proto3";
-message MapObject { map<string, string> data = 1; }
 message API_Status {
   int32 current_season = 1;
   int32 max_season = 2;
@@ -40,7 +39,7 @@ message Team {
   string website = 16;
   int32 rookie_year = 17;
   string motto = 18;
-  MapObject home_championship = 19;
+  map<string, string> home_championship = 19;
 }
 message Team_Robot {
   int32 year = 1;
@@ -105,8 +104,21 @@ message Team_Event_Status {
 }
 message Team_Event_Status_rank {
   int32 num_teams = 1;
-  MapObject ranking = 2;
-  repeated MapObject sort_order_info = 3;
+  message Ranking {
+    int32 matches_played = 1;
+    double qual_average = 2;
+    repeated double sort_orders = 3;
+    WLT_Record record = 4;
+    int32 rank = 5;
+    int32 dq = 6;
+    string team_key = 7;
+  }
+  Ranking ranking = 2;
+  message SortOrderInfo {
+    int32 precision = 1;
+    string name = 2;
+  }
+  repeated SortOrderInfo sort_order_info = 3;
   string status = 4;
 }
 message Team_Event_Status_alliance {
@@ -127,17 +139,35 @@ message Team_Event_Status_playoff {
   int32 playoff_average = 5;
 }
 message Event_Ranking {
-  repeated MapObject rankings = 1;
-  repeated MapObject extra_stats_info = 2;
-  repeated MapObject sort_order_info = 3;
+  message Rankings {
+    int32 matches_played = 1;
+    int32 qual_average = 2;
+    repeated double extra_stats = 3;
+    repeated double sort_orders = 4;
+    WLT_Record record = 5;
+    int32 rank = 6;
+    int32 dq = 7;
+    string team_key = 8;
+  }
+  repeated Rankings rankings = 1;
+  message ExtraStatsInfo {
+    double precision = 1;
+    string name = 2;
+  }
+  repeated ExtraStatsInfo extra_stats_info = 2;
+  message SortOrderInfo {
+    int32 precision = 1;
+    string name = 2;
+  }
+  repeated SortOrderInfo sort_order_info = 3;
 }
 message Event_District_Points {
-  MapObject points = 1;
-  MapObject tiebreakers = 2;
+  map<string, string> points = 1;
+  map<string, string> tiebreakers = 2;
 }
 message Event_Insights {
-  MapObject qual = 1;
-  MapObject playoff = 2;
+  map<string, string> qual = 1;
+  map<string, string> playoff = 2;
 }
 message Event_Insights_2016 {
   repeated double LowBar = 1;
@@ -239,9 +269,9 @@ message Event_Insights_2018 {
   double winning_scale_ownership_percentage_teleop = 37;
 }
 message Event_OPRs {
-  MapObject oprs = 1;
-  MapObject dprs = 2;
-  MapObject ccwms = 3;
+  map<string, string> oprs = 1;
+  map<string, string> dprs = 2;
+  map<string, string> ccwms = 3;
 }
 
 message Match_Simple {
@@ -249,7 +279,11 @@ message Match_Simple {
   string comp_level = 2;
   int32 set_number = 3;
   int32 match_number = 4;
-  MapObject alliances = 5;
+  message Alliances {
+    Match_alliance red = 1;
+    Match_alliance blue = 2;
+  }
+  Alliances alliances = 5;
   string winning_alliance = 6;
   string event_key = 7;
   int32 time = 8;
@@ -261,15 +295,23 @@ message Match {
   string comp_level = 2;
   int32 set_number = 3;
   int32 match_number = 4;
-  MapObject alliances = 5;
+  message Alliances {
+    Match_alliance red = 1;
+    Match_alliance blue = 2;
+  }
+  Alliances alliances = 5;
   string winning_alliance = 6;
   string event_key = 7;
   int32 time = 8;
   int32 actual_time = 9;
   int32 predicted_time = 10;
   int32 post_result_time = 11;
-  MapObject score_breakdown = 12;
-  repeated MapObject videos = 13;
+  map<string, string> score_breakdown = 12;
+  message Videos {
+    string type = 1;
+    string key = 2;
+  }
+  repeated Videos videos = 13;
 }
 message Match_alliance {
   int32 score = 1;
@@ -280,7 +322,11 @@ message Match_alliance {
 message Zebra {
   string key = 1;
   repeated double times = 2;
-  MapObject alliances = 3;
+  message Alliances {
+    repeated Zebra_team red = 1;
+    repeated Zebra_team blue = 2;
+  }
+  Alliances alliances = 3;
 }
 message Zebra_team {
   string team_key = 1;
@@ -578,17 +624,28 @@ message Match_Score_Breakdown_2020_Alliance {
 message Media {
   string type = 1;
   string foreign_key = 2;
-  MapObject details = 3;
+  map<string, string> details = 3;
   bool preferred = 4;
   string direct_url = 5;
   string view_url = 6;
 }
 message Elimination_Alliance {
   string name = 1;
-  MapObject backup = 2;
+  message Backup {
+    string in = 1;
+    string out = 2;
+  }
+  Backup backup = 2;
   repeated string declines = 3;
   repeated string picks = 4;
-  MapObject status = 5;
+  message Status {
+    double playoff_average = 1;
+    string level = 2;
+    WLT_Record record = 3;
+    WLT_Record current_level_record = 4;
+    string status = 5;
+  }
+  Status status = 5;
 }
 message Award {
   string name = 1;
@@ -612,7 +669,16 @@ message District_Ranking {
   int32 rank = 2;
   int32 rookie_bonus = 3;
   int32 point_total = 4;
-  repeated MapObject event_points = 5;
+  message EventPoints {
+    bool district_cmp = 1;
+    int32 total = 2;
+    int32 alliance_points = 3;
+    int32 elim_points = 4;
+    int32 award_points = 5;
+    string event_key = 6;
+    int32 qual_points = 7;
+  }
+  repeated EventPoints event_points = 5;
 }
 message WLT_Record {
   int32 losses = 1;

@@ -1,6 +1,7 @@
 from py.cli import expose, pprint
 from typing import Callable, List, Union, Dict
 import yaml
+import inflection
 
 
 class Model:
@@ -24,38 +25,53 @@ class Model:
 
         return self.fns[field_type]
 
-    def ref_to_proto(self, field_name: str, ref: str) -> str:
+    def ref_to_proto(self, field_name: str, ref: str, n: int) -> str:
         field_type = ref.split("/")[-1]
-        return field_type + " " + field_name + " = {n};"
+        return field_type + " " + field_name + f" = {n};"
 
     def field_to_proto(
-        self, field_name: str, data: dict
+        self, field_name: str, data: dict, n: int
     ) -> Union[int, str, bool, float, list]:
-        return self.get_fn_for_type(data["type"])(field_name, data)
+        return self.get_fn_for_type(data["type"])(field_name, data, n)
 
-    def int_field_to_proto(self, field_name: str, data: dict) -> str:
-        return "int32 " + field_name + " = {n};"
+    def int_field_to_proto(self, field_name: str, data: dict, n: int) -> str:
+        return "int32 " + field_name + f" = {n};"
 
-    def str_field_to_proto(self, field_name: str, data: dict) -> str:
-        return "string " + field_name + " = {n};"
+    def str_field_to_proto(self, field_name: str, data: dict, n: int) -> str:
+        return "string " + field_name + f" = {n};"
 
-    def bool_field_to_proto(self, field_name: str, data: dict) -> str:
-        return "bool " + field_name + " = {n};"
+    def bool_field_to_proto(self, field_name: str, data: dict, n: int) -> str:
+        return "bool " + field_name + f" = {n};"
 
-    def float_field_to_proto(self, field_name: str, data: dict) -> str:
-        return "double " + field_name + " = {n};"
+    def float_field_to_proto(self, field_name: str, data: dict, n: int) -> str:
+        return "double " + field_name + f" = {n};"
 
-    def array_field_to_proto(self, field_name: str, data: dict) -> str:
+    def array_field_to_proto(self, field_name: str, data: dict, n: int) -> str:
         if "$ref" in data["items"]:
             return "repeated " + self.ref_to_proto(
-                field_name=field_name, ref=data["items"]["$ref"]
+                field_name=field_name, ref=data["items"]["$ref"], n=n
             )
 
         inner_type = data["items"]["type"]
-        return "repeated " + self.get_fn_for_type(inner_type)(field_name, data)
 
-    def object_field_to_proto(self, field_name: str, data: dict) -> str:
-        return "MapObject " + field_name + " = {n};"
+        s = self.get_fn_for_type(inner_type)(field_name, data["items"], n)
+        if inner_type == "object":
+            split = s.split("\n")
+            split[-1] = "repeated " + split[-1]
+            s = "\n".join(split)
+        else:
+            s = "repeated " + s
+
+        return s
+
+    def object_field_to_proto(self, field_name: str, data: dict, n: int) -> str:
+        if "properties" in data and len(data["properties"].keys()) > 0:
+            model = Model(inflection.camelize(field_name), data).to_proto()
+            return (
+                f"{model}\n{inflection.camelize(field_name)} {field_name} = " + f"{n};"
+            )
+
+        return "map<string, string> " + field_name + f" = {n};"
 
     def to_proto(self):
         fields = []
@@ -63,17 +79,20 @@ class Model:
         if "properties" not in self.data:
             return ""
 
-        for field_name, field_data in self.data["properties"].items():
+        for index, (field_name, field_data) in enumerate(
+            self.data["properties"].items(), start=1
+        ):
             if "$ref" in field_data:
                 fields.append(
-                    self.ref_to_proto(field_name=field_name, ref=field_data["$ref"])
+                    self.ref_to_proto(
+                        field_name=field_name, ref=field_data["$ref"], n=index
+                    )
                 )
             else:
                 fields.append(
-                    self.field_to_proto(field_name=field_name, data=field_data)
+                    self.field_to_proto(field_name=field_name, data=field_data, n=index)
                 )
 
-        fields = [f.format(n=i) for i, f in enumerate(fields, start=1)]
         header = f"message {self.name} {{"
         footer = "}"
 
@@ -94,9 +113,6 @@ def generate_models(filepath):
     components = content["components"]
 
     print('syntax = "proto3";')
-    print("message MapObject {")
-    print("  map<string, string> data = 1;")
-    print("}")
 
     models = [Model(k, v) for k, v in components["schemas"].items()]
     for m in models:
