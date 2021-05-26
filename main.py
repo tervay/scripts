@@ -4,7 +4,7 @@ from sys import argv
 from grpclib.server import Server
 
 import py.graphing
-import py.tba_proto
+import py.codegen
 import py.teams
 from py.cli import run_main
 from py.tpa import TPAService
