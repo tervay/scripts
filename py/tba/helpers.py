@@ -8,16 +8,16 @@ def flatten_lists(lists):
     return [item for sublist in lists for item in sublist]
 
 
-def filter_official_events(event_list, whitelist=None):
-    blacklist = ["Offseason", "Preseason", "--"]
-    if whitelist is None:
-        whitelist = []
+def filter_official_events(event_list, allowlist=None):
+    blocklist = ["Offseason", "Preseason", "--"]
+    if allowlist is None:
+        allowlist = []
 
     return list(
         filter(
-            lambda e: e["event_type_string"] not in blacklist
-            or e["key"] in whitelist
-            or e["event_code"] in whitelist,
+            lambda e: e["event_type_string"] not in blocklist
+            or e["key"] in allowlist
+            or e["event_code"] in allowlist,
             event_list,
         )
     )

@@ -2,6 +2,7 @@ from py.cli import expose, pprint
 from py.tba import tba, helpers
 from tqdm import tqdm
 
+from protos.tba import Team
 
 @expose
 def about(num):
@@ -28,3 +29,8 @@ def dlf_wffa():
                     wffa[recipient["awardee"]] = (event["key"], recipient["team_key"])
 
     pprint(set(dlf.keys()) & set(wffa.keys()))
+
+
+@expose
+def test_pb():
+    print(Team(team_number=2791))

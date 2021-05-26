@@ -1,0 +1,627 @@
+syntax = "proto3";
+message MapObject { map<string, string> data = 1; }
+message API_Status {
+  int32 current_season = 1;
+  int32 max_season = 2;
+  bool is_datafeed_down = 3;
+  repeated string down_events = 4;
+  API_Status_App_Version ios = 5;
+  API_Status_App_Version android = 6;
+}
+message API_Status_App_Version {
+  int32 min_app_version = 1;
+  int32 latest_app_version = 2;
+}
+message Team_Simple {
+  string key = 1;
+  int32 team_number = 2;
+  string nickname = 3;
+  string name = 4;
+  string city = 5;
+  string state_prov = 6;
+  string country = 7;
+}
+message Team {
+  string key = 1;
+  int32 team_number = 2;
+  string nickname = 3;
+  string name = 4;
+  string school_name = 5;
+  string city = 6;
+  string state_prov = 7;
+  string country = 8;
+  string address = 9;
+  string postal_code = 10;
+  string gmaps_place_id = 11;
+  string gmaps_url = 12;
+  double lat = 13;
+  double lng = 14;
+  string location_name = 15;
+  string website = 16;
+  int32 rookie_year = 17;
+  string motto = 18;
+  MapObject home_championship = 19;
+}
+message Team_Robot {
+  int32 year = 1;
+  string robot_name = 2;
+  string key = 3;
+  string team_key = 4;
+}
+message Event_Simple {
+  string key = 1;
+  string name = 2;
+  string event_code = 3;
+  int32 event_type = 4;
+  District_List district = 5;
+  string city = 6;
+  string state_prov = 7;
+  string country = 8;
+  string start_date = 9;
+  string end_date = 10;
+  int32 year = 11;
+}
+message Event {
+  string key = 1;
+  string name = 2;
+  string event_code = 3;
+  int32 event_type = 4;
+  District_List district = 5;
+  string city = 6;
+  string state_prov = 7;
+  string country = 8;
+  string start_date = 9;
+  string end_date = 10;
+  int32 year = 11;
+  string short_name = 12;
+  string event_type_string = 13;
+  int32 week = 14;
+  string address = 15;
+  string postal_code = 16;
+  string gmaps_place_id = 17;
+  string gmaps_url = 18;
+  double lat = 19;
+  double lng = 20;
+  string location_name = 21;
+  string timezone = 22;
+  string website = 23;
+  string first_event_id = 24;
+  string first_event_code = 25;
+  repeated Webcast webcasts = 26;
+  repeated string division_keys = 27;
+  string parent_event_key = 28;
+  int32 playoff_type = 29;
+  string playoff_type_string = 30;
+}
+message Team_Event_Status {
+  Team_Event_Status_rank qual = 1;
+  Team_Event_Status_alliance alliance = 2;
+  Team_Event_Status_playoff playoff = 3;
+  string alliance_status_str = 4;
+  string playoff_status_str = 5;
+  string overall_status_str = 6;
+  string next_match_key = 7;
+  string last_match_key = 8;
+}
+message Team_Event_Status_rank {
+  int32 num_teams = 1;
+  MapObject ranking = 2;
+  repeated MapObject sort_order_info = 3;
+  string status = 4;
+}
+message Team_Event_Status_alliance {
+  string name = 1;
+  int32 number = 2;
+  Team_Event_Status_alliance_backup backup = 3;
+  int32 pick = 4;
+}
+message Team_Event_Status_alliance_backup {
+  string out = 1;
+  string in = 2;
+}
+message Team_Event_Status_playoff {
+  string level = 1;
+  WLT_Record current_level_record = 2;
+  WLT_Record record = 3;
+  string status = 4;
+  int32 playoff_average = 5;
+}
+message Event_Ranking {
+  repeated MapObject rankings = 1;
+  repeated MapObject extra_stats_info = 2;
+  repeated MapObject sort_order_info = 3;
+}
+message Event_District_Points {
+  MapObject points = 1;
+  MapObject tiebreakers = 2;
+}
+message Event_Insights {
+  MapObject qual = 1;
+  MapObject playoff = 2;
+}
+message Event_Insights_2016 {
+  repeated double LowBar = 1;
+  repeated double A_ChevalDeFrise = 2;
+  repeated double A_Portcullis = 3;
+  repeated double B_Ramparts = 4;
+  repeated double B_Moat = 5;
+  repeated double C_SallyPort = 6;
+  repeated double C_Drawbridge = 7;
+  repeated double D_RoughTerrain = 8;
+  repeated double D_RockWall = 9;
+  double average_high_goals = 10;
+  double average_low_goals = 11;
+  repeated double breaches = 12;
+  repeated double scales = 13;
+  repeated double challenges = 14;
+  repeated double captures = 15;
+  double average_win_score = 16;
+  double average_win_margin = 17;
+  double average_score = 18;
+  double average_auto_score = 19;
+  double average_crossing_score = 20;
+  double average_boulder_score = 21;
+  double average_tower_score = 22;
+  double average_foul_score = 23;
+  repeated string high_score = 24;
+}
+message Event_Insights_2017 {
+  double average_foul_score = 1;
+  double average_fuel_points = 2;
+  double average_fuel_points_auto = 3;
+  double average_fuel_points_teleop = 4;
+  double average_high_goals = 5;
+  double average_high_goals_auto = 6;
+  double average_high_goals_teleop = 7;
+  double average_low_goals = 8;
+  double average_low_goals_auto = 9;
+  double average_low_goals_teleop = 10;
+  double average_mobility_points_auto = 11;
+  double average_points_auto = 12;
+  double average_points_teleop = 13;
+  double average_rotor_points = 14;
+  double average_rotor_points_auto = 15;
+  double average_rotor_points_teleop = 16;
+  double average_score = 17;
+  double average_takeoff_points_teleop = 18;
+  double average_win_margin = 19;
+  double average_win_score = 20;
+  repeated string high_kpa = 21;
+  repeated string high_score = 22;
+  repeated double kpa_achieved = 23;
+  repeated double mobility_counts = 24;
+  repeated double rotor_1_engaged = 25;
+  repeated double rotor_1_engaged_auto = 26;
+  repeated double rotor_2_engaged = 27;
+  repeated double rotor_2_engaged_auto = 28;
+  repeated double rotor_3_engaged = 29;
+  repeated double rotor_4_engaged = 30;
+  repeated double takeoff_counts = 31;
+  repeated double unicorn_matches = 32;
+}
+message Event_Insights_2018 {
+  repeated double auto_quest_achieved = 1;
+  double average_boost_played = 2;
+  double average_endgame_points = 3;
+  double average_force_played = 4;
+  double average_foul_score = 5;
+  double average_points_auto = 6;
+  double average_points_teleop = 7;
+  double average_run_points_auto = 8;
+  double average_scale_ownership_points = 9;
+  double average_scale_ownership_points_auto = 10;
+  double average_scale_ownership_points_teleop = 11;
+  double average_score = 12;
+  double average_switch_ownership_points = 13;
+  double average_switch_ownership_points_auto = 14;
+  double average_switch_ownership_points_teleop = 15;
+  double average_vault_points = 16;
+  double average_win_margin = 17;
+  double average_win_score = 18;
+  repeated double boost_played_counts = 19;
+  repeated double climb_counts = 20;
+  repeated double face_the_boss_achieved = 21;
+  repeated double force_played_counts = 22;
+  repeated string high_score = 23;
+  repeated double levitate_played_counts = 24;
+  repeated double run_counts_auto = 25;
+  double scale_neutral_percentage = 26;
+  double scale_neutral_percentage_auto = 27;
+  double scale_neutral_percentage_teleop = 28;
+  repeated double switch_owned_counts_auto = 29;
+  repeated double unicorn_matches = 30;
+  double winning_opp_switch_denial_percentage_teleop = 31;
+  double winning_own_switch_ownership_percentage = 32;
+  double winning_own_switch_ownership_percentage_auto = 33;
+  double winning_own_switch_ownership_percentage_teleop = 34;
+  double winning_scale_ownership_percentage = 35;
+  double winning_scale_ownership_percentage_auto = 36;
+  double winning_scale_ownership_percentage_teleop = 37;
+}
+message Event_OPRs {
+  MapObject oprs = 1;
+  MapObject dprs = 2;
+  MapObject ccwms = 3;
+}
+
+message Match_Simple {
+  string key = 1;
+  string comp_level = 2;
+  int32 set_number = 3;
+  int32 match_number = 4;
+  MapObject alliances = 5;
+  string winning_alliance = 6;
+  string event_key = 7;
+  int32 time = 8;
+  int32 predicted_time = 9;
+  int32 actual_time = 10;
+}
+message Match {
+  string key = 1;
+  string comp_level = 2;
+  int32 set_number = 3;
+  int32 match_number = 4;
+  MapObject alliances = 5;
+  string winning_alliance = 6;
+  string event_key = 7;
+  int32 time = 8;
+  int32 actual_time = 9;
+  int32 predicted_time = 10;
+  int32 post_result_time = 11;
+  MapObject score_breakdown = 12;
+  repeated MapObject videos = 13;
+}
+message Match_alliance {
+  int32 score = 1;
+  repeated string team_keys = 2;
+  repeated string surrogate_team_keys = 3;
+  repeated string dq_team_keys = 4;
+}
+message Zebra {
+  string key = 1;
+  repeated double times = 2;
+  MapObject alliances = 3;
+}
+message Zebra_team {
+  string team_key = 1;
+  repeated double xs = 2;
+  repeated double ys = 3;
+}
+message Match_Score_Breakdown_2015 {
+  Match_Score_Breakdown_2015_Alliance blue = 1;
+  Match_Score_Breakdown_2015_Alliance red = 2;
+  string coopertition = 3;
+  int32 coopertition_points = 4;
+}
+message Match_Score_Breakdown_2015_Alliance {
+  int32 auto_points = 1;
+  int32 teleop_points = 2;
+  int32 container_points = 3;
+  int32 tote_points = 4;
+  int32 litter_points = 5;
+  int32 foul_points = 6;
+  int32 adjust_points = 7;
+  int32 total_points = 8;
+  int32 foul_count = 9;
+  int32 tote_count_far = 10;
+  int32 tote_count_near = 11;
+  bool tote_set = 12;
+  bool tote_stack = 13;
+  int32 container_count_level1 = 14;
+  int32 container_count_level2 = 15;
+  int32 container_count_level3 = 16;
+  int32 container_count_level4 = 17;
+  int32 container_count_level5 = 18;
+  int32 container_count_level6 = 19;
+  bool container_set = 20;
+  int32 litter_count_container = 21;
+  int32 litter_count_landfill = 22;
+  int32 litter_count_unprocessed = 23;
+  bool robot_set = 24;
+}
+message Match_Score_Breakdown_2016 {
+  Match_Score_Breakdown_2016_Alliance blue = 1;
+  Match_Score_Breakdown_2016_Alliance red = 2;
+}
+message Match_Score_Breakdown_2016_Alliance {
+  int32 autoPoints = 1;
+  int32 teleopPoints = 2;
+  int32 breachPoints = 3;
+  int32 foulPoints = 4;
+  int32 capturePoints = 5;
+  int32 adjustPoints = 6;
+  int32 totalPoints = 7;
+  string robot1Auto = 8;
+  string robot2Auto = 9;
+  string robot3Auto = 10;
+  int32 autoReachPoints = 11;
+  int32 autoCrossingPoints = 12;
+  int32 autoBouldersLow = 13;
+  int32 autoBouldersHigh = 14;
+  int32 autoBoulderPoints = 15;
+  int32 teleopCrossingPoints = 16;
+  int32 teleopBouldersLow = 17;
+  int32 teleopBouldersHigh = 18;
+  int32 teleopBoulderPoints = 19;
+  bool teleopDefensesBreached = 20;
+  int32 teleopChallengePoints = 21;
+  int32 teleopScalePoints = 22;
+  int32 teleopTowerCaptured = 23;
+  string towerFaceA = 24;
+  string towerFaceB = 25;
+  string towerFaceC = 26;
+  int32 towerEndStrength = 27;
+  int32 techFoulCount = 28;
+  int32 foulCount = 29;
+  string position2 = 30;
+  string position3 = 31;
+  string position4 = 32;
+  string position5 = 33;
+  int32 position1crossings = 34;
+  int32 position2crossings = 35;
+  int32 position3crossings = 36;
+  int32 position4crossings = 37;
+  int32 position5crossings = 38;
+}
+message Match_Score_Breakdown_2017 {
+  Match_Score_Breakdown_2017_Alliance blue = 1;
+  Match_Score_Breakdown_2017_Alliance red = 2;
+}
+message Match_Score_Breakdown_2017_Alliance {
+  int32 autoPoints = 1;
+  int32 teleopPoints = 2;
+  int32 foulPoints = 3;
+  int32 adjustPoints = 4;
+  int32 totalPoints = 5;
+  string robot1Auto = 6;
+  string robot2Auto = 7;
+  string robot3Auto = 8;
+  bool rotor1Auto = 9;
+  bool rotor2Auto = 10;
+  int32 autoFuelLow = 11;
+  int32 autoFuelHigh = 12;
+  int32 autoMobilityPoints = 13;
+  int32 autoRotorPoints = 14;
+  int32 autoFuelPoints = 15;
+  int32 teleopFuelPoints = 16;
+  int32 teleopFuelLow = 17;
+  int32 teleopFuelHigh = 18;
+  int32 teleopRotorPoints = 19;
+  bool kPaRankingPointAchieved = 20;
+  int32 teleopTakeoffPoints = 21;
+  int32 kPaBonusPoints = 22;
+  int32 rotorBonusPoints = 23;
+  bool rotor1Engaged = 24;
+  bool rotor2Engaged = 25;
+  bool rotor3Engaged = 26;
+  bool rotor4Engaged = 27;
+  bool rotorRankingPointAchieved = 28;
+  int32 techFoulCount = 29;
+  int32 foulCount = 30;
+  string touchpadNear = 31;
+  string touchpadMiddle = 32;
+  string touchpadFar = 33;
+}
+message Match_Score_Breakdown_2018 {
+  Match_Score_Breakdown_2018_Alliance blue = 1;
+  Match_Score_Breakdown_2018_Alliance red = 2;
+}
+message Match_Score_Breakdown_2018_Alliance {
+  int32 adjustPoints = 1;
+  int32 autoOwnershipPoints = 2;
+  int32 autoPoints = 3;
+  bool autoQuestRankingPoint = 4;
+  string autoRobot1 = 5;
+  string autoRobot2 = 6;
+  string autoRobot3 = 7;
+  int32 autoRunPoints = 8;
+  int32 autoScaleOwnershipSec = 9;
+  bool autoSwitchAtZero = 10;
+  int32 autoSwitchOwnershipSec = 11;
+  int32 endgamePoints = 12;
+  string endgameRobot1 = 13;
+  string endgameRobot2 = 14;
+  string endgameRobot3 = 15;
+  bool faceTheBossRankingPoint = 16;
+  int32 foulCount = 17;
+  int32 foulPoints = 18;
+  int32 rp = 19;
+  int32 techFoulCount = 20;
+  int32 teleopOwnershipPoints = 21;
+  int32 teleopPoints = 22;
+  int32 teleopScaleBoostSec = 23;
+  int32 teleopScaleForceSec = 24;
+  int32 teleopScaleOwnershipSec = 25;
+  int32 teleopSwitchBoostSec = 26;
+  int32 teleopSwitchForceSec = 27;
+  int32 teleopSwitchOwnershipSec = 28;
+  int32 totalPoints = 29;
+  int32 vaultBoostPlayed = 30;
+  int32 vaultBoostTotal = 31;
+  int32 vaultForcePlayed = 32;
+  int32 vaultForceTotal = 33;
+  int32 vaultLevitatePlayed = 34;
+  int32 vaultLevitateTotal = 35;
+  int32 vaultPoints = 36;
+  string tba_gameData = 37;
+}
+message Match_Timeseries_2018 {
+  string event_key = 1;
+  string match_id = 2;
+  string mode = 3;
+  int32 play = 4;
+  int32 time_remaining = 5;
+  int32 blue_auto_quest = 6;
+  int32 blue_boost_count = 7;
+  int32 blue_boost_played = 8;
+  string blue_current_powerup = 9;
+  int32 blue_face_the_boss = 10;
+  int32 blue_force_count = 11;
+  int32 blue_force_played = 12;
+  int32 blue_levitate_count = 13;
+  int32 blue_levitate_played = 14;
+  string blue_powerup_time_remaining = 15;
+  int32 blue_scale_owned = 16;
+  int32 blue_score = 17;
+  int32 blue_switch_owned = 18;
+  int32 red_auto_quest = 19;
+  int32 red_boost_count = 20;
+  int32 red_boost_played = 21;
+  string red_current_powerup = 22;
+  int32 red_face_the_boss = 23;
+  int32 red_force_count = 24;
+  int32 red_force_played = 25;
+  int32 red_levitate_count = 26;
+  int32 red_levitate_played = 27;
+  string red_powerup_time_remaining = 28;
+  int32 red_scale_owned = 29;
+  int32 red_score = 30;
+  int32 red_switch_owned = 31;
+}
+message Match_Score_Breakdown_2019 {
+  Match_Score_Breakdown_2019_Alliance blue = 1;
+  Match_Score_Breakdown_2019_Alliance red = 2;
+}
+message Match_Score_Breakdown_2019_Alliance {
+  int32 adjustPoints = 1;
+  int32 autoPoints = 2;
+  string bay1 = 3;
+  string bay2 = 4;
+  string bay3 = 5;
+  string bay4 = 6;
+  string bay5 = 7;
+  string bay6 = 8;
+  string bay7 = 9;
+  string bay8 = 10;
+  int32 cargoPoints = 11;
+  bool completeRocketRankingPoint = 12;
+  bool completedRocketFar = 13;
+  bool completedRocketNear = 14;
+  string endgameRobot1 = 15;
+  string endgameRobot2 = 16;
+  string endgameRobot3 = 17;
+  int32 foulCount = 18;
+  int32 foulPoints = 19;
+  int32 habClimbPoints = 20;
+  bool habDockingRankingPoint = 21;
+  string habLineRobot1 = 22;
+  string habLineRobot2 = 23;
+  string habLineRobot3 = 24;
+  int32 hatchPanelPoints = 25;
+  string lowLeftRocketFar = 26;
+  string lowLeftRocketNear = 27;
+  string lowRightRocketFar = 28;
+  string lowRightRocketNear = 29;
+  string midLeftRocketFar = 30;
+  string midLeftRocketNear = 31;
+  string midRightRocketFar = 32;
+  string midRightRocketNear = 33;
+  string preMatchBay1 = 34;
+  string preMatchBay2 = 35;
+  string preMatchBay3 = 36;
+  string preMatchBay6 = 37;
+  string preMatchBay7 = 38;
+  string preMatchBay8 = 39;
+  string preMatchLevelRobot1 = 40;
+  string preMatchLevelRobot2 = 41;
+  string preMatchLevelRobot3 = 42;
+  int32 rp = 43;
+  int32 sandStormBonusPoints = 44;
+  int32 techFoulCount = 45;
+  int32 teleopPoints = 46;
+  string topLeftRocketFar = 47;
+  string topLeftRocketNear = 48;
+  string topRightRocketFar = 49;
+  string topRightRocketNear = 50;
+  int32 totalPoints = 51;
+}
+message Match_Score_Breakdown_2020 {
+  Match_Score_Breakdown_2020_Alliance blue = 1;
+  Match_Score_Breakdown_2020_Alliance red = 2;
+}
+message Match_Score_Breakdown_2020_Alliance {
+  string initLineRobot1 = 1;
+  string endgameRobot1 = 2;
+  string initLineRobot2 = 3;
+  string endgameRobot2 = 4;
+  string initLineRobot3 = 5;
+  string endgameRobot3 = 6;
+  int32 autoCellsBottom = 7;
+  int32 autoCellsOuter = 8;
+  int32 autoCellsInner = 9;
+  int32 teleopCellsBottom = 10;
+  int32 teleopCellsOuter = 11;
+  int32 teleopCellsInner = 12;
+  bool stage1Activated = 13;
+  bool stage2Activated = 14;
+  bool stage3Activated = 15;
+  string stage3TargetColor = 16;
+  string endgameRungIsLevel = 17;
+  int32 autoInitLinePoints = 18;
+  int32 autoCellPoints = 19;
+  int32 autoPoints = 20;
+  int32 teleopCellPoints = 21;
+  int32 controlPanelPoints = 22;
+  int32 endgamePoints = 23;
+  int32 teleopPoints = 24;
+  bool shieldOperationalRankingPoint = 25;
+  bool shieldEnergizedRankingPoint = 26;
+  bool tba_shieldEnergizedRankingPointFromFoul = 27;
+  int32 tba_numRobotsHanging = 28;
+  int32 foulCount = 29;
+  int32 techFoulCount = 30;
+  int32 adjustPoints = 31;
+  int32 foulPoints = 32;
+  int32 rp = 33;
+  int32 totalPoints = 34;
+}
+message Media {
+  string type = 1;
+  string foreign_key = 2;
+  MapObject details = 3;
+  bool preferred = 4;
+  string direct_url = 5;
+  string view_url = 6;
+}
+message Elimination_Alliance {
+  string name = 1;
+  MapObject backup = 2;
+  repeated string declines = 3;
+  repeated string picks = 4;
+  MapObject status = 5;
+}
+message Award {
+  string name = 1;
+  int32 award_type = 2;
+  string event_key = 3;
+  repeated Award_Recipient recipient_list = 4;
+  int32 year = 5;
+}
+message Award_Recipient {
+  string team_key = 1;
+  string awardee = 2;
+}
+message District_List {
+  string abbreviation = 1;
+  string display_name = 2;
+  string key = 3;
+  int32 year = 4;
+}
+message District_Ranking {
+  string team_key = 1;
+  int32 rank = 2;
+  int32 rookie_bonus = 3;
+  int32 point_total = 4;
+  repeated MapObject event_points = 5;
+}
+message WLT_Record {
+  int32 losses = 1;
+  int32 wins = 2;
+  int32 ties = 3;
+}
+message Webcast {
+  string type = 1;
+  string channel = 2;
+  string date = 3;
+  string file = 4;
+}
