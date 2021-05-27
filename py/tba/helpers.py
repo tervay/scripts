@@ -8,6 +8,16 @@ def flatten_lists(lists):
     return [item for sublist in lists for item in sublist]
 
 
+async def flatten_lists_async(lists):
+    return [item for sublist in lists async for item in sublist]
+
+
+async def flatten_lists_gen(lists):
+    for l in lists:
+        async for item in l:
+            yield item
+
+
 def filter_official_events(event_list, allowlist=None):
     blocklist = ["Offseason", "Preseason", "--"]
     if allowlist is None:
@@ -43,12 +53,13 @@ def filter_bad_matches(match_list):
 
 
 def filter_completed_events(event_list):
-    return list(
-        filter(
-            lambda e: datetime.datetime.strptime(e["end_date"], "%Y-%m-%d")
-            < datetime.datetime.now(),
-            event_list,
-        )
+    return list(filter(is_completed_event, event_list))
+
+
+def is_completed_event(event) -> bool:
+    return (
+        datetime.datetime.strptime(event["end_date"], "%Y-%m-%d")
+        < datetime.datetime.now()
     )
 
 
