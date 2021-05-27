@@ -35,5 +35,5 @@ def dlf_wffa():
 @expose
 async def test(n):
     async with tpa_cm() as tpa:
-        res = await tpa.get_team(team_key=f"frc{n}")
-        print(res)
+        async for t in tpa.get_teams(page_num=n):
+            print(t)

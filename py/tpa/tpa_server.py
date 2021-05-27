@@ -16,8 +16,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("Event")]:
-        print("called get_district_events")
-        return None
+        events = tba.district_events(district=district_key)
+        for e in events:
+            yield Event().from_dict(e)
 
     async def get_district_events_keys(
         self,
@@ -30,8 +31,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_district_events_keys")
-        return None
+        events = tba.district_events(district=district_key, keys=True)
+        for e in events:
+            yield Response(string_value=e)
 
     async def get_district_events_simple(
         self,
@@ -44,8 +46,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("EventSimple")]:
-        print("called get_district_events_simple")
-        return None
+        events = tba.district_events(district=district_key, simple=True)
+        for e in events:
+            yield EventSimple().from_dict(e)
 
     async def get_district_rankings(
         self,
@@ -58,8 +61,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("DistrictRanking")]:
-        print("called get_district_rankings")
-        return None
+        rankings = tba.district_rankings(district=district_key)
+        for r in rankings:
+            yield DistrictRanking().from_dict(r)
 
     async def get_district_teams(
         self,
@@ -72,8 +76,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("Team")]:
-        print("called get_district_teams")
-        return None
+        teams = tba.district_teams(district=district_key)
+        for t in teams:
+            yield Team().from_dict(t)
 
     async def get_district_teams_keys(
         self,
@@ -86,8 +91,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_district_teams_keys")
-        return None
+        teams = tba.district_teams(district=district_key, keys=True)
+        for t in teams:
+            yield Response(string_value=t)
 
     async def get_district_teams_simple(
         self,
@@ -100,8 +106,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("TeamSimple")]:
-        print("called get_district_teams_simple")
-        return None
+        teams = tba.district_teams(district=district_key, simple=True)
+        for t in teams:
+            yield TeamSimple().from_dict(t)
 
     async def get_districts_by_year(
         self,
@@ -114,8 +121,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("DistrictList")]:
-        print("called get_districts_by_year")
-        return None
+        district_list = tba.districts(year=year)
+        for dl in district_list:
+            yield DistrictList().from_dict(dl)
 
     async def get_event(
         self,
@@ -156,8 +164,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("Award")]:
-        print("called get_event_awards")
-        return None
+        awards = tba.event_awards(event=event_key)
+        for a in awards:
+            yield Award().from_dict(a)
 
     async def get_event_district_points(
         self,
@@ -338,8 +347,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("Event")]:
-        print("called get_events_by_year")
-        return None
+        events = tba.events(year=year)
+        for e in events:
+            yield Event().from_dict(e)
 
     async def get_events_by_year_keys(
         self,
@@ -449,8 +459,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("Award")]:
-        print("called get_team_awards")
-        return None
+        awards = tba.team_awards(team=team_key)
+        for a in awards:
+            yield Award().from_dict(a)
 
     async def get_team_awards_by_year(
         self,
@@ -785,8 +796,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("Team")]:
-        print("called get_teams")
-        return None
+        teams = tba.teams(page=page_num)
+        for t in teams:
+            yield Team().from_dict(t)
 
     async def get_teams_by_year(
         self,
@@ -799,8 +811,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("Team")]:
-        print("called get_teams_by_year")
-        return None
+        teams = tba.teams(page=page_num, year=year)
+        for t in teams:
+            yield Team().from_dict(t)
 
     async def get_teams_by_year_keys(
         self,
@@ -813,8 +826,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_teams_by_year_keys")
-        return None
+        teams = tba.teams(page=page_num, year=year, keys=True)
+        for t in teams:
+            yield Response(string_value=t)
 
     async def get_teams_by_year_simple(
         self,
@@ -827,8 +841,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("TeamSimple")]:
-        print("called get_teams_by_year_simple")
-        return None
+        teams = tba.teams(page=page_num, year=year, simple=True)
+        for t in teams:
+            yield TeamSimple().from_dict(t)
 
     async def get_teams_keys(
         self,
@@ -841,8 +856,9 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_teams_keys")
-        return None
+        teams = tba.teams(page=page_num, keys=True)
+        for t in teams:
+            yield Response(string_value=t)
 
     async def get_teams_simple(
         self,
@@ -855,5 +871,6 @@ class TPAService(TpaBase):
         team_key: str,
         event_key: str,
     ) -> AsyncIterator[ForwardRef("TeamSimple")]:
-        print("called get_teams_simple")
-        return None
+        teams = tba.teams(page=page_num, simple=True)
+        for t in teams:
+            yield TeamSimple().from_dict(t)

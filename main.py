@@ -3,8 +3,9 @@ from sys import argv
 
 from grpclib.server import Server
 
-import py.graphing
+import py.awards
 import py.codegen
+import py.graphing
 import py.teams
 from py.cli import run_main
 from py.tpa import TPAService
