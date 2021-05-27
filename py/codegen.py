@@ -5,6 +5,7 @@ import inflection
 import yaml
 
 from py.cli import expose, pprint
+from collections import namedtuple
 
 
 class Model:
@@ -146,9 +147,17 @@ def generate_request_models(content):
 
 
 def generate_rpcs(content):
-    print("service TPA {")
-
+    rpcs = "service TPA {\n"
     paths = content["paths"]
+
+    Msg = namedtuple("Msg", ["message_name", "type_", "field_name"])
+    msgs = set()
+    param_name_to_type = {}
+    # Pre-determine param types
+    for param_name, param_data in content["components"]["parameters"].items():
+        param_name_to_type[param_name] = {"string": "string", "integer": "int32"}[
+            param_data["schema"]["type"]
+        ]
 
     for path, path_data in paths.items():
         name = path_data["get"]["operationId"]
@@ -173,10 +182,41 @@ def generate_rpcs(content):
 
         response_type += type_
 
-        print(f"  /* {comment} */")
-        print(f"  rpc {name}(Parameter) returns ({response_type}) {{}}")
+        # Create Message type for the required args
+        local_msgs = []
+        for param_dict in path_data["get"]["parameters"]:
+            if "$ref" not in param_dict:
+                print(path, param_dict)
+                raise Exception("$ref not in path params")
 
-    print("}")
+            ref_name = param_dict["$ref"].split("/")[-1]
+            if ref_name == "If-Modified-Since":
+                continue
+
+            local_msgs.append(
+                Msg(
+                    message_name=inflection.camelize(inflection.underscore(ref_name)),
+                    type_=param_name_to_type[ref_name],
+                    field_name=inflection.underscore(ref_name),
+                )
+            )
+        if len(local_msgs) == 0:
+            continue
+
+        param_name = "".join([m.message_name for m in local_msgs])
+        msg_str = f"message {param_name} {{\n"
+        for i, msg in enumerate(local_msgs, start=1):
+            msg_str += f"  {msg.type_} {msg.field_name} = {i};\n"
+        msg_str += "}\n"
+        msgs.add(msg_str)
+
+        rpcs += f"  /* {comment} */\n"
+        rpcs += f"  rpc {name}({param_name}) returns ({response_type}) {{}}\n"
+
+    rpcs += "}\n"
+    for msg in msgs:
+        print(msg)
+    print(rpcs)
 
 
 @expose

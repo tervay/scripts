@@ -1931,12 +1931,7 @@ paths:
       operationId: getDistrictEventsSimple
       parameters:
         - $ref: '#/components/parameters/If-Modified-Since'
-        - name: district_key
-          in: path
-          description: 'TBA District Key, eg `2016fim`'
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/district_key'
       responses:
         '200':
           description: Successful response
