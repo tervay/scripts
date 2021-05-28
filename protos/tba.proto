@@ -1,4 +1,7 @@
 syntax = "proto3";
+
+package tpa;
+
 message API_Status {
   int32 current_season = 1;
   int32 max_season = 2;
@@ -306,12 +309,21 @@ message Match {
   int32 actual_time = 9;
   int32 predicted_time = 10;
   int32 post_result_time = 11;
-  map<string, string> score_breakdown = 12;
   message Videos {
     string type = 1;
     string key = 2;
   }
   repeated Videos videos = 13;
+
+  oneof score_breakdown {
+    Match_Score_Breakdown_2015 score_breakdown_2015 = 14;
+    Match_Score_Breakdown_2016 score_breakdown_2016 = 15;
+    Match_Score_Breakdown_2017 score_breakdown_2017 = 16;
+    Match_Score_Breakdown_2018 score_breakdown_2018 = 17;
+    Match_Score_Breakdown_2019 score_breakdown_2019 = 18;
+    Match_Score_Breakdown_2020 score_breakdown_2020 = 19;
+  }
+  reserved 20 to 30;
 }
 message Match_alliance {
   int32 score = 1;

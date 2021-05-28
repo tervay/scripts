@@ -1,7 +1,28 @@
 from typing import AsyncIterator, ForwardRef
 
-from protos import *
+from protos.tpa import *
 from py.tba import tba
+
+
+def tba_match_to_tpa_match(m) -> Match:
+    sb = m["score_breakdown"].copy()
+    del m["score_breakdown"]
+
+    m = Match().from_dict(m)
+    if "2015" in m.event_key:
+        m.score_breakdown_2015 = MatchScoreBreakdown2015().from_dict(sb)
+    if "2016" in m.event_key:
+        m.score_breakdown_2016 = MatchScoreBreakdown2016().from_dict(sb)
+    if "2017" in m.event_key:
+        m.score_breakdown_2017 = MatchScoreBreakdown2017().from_dict(sb)
+    if "2018" in m.event_key:
+        m.score_breakdown_2018 = MatchScoreBreakdown2018().from_dict(sb)
+    if "2019" in m.event_key:
+        m.score_breakdown_2019 = MatchScoreBreakdown2019().from_dict(sb)
+    if "2020" in m.event_key:
+        m.score_breakdown_2020 = MatchScoreBreakdown2020().from_dict(sb)
+
+    return m
 
 
 class TPAService(TpaBase):
@@ -103,8 +124,7 @@ class TPAService(TpaBase):
         return None
 
     async def get_event_op_rs(self, event_key: str) -> "EventOpRs":
-        print("called get_event_op_rs")
-        return None
+        return EventOpRs().from_dict(tba.event_oprs(event=event_key))
 
     async def get_event_rankings(self, event_key: str) -> "EventRanking":
         print("called get_event_rankings")
@@ -150,8 +170,7 @@ class TPAService(TpaBase):
         return None
 
     async def get_match(self, match_key: str) -> "Match":
-        print("called get_match")
-        return None
+        return tba_match_to_tpa_match(tba.match(key=match_key))
 
     async def get_match_simple(self, match_key: str) -> "MatchSimple":
         print("called get_match_simple")

@@ -1,4 +1,5 @@
 import datetime
+from protos.tpa import Event
 
 from py.cli import pprint
 from py.tba import tba
@@ -31,6 +32,10 @@ def filter_official_events(event_list, allowlist=None):
             event_list,
         )
     )
+
+
+def is_champs(event: Event) -> bool:
+    return event.event_type in [3, 4, 6]
 
 
 def pprint_dict(dictionary, lowest_first=False, index=1, limit=100000000):

@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 
 from grpclib.client import Channel
-from protos import TpaStub
+from protos.tpa import TpaStub
 
 ch = Channel(host="127.0.0.1", port=1337)
 stub = TpaStub(channel=ch)

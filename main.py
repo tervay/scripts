@@ -1,14 +1,19 @@
 import asyncio
 from sys import argv
 
+from colorama import init
 from grpclib.server import Server
 
 import py.awards
 import py.codegen
+import py.event_gen
 import py.graphing
+import py.scout
 import py.teams
 from py.cli import run_main
 from py.tpa import TPAService
+
+init()
 
 
 async def start_server():
