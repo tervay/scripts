@@ -5,6 +5,8 @@ from pygments import highlight
 from pygments.formatters import Terminal256Formatter
 from pygments.lexers import PythonLexer
 
+from py.tpa.context_manager import close, tpa_cm
+
 fns = dict()
 
 
@@ -40,6 +42,7 @@ async def run_main(argv):
 
     if inspect.iscoroutinefunction(fn):
         await ((fn(*args)))
+        close()
     else:
         fn(*args)
 

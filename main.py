@@ -10,8 +10,10 @@ import py.event_gen
 import py.graphing
 import py.scout
 import py.teams
+import py.sim
 from py.cli import run_main
 from py.tpa import TPAService
+
 
 init()
 

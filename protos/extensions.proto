@@ -5,6 +5,6 @@ package tpa;
 import "tba.proto";
 
 message Schedule {
-    repeated Team_Simple teams = 1;
-    repeated Match_Simple matches = 2;
+    repeated Team teams = 1;
+    repeated Match matches = 2;
 }

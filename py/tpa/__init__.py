@@ -1,2 +1,2 @@
-from .context_manager import tpa_cm
+from .context_manager import tpa_cm, close
 from .tpa_server import TPAService

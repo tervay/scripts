@@ -108,8 +108,12 @@ class TPAService(TpaBase):
     async def get_event_matches(
         self, event_key: str
     ) -> AsyncIterator[ForwardRef("Match")]:
-        print("called get_event_matches")
-        return None
+        for m in tba.event_matches(event=event_key):
+            try:
+                m_ = tba_match_to_tpa_match(m)
+                yield m_
+            except AttributeError:
+                continue
 
     async def get_event_matches_keys(
         self, event_key: str
@@ -137,8 +141,9 @@ class TPAService(TpaBase):
     async def get_event_teams(
         self, event_key: str
     ) -> AsyncIterator[ForwardRef("Team")]:
-        print("called get_event_teams")
-        return None
+        teams = tba.event_teams(event=event_key)
+        for t in teams:
+            yield Team().from_dict(t)
 
     async def get_event_teams_keys(
         self, event_key: str
@@ -181,8 +186,7 @@ class TPAService(TpaBase):
         return None
 
     async def get_team(self, team_key: str) -> "Team":
-        print("called get_team")
-        return None
+        return Team().from_dict(tba.team(team=team_key))
 
     async def get_team_awards(
         self, team_key: str
@@ -241,8 +245,8 @@ class TPAService(TpaBase):
     async def get_team_events_by_year(
         self, team_key: str, year: int
     ) -> AsyncIterator[ForwardRef("Event")]:
-        print("called get_team_events_by_year")
-        return None
+        for e in tba.team_events(team=team_key, year=year):
+            yield Event().from_dict(e)
 
     async def get_team_events_by_year_keys(
         self, team_key: str, year: int

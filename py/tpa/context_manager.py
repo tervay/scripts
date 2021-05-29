@@ -12,4 +12,9 @@ async def tpa_cm():
     try:
         yield stub
     finally:
-        ch.close()
+        # ch.close()
+        pass
+
+
+def close():
+    ch.close()

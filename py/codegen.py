@@ -1,11 +1,11 @@
 import inspect
+from collections import namedtuple
 from typing import Callable, Dict, Union
 
 import inflection
 import yaml
 
 from py.cli import expose, pprint
-from collections import namedtuple
 
 
 class Model:

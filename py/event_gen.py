@@ -2,6 +2,7 @@ import random
 from typing import Dict, List
 
 from colorama import Fore
+
 from protos.tpa import (
     MatchAlliance,
     MatchSimple,
@@ -10,8 +11,8 @@ from protos.tpa import (
     Team,
     TeamSimple,
 )
-
 from py.cli import expose
+from py.util import file_cm, get_real_event_schedule, get_savepath
 
 event_key = "2021fake"
 
@@ -51,9 +52,7 @@ def make_schedule_pb(id_to_team_map: Dict[int, Team], schedule_fp: str) -> Sched
     return schedule
 
 
-def generate_with_teams(
-    team_list: List[TeamSimple], save_path=f"{event_key}.pb", num_matches=10
-):
+def generate_with_teams(team_list: List[TeamSimple], fname: str, num_matches=10):
     schedule_filepath = f"schedules/{len(team_list)}_{num_matches}.csv"
     schedule = make_schedule_pb(
         id_to_team_map={
@@ -63,18 +62,18 @@ def generate_with_teams(
         schedule_fp=schedule_filepath,
     )
 
-    with open(save_path, "wb+") as f:
+    with file_cm(get_savepath(fname), "wb+") as f:
         f.write(schedule.SerializeToString())
 
 
 @expose
-def generate(team_list_filepath, save_path=f"{event_key}.pb", num_matches=10):
+def generate(team_list_filepath, fname=f"{event_key}_schedule.pb", num_matches=10):
     with open(team_list_filepath, "r") as f:
         teams = [
             TeamSimple(key=f"frc{t.strip()}", team_number=int(t)) for t in f.readlines()
         ]
 
-    generate_with_teams(teams, save_path=save_path, num_matches=num_matches)
+    generate_with_teams(teams, fname=fname, num_matches=num_matches)
 
 
 @expose
@@ -106,3 +105,14 @@ def pprint_schedule(schedule_pb, highlight=None):
 
         out_str += Fore.RESET
         print(out_str)
+
+
+@expose
+async def save_real_schedule(event_key, fname=None):
+    if fname is None:
+        fname = f"{event_key}.pb"
+
+    with file_cm(get_savepath(fname), "wb+") as f:
+        f.write(
+            (await get_real_event_schedule(event_key=event_key)).SerializeToString()
+        )
