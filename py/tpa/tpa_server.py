@@ -92,8 +92,12 @@ class TPAService(TpaBase):
             yield Award().from_dict(a)
 
     async def get_event_district_points(self, event_key: str) -> "EventDistrictPoints":
-        print("called get_event_district_points")
-        return None
+        edp = tba.event_district_points(event=event_key)
+        for key, pts in edp['points'].items():
+            for ptk, ptv in pts.items():
+                pts[ptk] = int(ptv)
+
+        return EventDistrictPoints().from_dict(edp)
 
     async def get_event_insights(self, event_key: str) -> "EventInsights":
         print("called get_event_insights")
@@ -209,8 +213,8 @@ class TPAService(TpaBase):
     async def get_team_event_awards(
         self, team_key: str, event_key: str
     ) -> AsyncIterator[ForwardRef("Award")]:
-        print("called get_team_event_awards")
-        return None
+        for a in tba.team_awards(team=team_key, event=event_key):
+            yield Award().from_dict(a)
 
     async def get_team_event_matches(
         self, team_key: str, event_key: str
@@ -337,8 +341,8 @@ class TPAService(TpaBase):
     async def get_teams_by_year(
         self, year: int, page_num: int
     ) -> AsyncIterator[ForwardRef("Team")]:
-        print("called get_teams_by_year")
-        return None
+        for t in tba.teams(page=page_num, year=year):
+            yield Team().from_dict(t)
 
     async def get_teams_by_year_keys(
         self, year: int, page_num: int

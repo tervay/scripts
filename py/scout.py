@@ -32,6 +32,12 @@ RP_FNs = {
             getattr(m.score_breakdown_2019, c).hab_docking_ranking_point
         ),
     ),
+    2018: (
+        lambda m, c: float(getattr(m.score_breakdown_2018, c).auto_quest_ranking_point),
+        lambda m, c: float(
+            getattr(m.score_breakdown_2018, c).face_the_boss_ranking_point
+        ),
+    ),
     2017: (
         lambda m, c: getattr(m.score_breakdown_2017, c).k_pa_ranking_point_achieved,
         lambda m, c: getattr(m.score_breakdown_2017, c).rotor_ranking_point_achieved,

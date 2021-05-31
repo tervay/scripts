@@ -164,9 +164,16 @@ message Event_Ranking {
   }
   repeated SortOrderInfo sort_order_info = 3;
 }
+message DistrictPoints {
+  int32 alliance_points = 1;
+  int32 award_points = 2;
+  int32 elim_points = 3;
+  int32 qual_points = 4;
+  int32 total = 5;
+}
 message Event_District_Points {
-  map<string, string> points = 1;
-  map<string, string> tiebreakers = 2;
+  map<string, DistrictPoints> points = 1;
+  map<string, DistrictPoints> tiebreakers = 2;
 }
 message Event_Insights {
   map<string, string> qual = 1;

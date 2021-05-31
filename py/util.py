@@ -1,8 +1,9 @@
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Iterable, Tuple, TypeVar, Union
+from typing import Iterable, Tuple, TypeVar, Union, List
 
 from tqdm import tqdm
+from tqdm.asyncio import tqdm as atqdm
 
 from protos.tpa import (
     Event,
@@ -16,6 +17,7 @@ from protos.tpa import (
 )
 from py.tba import EventType
 from py.tpa.context_manager import tpa_cm
+import datetime
 
 save_dir = "out"
 
@@ -31,6 +33,8 @@ MatchScoreBreakdown = Union[
 T = TypeVar("T")
 
 OPPOSITE_COLOR = {"blue": "red", "red": "blue"}
+
+MAX_TEAMS_PAGE_NUM = 17
 
 
 def create_dir_if_not_exists(name: str):
@@ -95,3 +99,47 @@ def tqdm_bar(iterable: Iterable[T]) -> Tuple[tqdm, T]:
     bar = tqdm(iterable)
     for item in bar:
         yield (bar, item)
+
+
+async def tqdm_bar_async(iterable: Iterable[T]) -> Tuple[atqdm, T]:
+    bar = atqdm(iterable)
+    for item in bar:
+        yield (bar, item)
+
+
+def flatten_lists(lists):
+    return [item for sublist in lists for item in sublist]
+
+
+async def flatten_lists_async(lists):
+    return [item for sublist in lists async for item in sublist]
+
+
+async def flatten_lists_aiter(lists):
+    for l in lists:
+        async for item in l:
+            yield item
+
+
+def sort_events(events: List[Event]) -> List[Event]:
+    return sorted(
+        events, key=lambda e: datetime.datetime.strptime(e.end_date, "%Y-%m-%d")
+    )
+
+
+def filter_completed_events(event_list: List[Event]) -> List[Event]:
+    return list(filter(is_completed_event, event_list))
+
+
+def is_completed_event(event: Event) -> bool:
+    return (
+        datetime.datetime.strptime(event.end_date, "%Y-%m-%d") < datetime.datetime.now()
+    )
+
+
+def filter_official_events(events: List[Event]):
+    return list(filter(is_official_event, events))
+
+
+def is_official_event(event: Event) -> bool:
+    return event.event_type in EventType.SEASON_EVENT_TYPES

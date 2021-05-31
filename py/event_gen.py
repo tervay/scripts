@@ -1,8 +1,8 @@
 import random
+from collections import defaultdict
 from typing import Dict, List
 
 from colorama import Fore
-
 from protos.tpa import (
     MatchAlliance,
     MatchSimple,
@@ -11,8 +11,19 @@ from protos.tpa import (
     Team,
     TeamSimple,
 )
-from py.cli import expose
-from py.util import file_cm, get_real_event_schedule, get_savepath
+
+from py.cli import expose, pprint
+from py.tba import AwardType, EventType
+from py.tpa.context_manager import tpa_cm
+from py.util import (
+    MAX_TEAMS_PAGE_NUM,
+    file_cm,
+    flatten_lists_async,
+    get_real_event_schedule,
+    get_savepath,
+    sort_events,
+    tqdm_bar_async,
+)
 
 event_key = "2021fake"
 
@@ -115,4 +126,85 @@ async def save_real_schedule(event_key, fname=None):
     with file_cm(get_savepath(fname), "wb+") as f:
         f.write(
             (await get_real_event_schedule(event_key=event_key)).SerializeToString()
+        )
+
+
+@expose
+async def district_from_states(
+    states: str, year: int, dcmp_fraction: float = 0.35, double_1_events=True
+):
+    states = states.title()
+    allowlist = set(states.split(",")) | set(states.split(", "))
+
+    pts = defaultdict(list)
+    cmp_qual = defaultdict(lambda: False)
+
+    async with tpa_cm() as tpa:
+        async for bar, team in tqdm_bar_async(
+            await flatten_lists_async(
+                [
+                    tpa.get_teams_by_year(year=year, page_num=i)
+                    for i in range(MAX_TEAMS_PAGE_NUM)
+                ]
+            )
+        ):
+            bar.set_description(team.key)
+            if team.state_prov in allowlist:
+                events = [
+                    e
+                    async for e in tpa.get_team_events_by_year(
+                        team_key=team.key, year=year
+                    )
+                ]
+                if any([e.event_type in EventType.CMP_EVENT_TYPES for e in events]):
+                    cmp_qual[team.key] = True
+
+                for e in events:
+                    async for award in tpa.get_team_event_awards(
+                        team_key=team.key, event_key=e.key
+                    ):
+                        if (
+                            award.award_type in AwardType.CMP_QUALIFYING_AWARDS
+                            and e.event_type == EventType.REGIONAL
+                        ):
+                            cmp_qual[team.key] = True
+
+                events = [
+                    e for e in events if e.event_type in EventType.NON_CMP_EVENT_TYPES
+                ]
+                events = sort_events(events)
+
+                n = 0
+                for event in events:
+                    if n == 2:
+                        break
+
+                    dpts = await tpa.get_event_district_points(event_key=event.key)
+                    if team.key not in dpts.points:
+                        continue
+
+                    pts[team.key].append(dpts.points[team.key].total)
+                    n += 1
+
+                if team.key in pts and len(pts[team.key]) == 1 and double_1_events:
+                    pts[team.key].append(pts[team.key][0])
+
+                if team.rookie_year == year:
+                    pts[team.key].append(10)
+                elif team.rookie_year == year - 1:
+                    pts[team.key].append(5)
+
+    n_qualified = dcmp_fraction * len(pts.keys())
+    for i, (team, team_pts) in enumerate(
+        sorted(pts.items(), key=lambda t: -sum(t[1])), start=1
+    ):
+        team_color = Fore.GREEN if i < n_qualified else Fore.RED
+
+        pts_str = [str(p).rjust(2) for p in team_pts]
+        pts_str = " + ".join(pts_str).ljust(12)
+        cmp_str = f"{Fore.GREEN}✓" if cmp_qual[team] else ""
+
+        print(
+            f"{Fore.RESET}{str(i).rjust(3)}. {team_color}{team[3:].rjust(4)}{Fore.RESET} "
+            + f"{pts_str} = {sum(team_pts)}\t{cmp_str}"
         )

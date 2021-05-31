@@ -154,6 +154,7 @@ async def sim(schedule_fp, year, outfile=None):
 
     with file_cm(outfile, "w+") as f:
         async with tpa_cm() as tpa:
-            for (k, rp) in sorted(rps.items(), key=lambda t: -t[1]):
+            for bar, (k, rp) in tqdm_bar(sorted(rps.items(), key=lambda t: -t[1])):
+                bar.set_description(k)
                 team = await tpa.get_team(team_key=k)
                 print(f"{team.team_number}\t{team.nickname}", file=f)

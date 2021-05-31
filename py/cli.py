@@ -32,6 +32,11 @@ def attempt_to_cast_value(s):
     except ValueError:
         pass
 
+    if s.lower() == "true":
+        return True
+    if s.lower() == "false":
+        return False
+
     return s
 
 
