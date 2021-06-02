@@ -5,6 +5,9 @@ from py.tba import tba
 
 
 def tba_match_to_tpa_match(m) -> Match:
+    if "score_breakdown" not in m or m["score_breakdown"] is None:
+        return Match().from_dict(m)
+
     sb = m["score_breakdown"].copy()
     del m["score_breakdown"]
 
@@ -93,7 +96,7 @@ class TPAService(TpaBase):
 
     async def get_event_district_points(self, event_key: str) -> "EventDistrictPoints":
         edp = tba.event_district_points(event=event_key)
-        for key, pts in edp['points'].items():
+        for key, pts in edp["points"].items():
             for ptk, ptv in pts.items():
                 pts[ptk] = int(ptv)
 
@@ -113,11 +116,8 @@ class TPAService(TpaBase):
         self, event_key: str
     ) -> AsyncIterator[ForwardRef("Match")]:
         for m in tba.event_matches(event=event_key):
-            try:
-                m_ = tba_match_to_tpa_match(m)
-                yield m_
-            except AttributeError:
-                continue
+            m_ = tba_match_to_tpa_match(m)
+            yield m_
 
     async def get_event_matches_keys(
         self, event_key: str
@@ -279,8 +279,9 @@ class TPAService(TpaBase):
     async def get_team_matches_by_year(
         self, team_key: str, year: int
     ) -> AsyncIterator[ForwardRef("Match")]:
-        print("called get_team_matches_by_year")
-        return None
+        for m in tba.team_matches(team=team_key, year=year):
+            m_ = tba_match_to_tpa_match(m)
+            yield m_
 
     async def get_team_matches_by_year_keys(
         self, team_key: str, year: int
@@ -347,8 +348,8 @@ class TPAService(TpaBase):
     async def get_teams_by_year_keys(
         self, year: int, page_num: int
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_teams_by_year_keys")
-        return None
+        for t in tba.teams(year=year, page=page_num, keys=True):
+            yield Response(string_value=t)
 
     async def get_teams_by_year_simple(
         self, year: int, page_num: int
