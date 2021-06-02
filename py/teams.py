@@ -6,7 +6,9 @@ from py.tba import helpers, tba, EventType
 from py.tpa import tpa_cm
 from py.util import (
     MAX_TEAMS_PAGE_NUM,
+    file_cm,
     filter_official_events,
+    get_savepath,
     tqdm_bar_async,
     flatten_lists_async,
 )
@@ -227,3 +229,7 @@ async def costs2(year):
     pprint(sorted(by_state.items(), key=lambda t: t[1])[:10])
 
     print(pd.DataFrame(cpm.values()).describe())
+
+    with file_cm(get_savepath("cpm.csv"), "w+") as f:
+        for k, cpm_ in cpm.items():
+            print(f"{k},{key_to_team[k].state_prov},{cpm_}", file=f)
