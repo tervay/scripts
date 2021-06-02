@@ -3,8 +3,11 @@
 ```
 $ pip install -r requirements.txt
 $ echo "key = 'MyTBAkey'" > keys.py
+$ python main.py tpa
 $ python main.py module fn args
 ```
+
+`python main.py tpa` will run the cache layer / protobuf proxy.
 
 ### Protos
 
