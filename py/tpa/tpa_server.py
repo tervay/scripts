@@ -2,6 +2,7 @@ from typing import AsyncIterator, ForwardRef
 
 from protos.tpa import *
 from py.tba import tba
+from py.tpa.force_fixes import fix_team
 
 
 def tba_match_to_tpa_match(m) -> Match:
@@ -78,8 +79,7 @@ class TPAService(TpaBase):
         return None
 
     async def get_event(self, event_key: str) -> "Event":
-        print("called get_event")
-        return None
+        return Event().from_dict(tba.event(event=event_key))
 
     async def get_event_alliances(
         self, event_key: str
@@ -147,7 +147,7 @@ class TPAService(TpaBase):
     ) -> AsyncIterator[ForwardRef("Team")]:
         teams = tba.event_teams(event=event_key)
         for t in teams:
-            yield Team().from_dict(t)
+            yield fix_team(Team().from_dict(t))
 
     async def get_event_teams_keys(
         self, event_key: str
@@ -190,7 +190,7 @@ class TPAService(TpaBase):
         return None
 
     async def get_team(self, team_key: str) -> "Team":
-        return Team().from_dict(tba.team(team=team_key))
+        return fix_team(Team().from_dict(tba.team(team=team_key)))
 
     async def get_team_awards(
         self, team_key: str
@@ -336,14 +336,14 @@ class TPAService(TpaBase):
         return None
 
     async def get_teams(self, page_num: int) -> AsyncIterator[ForwardRef("Team")]:
-        print("called get_teams")
-        return None
+        for t in tba.teams(page=page_num):
+            yield fix_team(Team().from_dict(t))
 
     async def get_teams_by_year(
         self, year: int, page_num: int
     ) -> AsyncIterator[ForwardRef("Team")]:
         for t in tba.teams(page=page_num, year=year):
-            yield Team().from_dict(t)
+            yield fix_team(Team().from_dict(t))
 
     async def get_teams_by_year_keys(
         self, year: int, page_num: int
