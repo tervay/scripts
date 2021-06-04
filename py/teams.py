@@ -6,12 +6,14 @@ from tqdm import tqdm as tqdm_sync
 from tqdm.asyncio import tqdm
 
 from py.cli import expose, pprint
-from py.tba import EventType, helpers, tba
+from py.tba import EventType, tba
 from py.tpa import tpa_cm
 from py.util import (
     MAX_TEAMS_PAGE_NUM,
     file_cm,
+    filter_completed_events,
     filter_official_events,
+    flatten_lists,
     flatten_lists_async,
     get_savepath,
     tqdm_bar_async,
@@ -25,8 +27,8 @@ def about(num):
 
 @expose
 def dlf_wffa():
-    events = helpers.flatten_lists([tba.events(year=y) for y in range(2008, 2022)])
-    events = helpers.filter_completed_events(events)
+    events = flatten_lists([tba.events(year=y) for y in range(2008, 2022)])
+    events = filter_completed_events(events)
 
     dlf = {}
     wffa = {}
@@ -50,7 +52,7 @@ async def async_dlf_wffa():
     dlf, wffa = {}, {}
     async with tpa_cm() as tpa:
         async for event in tqdm(
-            await helpers.flatten_lists_async(
+            await flatten_lists_async(
                 [tpa.get_events_by_year(year=y) for y in range(2008, 2022)]
             )
         ):

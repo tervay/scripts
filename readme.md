@@ -1,20 +1,5 @@
 ### Setup
 
-You'll need to set up GDAL. It's a pain. Sorry.
-
-```bash
-$ sudo add-apt-repository ppa:ubuntugis/ppa
-$ sudo apt-get update
-$ sudo apt-get install gdal-bin libgdal-dev
-```
-
-Edit `~/.bashrc` and append these lines:
-
-```bash
-export CPLUS_INCLUDE_PATH=/usr/include/gdal
-export C_INCLUDE_PATH=/usr/include/gdal
-```
-
 ```bash
 $ pip install -r requirements.txt
 $ echo "key = 'MyTBAkey'" > keys.py

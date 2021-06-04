@@ -1,6 +1,7 @@
 import asyncio
 from sys import argv
 
+import osrm
 import requests_cache
 from colorama import init
 from grpclib.server import Server
@@ -18,6 +19,8 @@ from py.tpa import TPAService
 
 init()
 requests_cache.install_cache("requests_cache")
+
+osrm.RequestConfig.host = "router.project-osrm.org"
 
 
 async def start_server():

@@ -48,6 +48,7 @@ def fix_team_city(team: Team) -> Team:
         "Kefar Blum": {3034: "Kfar Blum"},
         "Dabburiya": {5715: "Daburiyya"},
         "Jaffa of Nazareth": {7554: "Yafa an-Naseriyye"},
+        "arara negev": {6149: "Ar'arat an-Naqab"},
     }
 
     # Use 0 as default
