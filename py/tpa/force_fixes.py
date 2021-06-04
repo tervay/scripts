@@ -133,6 +133,7 @@ def fix_event_city(event: Event) -> Event:
             "2014bfbg": "Lexington",
         },
         "Seatwen": {0: ""},
+        "Troy": {0: "City of Troy"},
     }
 
     # Use 0 as default
