@@ -1,6 +1,6 @@
 import datetime
-from protos.tpa import Event
 
+from protos.tpa import Event
 from py.cli import pprint
 from py.tba import tba
 

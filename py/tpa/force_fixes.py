@@ -1,4 +1,5 @@
 from geopy.geocoders import Nominatim
+
 from protos.tpa import Event, Team
 
 

@@ -40,3 +40,9 @@ $ python main.py event_gen generate in.txt
 # Sim event
 $ python main.py sim sim out/schedule.pb <year>
 ```
+
+### Formatting
+
+```bash
+$ isort --skip venv/ .; black --exclude venv .
+```

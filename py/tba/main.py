@@ -6,10 +6,10 @@ from hashlib import md5
 import requests
 from cachecontrol import CacheControl
 
+from py.cache import read_from_cache, write_to_cache
+
 from .exceptions import *
 from .models import *
-
-from py.cache import read_from_cache, write_to_cache
 
 
 class TBA:

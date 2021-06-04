@@ -1,6 +1,7 @@
+import datetime
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Iterable, Tuple, TypeVar, Union, List
+from typing import Iterable, List, Tuple, TypeVar, Union
 
 from tqdm import tqdm
 from tqdm.asyncio import tqdm as atqdm
@@ -17,7 +18,6 @@ from protos.tpa import (
 )
 from py.tba import EventType
 from py.tpa.context_manager import tpa_cm
-import datetime
 
 save_dir = "out"
 

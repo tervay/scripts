@@ -1,9 +1,9 @@
 import asyncio
 from sys import argv
 
+import requests_cache
 from colorama import init
 from grpclib.server import Server
-import requests_cache
 
 import py.awards
 import py.codegen
@@ -11,11 +11,10 @@ import py.event_gen
 import py.geo
 import py.graphing
 import py.scout
-import py.teams
 import py.sim
+import py.teams
 from py.cli import run_main
 from py.tpa import TPAService
-
 
 init()
 requests_cache.install_cache("requests_cache")

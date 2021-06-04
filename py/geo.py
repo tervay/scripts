@@ -1,18 +1,9 @@
-from geopy.geocoders import Nominatim
-from routingpy.routers.mapbox_osrm import MapboxOSRM
+import osrm
 from tabulate import tabulate
 
 from py.cli import expose, pprint
 from py.tpa import tpa_cm
-from py.util import (
-    MAX_TEAMS_PAGE_NUM,
-    flatten_lists_async,
-    tqdm_bar_async,
-)
-
-from routingpy import MapboxValhalla
-from key import mapbox_key
-import osrm
+from py.util import MAX_TEAMS_PAGE_NUM, flatten_lists_async, tqdm_bar_async
 
 
 @expose

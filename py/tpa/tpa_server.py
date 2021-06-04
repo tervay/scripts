@@ -2,7 +2,7 @@ from typing import AsyncIterator, ForwardRef
 
 from protos.tpa import *
 from py.tba import tba
-from py.tpa.force_fixes import fix_team, fix_event
+from py.tpa.force_fixes import fix_event, fix_team
 
 
 def tba_match_to_tpa_match(m) -> Match:

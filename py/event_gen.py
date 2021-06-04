@@ -3,6 +3,7 @@ from collections import defaultdict
 from typing import Dict, List
 
 from colorama import Fore
+
 from protos.tpa import (
     MatchAlliance,
     MatchSimple,
@@ -11,7 +12,6 @@ from protos.tpa import (
     Team,
     TeamSimple,
 )
-
 from py.cli import expose, pprint
 from py.tba import AwardType, EventType
 from py.tpa.context_manager import tpa_cm

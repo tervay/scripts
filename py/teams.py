@@ -1,21 +1,21 @@
+import statistics
+from collections import defaultdict
+
+import pandas as pd
 from tqdm import tqdm as tqdm_sync
 from tqdm.asyncio import tqdm
 
 from py.cli import expose, pprint
-from py.tba import helpers, tba, EventType
+from py.tba import EventType, helpers, tba
 from py.tpa import tpa_cm
 from py.util import (
     MAX_TEAMS_PAGE_NUM,
     file_cm,
     filter_official_events,
+    flatten_lists_async,
     get_savepath,
     tqdm_bar_async,
-    flatten_lists_async,
 )
-import pandas as pd
-
-from collections import defaultdict
-import statistics
 
 
 @expose
