@@ -1,68 +1,49 @@
 from geopy.geocoders import Nominatim
-from protos.tpa import AllTeamLocationCaches, LocationCache, TeamLocationCache
 from tabulate import tabulate
 
-from py.cli import expose, pprint
+from py.cli import expose
 from py.tpa import tpa_cm
 from py.util import (
     MAX_TEAMS_PAGE_NUM,
-    file_cm,
     flatten_lists_async,
-    get_savepath,
     tqdm_bar_async,
 )
 
 
 @expose
 async def geocode_teams():
-    nom = Nominatim(user_agent="frcscripts")
-    full_cache = AllTeamLocationCaches()
     unfixed = []
 
     async with tpa_cm() as tpa:
         async for bar, team in tqdm_bar_async(
             await flatten_lists_async(
                 [
-                    tpa.get_teams_by_year(page_num=i, year=2021)
+                    tpa.get_teams_by_year(page_num=i, year=2020)
                     for i in range(MAX_TEAMS_PAGE_NUM)
                 ]
             )
         ):
-            bar.set_description(team.key)
-            if 0 in [len(team.city), len(team.state_prov), len(team.country)]:
-                continue
-
-            if team.team_number in [5415]:
-                unfixed.append(team)
-                continue
-
-            loc = nom.geocode(f"{team.city}, {team.state_prov}, {team.country}")
-
-            if loc is None:
-                unfixed.append(team)
-                print(team.key, team.city, team.state_prov, team.country)
-                continue
-
-            full_cache.team_locations.append(
-                TeamLocationCache(
-                    team=team,
-                    location=LocationCache(
-                        latitude=loc.latitude, longitude=loc.longitude
-                    ),
-                )
-            )
-
-    print(
-        tabulate(
-            [(t.team_number, t.city, t.state_prov, t.country) for t in unfixed],
-            headers=["Team", "City", "State", "Country"],
-        )
-    )
-
-    with file_cm(get_savepath("team_location_cache.pb"), "wb+") as f:
-        f.write(full_cache.SerializeToString())
+            print(f"{team.key.rjust(3 + 4)} {team.lat}, {team.lng}")
 
 
 @expose
-def geocode_events():
-    pass
+async def geocode_events():
+    unfixed = []
+
+    async with tpa_cm() as tpa:
+        async for bar, event in tqdm_bar_async(
+            await flatten_lists_async(
+                [tpa.get_events_by_year(year=i) for i in range(1992, 2022)]
+            )
+        ):
+            bar.set_description(event.key)
+            if (event.lat, event.lng) == (0.0, 0.0):
+                unfixed.append(event)
+
+    print("")
+    print(
+        tabulate(
+            [[e.key, e.city, e.state_prov, e.country] for e in unfixed],
+            headers=["Key", "City", "State", "Country"],
+        )
+    )

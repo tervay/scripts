@@ -2,7 +2,7 @@ from typing import AsyncIterator, ForwardRef
 
 from protos.tpa import *
 from py.tba import tba
-from py.tpa.force_fixes import fix_team
+from py.tpa.force_fixes import fix_team, fix_event
 
 
 def tba_match_to_tpa_match(m) -> Match:
@@ -79,7 +79,7 @@ class TPAService(TpaBase):
         return None
 
     async def get_event(self, event_key: str) -> "Event":
-        return Event().from_dict(tba.event(event=event_key))
+        return fix_event(Event().from_dict(tba.event(event=event_key)))
 
     async def get_event_alliances(
         self, event_key: str
@@ -164,7 +164,7 @@ class TPAService(TpaBase):
     async def get_events_by_year(self, year: int) -> AsyncIterator[ForwardRef("Event")]:
         events = tba.events(year=year)
         for e in events:
-            yield Event().from_dict(e)
+            yield fix_event(Event().from_dict(e))
 
     async def get_events_by_year_keys(
         self, year: int
@@ -250,7 +250,7 @@ class TPAService(TpaBase):
         self, team_key: str, year: int
     ) -> AsyncIterator[ForwardRef("Event")]:
         for e in tba.team_events(team=team_key, year=year):
-            yield Event().from_dict(e)
+            yield fix_event(Event().from_dict(e))
 
     async def get_team_events_by_year_keys(
         self, team_key: str, year: int

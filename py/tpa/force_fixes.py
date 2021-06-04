@@ -1,12 +1,19 @@
-from protos.tpa import Team
+from geopy.geocoders import Nominatim
+from protos.tpa import Event, Team
 
 
 def fix_team(team: Team) -> Team:
-    fns = [fix_team_city, fix_team_state_prov, fix_team_country]
-    for f in fns:
+    for f in [fix_team_city, fix_team_state_prov, fix_team_country, fix_team_geo]:
         team = f(team)
 
     return team
+
+
+def fix_event(event: Event) -> Event:
+    for f in [fix_event_city, fix_event_state_prov, fix_event_country, fix_event_geo]:
+        event = f(event)
+
+    return event
 
 
 def fix_team_city(team: Team) -> Team:
@@ -37,6 +44,9 @@ def fix_team_city(team: Team) -> Team:
         "Detroi": {4834: "Detroit"},
         "Pghp": {1707: "Pittsburgh"},
         "Cape Vincent / Clayton": {1713: "Cape Vincent"},
+        "Kefar Blum": {3034: "Kfar Blum"},
+        "Dabburiya": {5715: "Daburiyya"},
+        "Jaffa of Nazareth": {7554: "Yafa an-Naseriyye"},
     }
 
     # Use 0 as default
@@ -93,3 +103,99 @@ def fix_team_country(team: Team) -> Team:
         team.country = d[team.country].get(team.team_number, d[team.country].get(0, ""))
 
     return team
+
+
+def fix_team_geo(team: Team) -> Team:
+    nom = Nominatim(user_agent="frcscripts")
+    loc = nom.geocode(f"{team.city}, {team.state_prov}, {team.country}")
+    if loc is None:
+        print(f"Could not locate {team}")
+        return team
+
+    team.lat = loc.latitude
+    team.lng = loc.longitude
+    return team
+
+
+def fix_event_city(event: Event) -> Event:
+    d = {
+        "": {
+            "2006ca": "Los Angeles",
+            "2007az": "Phoenix",
+            "2007br": "Porto Alegre",
+            "2007ca": "Los Angeles",
+            "2007co": "Denver",
+            "2007ct": "Hartford",
+            "2007fl": "Orlando",
+            "2013mm": "Montgomery Township",
+            "2013mshsl": "Minneapolis",
+            "2013rsr": "New Orleans",
+            "2014bfbg": "Lexington",
+        },
+        "Seatwen": {0: ""},
+    }
+
+    # Use 0 as default
+    if event.city in d:
+        event.city = d[event.city].get(event.key, d[event.city].get(0, ""))
+
+    return event
+
+
+def fix_event_state_prov(event: Event) -> Event:
+    d = {
+        "": {
+            "2006ca": "California",
+            "2007az": "Arizona",
+            "2007br": "",
+            "2007ca": "California",
+            "2007co": "Colorado",
+            "2007ct": "Connecticut",
+            "2007fl": "Florida",
+            "2013mm": "New Jersey",
+            "2013mshsl": "Minnesota",
+            "2013rsr": "Louisiana",
+            "2014bfbg": "Kentucky",
+        },
+        "LA": {0: "Louisiana"},
+        "HaMerkaz": {0: "Center District"},
+        "KY": {"2008ios": ""},
+        "TXQ": {0: "Taichung City"},
+    }
+
+    # Use 0 as default
+    if event.state_prov in d:
+        event.state_prov = d[event.state_prov].get(
+            event.key, d[event.state_prov].get(0, "")
+        )
+
+    return event
+
+
+def fix_event_country(event: Event) -> Event:
+    d = {
+        "": {"2007br": "Brazil", 0: "USA"},
+        "Chinese Taipei": {0: "Taiwan"},
+        "Austrialia": {"2017aurb": "Australia"},
+        "Northern Israel": {"2008ios": "Israel"},
+    }
+
+    # Use 0 as default
+    if event.country in d:
+        event.country = d[event.country].get(event.key, d[event.country].get(0, ""))
+
+    return event
+
+
+def fix_event_geo(event: Event) -> Event:
+    nom = Nominatim(user_agent="frcscripts")
+    loc = nom.geocode(f"{event.city}, {event.state_prov}, {event.country}")
+    if loc is None:
+        print(f"Could not locate {event}")
+        event.lat = 0.0
+        event.lng = 0.0
+        return event
+
+    event.lat = loc.latitude
+    event.lng = loc.longitude
+    return event
