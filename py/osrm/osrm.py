@@ -2,6 +2,7 @@ from typing import Dict, List, Literal, Tuple
 
 import requests
 from requests_cache import CachedSession
+
 from protos.tpa import Event, Team
 from py.cli import pprint
 

@@ -5,16 +5,31 @@ from collections import defaultdict
 import numpy as np
 from tqdm import tqdm
 
-from protos.tpa import Schedule
-from py.cli import expose
+from protos.tpa import (
+    FakeAlliance,
+    FakeEvent,
+    Match,
+    MatchAlliance,
+    MatchAlliances,
+    Schedule,
+    TeamRp,
+)
+from py.cli import expose, pprint
 from py.scout import RP_FNs, get_component_opr, opr_component
+from py.tpa import SBs
 from py.tpa.context_manager import tpa_cm
-from py.util import file_cm, get_real_event_schedule, is_official_event, tqdm_bar
+from py.util import (
+    file_cm,
+    get_real_event_schedule,
+    get_savepath,
+    is_official_event,
+    tqdm_bar,
+)
 
 RP_THRESHOLDS = {
     2019: (0.5, 1),
-    2018: (1, 1),
-    2017: (1, 1),
+    2018: (0.75, 0.33),
+    2017: (0.35, 0.45),
     2016: (1, 1),
     2015: (1, 1),
     2014: (1, 1),
@@ -22,9 +37,11 @@ RP_THRESHOLDS = {
 
 
 @expose
-async def sim(schedule_fp, year, outfile=None):
-    if outfile is None:
-        outfile = f"{schedule_fp}_simmed_for_{year}.txt"
+async def sim(schedule_fp: str, year):
+    event_key = schedule_fp.replace("_schedule.pb", "").split("/")[-1]
+    outfile = f"fake_events/{event_key}_rankings.txt"
+    fake_event_file_path = f"fake_events/{event_key}_faked.pb"
+    fake_event = FakeEvent(event_key=event_key)
 
     with file_cm(schedule_fp, "rb") as f:
         schedule = Schedule.FromString(f.read())
@@ -96,6 +113,7 @@ async def sim(schedule_fp, year, outfile=None):
             rp1_means = [statistics.mean(team_rp1[k]) for k in a.team_keys]
             rp1_mean = sum(rp1_means)
             if (n := random.gauss(rp1_mean, rp1_stdev)) > RP_THRESHOLDS[year][0]:
+                # print(f"Awarding RP1 as n={round(n,2)} to {a.team_keys}")
                 for k in a.team_keys:
                     rps[k] += 1
 
@@ -104,6 +122,7 @@ async def sim(schedule_fp, year, outfile=None):
             rp2_means = [statistics.mean(team_rp2[k]) for k in a.team_keys]
             rp2_mean = sum(rp2_means)
             if (n := random.gauss(rp2_mean, rp2_stdev)) > RP_THRESHOLDS[year][1]:
+                # print(f"Awarding RP2 as n={round(n,2)} to {a.team_keys}")
                 for k in a.team_keys:
                     rps[k] += 1
 
@@ -124,6 +143,9 @@ async def sim(schedule_fp, year, outfile=None):
         ]
         blue_pt_mean = sum(blue_pt_means)
         blue_pts = round(random.gauss(blue_pt_mean, blue_pt_stdev))
+
+        m.alliances.blue.score = blue_pts
+        m.alliances.red.score = red_pts
 
         if red_pts > blue_pts:
             for k in m.alliances.red.team_keys:
@@ -152,9 +174,289 @@ async def sim(schedule_fp, year, outfile=None):
     for i, (k, rp) in enumerate(sorted(rps.items(), key=lambda t: -t[1]), start=1):
         print(f"{str(i).rjust(3)}. {k.rjust(3 + 4)} - {rp} - {rec_str(records[k])}")
 
-    with file_cm(outfile, "w+") as f:
+    with file_cm(get_savepath(outfile), "w+") as f:
         async with tpa_cm() as tpa:
             for bar, (k, rp) in tqdm_bar(sorted(rps.items(), key=lambda t: -t[1])):
                 bar.set_description(k)
                 team = await tpa.get_team(team_key=k)
                 print(f"{team.team_number}\t{team.nickname}", file=f)
+
+    with file_cm(get_savepath(fake_event_file_path), "wb+") as f:
+        fake_event.schedule = schedule
+        async with tpa_cm() as tpa:
+            for k, rp in sorted(rps.items(), key=lambda t: -t[1]):
+                team = await tpa.get_team(team_key=k)
+                fake_event.rankings.append(TeamRp(team=team, rp=rp))
+        f.write(fake_event.SerializeToString())
+
+
+@expose
+def print_faked_schedule(path):
+    with file_cm(path, "rb") as f:
+        fake_event = FakeEvent.FromString(f.read())
+
+    pprint(fake_event.schedule.matches[1])
+
+
+@expose
+async def save_draft(fake_event_path: str):
+    with file_cm(fake_event_path, "rb") as f:
+        fake_event = FakeEvent.FromString(f.read())
+
+    print(f"Alliances: (ctrl-d to end)")
+    alliances_raw = []
+    try:
+        while True:
+            alliances_raw.append(input())
+    except EOFError:
+        pass
+
+    async with tpa_cm() as tpa:
+        for i, raw_alliance in enumerate(alliances_raw, start=1):
+            c, p1, p2 = raw_alliance.split("\t")
+            fake_event.alliance_selection.append(
+                FakeAlliance(
+                    captain=await tpa.get_team(team_key=f"frc{c}"),
+                    first_pick=await tpa.get_team(team_key=f"frc{p1}"),
+                    second_pick=await tpa.get_team(team_key=f"frc{p2}"),
+                    seed=i,
+                )
+            )
+
+    def gen_fake_elim_match(
+        event_key: str,
+        comp_level: str,
+        set_number: int,
+        match_number: int,
+        red_fake: FakeAlliance,
+        blue_fake: FakeAlliance,
+        red_score: int,
+        blue_score: int,
+    ) -> Match:
+        return Match(
+            alliances=MatchAlliances(
+                red=MatchAlliance(
+                    score=red_score,
+                    team_keys=[
+                        red_fake.first_pick.key,
+                        red_fake.captain.key,
+                        red_fake.second_pick.key,
+                    ],
+                ),
+                blue=MatchAlliance(
+                    score=blue_score,
+                    team_keys=[
+                        blue_fake.first_pick.key,
+                        blue_fake.captain.key,
+                        blue_fake.second_pick.key,
+                    ],
+                ),
+            ),
+            key=f"{event_key}_{comp_level}{set_number}m{match_number}",
+            comp_level=comp_level,
+            set_number=set_number,
+            match_number=match_number,
+            winning_alliance="red" if red_score > blue_score else "blue",
+        )
+
+    # Qf
+    a = lambda n: fake_event.alliance_selection[n - 1]
+    sa = lambda a_: f"{a_.captain.key}-{a_.first_pick.key}-{a_.second_pick.key}"
+    qf18_winner = int(input(f"1. [{sa(a(1))}] vs 8. [{sa(a(8))}] - "))
+    fake_event.schedule.matches.extend(
+        [
+            gen_fake_elim_match(
+                event_key=fake_event.event_key,
+                comp_level="qf",
+                set_number=1,
+                match_number=1,
+                red_fake=a(1),
+                blue_fake=a(8),
+                red_score=1 if qf18_winner == 1 else 0,
+                blue_score=0 if qf18_winner == 1 else 1,
+            ),
+            gen_fake_elim_match(
+                event_key=fake_event.event_key,
+                comp_level="qf",
+                set_number=1,
+                match_number=2,
+                red_fake=a(1),
+                blue_fake=a(8),
+                red_score=1 if qf18_winner == 1 else 0,
+                blue_score=0 if qf18_winner == 1 else 1,
+            ),
+        ]
+    )
+
+    qf27_winner = int(input(f"2. [{sa(a(2))}] vs 7. [{sa(a(7))}] - "))
+    fake_event.schedule.matches.extend(
+        [
+            gen_fake_elim_match(
+                event_key=fake_event.event_key,
+                comp_level="qf",
+                set_number=2,
+                match_number=1,
+                red_fake=a(2),
+                blue_fake=a(7),
+                red_score=1 if qf27_winner == 1 else 0,
+                blue_score=0 if qf27_winner == 1 else 1,
+            ),
+            gen_fake_elim_match(
+                event_key=fake_event.event_key,
+                comp_level="qf",
+                set_number=2,
+                match_number=2,
+                red_fake=a(2),
+                blue_fake=a(7),
+                red_score=1 if qf27_winner == 1 else 0,
+                blue_score=0 if qf27_winner == 1 else 1,
+            ),
+        ]
+    )
+
+    qf36_winner = int(input(f"3. [{sa(a(3))}] vs 6. [{sa(a(6))}] - "))
+    fake_event.schedule.matches.extend(
+        [
+            gen_fake_elim_match(
+                event_key=fake_event.event_key,
+                comp_level="qf",
+                set_number=3,
+                match_number=1,
+                red_fake=a(3),
+                blue_fake=a(6),
+                red_score=1 if qf36_winner == 1 else 0,
+                blue_score=0 if qf36_winner == 1 else 1,
+            ),
+            gen_fake_elim_match(
+                event_key=fake_event.event_key,
+                comp_level="qf",
+                set_number=3,
+                match_number=2,
+                red_fake=a(3),
+                blue_fake=a(6),
+                red_score=1 if qf36_winner == 1 else 0,
+                blue_score=0 if qf36_winner == 1 else 1,
+            ),
+        ]
+    )
+
+    qf45_winner = int(input(f"4. [{sa(a(4))}] vs 5. [{sa(a(5))}] - "))
+    fake_event.schedule.matches.extend(
+        [
+            gen_fake_elim_match(
+                event_key=fake_event.event_key,
+                comp_level="qf",
+                set_number=4,
+                match_number=1,
+                red_fake=a(4),
+                blue_fake=a(5),
+                red_score=1 if qf45_winner == 1 else 0,
+                blue_score=0 if qf45_winner == 1 else 1,
+            ),
+            gen_fake_elim_match(
+                event_key=fake_event.event_key,
+                comp_level="qf",
+                set_number=4,
+                match_number=2,
+                red_fake=a(4),
+                blue_fake=a(5),
+                red_score=1 if qf45_winner == 1 else 0,
+                blue_score=0 if qf45_winner == 1 else 1,
+            ),
+        ]
+    )
+
+    # Sf
+    sf14_winner = int(
+        input(
+            f"{qf18_winner}. [{sa(a(qf18_winner))}] vs {qf45_winner}. [{sa(a(qf45_winner))}] - "
+        )
+    )
+    fake_event.schedule.matches.extend(
+        [
+            gen_fake_elim_match(
+                event_key=fake_event.event_key,
+                comp_level="sf",
+                set_number=1,
+                match_number=1,
+                red_fake=a(qf18_winner),
+                blue_fake=a(qf45_winner),
+                red_score=1 if sf14_winner == 1 else 0,
+                blue_score=0 if sf14_winner == 1 else 1,
+            ),
+            gen_fake_elim_match(
+                event_key=fake_event.event_key,
+                comp_level="sf",
+                set_number=1,
+                match_number=2,
+                red_fake=a(qf18_winner),
+                blue_fake=a(qf45_winner),
+                red_score=1 if sf14_winner == 1 else 0,
+                blue_score=0 if sf14_winner == 1 else 1,
+            ),
+        ]
+    )
+
+    sf23_winner = int(
+        input(
+            f"{qf27_winner}. [{sa(a(qf27_winner))}] vs {qf36_winner}. [{sa(a(qf36_winner))}] - "
+        )
+    )
+    fake_event.schedule.matches.extend(
+        [
+            gen_fake_elim_match(
+                event_key=fake_event.event_key,
+                comp_level="sf",
+                set_number=2,
+                match_number=1,
+                red_fake=a(qf27_winner),
+                blue_fake=a(qf36_winner),
+                red_score=1 if sf23_winner == 1 else 0,
+                blue_score=0 if sf23_winner == 1 else 1,
+            ),
+            gen_fake_elim_match(
+                event_key=fake_event.event_key,
+                comp_level="sf",
+                set_number=2,
+                match_number=2,
+                red_fake=a(qf27_winner),
+                blue_fake=a(qf36_winner),
+                red_score=1 if sf23_winner == 1 else 0,
+                blue_score=0 if sf23_winner == 1 else 1,
+            ),
+        ]
+    )
+
+    # F
+    f_winner = int(
+        input(
+            f"{sf14_winner}. [{sa(a(sf14_winner))}] vs {sf23_winner}. [{sa(a(sf23_winner))}] - "
+        )
+    )
+    fake_event.schedule.matches.extend(
+        [
+            gen_fake_elim_match(
+                event_key=fake_event.event_key,
+                comp_level="f",
+                set_number=1,
+                match_number=1,
+                red_fake=a(sf14_winner),
+                blue_fake=a(sf23_winner),
+                red_score=1 if f_winner == 1 else 0,
+                blue_score=0 if f_winner == 1 else 1,
+            ),
+            gen_fake_elim_match(
+                event_key=fake_event.event_key,
+                comp_level="f",
+                set_number=1,
+                match_number=2,
+                red_fake=a(sf14_winner),
+                blue_fake=a(sf23_winner),
+                red_score=1 if f_winner == 1 else 0,
+                blue_score=0 if f_winner == 1 else 1,
+            ),
+        ]
+    )
+
+    with file_cm(fake_event_path, "wb+") as f:
+        f.write(fake_event.SerializeToString())

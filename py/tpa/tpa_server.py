@@ -4,6 +4,15 @@ from protos.tpa import *
 from py.tba import tba
 from py.tpa.force_fixes import fix_event, fix_team
 
+SBs = {
+    2015: (MatchScoreBreakdown2015, MatchScoreBreakdown2015Alliance),
+    2016: (MatchScoreBreakdown2016, MatchScoreBreakdown2016Alliance),
+    2017: (MatchScoreBreakdown2017, MatchScoreBreakdown2017Alliance),
+    2018: (MatchScoreBreakdown2018, MatchScoreBreakdown2018Alliance),
+    2019: (MatchScoreBreakdown2019, MatchScoreBreakdown2019Alliance),
+    2020: (MatchScoreBreakdown2020, MatchScoreBreakdown2020Alliance),
+}
+
 
 def tba_match_to_tpa_match(m) -> Match:
     if "score_breakdown" not in m or m["score_breakdown"] is None:

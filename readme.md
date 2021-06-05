@@ -20,10 +20,14 @@ $ python -m grpc_tools.protoc --python_betterproto_out=protos/ -I=protos/ protos
 ```bash
 # Schedule from real event
 $ python main.py event_gen save_real_schedule <event_key>
+# District from states in year
+$ python main.py event_gen district_from_states "New York,NY" 2018
 # Schedule from fake event
-$ python main.py event_gen generate in.txt
+$ python main.py event_gen generate out/districts/New\ York-Ny_2018.txt 2018nycmp
 # Sim event
-$ python main.py sim sim out/schedule.pb <year>
+$ python main.py sim sim out/fake_events/2018nycmp_schedule.pb 2018
+# Save fake draft
+$ python main.py sim save_draft out/fake_events/2018nycmp_faked.pb
 ```
 
 ### Formatting

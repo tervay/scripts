@@ -2,6 +2,66 @@ from geopy.geocoders import Nominatim
 
 from protos.tpa import Event, Team
 
+us_state_abbrev = {
+    "Alabama": "AL",
+    "Alaska": "AK",
+    "American Samoa": "AS",
+    "Arizona": "AZ",
+    "Arkansas": "AR",
+    "California": "CA",
+    "Colorado": "CO",
+    "Connecticut": "CT",
+    "Delaware": "DE",
+    "District of Columbia": "DC",
+    "Florida": "FL",
+    "Georgia": "GA",
+    "Guam": "GU",
+    "Hawaii": "HI",
+    "Idaho": "ID",
+    "Illinois": "IL",
+    "Indiana": "IN",
+    "Iowa": "IA",
+    "Kansas": "KS",
+    "Kentucky": "KY",
+    "Louisiana": "LA",
+    "Maine": "ME",
+    "Maryland": "MD",
+    "Massachusetts": "MA",
+    "Michigan": "MI",
+    "Minnesota": "MN",
+    "Mississippi": "MS",
+    "Missouri": "MO",
+    "Montana": "MT",
+    "Nebraska": "NE",
+    "Nevada": "NV",
+    "New Hampshire": "NH",
+    "New Jersey": "NJ",
+    "New Mexico": "NM",
+    "New York": "NY",
+    "North Carolina": "NC",
+    "North Dakota": "ND",
+    "Northern Mariana Islands": "MP",
+    "Ohio": "OH",
+    "Oklahoma": "OK",
+    "Oregon": "OR",
+    "Pennsylvania": "PA",
+    "Puerto Rico": "PR",
+    "Rhode Island": "RI",
+    "South Carolina": "SC",
+    "South Dakota": "SD",
+    "Tennessee": "TN",
+    "Texas": "TX",
+    "Utah": "UT",
+    "Vermont": "VT",
+    "Virgin Islands": "VI",
+    "Virginia": "VA",
+    "Washington": "WA",
+    "West Virginia": "WV",
+    "Wisconsin": "WI",
+    "Wyoming": "WY",
+}
+abbrev_us_state = dict(map(reversed, us_state_abbrev.items()))
+
 
 def fix_team(team: Team) -> Team:
     for f in [fix_team_city, fix_team_state_prov, fix_team_country, fix_team_geo]:
@@ -49,27 +109,19 @@ def fix_team_city(team: Team) -> Team:
         "Dabburiya": {5715: "Daburiyya"},
         "Jaffa of Nazareth": {7554: "Yafa an-Naseriyye"},
         "arara negev": {6149: "Ar'arat an-Naqab"},
+        "Jadeh Mahbas": {7329: ""},
+        "Tamra GLIL": {1946: "Tamra"},
     }
 
     # Use 0 as default
     if team.city in d:
-        team.city = d[team.city].get(team.team_number, d[team.city].get(0, ""))
+        team.city = d[team.city].get(team.team_number, d[team.city].get(0, team.city))
 
     return team
 
 
 def fix_team_state_prov(team: Team) -> Team:
     d = {
-        "LA": {0: "Louisiana"},
-        "FL": {1390: "Florida"},
-        "NY": {1713: "New York"},
-        "PA": {0: "Pennsylvania"},
-        "IL": {2112: "Illinois"},
-        "OR": {2142: "Oregon"},
-        "OK": {3144: "Oklahoma"},
-        "CA": {4101: "California"},
-        "TX": {4282: "Texas"},
-        "MI": {4834: "Michigan"},
         "TA": {0: "Tel Aviv District"},
         "Tel-Aviv": {6741: ""},
         "HaMerkaz": {0: "Center District"},
@@ -84,13 +136,17 @@ def fix_team_state_prov(team: Team) -> Team:
         "Tainan Municipality": {0: ""},
         "Taichung Municipality": {0: ""},
         "Dolnoslaskie": {7570: ""},
+        "Región Metropolitana de Santiago": {0: ""},
     }
 
     # Use 0 as default
     if team.state_prov in d:
         team.state_prov = d[team.state_prov].get(
-            team.team_number, d[team.state_prov].get(0, "")
+            team.team_number, d[team.state_prov].get(0, team.state_prov)
         )
+
+    if team.state_prov in abbrev_us_state and team.country == "USA":
+        team.state_prov = abbrev_us_state[team.state_prov]
 
     return team
 
@@ -102,14 +158,21 @@ def fix_team_country(team: Team) -> Team:
 
     # Use 0 as default
     if team.country in d:
-        team.country = d[team.country].get(team.team_number, d[team.country].get(0, ""))
+        team.country = d[team.country].get(
+            team.team_number, d[team.country].get(0, team.country)
+        )
 
     return team
 
 
 def fix_team_geo(team: Team) -> Team:
     nom = Nominatim(user_agent="frcscripts")
-    loc = nom.geocode(f"{team.city}, {team.state_prov}, {team.country}")
+    try:
+        loc = nom.geocode(f"{team.city}, {team.state_prov}, {team.country}")
+    except:
+        print(f"Could not locate {team}")
+        return team
+
     if loc is None:
         print(f"Could not locate {team}")
         return team
@@ -140,7 +203,7 @@ def fix_event_city(event: Event) -> Event:
 
     # Use 0 as default
     if event.city in d:
-        event.city = d[event.city].get(event.key, d[event.city].get(0, ""))
+        event.city = d[event.city].get(event.key, d[event.city].get(0, event.city))
 
     return event
 
@@ -160,7 +223,6 @@ def fix_event_state_prov(event: Event) -> Event:
             "2013rsr": "Louisiana",
             "2014bfbg": "Kentucky",
         },
-        "LA": {0: "Louisiana"},
         "HaMerkaz": {0: "Center District"},
         "KY": {"2008ios": ""},
         "TXQ": {0: "Taichung City"},
@@ -169,8 +231,11 @@ def fix_event_state_prov(event: Event) -> Event:
     # Use 0 as default
     if event.state_prov in d:
         event.state_prov = d[event.state_prov].get(
-            event.key, d[event.state_prov].get(0, "")
+            event.key, d[event.state_prov].get(0, event.state_prov)
         )
+
+    if event.state_prov in abbrev_us_state and event.country == "USA":
+        event.state_prov = abbrev_us_state[event.state_prov]
 
     return event
 
@@ -185,14 +250,21 @@ def fix_event_country(event: Event) -> Event:
 
     # Use 0 as default
     if event.country in d:
-        event.country = d[event.country].get(event.key, d[event.country].get(0, ""))
+        event.country = d[event.country].get(
+            event.key, d[event.country].get(0, event.country)
+        )
 
     return event
 
 
 def fix_event_geo(event: Event) -> Event:
     nom = Nominatim(user_agent="frcscripts")
-    loc = nom.geocode(f"{event.city}, {event.state_prov}, {event.country}")
+    try:
+        loc = nom.geocode(f"{event.city}, {event.state_prov}, {event.country}")
+    except:
+        print(f"Could not locate {event}")
+        return event
+
     if loc is None:
         print(f"Could not locate {event}")
         event.lat = 0.0

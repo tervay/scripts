@@ -3,7 +3,7 @@ from collections import defaultdict
 from tqdm.asyncio import trange
 
 from py.cli import expose, pprint
-from py.tba import EventType
+from py.tba import AwardType, EventType
 from py.tpa import tpa_cm
 
 
@@ -45,3 +45,30 @@ async def wffa_families():
             print(f"* {last_name} family?: ", end="")
             s = [f"{a} ({t}) ({e})" for e, a, t in event_awardee_list]
             print(", ".join(s))
+
+
+@expose
+async def wffa_info():
+    async with tpa_cm() as tpa:
+        async for year in trange(1992, 2022):
+            async for event in tpa.get_events_by_year(year=year):
+                award_type = (
+                    "WFA" if event.event_type in EventType.CMP_EVENT_TYPES else "WFFA"
+                )
+                async for award in tpa.get_event_awards(event_key=event.key):
+                    if award.award_type == AwardType.WOODIE_FLOWERS:
+                        for recipient in award.recipient_list:
+                            tcity, tstate, tcountry = "", "", ""
+                            if len(recipient.team_key) > 0:
+                                team = await tpa.get_team(team_key=recipient.team_key)
+                                tcity, tstate, tcountry = (
+                                    team.city,
+                                    team.state_prov,
+                                    team.country,
+                                )
+
+                            print(
+                                f"{award_type}\t{event.key}\t{recipient.awardee}\t{recipient.team_key}\t"
+                                + f"{tcity}\t{tstate}\t{tcountry}\t"
+                                + f"{event.city}\t{event.state_prov}\t{event.country}"
+                            )

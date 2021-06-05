@@ -3,6 +3,7 @@ from collections import defaultdict
 from typing import Dict, List
 
 from colorama import Fore
+from tqdm import trange
 
 from protos.tpa import (
     MatchAlliance,
@@ -22,13 +23,16 @@ from py.util import (
     get_real_event_schedule,
     get_savepath,
     sort_events,
+    tqdm_bar,
     tqdm_bar_async,
 )
 
-event_key = "2021fake"
+save_dir = get_savepath("fake_events")
 
 
-def make_schedule_pb(id_to_team_map: Dict[int, Team], schedule_fp: str) -> Schedule:
+def make_schedule_pb(
+    id_to_team_map: Dict[int, Team], schedule_fp: str, event_key: str
+) -> Schedule:
     schedule = Schedule(teams=list(id_to_team_map.values()))
 
     with open(schedule_fp, "r") as f:
@@ -63,7 +67,9 @@ def make_schedule_pb(id_to_team_map: Dict[int, Team], schedule_fp: str) -> Sched
     return schedule
 
 
-def generate_with_teams(team_list: List[TeamSimple], fname: str, num_matches=10):
+def generate_with_teams(
+    team_list: List[TeamSimple], event_key: str, fname: str, num_matches=10
+):
     schedule_filepath = f"schedules/{len(team_list)}_{num_matches}.csv"
     schedule = make_schedule_pb(
         id_to_team_map={
@@ -71,20 +77,21 @@ def generate_with_teams(team_list: List[TeamSimple], fname: str, num_matches=10)
             for i, t in enumerate(random.sample(team_list, len(team_list)), start=1)
         },
         schedule_fp=schedule_filepath,
+        event_key=event_key,
     )
 
-    with file_cm(get_savepath(fname), "wb+") as f:
+    with file_cm(save_dir + "/" + fname, "wb+") as f:
         f.write(schedule.SerializeToString())
 
 
 @expose
-def generate(team_list_filepath, fname=f"{event_key}_schedule.pb", num_matches=10):
+def generate(team_list_filepath, key, num_matches=10):
     with open(team_list_filepath, "r") as f:
         teams = [
             TeamSimple(key=f"frc{t.strip()}", team_number=int(t)) for t in f.readlines()
         ]
 
-    generate_with_teams(teams, fname=fname, num_matches=num_matches)
+    generate_with_teams(teams, key, f"{key}_schedule.pb", num_matches=num_matches)
 
 
 @expose
@@ -140,14 +147,12 @@ async def district_from_states(
     cmp_qual = defaultdict(lambda: False)
 
     async with tpa_cm() as tpa:
-        async for bar, team in tqdm_bar_async(
-            await flatten_lists_async(
-                [
-                    tpa.get_teams_by_year(year=year, page_num=i)
-                    for i in range(MAX_TEAMS_PAGE_NUM)
-                ]
-            )
-        ):
+        teams = []
+        for i in trange(MAX_TEAMS_PAGE_NUM):
+            pg = [t async for t in tpa.get_teams_by_year(year=year, page_num=i)]
+            teams.extend(pg)
+
+        for bar, team in tqdm_bar(teams):
             bar.set_description(team.key)
             if team.state_prov in allowlist:
                 events = [
@@ -208,3 +213,11 @@ async def district_from_states(
             f"{Fore.RESET}{str(i).rjust(3)}. {team_color}{team[3:].rjust(4)}{Fore.RESET} "
             + f"{pts_str} = {sum(team_pts)}\t{cmp_str}"
         )
+
+    with file_cm(
+        get_savepath(f'districts/{states.replace(",", "-")}_{year}.txt'), "w+"
+    ) as f:
+        for team, team_pts in sorted(pts.items(), key=lambda t: -sum(t[1]))[
+            : int(round(n_qualified))
+        ]:
+            f.write(f"{team[3:]}\n")

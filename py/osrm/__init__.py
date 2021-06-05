@@ -1,1 +1,1 @@
-from .osrm import matrix, event_matrix
+from .osrm import event_matrix, matrix

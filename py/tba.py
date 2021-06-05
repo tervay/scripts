@@ -1,5 +1,6 @@
-from key import key
 from tbapy import TBA
+
+from key import key
 
 tba = TBA(auth_key=key)
 
