@@ -6,12 +6,14 @@ from colorama import Fore
 from tqdm import trange
 
 from protos.tpa import (
+    FakeEvent,
     MatchAlliance,
     MatchSimple,
     MatchSimpleAlliances,
     Schedule,
     Team,
     TeamSimple,
+    Event,
 )
 from py.cli import expose, pprint
 from py.tba import AwardType, EventType
@@ -26,6 +28,8 @@ from py.util import (
     tqdm_bar,
     tqdm_bar_async,
 )
+import json
+from betterproto import Casing
 
 save_dir = get_savepath("fake_events")
 
@@ -69,7 +73,7 @@ def make_schedule_pb(
 
 def generate_with_teams(
     team_list: List[TeamSimple], event_key: str, fname: str, num_matches=10
-):
+) -> Schedule:
     schedule_filepath = f"schedules/{len(team_list)}_{num_matches}.csv"
     schedule = make_schedule_pb(
         id_to_team_map={
@@ -82,6 +86,8 @@ def generate_with_teams(
 
     with file_cm(save_dir + "/" + fname, "wb+") as f:
         f.write(schedule.SerializeToString())
+
+    return schedule
 
 
 @expose
@@ -221,3 +227,87 @@ async def district_from_states(
             : int(round(n_qualified))
         ]:
             f.write(f"{team[3:]}\n")
+
+
+@expose
+def tba(fake_event_path: str):
+    with file_cm(fake_event_path, "rb") as f:
+        fake_event = FakeEvent.FromString(f.read())
+
+    with file_cm(
+        get_savepath(
+            f"fake_events/{fake_event.inner_event.key}/{fake_event.inner_event.key}_tba.json"
+        ),
+        "w+",
+    ) as f:
+        d = fake_event.to_dict(casing=Casing.SNAKE)
+        d["inner_event"]["playoff_type"] = 0
+        d["inner_event"]["parent_event_key"] = None
+        d["inner_event"]["division_keys"] = None
+        d["inner_event"]["district"] = None
+        d["inner_event"]["webcasts"] = {}
+
+        for m in d["schedule"]["matches"]:
+            m["score_breakdown"] = None
+            m['videos'] = []
+            for _, data in m["alliances"].items():
+                data["surrogate_team_keys"] = []
+                data["dq_team_keys"] = []
+
+        print(
+            json.dumps(d, indent=2),
+            file=f,
+        )
+
+
+@expose
+def create(team_list_filepath):
+    get = lambda s: input(f"{s}: ")
+    e = Event()
+
+    fields = {
+        field: get(field)
+        for field in [
+            "name",
+            "key",
+            "city",
+        ]
+    }
+
+    fields.update(
+        {
+            "short_name": fields["name"],
+            "event_code": fields["key"][4:],
+            "event_type": 99,
+            "year": int(fields["key"][:4]),
+            "timezone": "America/New_York",
+            "website": "https://www.thebluealliance.com/",
+            "start_date": f'{fields["key"][:4]}-03-01',
+            "end_date": f'{fields["key"][:4]}-03-04',
+            "location_name": "Fake Arena",
+            "state_prov": fields["key"][4:6].upper(),
+            "country": "USA",
+        }
+    )
+
+    for k, v in fields.items():
+        setattr(e, k, v)
+
+    print(e)
+
+    with open(team_list_filepath, "r") as f:
+        teams = [Team(key=f"frc{t.strip()}", team_number=int(t)) for t in f.readlines()]
+
+    schedule_filepath = f"schedules/{len(teams)}_10.csv"
+    schedule = make_schedule_pb(
+        id_to_team_map={
+            i: t for i, t in enumerate(random.sample(teams, len(teams)), start=1)
+        },
+        schedule_fp=schedule_filepath,
+        event_key=e.key,
+    )
+
+    fe = FakeEvent(inner_event=e, schedule=schedule)
+
+    with file_cm(get_savepath(f"fake_events/{e.key}/{e.key}_fe.pb"), "wb+") as f:
+        f.write(fe.SerializeToString())

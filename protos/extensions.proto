@@ -24,7 +24,7 @@ message FakeAlliance {
 }
 
 message FakeEvent {
-  string event_key = 1;
+  Event inner_event = 1;
   Schedule schedule = 2;
   repeated TeamRP rankings = 3;
   repeated FakeAlliance alliance_selection = 4;

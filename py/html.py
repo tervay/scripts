@@ -24,8 +24,14 @@ def fake_page(fake_event_path):
                 quals=list(
                     filter(lambda m: m.comp_level == "qm", fake_event.schedule.matches)
                 ),
-                elims=list(
-                    filter(lambda m: m.comp_level != "qm", fake_event.schedule.matches)
+                qf=list(
+                    filter(lambda m: m.comp_level == "qf", fake_event.schedule.matches)
+                ),
+                sf=list(
+                    filter(lambda m: m.comp_level == "sf", fake_event.schedule.matches)
+                ),
+                f=list(
+                    filter(lambda m: m.comp_level == "f", fake_event.schedule.matches)
                 ),
             ),
             file=f,

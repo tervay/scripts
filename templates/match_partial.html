@@ -1,0 +1,30 @@
+{% set rs = match.alliances.red.score %} {% set bs = match.alliances.blue.score
+%} {% set rwin = rs > bs %} {% set bwin = bs > rs %} {% set winner_class =
+"has-text-weight-bold" %} {% set rcss = winner_class if rwin else "" %} {% set
+bcss = winner_class if bwin else "" %}
+
+<tr>
+  <td class="has-text-centered">
+    {{ match.comp_level }}{% if match.comp_level != 'qm' %}{{ match.set_number
+    }}{% else %}{% endif %} {{ match.match_number }}
+  </td>
+  {% for tk in match.alliances.red.team_keys %}
+  <td class="has-background-danger-light  has-text-centered {{ rcss }}">
+    <a href="https://www.thebluealliance.com/team/{{ tk[3:] }}/{{ year }}"
+      >{{ tk[3:] }}</a
+    >
+  </td>
+  {% endfor %} {% for tk in match.alliances.blue.team_keys %}
+  <td class="has-background-link-light  has-text-centered {{ bcss }}">
+    <a href="https://www.thebluealliance.com/team/{{ tk[3:] }}/{{ year }}"
+      >{{ tk[3:] }}</a
+    >
+  </td>
+  {% endfor %}
+  <td class="has-background-danger-light  has-text-centered {{ rcss }}">
+    {{ match.alliances.red.score }}
+  </td>
+  <td class="has-background-link-light  has-text-centered {{ bcss }}">
+    {{ match.alliances.blue.score }}
+  </td>
+</tr>

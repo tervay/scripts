@@ -13,6 +13,7 @@ from protos.tpa import (
     MatchAlliances,
     Schedule,
     TeamRp,
+    WltRecord,
 )
 from py.cli import expose, pprint
 from py.scout import RP_FNs, get_component_opr, opr_component
@@ -27,7 +28,7 @@ from py.util import (
 )
 
 RP_THRESHOLDS = {
-    2019: (0.5, 1),
+    2019: (0.35, 0.25),
     2018: (0.75, 0.33),
     2017: (0.35, 0.45),
     2016: (1, 1),
@@ -37,14 +38,14 @@ RP_THRESHOLDS = {
 
 
 @expose
-async def sim(schedule_fp: str, year):
-    event_key = schedule_fp.replace("_schedule.pb", "").split("/")[-1]
-    outfile = f"fake_events/{event_key}_rankings.txt"
-    fake_event_file_path = f"fake_events/{event_key}_faked.pb"
-    fake_event = FakeEvent(event_key=event_key)
+async def sim(fe_fp: str):
+    with file_cm(fe_fp, "rb") as f:
+        fake_event = FakeEvent.FromString(f.read())
 
-    with file_cm(schedule_fp, "rb") as f:
-        schedule = Schedule.FromString(f.read())
+    rankings_file = fe_fp.replace("_fe.pb", "_ranks.csv")
+
+    schedule = fake_event.schedule
+    year = fake_event.inner_event.year
 
     team_rp1 = defaultdict(list)
     team_rp2 = defaultdict(list)
@@ -168,25 +169,22 @@ async def sim(schedule_fp: str, year):
     for t, rec in records.items():
         rec["losses"] = played[t] - (rec["wins"] + rec["ties"])
 
-    def rec_str(rec):
-        return f'{rec["wins"]}-{rec["losses"]}-{rec["ties"]}'
-
-    for i, (k, rp) in enumerate(sorted(rps.items(), key=lambda t: -t[1]), start=1):
-        print(f"{str(i).rjust(3)}. {k.rjust(3 + 4)} - {rp} - {rec_str(records[k])}")
-
-    with file_cm(get_savepath(outfile), "w+") as f:
+    with file_cm(rankings_file, "w+") as f:
         async with tpa_cm() as tpa:
             for bar, (k, rp) in tqdm_bar(sorted(rps.items(), key=lambda t: -t[1])):
                 bar.set_description(k)
                 team = await tpa.get_team(team_key=k)
                 print(f"{team.team_number}\t{team.nickname}", file=f)
 
-    with file_cm(get_savepath(fake_event_file_path), "wb+") as f:
+    with file_cm(fe_fp, "wb+") as f:
         fake_event.schedule = schedule
         async with tpa_cm() as tpa:
             for k, rp in sorted(rps.items(), key=lambda t: -t[1]):
                 team = await tpa.get_team(team_key=k)
-                fake_event.rankings.append(TeamRp(team=team, rp=rp))
+                fake_event.rankings.append(
+                    TeamRp(team=team, rp=rp, record=WltRecord.from_dict(records[k]))
+                )
+
         f.write(fake_event.SerializeToString())
 
 
@@ -210,6 +208,11 @@ async def save_draft(fake_event_path: str):
             alliances_raw.append(input())
     except EOFError:
         pass
+
+    fake_event.alliance_selection.clear()
+    fake_event.schedule.matches = list(
+        filter(lambda m: m.comp_level == "qm", fake_event.schedule.matches)
+    )
 
     async with tpa_cm() as tpa:
         for i, raw_alliance in enumerate(alliances_raw, start=1):
@@ -257,6 +260,7 @@ async def save_draft(fake_event_path: str):
             set_number=set_number,
             match_number=match_number,
             winning_alliance="red" if red_score > blue_score else "blue",
+            event_key=event_key,
         )
 
     # Qf
@@ -266,24 +270,24 @@ async def save_draft(fake_event_path: str):
     fake_event.schedule.matches.extend(
         [
             gen_fake_elim_match(
-                event_key=fake_event.event_key,
+                event_key=fake_event.inner_event.key,
                 comp_level="qf",
                 set_number=1,
                 match_number=1,
                 red_fake=a(1),
                 blue_fake=a(8),
-                red_score=1 if qf18_winner == 1 else 0,
-                blue_score=0 if qf18_winner == 1 else 1,
+                red_score=2 if qf18_winner == 1 else 1,
+                blue_score=1 if qf18_winner == 1 else 2,
             ),
             gen_fake_elim_match(
-                event_key=fake_event.event_key,
+                event_key=fake_event.inner_event.key,
                 comp_level="qf",
                 set_number=1,
                 match_number=2,
                 red_fake=a(1),
                 blue_fake=a(8),
-                red_score=1 if qf18_winner == 1 else 0,
-                blue_score=0 if qf18_winner == 1 else 1,
+                red_score=2 if qf18_winner == 1 else 1,
+                blue_score=1 if qf18_winner == 1 else 2,
             ),
         ]
     )
@@ -292,24 +296,24 @@ async def save_draft(fake_event_path: str):
     fake_event.schedule.matches.extend(
         [
             gen_fake_elim_match(
-                event_key=fake_event.event_key,
+                event_key=fake_event.inner_event.key,
                 comp_level="qf",
-                set_number=2,
+                set_number=3,
                 match_number=1,
                 red_fake=a(2),
                 blue_fake=a(7),
-                red_score=1 if qf27_winner == 1 else 0,
-                blue_score=0 if qf27_winner == 1 else 1,
+                red_score=2 if qf27_winner == 2 else 1,
+                blue_score=1 if qf27_winner == 2 else 2,
             ),
             gen_fake_elim_match(
-                event_key=fake_event.event_key,
+                event_key=fake_event.inner_event.key,
                 comp_level="qf",
-                set_number=2,
+                set_number=3,
                 match_number=2,
                 red_fake=a(2),
                 blue_fake=a(7),
-                red_score=1 if qf27_winner == 1 else 0,
-                blue_score=0 if qf27_winner == 1 else 1,
+                red_score=2 if qf27_winner == 2 else 1,
+                blue_score=1 if qf27_winner == 2 else 2,
             ),
         ]
     )
@@ -318,24 +322,24 @@ async def save_draft(fake_event_path: str):
     fake_event.schedule.matches.extend(
         [
             gen_fake_elim_match(
-                event_key=fake_event.event_key,
+                event_key=fake_event.inner_event.key,
                 comp_level="qf",
-                set_number=3,
+                set_number=4,
                 match_number=1,
                 red_fake=a(3),
                 blue_fake=a(6),
-                red_score=1 if qf36_winner == 1 else 0,
-                blue_score=0 if qf36_winner == 1 else 1,
+                red_score=2 if qf36_winner == 3 else 1,
+                blue_score=1 if qf36_winner == 3 else 2,
             ),
             gen_fake_elim_match(
-                event_key=fake_event.event_key,
+                event_key=fake_event.inner_event.key,
                 comp_level="qf",
-                set_number=3,
+                set_number=4,
                 match_number=2,
                 red_fake=a(3),
                 blue_fake=a(6),
-                red_score=1 if qf36_winner == 1 else 0,
-                blue_score=0 if qf36_winner == 1 else 1,
+                red_score=2 if qf36_winner == 3 else 1,
+                blue_score=1 if qf36_winner == 3 else 2,
             ),
         ]
     )
@@ -344,24 +348,24 @@ async def save_draft(fake_event_path: str):
     fake_event.schedule.matches.extend(
         [
             gen_fake_elim_match(
-                event_key=fake_event.event_key,
+                event_key=fake_event.inner_event.key,
                 comp_level="qf",
-                set_number=4,
+                set_number=2,
                 match_number=1,
                 red_fake=a(4),
                 blue_fake=a(5),
-                red_score=1 if qf45_winner == 1 else 0,
-                blue_score=0 if qf45_winner == 1 else 1,
+                red_score=2 if qf45_winner == 4 else 1,
+                blue_score=1 if qf45_winner == 4 else 2,
             ),
             gen_fake_elim_match(
-                event_key=fake_event.event_key,
+                event_key=fake_event.inner_event.key,
                 comp_level="qf",
-                set_number=4,
+                set_number=2,
                 match_number=2,
                 red_fake=a(4),
                 blue_fake=a(5),
-                red_score=1 if qf45_winner == 1 else 0,
-                blue_score=0 if qf45_winner == 1 else 1,
+                red_score=2 if qf45_winner == 4 else 1,
+                blue_score=1 if qf45_winner == 4 else 2,
             ),
         ]
     )
@@ -375,24 +379,24 @@ async def save_draft(fake_event_path: str):
     fake_event.schedule.matches.extend(
         [
             gen_fake_elim_match(
-                event_key=fake_event.event_key,
+                event_key=fake_event.inner_event.key,
                 comp_level="sf",
                 set_number=1,
                 match_number=1,
                 red_fake=a(qf18_winner),
                 blue_fake=a(qf45_winner),
-                red_score=1 if sf14_winner == 1 else 0,
-                blue_score=0 if sf14_winner == 1 else 1,
+                red_score=2 if sf14_winner == qf18_winner else 1,
+                blue_score=1 if sf14_winner == qf18_winner else 2,
             ),
             gen_fake_elim_match(
-                event_key=fake_event.event_key,
+                event_key=fake_event.inner_event.key,
                 comp_level="sf",
                 set_number=1,
                 match_number=2,
                 red_fake=a(qf18_winner),
                 blue_fake=a(qf45_winner),
-                red_score=1 if sf14_winner == 1 else 0,
-                blue_score=0 if sf14_winner == 1 else 1,
+                red_score=2 if sf14_winner == qf18_winner else 1,
+                blue_score=1 if sf14_winner == qf18_winner else 2,
             ),
         ]
     )
@@ -405,24 +409,24 @@ async def save_draft(fake_event_path: str):
     fake_event.schedule.matches.extend(
         [
             gen_fake_elim_match(
-                event_key=fake_event.event_key,
+                event_key=fake_event.inner_event.key,
                 comp_level="sf",
                 set_number=2,
                 match_number=1,
                 red_fake=a(qf27_winner),
                 blue_fake=a(qf36_winner),
-                red_score=1 if sf23_winner == 1 else 0,
-                blue_score=0 if sf23_winner == 1 else 1,
+                red_score=2 if sf23_winner == qf27_winner else 1,
+                blue_score=1 if sf23_winner == qf27_winner else 2,
             ),
             gen_fake_elim_match(
-                event_key=fake_event.event_key,
+                event_key=fake_event.inner_event.key,
                 comp_level="sf",
                 set_number=2,
                 match_number=2,
                 red_fake=a(qf27_winner),
                 blue_fake=a(qf36_winner),
-                red_score=1 if sf23_winner == 1 else 0,
-                blue_score=0 if sf23_winner == 1 else 1,
+                red_score=2 if sf23_winner == qf27_winner else 1,
+                blue_score=1 if sf23_winner == qf27_winner else 2,
             ),
         ]
     )
@@ -436,24 +440,24 @@ async def save_draft(fake_event_path: str):
     fake_event.schedule.matches.extend(
         [
             gen_fake_elim_match(
-                event_key=fake_event.event_key,
+                event_key=fake_event.inner_event.key,
                 comp_level="f",
                 set_number=1,
                 match_number=1,
                 red_fake=a(sf14_winner),
                 blue_fake=a(sf23_winner),
-                red_score=1 if f_winner == 1 else 0,
-                blue_score=0 if f_winner == 1 else 1,
+                red_score=2 if f_winner == sf14_winner else 1,
+                blue_score=1 if f_winner == sf14_winner else 2,
             ),
             gen_fake_elim_match(
-                event_key=fake_event.event_key,
+                event_key=fake_event.inner_event.key,
                 comp_level="f",
                 set_number=1,
                 match_number=2,
                 red_fake=a(sf14_winner),
                 blue_fake=a(sf23_winner),
-                red_score=1 if f_winner == 1 else 0,
-                blue_score=0 if f_winner == 1 else 1,
+                red_score=2 if f_winner == sf14_winner else 1,
+                blue_score=1 if f_winner == sf14_winner else 2,
             ),
         ]
     )
