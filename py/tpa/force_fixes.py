@@ -1,66 +1,7 @@
 from geopy.geocoders import Nominatim
 
 from protos.tpa import Event, Team
-
-us_state_abbrev = {
-    "Alabama": "AL",
-    "Alaska": "AK",
-    "American Samoa": "AS",
-    "Arizona": "AZ",
-    "Arkansas": "AR",
-    "California": "CA",
-    "Colorado": "CO",
-    "Connecticut": "CT",
-    "Delaware": "DE",
-    "District of Columbia": "DC",
-    "Florida": "FL",
-    "Georgia": "GA",
-    "Guam": "GU",
-    "Hawaii": "HI",
-    "Idaho": "ID",
-    "Illinois": "IL",
-    "Indiana": "IN",
-    "Iowa": "IA",
-    "Kansas": "KS",
-    "Kentucky": "KY",
-    "Louisiana": "LA",
-    "Maine": "ME",
-    "Maryland": "MD",
-    "Massachusetts": "MA",
-    "Michigan": "MI",
-    "Minnesota": "MN",
-    "Mississippi": "MS",
-    "Missouri": "MO",
-    "Montana": "MT",
-    "Nebraska": "NE",
-    "Nevada": "NV",
-    "New Hampshire": "NH",
-    "New Jersey": "NJ",
-    "New Mexico": "NM",
-    "New York": "NY",
-    "North Carolina": "NC",
-    "North Dakota": "ND",
-    "Northern Mariana Islands": "MP",
-    "Ohio": "OH",
-    "Oklahoma": "OK",
-    "Oregon": "OR",
-    "Pennsylvania": "PA",
-    "Puerto Rico": "PR",
-    "Rhode Island": "RI",
-    "South Carolina": "SC",
-    "South Dakota": "SD",
-    "Tennessee": "TN",
-    "Texas": "TX",
-    "Utah": "UT",
-    "Vermont": "VT",
-    "Virgin Islands": "VI",
-    "Virginia": "VA",
-    "Washington": "WA",
-    "West Virginia": "WV",
-    "Wisconsin": "WI",
-    "Wyoming": "WY",
-}
-abbrev_us_state = dict(map(reversed, us_state_abbrev.items()))
+from py.util import SHORT_TO_STATE
 
 
 def fix_team(team: Team) -> Team:
@@ -145,8 +86,8 @@ def fix_team_state_prov(team: Team) -> Team:
             team.team_number, d[team.state_prov].get(0, team.state_prov)
         )
 
-    if team.state_prov in abbrev_us_state and team.country == "USA":
-        team.state_prov = abbrev_us_state[team.state_prov]
+    if team.state_prov in SHORT_TO_STATE and team.country == "USA":
+        team.state_prov = SHORT_TO_STATE[team.state_prov]
 
     return team
 
@@ -234,8 +175,8 @@ def fix_event_state_prov(event: Event) -> Event:
             event.key, d[event.state_prov].get(0, event.state_prov)
         )
 
-    if event.state_prov in abbrev_us_state and event.country == "USA":
-        event.state_prov = abbrev_us_state[event.state_prov]
+    if event.state_prov in SHORT_TO_STATE and event.country == "USA":
+        event.state_prov = SHORT_TO_STATE[event.state_prov]
 
     return event
 

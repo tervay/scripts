@@ -1,8 +1,8 @@
+from jinja2 import Environment, FileSystemLoader
+
 from protos.tpa import FakeEvent
 from py.cli import expose
 from py.util import file_cm, get_savepath
-from jinja2 import Environment, FileSystemLoader
-
 
 env = Environment(loader=FileSystemLoader("templates"))
 

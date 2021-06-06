@@ -1,11 +1,18 @@
+import glob
+import json
+import os
 import random
+import statistics
 from collections import defaultdict
+from math import log
 from typing import Dict, List
 
+from betterproto import Casing
 from colorama import Fore
 from tqdm import trange
 
 from protos.tpa import (
+    Event,
     FakeEvent,
     MatchAlliance,
     MatchSimple,
@@ -13,13 +20,15 @@ from protos.tpa import (
     Schedule,
     Team,
     TeamSimple,
-    Event,
 )
 from py.cli import expose, pprint
-from py.tba import AwardType, EventType
+from py.tba import ROOKIE_YEAR_LOWEST_NUMBER, AwardType, EventType
 from py.tpa.context_manager import tpa_cm
 from py.util import (
-    MAX_TEAMS_PAGE_NUM,
+    MAX_TEAMS_PAGE_RANGE,
+    SHORT_TO_STATE,
+    STATE_TO_SHORT,
+    chunkify,
     file_cm,
     flatten_lists_async,
     get_real_event_schedule,
@@ -28,8 +37,6 @@ from py.util import (
     tqdm_bar,
     tqdm_bar_async,
 )
-import json
-from betterproto import Casing
 
 save_dir = get_savepath("fake_events")
 
@@ -146,15 +153,17 @@ async def save_real_schedule(event_key, fname=None):
 async def district_from_states(
     states: str, year: int, dcmp_fraction: float = 0.35, double_1_events=True
 ):
-    states = states.title()
     allowlist = set(states.split(",")) | set(states.split(", "))
+    allowlist = set(STATE_TO_SHORT.get(s.title(), s) for s in allowlist) | set(
+        SHORT_TO_STATE.get(s.upper(), s) for s in allowlist
+    )
 
     pts = defaultdict(list)
     cmp_qual = defaultdict(lambda: False)
 
     async with tpa_cm() as tpa:
         teams = []
-        for i in trange(MAX_TEAMS_PAGE_NUM):
+        for i in trange(MAX_TEAMS_PAGE_RANGE):
             pg = [t async for t in tpa.get_teams_by_year(year=year, page_num=i)]
             teams.extend(pg)
 
@@ -228,6 +237,14 @@ async def district_from_states(
         ]:
             f.write(f"{team[3:]}\n")
 
+    with file_cm(
+        get_savepath(f'districts/{states.replace(",", "-")}_{year}_pts.txt'), "w+"
+    ) as f:
+        for team, team_pts in sorted(pts.items(), key=lambda t: -sum(t[1]))[
+            : int(round(n_qualified))
+        ]:
+            f.write(f"{team[3:]}\t{sum(team_pts)}\n")
+
 
 @expose
 def tba(fake_event_path: str):
@@ -249,7 +266,7 @@ def tba(fake_event_path: str):
 
         for m in d["schedule"]["matches"]:
             m["score_breakdown"] = None
-            m['videos'] = []
+            m["videos"] = []
             for _, data in m["alliances"].items():
                 data["surrogate_team_keys"] = []
                 data["dq_team_keys"] = []
@@ -311,3 +328,109 @@ def create(team_list_filepath):
 
     with file_cm(get_savepath(f"fake_events/{e.key}/{e.key}_fe.pb"), "wb+") as f:
         f.write(fe.SerializeToString())
+
+
+@expose
+def divisions(in_fp, n_divs: int, year: int = 2021):
+    with file_cm(in_fp, "r") as f:
+        lines = f.readlines()
+
+    lines = [int(s.strip()) for s in lines]
+    rookies = list(filter(lambda n: n >= ROOKIE_YEAR_LOWEST_NUMBER[year], lines))
+    non_rookies = list(filter(lambda n: n < ROOKIE_YEAR_LOWEST_NUMBER[year], lines))
+
+    random.shuffle(rookies)
+    random.shuffle(non_rookies)
+
+    split_rookies = [sorted(l) for l in chunkify(rookies, n_divs)]
+    split_vets = [sorted(l) for l in chunkify(non_rookies, n_divs)]
+
+    merged = [a + b for a, b in zip(split_vets, split_rookies)]
+
+    files = glob.glob(get_savepath("divs/*"))
+    for f in files:
+        os.remove(f)
+
+    for i in range(n_divs):
+        with file_cm(get_savepath(f"divs/{i + 1}.txt"), "w+") as f:
+            for n in merged[i]:
+                f.write(f"{n}\n")
+
+
+@expose
+def fair_divisions(in_fp, n_divs: int, year: int = 2021):
+    with file_cm(in_fp, "r") as f:
+        lines = f.readlines()
+
+    teams = []
+    perfs = {}
+    for line in lines:
+        tnum, pts = line.strip().split("\t")
+        perfs[int(tnum)] = float(pts)
+        teams.append(int(tnum))
+
+    eval_limits = {
+        "Average": {
+            2: 1,
+            4: 2,
+        },
+        "Distribution": {
+            2: 1,
+            4: 2.5,
+        },
+        "Top Distribution": {
+            2: 1.5,
+            4: 2,
+        },
+    }
+
+    def snr(teams: List[int]) -> float:
+        x = statistics.mean([perfs[t] for t in teams])
+        o = statistics.stdev([perfs[t] for t in teams])
+
+        return 10.0 * log((x * x) / (o * o))
+
+    def top_quartile(teams: List[int]) -> List[int]:
+        return sorted(teams, key=lambda t: -perfs[t])[: int(round(len(teams) * 0.25))]
+
+    valid = False
+    n = 0
+    while not valid:
+        random.shuffle(teams)
+        divs = [sorted(d) for d in chunkify(teams, n_divs)]
+        avgs = []
+        dists = []
+        top_dists = []
+
+        for div in divs:
+            d_avg = statistics.mean([perfs[t] for t in div])
+            d_snr = snr(div)
+            d_top_snr = snr(top_quartile(div))
+
+            avgs.append(d_avg)
+            dists.append(d_snr)
+            top_dists.append(d_top_snr)
+
+            if len(avgs) > 2:
+                for a in avgs:
+                    if abs(a - d_avg) > eval_limits["Average"][n_divs]:
+                        break
+                else:
+                    for d in dists:
+                        if abs(d - d_snr) > eval_limits["Distribution"][n_divs]:
+                            break
+                    else:
+                        for td in top_dists:
+                            if (
+                                abs(td - d_top_snr)
+                                > eval_limits["Top Distribution"][n_divs]
+                            ):
+                                break
+                        else:
+                            valid = True
+        n += 1
+
+    for i in range(n_divs):
+        with file_cm(get_savepath(f"divs/{i + 1}.txt"), "w+") as f:
+            for n in divs[i]:
+                f.write(f"{n}\n")

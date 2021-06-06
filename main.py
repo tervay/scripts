@@ -27,7 +27,6 @@ async def start_server():
     await server.start("127.0.0.1", "1337")
     print("waiting")
     await server.wait_closed()
-    asyncio.create_task()
 
 
 if __name__ == "__main__":

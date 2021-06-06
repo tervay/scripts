@@ -182,7 +182,7 @@ async def sim(fe_fp: str):
             for k, rp in sorted(rps.items(), key=lambda t: -t[1]):
                 team = await tpa.get_team(team_key=k)
                 fake_event.rankings.append(
-                    TeamRp(team=team, rp=rp, record=WltRecord.from_dict(records[k]))
+                    TeamRp(team=team, rp=rp, record=WltRecord().from_dict(records[k]))
                 )
 
         f.write(fake_event.SerializeToString())

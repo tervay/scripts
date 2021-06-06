@@ -46,7 +46,7 @@ async def run_main(argv):
     fn = fns[module_name][fn_name]
 
     if inspect.iscoroutinefunction(fn):
-        await ((fn(*args)))
+        await fn(*args)
         close()
     else:
         fn(*args)
