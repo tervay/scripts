@@ -2,7 +2,7 @@ import statistics
 from collections import defaultdict
 
 import pandas as pd
-from tqdm import tqdm as tqdm_sync
+from tqdm import tqdm as tqdm_sync, trange
 from tqdm.asyncio import tqdm
 
 from py.cli import expose, pprint
@@ -10,6 +10,7 @@ from py.tba import EventType, tba
 from py.tpa import tpa_cm
 from py.util import (
     MAX_TEAMS_PAGE_NUM,
+    MAX_TEAMS_PAGE_RANGE,
     file_cm,
     filter_completed_events,
     filter_official_events,
@@ -235,3 +236,22 @@ async def costs2(year):
     with file_cm(get_savepath("cpm.csv"), "w+") as f:
         for k, cpm_ in cpm.items():
             print(f"{k},{key_to_team[k].state_prov},{cpm_}", file=f)
+
+
+@expose
+async def unused():
+    n = 0
+    async with tpa_cm() as tpa:
+        for page in trange(MAX_TEAMS_PAGE_RANGE):
+            async for team in tpa.get_teams(page_num=page):
+                while n < team.team_number:
+                    # print(n)
+
+                    if (len(set(str(n))) in [1, 2]) and not any(
+                        [c in str(n) for c in "04689"]
+                    ) and n >= 1000:
+                        print(n)
+
+                    n += 1
+
+                n += 1

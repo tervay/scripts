@@ -108,16 +108,16 @@ def generate(team_list_filepath, key, num_matches=10):
 
 
 @expose
-def pprint_schedule(schedule_pb, highlight=None):
+def pprint_fe(schedule_pb, highlight=None):
     if "," in str(highlight):
         highlight = highlight.split(",")
     else:
         highlight = [str(highlight)]
 
     with open(schedule_pb, "rb") as f:
-        schedule = Schedule.FromString(f.read())
+        fake_event = FakeEvent.FromString(f.read())
 
-    for match in schedule.matches:
+    for match in fake_event.schedule.matches:
         out_str = f"{str(match.match_number).rjust(3)}: "
         for k in match.alliances.red.team_keys:
             n = k[3:]
@@ -153,10 +153,12 @@ async def save_real_schedule(event_key, fname=None):
 async def district_from_states(
     states: str, year: int, dcmp_fraction: float = 0.35, double_1_events=True
 ):
-    allowlist = set(states.split(",")) | set(states.split(", "))
-    allowlist = set(STATE_TO_SHORT.get(s.title(), s) for s in allowlist) | set(
-        SHORT_TO_STATE.get(s.upper(), s) for s in allowlist
-    )
+    allowlist = set()
+    if states is not None:
+        allowlist = set(states.split(",")) | set(states.split(", "))
+        allowlist = set(STATE_TO_SHORT.get(s.title(), s) for s in allowlist) | set(
+            SHORT_TO_STATE.get(s.upper(), s) for s in allowlist
+        )
 
     pts = defaultdict(list)
     cmp_qual = defaultdict(lambda: False)
@@ -169,7 +171,7 @@ async def district_from_states(
 
         for bar, team in tqdm_bar(teams):
             bar.set_description(team.key)
-            if team.state_prov in allowlist:
+            if (team.state_prov in allowlist) or (states is None):
                 events = [
                     e
                     async for e in tpa.get_team_events_by_year(
@@ -229,6 +231,9 @@ async def district_from_states(
             + f"{pts_str} = {sum(team_pts)}\t{cmp_str}"
         )
 
+    if states is None:
+        states = "all"
+
     with file_cm(
         get_savepath(f'districts/{states.replace(",", "-")}_{year}.txt'), "w+"
     ) as f:
@@ -275,6 +280,13 @@ def tba(fake_event_path: str):
             json.dumps(d, indent=2),
             file=f,
         )
+
+
+@expose
+async def district_from_all(
+    year: int, dcmp_fraction: float = 0.35, double_1_events=True
+):
+    await district_from_states(None, year, dcmp_fraction, double_1_events)
 
 
 @expose
@@ -358,7 +370,7 @@ def divisions(in_fp, n_divs: int, year: int = 2021):
 
 
 @expose
-def fair_divisions(in_fp, n_divs: int, year: int = 2021):
+def fair_divisions(in_fp, n_divs: int):
     with file_cm(in_fp, "r") as f:
         lines = f.readlines()
 
@@ -373,14 +385,17 @@ def fair_divisions(in_fp, n_divs: int, year: int = 2021):
         "Average": {
             2: 1,
             4: 2,
+            8: 2,
         },
         "Distribution": {
             2: 1,
             4: 2.5,
+            8: 2.5,
         },
         "Top Distribution": {
             2: 1.5,
             4: 2,
+            8: 2,
         },
     }
 
@@ -411,7 +426,7 @@ def fair_divisions(in_fp, n_divs: int, year: int = 2021):
             dists.append(d_snr)
             top_dists.append(d_top_snr)
 
-            if len(avgs) > 2:
+            if len(avgs) > (n_divs / 2):
                 for a in avgs:
                     if abs(a - d_avg) > eval_limits["Average"][n_divs]:
                         break

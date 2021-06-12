@@ -19,6 +19,7 @@ $ python -m grpc_tools.protoc --python_betterproto_out=protos/ -I=protos/ protos
 
 ```bash
 $ python main.py event_gen district_from_states "NY,MA" 2018
+$ python main.py event_gen fair_divisions out/districts/NY-MA-VT-CT-RI-NH-ME-PA-NJ-DE_2018_pts.txt 4
 $ python main.py event_gen create in.txt
 $ python main.py sim sim out/fake_events/2019nycmp/2019nycmp_fe.pb
 $ python main.py sim save_draft out/fake_events/2019nycmp/2019nycmp_fe.pb

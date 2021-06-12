@@ -19,6 +19,7 @@ def expose(fn):
         fns[module_name] = dict()
 
     fns[module_name][fname] = fn
+    return fn
 
 
 def attempt_to_cast_value(s):
