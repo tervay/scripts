@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 from rich import print
-from tqdm.asyncio import trange
+from tqdm.rich import trange
 
 from py.cli import expose
 from py.tba import AwardType, EventType
@@ -28,7 +28,7 @@ async def wffa_families():
     winners = defaultdict(list)
 
     async with tpa_cm() as tpa:
-        async for year in trange(1992, 2022):
+        for year in trange(1992, 2022):
             async for event in tpa.get_events_by_year(year=year):
                 if event.event_type in EventType.CMP_EVENT_TYPES:
                     continue

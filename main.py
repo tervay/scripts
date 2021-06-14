@@ -1,4 +1,5 @@
 import asyncio
+import warnings
 from sys import argv
 
 import pretty_errors
@@ -17,6 +18,8 @@ import py.sim
 import py.teams
 from py.cli import run_main
 from py.tpa import TPAService
+
+warnings.filterwarnings("ignore")
 
 init()
 requests_cache.install_cache("requests_cache")
