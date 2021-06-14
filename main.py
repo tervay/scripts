@@ -2,6 +2,7 @@ import asyncio
 from sys import argv
 
 import requests_cache
+import pretty_errors
 from colorama import init
 from grpclib.server import Server
 

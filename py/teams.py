@@ -247,9 +247,11 @@ async def unused():
                 while n < team.team_number:
                     # print(n)
 
-                    if (len(set(str(n))) in [1, 2]) and not any(
-                        [c in str(n) for c in "04689"]
-                    ) and n >= 1000:
+                    if (
+                        (len(set(str(n))) in [1, 2])
+                        and not any([c in str(n) for c in "04689"])
+                        and n >= 1000
+                    ):
                         print(n)
 
                     n += 1
