@@ -3,9 +3,9 @@ from collections import defaultdict
 
 import pandas as pd
 from rich import print
+from tqdm.asyncio import tqdm
 from tqdm.rich import tqdm as tqdm_sync
 from tqdm.rich import trange
-from tqdm.asyncio import tqdm
 
 from py.cli import expose
 from py.tba import EventType, tba
