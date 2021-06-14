@@ -1,8 +1,9 @@
 from collections import defaultdict
 
+from rich import print
 from tqdm.asyncio import trange
 
-from py.cli import expose, pprint
+from py.cli import expose
 from py.tba import AwardType, EventType
 from py.tpa import tpa_cm
 
@@ -19,7 +20,7 @@ async def most_states():
                             states[recipient.team_key].add(event.state_prov)
 
     counts = {t: len(s) for t, s in states.items()}
-    pprint(sorted(counts.items(), key=lambda t: -(t[1]))[:25])
+    print(sorted(counts.items(), key=lambda t: -(t[1]))[:25])
 
 
 @expose

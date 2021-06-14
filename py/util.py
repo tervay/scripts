@@ -3,7 +3,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Iterable, List, Tuple, TypeVar, Union
 
-from tqdm import tqdm
+from tqdm.rich import tqdm
 from tqdm.asyncio import tqdm as atqdm
 
 from protos.tpa import (

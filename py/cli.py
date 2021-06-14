@@ -1,11 +1,6 @@
 import inspect
-from pprint import pformat
 
-from pygments import highlight
-from pygments.formatters import Terminal256Formatter
-from pygments.lexers import PythonLexer
-
-from py.tpa.context_manager import close, tpa_cm
+from py.tpa.context_manager import close
 
 fns = dict()
 
@@ -51,7 +46,3 @@ async def run_main(argv):
         close()
     else:
         fn(*args)
-
-
-def pprint(*args, **kwargs):
-    print(highlight(pformat(*args, **kwargs), PythonLexer(), Terminal256Formatter()))

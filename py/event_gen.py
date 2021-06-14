@@ -9,7 +9,7 @@ from typing import Dict, List
 
 from betterproto import Casing
 from colorama import Fore
-from tqdm import trange
+from tqdm.rich import trange
 
 from protos.tpa import (
     Event,
@@ -21,7 +21,7 @@ from protos.tpa import (
     Team,
     TeamSimple,
 )
-from py.cli import expose, pprint
+from py.cli import expose
 from py.tba import ROOKIE_YEAR_LOWEST_NUMBER, AwardType, EventType
 from py.tpa.context_manager import tpa_cm
 from py.util import (

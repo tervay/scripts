@@ -1,6 +1,7 @@
+from rich import print
 from tabulate import tabulate
 
-from py.cli import expose, pprint
+from py.cli import expose
 from py.osrm import event_matrix, matrix
 from py.tba import EventType
 from py.tpa import tpa_cm
@@ -44,7 +45,7 @@ async def test(tkey, ekey):
         team = await tpa.get_team(team_key=tkey)
         event = await tpa.get_event(event_key=ekey)
         teams = [t async for t in tpa.get_event_teams(event_key=event.key)]
-        pprint(event_matrix(event=event, teams=teams))
+        print(event_matrix(event=event, teams=teams))
 
 
 @expose
@@ -66,4 +67,4 @@ async def isolated_events(year):
             dists[event.key] = [m[t.key] for t in teams if m[t.key] is not None]
 
     dists = {k: (sum(v) / len(v)) / (60 * 60) for k, v in dists.items()}
-    pprint(sorted(dists.items(), key=lambda t: -t[1]))
+    print(sorted(dists.items(), key=lambda t: -t[1]))

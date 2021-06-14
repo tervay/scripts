@@ -1,10 +1,9 @@
 from typing import Dict, List, Literal, Tuple
 
-import requests
 from requests_cache import CachedSession
+from rich import print
 
 from protos.tpa import Event, Team
-from py.cli import pprint
 
 LongLat = Tuple[float, float]
 
@@ -34,7 +33,7 @@ def matrix(
     coordinates: List[LongLat], labels: List[str], extra_args: Dict[str, str] = {}
 ) -> Dict[str, Dict[str, float]]:
     data = get(service="table", coordinates=coordinates, extra_args=extra_args)
-    pprint(data)
+    print(data)
 
     ret = {}
     for i, l1 in enumerate(labels):
@@ -67,7 +66,7 @@ def event_matrix(event: Event, teams: List[Team]) -> Dict[str, float]:
 
         print("")
         print(event.key)
-        pprint(data)
+        print(data)
         exit(0)
 
     return {team.key: data["durations"][i][0] for i, team in enumerate(teams, start=1)}

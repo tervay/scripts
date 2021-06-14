@@ -4,7 +4,7 @@ from typing import Dict, List, Set, Tuple, Union
 
 import matplotlib.pyplot as plt
 import networkx as nx
-from tqdm import tqdm
+from tqdm.rich import tqdm
 
 from py.cli import expose
 from py.data.graphs import *

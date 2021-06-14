@@ -2,10 +2,12 @@ import statistics
 from collections import defaultdict
 
 import pandas as pd
-from tqdm import tqdm as tqdm_sync, trange
+from rich import print
+from tqdm.rich import tqdm as tqdm_sync
+from tqdm.rich import trange
 from tqdm.asyncio import tqdm
 
-from py.cli import expose, pprint
+from py.cli import expose
 from py.tba import EventType, tba
 from py.tpa import tpa_cm
 from py.util import (
@@ -23,7 +25,7 @@ from py.util import (
 
 @expose
 def about(num):
-    pprint(tba.team(num, simple=True))
+    print(tba.team(num, simple=True))
 
 
 @expose
@@ -45,7 +47,7 @@ def dlf_wffa():
                 for recipient in award["recipient_list"]:
                     wffa[recipient["awardee"]] = (event["key"], recipient["team_key"])
 
-    pprint(set(dlf.keys()) & set(wffa.keys()))
+    print(set(dlf.keys()) & set(wffa.keys()))
 
 
 @expose
@@ -66,7 +68,7 @@ async def async_dlf_wffa():
                             recipient.team_key,
                         )
 
-    pprint(set(dlf.keys()) & set(wffa.keys()))
+    print(set(dlf.keys()) & set(wffa.keys()))
 
 
 @expose
@@ -225,11 +227,11 @@ async def costs2(year):
     for k in by_state.keys():
         by_state[k] = statistics.mean(by_state[k])
 
-    pprint(sorted(cpm.items(), key=lambda t: -t[1])[:10])
-    pprint(sorted(cpm.items(), key=lambda t: t[1])[:10])
+    print(sorted(cpm.items(), key=lambda t: -t[1])[:10])
+    print(sorted(cpm.items(), key=lambda t: t[1])[:10])
     print("----")
-    pprint(sorted(by_state.items(), key=lambda t: -t[1])[:10])
-    pprint(sorted(by_state.items(), key=lambda t: t[1])[:10])
+    print(sorted(by_state.items(), key=lambda t: -t[1])[:10])
+    print(sorted(by_state.items(), key=lambda t: t[1])[:10])
 
     print(pd.DataFrame(cpm.values()).describe())
 

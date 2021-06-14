@@ -3,7 +3,8 @@ import statistics
 from collections import defaultdict
 
 import numpy as np
-from tqdm import tqdm
+from rich import print
+from tqdm.rich import tqdm
 
 from protos.tpa import (
     FakeAlliance,
@@ -11,11 +12,10 @@ from protos.tpa import (
     Match,
     MatchAlliance,
     MatchAlliances,
-    Schedule,
     TeamRp,
     WltRecord,
 )
-from py.cli import expose, pprint
+from py.cli import expose
 from py.scout import RP_FNs, get_component_opr, opr_component
 from py.tpa import SBs
 from py.tpa.context_manager import tpa_cm
@@ -193,7 +193,7 @@ def print_faked_schedule(path):
     with file_cm(path, "rb") as f:
         fake_event = FakeEvent.FromString(f.read())
 
-    pprint(fake_event.schedule.matches[1])
+    print(fake_event.schedule.matches[1])
 
 
 @expose

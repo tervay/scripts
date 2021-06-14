@@ -5,7 +5,7 @@ from typing import Callable, Dict, Union
 import inflection
 import yaml
 
-from py.cli import expose, pprint
+from py.cli import expose
 
 
 class Model:
