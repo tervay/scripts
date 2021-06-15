@@ -42,7 +42,7 @@ async def sim(fe_fp: str):
     with file_cm(fe_fp, "rb") as f:
         fake_event = FakeEvent.FromString(f.read())
 
-    rankings_file = fe_fp.replace("_fe.pb", "_ranks.csv")
+    rankings_file = fe_fp.replace("_fe.pb", "_ranks.tsv")
 
     schedule = fake_event.schedule
     year = fake_event.inner_event.year
@@ -174,7 +174,7 @@ async def sim(fe_fp: str):
             for bar, (k, rp) in tqdm_bar(sorted(rps.items(), key=lambda t: -t[1])):
                 bar.set_description(k)
                 team = await tpa.get_team(team_key=k)
-                print(f"{team.team_number}\t{team.nickname}", file=f)
+                f.write(f"{team.team_number}\t{team.nickname}\n")
 
     with file_cm(fe_fp, "wb+") as f:
         fake_event.schedule = schedule

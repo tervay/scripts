@@ -3,6 +3,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Iterable, List, Tuple, TypeVar, Union
 
+from async_lru import alru_cache
 from tqdm.asyncio import tqdm as atqdm
 from tqdm.rich import tqdm
 
@@ -124,6 +125,7 @@ def get_savepath(fname):
     return f"{save_dir}/{fname}"
 
 
+@alru_cache(maxsize=250)
 async def get_real_event_schedule(event_key: str):
     async with tpa_cm() as tpa:
         teams = [t async for t in tpa.get_event_teams(event_key=event_key)]

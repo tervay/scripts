@@ -49,6 +49,14 @@ class EventType:
         REMOTE,
     }
 
+    STANDARD_EVENT_TYPES = {
+        REGIONAL,
+        DISTRICT,
+        DISTRICT_CMP,
+        DISTRICT_CMP_DIVISION,
+        CMP_DIVISION,
+    }
+
 
 class AwardType:
     CHAIRMANS = 0

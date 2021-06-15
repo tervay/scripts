@@ -10,6 +10,7 @@ from grpclib.server import Server
 import py.awards
 import py.codegen
 import py.event_gen
+import py.events
 import py.geo
 import py.graphing
 import py.html

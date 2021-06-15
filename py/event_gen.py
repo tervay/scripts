@@ -22,6 +22,7 @@ from protos.tpa import (
     TeamSimple,
 )
 from py.cli import expose
+from py.sim import sim
 from py.tba import ROOKIE_YEAR_LOWEST_NUMBER, AwardType, EventType
 from py.tpa.context_manager import tpa_cm
 from py.util import (
@@ -151,7 +152,11 @@ async def save_real_schedule(event_key, fname=None):
 
 @expose
 async def district_from_states(
-    states: str, year: int, dcmp_fraction: float = 0.35, double_1_events=True
+    states: str,
+    year: int,
+    dcmp_fraction: float = 0.35,
+    double_1_events=True,
+    take_2_best=False,
 ):
     allowlist = set()
     if states is not None:
@@ -196,17 +201,38 @@ async def district_from_states(
                 ]
                 events = sort_events(events)
 
-                n = 0
-                for event in events:
-                    if n == 2:
-                        break
+                if take_2_best:
+                    for event in events:
+                        dpts = await tpa.get_event_district_points(event_key=event.key)
+                        if team.key not in dpts.points:
+                            continue
 
-                    dpts = await tpa.get_event_district_points(event_key=event.key)
-                    if team.key not in dpts.points:
-                        continue
+                        pts[team.key].append(
+                            dpts.points[team.key].total
+                            / (
+                                1
+                                if event.event_type
+                                not in {
+                                    EventType.DISTRICT_CMP,
+                                    EventType.DISTRICT_CMP_DIVISION,
+                                }
+                                else 3
+                            )
+                        )
+                        pts[team.key].sort(reverse=True)
+                        pts[team.key] = pts[team.key][:2]
+                else:
+                    n = 0
+                    for event in events:
+                        if n == 2:
+                            break
 
-                    pts[team.key].append(dpts.points[team.key].total)
-                    n += 1
+                        dpts = await tpa.get_event_district_points(event_key=event.key)
+                        if team.key not in dpts.points:
+                            continue
+
+                        pts[team.key].append(dpts.points[team.key].total)
+                        n += 1
 
                 if team.key in pts and len(pts[team.key]) == 1 and double_1_events:
                     pts[team.key].append(pts[team.key][0])
@@ -286,22 +312,27 @@ def tba(fake_event_path: str):
 async def district_from_all(
     year: int, dcmp_fraction: float = 0.35, double_1_events=True
 ):
-    await district_from_states(None, year, dcmp_fraction, double_1_events)
+    await district_from_states(
+        None, year, dcmp_fraction, double_1_events, take_2_best=True
+    )
 
 
 @expose
-def create(team_list_filepath):
+def create(team_list_filepath, name=None, key=None, city="City"):
     get = lambda s: input(f"{s}: ")
     e = Event()
 
-    fields = {
-        field: get(field)
-        for field in [
-            "name",
-            "key",
-            "city",
-        ]
-    }
+    if None in [name, key, city]:
+        fields = {
+            field: get(field)
+            for field in [
+                "name",
+                "key",
+                "city",
+            ]
+        }
+    else:
+        fields = {"name": name, "key": key, "city": city}
 
     fields.update(
         {
@@ -449,3 +480,12 @@ def fair_divisions(in_fp, n_divs: int):
         with file_cm(get_savepath(f"divs/{i + 1}.txt"), "w+") as f:
             for n in divs[i]:
                 f.write(f"{n}\n")
+
+
+@expose
+async def create_and_sim_district(in_file: str, n_divs: int, prekey: str):
+    fair_divisions(in_file, n_divs)
+    for i in range(n_divs):
+        k = f"{prekey}{i + 1}"
+        create(f"out/divs/{i + 1}.txt", name=k, key=k)
+        await sim(f"out/fake_events/{k}/{k}_fe.pb")

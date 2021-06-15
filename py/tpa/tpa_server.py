@@ -93,8 +93,11 @@ class TPAService(TpaBase):
     async def get_event_alliances(
         self, event_key: str
     ) -> AsyncIterator[ForwardRef("EliminationAlliance")]:
-        print("called get_event_alliances")
-        return None
+        try:
+            for a in tba.event_alliances(event=event_key):
+                yield EliminationAlliance().from_dict(a)
+        except TypeError:
+            return
 
     async def get_event_awards(
         self, event_key: str
