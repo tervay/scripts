@@ -1,8 +1,8 @@
-from typing import AsyncIterator, ForwardRef
+from typing import AsyncIterator, ForwardRef, OrderedDict
 
 from protos.tpa import *
 from py.tba import tba
-from py.tpa.force_fixes import fix_event, fix_team
+from py.tpa.force_fixes import fix_event, fix_team, gen_missing_event_alliances
 
 SBs = {
     2015: (MatchScoreBreakdown2015, MatchScoreBreakdown2015Alliance),
@@ -97,7 +97,13 @@ class TPAService(TpaBase):
             for a in tba.event_alliances(event=event_key):
                 yield EliminationAlliance().from_dict(a)
         except TypeError:
-            return
+            if event_key == "2007sac":
+                return
+
+            for ea in gen_missing_event_alliances(
+                [m async for m in self.get_event_matches(event_key=event_key)]
+            ):
+                yield ea
 
     async def get_event_awards(
         self, event_key: str
@@ -107,7 +113,11 @@ class TPAService(TpaBase):
             yield Award().from_dict(a)
 
     async def get_event_district_points(self, event_key: str) -> "EventDistrictPoints":
-        edp = tba.event_district_points(event=event_key)
+        try:
+            edp = tba.event_district_points(event=event_key)
+        except TypeError:
+            return EventDistrictPoints()
+
         for key, pts in edp["points"].items():
             for ptk, ptv in pts.items():
                 pts[ptk] = int(ptv)

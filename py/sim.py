@@ -4,7 +4,7 @@ from collections import defaultdict
 
 import numpy as np
 from rich import print
-from tqdm.rich import tqdm
+from tqdm.rich import tqdm, trange
 
 from protos.tpa import (
     FakeAlliance,
@@ -16,29 +16,47 @@ from protos.tpa import (
     WltRecord,
 )
 from py.cli import expose
-from py.scout import RP_FNs, get_component_opr, opr_component
-from py.tpa import SBs
+from py.scout import get_component_opr, opr_component
 from py.tpa.context_manager import tpa_cm
-from py.util import (
-    file_cm,
-    get_real_event_schedule,
-    get_savepath,
-    is_official_event,
-    tqdm_bar,
-)
+from py.util import file_cm, get_real_event_schedule, is_official_event, tqdm_bar
+
+RP_FNs = {
+    2019: (
+        lambda m, c: float(
+            getattr(m.score_breakdown_2019, c).complete_rocket_ranking_point
+        ),
+        lambda m, c: float(
+            getattr(m.score_breakdown_2019, c).hab_docking_ranking_point
+        ),
+    ),
+    2018: (
+        lambda m, c: float(getattr(m.score_breakdown_2018, c).auto_quest_ranking_point),
+        lambda m, c: float(
+            getattr(m.score_breakdown_2018, c).face_the_boss_ranking_point
+        ),
+    ),
+    2017: (
+        lambda m, c: getattr(m.score_breakdown_2017, c).k_pa_ranking_point_achieved,
+        lambda m, c: getattr(m.score_breakdown_2017, c).rotor_ranking_point_achieved,
+    ),
+    2016: (
+        lambda m, c: getattr(m.score_breakdown_2016, c).teleop_defenses_breached,
+        lambda m, c: getattr(m.score_breakdown_2016, c).teleop_tower_captured,
+    ),
+}
 
 RP_THRESHOLDS = {
     2019: (0.35, 0.25),
-    2018: (0.75, 0.33),
+    2018: (0.75, 0.45),
     2017: (0.35, 0.45),
-    2016: (1, 1),
+    2016: (0.75, 0.5),
     2015: (1, 1),
     2014: (1, 1),
 }
 
 
 @expose
-async def sim(fe_fp: str):
+async def sim(fe_fp: str, iterations=1000):
     with file_cm(fe_fp, "rb") as f:
         fake_event = FakeEvent.FromString(f.read())
 
@@ -50,6 +68,7 @@ async def sim(fe_fp: str):
     team_rp1 = defaultdict(list)
     team_rp2 = defaultdict(list)
     team_opr = defaultdict(list)
+    all_rp1, all_rp2, all_opr = [], [], []
 
     rp1_cache = {}
     rp2_cache = {}
@@ -96,8 +115,11 @@ async def sim(fe_fp: str):
                 oprs = opr_cache[event.key]
                 try:
                     team_rp1[team.key].append(rp1_coprs[team.team_number])
+                    all_rp1.append(rp1_coprs[team.team_number])
                     team_rp2[team.key].append(rp2_coprs[team.team_number])
+                    all_rp2.append(rp2_coprs[team.team_number])
                     team_opr[team.key].append(oprs[team.team_number])
+                    all_opr.append(oprs[team.team_number])
                 except KeyError:
                     pass
 
@@ -105,66 +127,90 @@ async def sim(fe_fp: str):
                 if len(d[team.key]) == 0:
                     d[team.key].append(0)
 
+    all_rp1_var = statistics.pvariance(all_rp1)
+    all_rp2_var = statistics.pvariance(all_rp2)
+    all_opr_var = statistics.pvariance(all_opr)
     rps = defaultdict(lambda: 0)
     schedule.matches[0].alliances.red.team_keys
-    for m in tqdm(schedule.matches):
-        for a in [m.alliances.red, m.alliances.blue]:
-            rp1_vars = [statistics.pvariance(team_rp1[k]) for k in a.team_keys]
-            rp1_stdev = sum(rp1_vars) ** 0.5
-            rp1_means = [statistics.mean(team_rp1[k]) for k in a.team_keys]
-            rp1_mean = sum(rp1_means)
-            if (n := random.gauss(rp1_mean, rp1_stdev)) > RP_THRESHOLDS[year][0]:
-                # print(f"Awarding RP1 as n={round(n,2)} to {a.team_keys}")
-                for k in a.team_keys:
-                    rps[k] += 1
 
-            rp2_vars = [statistics.pvariance(team_rp2[k]) for k in a.team_keys]
-            rp2_stdev = sum(rp2_vars) ** 0.5
-            rp2_means = [statistics.mean(team_rp2[k]) for k in a.team_keys]
-            rp2_mean = sum(rp2_means)
-            if (n := random.gauss(rp2_mean, rp2_stdev)) > RP_THRESHOLDS[year][1]:
-                # print(f"Awarding RP2 as n={round(n,2)} to {a.team_keys}")
-                for k in a.team_keys:
-                    rps[k] += 1
+    for _ in trange(iterations):
+        for m in schedule.matches:
+            for a in [m.alliances.red, m.alliances.blue]:
+                rp1_vars = [
+                    statistics.pvariance(team_rp1[k])
+                    if len(team_rp1[k]) > 1
+                    else all_rp1_var
+                    for k in a.team_keys
+                ]
+                rp1_stdev = sum(rp1_vars) ** 0.5
+                rp1_means = [statistics.mean(team_rp1[k]) for k in a.team_keys]
+                rp1_mean = sum(rp1_means)
+                if (n := random.gauss(rp1_mean, rp1_stdev)) > RP_THRESHOLDS[year][0]:
+                    # print(f"Awarding RP1 as n={round(n,2)} to {a.team_keys}")
+                    for k in a.team_keys:
+                        rps[k] += 1
 
-        red_pt_vars = [
-            statistics.pvariance(team_opr[k]) for k in m.alliances.red.team_keys
-        ]
-        red_pt_stdev = sum(red_pt_vars) ** 0.5
-        red_pt_means = [statistics.mean(team_opr[k]) for k in m.alliances.red.team_keys]
-        red_pt_mean = sum(red_pt_means)
-        red_pts = round(random.gauss(red_pt_mean, red_pt_stdev))
+                rp2_vars = [
+                    statistics.pvariance(team_rp2[k])
+                    if len(team_rp2[k]) > 1
+                    else all_rp2_var
+                    for k in a.team_keys
+                ]
+                rp2_stdev = sum(rp2_vars) ** 0.5
+                rp2_means = [statistics.mean(team_rp2[k]) for k in a.team_keys]
+                rp2_mean = sum(rp2_means)
+                if (n := random.gauss(rp2_mean, rp2_stdev)) > RP_THRESHOLDS[year][1]:
+                    # print(f"Awarding RP2 as n={round(n,2)} to {a.team_keys}")
+                    for k in a.team_keys:
+                        rps[k] += 1
 
-        blue_pt_vars = [
-            statistics.pvariance(team_opr[k]) for k in m.alliances.blue.team_keys
-        ]
-        blue_pt_stdev = sum(blue_pt_vars) ** 0.5
-        blue_pt_means = [
-            statistics.mean(team_opr[k]) for k in m.alliances.blue.team_keys
-        ]
-        blue_pt_mean = sum(blue_pt_means)
-        blue_pts = round(random.gauss(blue_pt_mean, blue_pt_stdev))
+            red_pt_vars = [
+                statistics.pvariance(team_opr[k])
+                if len(team_opr[k]) > 1
+                else all_opr_var
+                for k in m.alliances.red.team_keys
+            ]
 
-        m.alliances.blue.score = blue_pts
-        m.alliances.red.score = red_pts
+            red_pt_stdev = sum(red_pt_vars) ** 0.5
+            red_pt_means = [
+                statistics.mean(team_opr[k]) for k in m.alliances.red.team_keys
+            ]
+            red_pt_mean = sum(red_pt_means)
+            red_pts = round(random.gauss(red_pt_mean, red_pt_stdev))
 
-        if red_pts > blue_pts:
-            for k in m.alliances.red.team_keys:
-                rps[k] += 2
-                records[k]["wins"] += 1
-        elif red_pts == blue_pts:
+            blue_pt_vars = [
+                statistics.pvariance(team_opr[k])
+                if len(team_opr[k]) > 1
+                else all_opr_var
+                for k in m.alliances.blue.team_keys
+            ]
+            blue_pt_stdev = sum(blue_pt_vars) ** 0.5
+            blue_pt_means = [
+                statistics.mean(team_opr[k]) for k in m.alliances.blue.team_keys
+            ]
+            blue_pt_mean = sum(blue_pt_means)
+            blue_pts = round(random.gauss(blue_pt_mean, blue_pt_stdev))
+
+            m.alliances.blue.score = blue_pts
+            m.alliances.red.score = red_pts
+
+            if red_pts > blue_pts:
+                for k in m.alliances.red.team_keys:
+                    rps[k] += 2
+                    records[k]["wins"] += 1
+            elif red_pts == blue_pts:
+                for a in [m.alliances.red, m.alliances.blue]:
+                    for k in a.team_keys:
+                        rps[k] += 1
+                        records[k]["ties"] += 1
+            else:
+                for k in m.alliances.blue.team_keys:
+                    rps[k] += 2
+                    records[k]["wins"] += 1
+
             for a in [m.alliances.red, m.alliances.blue]:
                 for k in a.team_keys:
-                    rps[k] += 1
-                    records[k]["ties"] += 1
-        else:
-            for k in m.alliances.blue.team_keys:
-                rps[k] += 2
-                records[k]["wins"] += 1
-
-        for a in [m.alliances.red, m.alliances.blue]:
-            for k in a.team_keys:
-                played[k] += 1
+                    played[k] += 1
 
     for t, rec in records.items():
         rec["losses"] = played[t] - (rec["wins"] + rec["ties"])

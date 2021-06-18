@@ -1,9 +1,14 @@
+from collections import defaultdict
 from typing import Callable, Dict, Tuple
 
+import betterproto
 import numpy as np
+from rich import print
+from rich.table import Table
 
 from protos.tpa import Match, Schedule
 from py.cli import expose
+from py.tpa.context_manager import tpa_cm
 from py.util import OPPOSITE_COLOR, file_cm
 
 
@@ -21,28 +26,6 @@ def win_lose_rp_component(m: Match, color: str) -> float:
         return 1.0
     else:
         return 0.0
-
-
-RP_FNs = {
-    2019: (
-        lambda m, c: float(
-            getattr(m.score_breakdown_2019, c).complete_rocket_ranking_point
-        ),
-        lambda m, c: float(
-            getattr(m.score_breakdown_2019, c).hab_docking_ranking_point
-        ),
-    ),
-    2018: (
-        lambda m, c: float(getattr(m.score_breakdown_2018, c).auto_quest_ranking_point),
-        lambda m, c: float(
-            getattr(m.score_breakdown_2018, c).face_the_boss_ranking_point
-        ),
-    ),
-    2017: (
-        lambda m, c: getattr(m.score_breakdown_2017, c).k_pa_ranking_point_achieved,
-        lambda m, c: getattr(m.score_breakdown_2017, c).rotor_ranking_point_achieved,
-    ),
-}
 
 
 def get_component_opr(
@@ -88,3 +71,44 @@ def get_component_opr(
     coprs = np.linalg.solve(a, b)
     coprs = {t: coprs[i] for t, i in d.items()}
     return coprs
+
+
+@expose
+async def copr_table(event_key: str, sort_by="rp"):
+    table = Table(show_header=True, title=event_key)
+    table.add_column("Team", justify="right")
+    data = []
+
+    async with tpa_cm() as tpa:
+        matches = [m async for m in tpa.get_event_matches(event_key=event_key)]
+        teams = [t async for t in tpa.get_event_teams(event_key=event_key)]
+        match = matches[35]
+        _, sb = betterproto.which_one_of(match, "score_breakdown")
+        sb = sb.red.to_dict(casing=betterproto.Casing.SNAKE)
+
+        components = [k for k, v in sb.items() if type(v) in [int, float]]
+        sort_index = components.index(sort_by)
+
+        coprs = {}
+
+        def make_copr_fn(component: str) -> Callable:
+            def copr_fn(m, c):
+                _, sb = betterproto.which_one_of(m, "score_breakdown")
+                return getattr(getattr(sb, c), component)
+
+            return copr_fn
+
+        for c in components:
+            table.add_column(c)
+            coprs[c] = get_component_opr(
+                Schedule(teams=teams, matches=matches), make_copr_fn(c)
+            )
+
+        for tk in list(coprs.values())[0]:
+            row = [(tk)] + [(round(coprs[c][tk], 2)) for c in components]
+            data.append(row)
+
+    data.sort(key=lambda r: -r[sort_index + 1])
+    [table.add_row(*[str(c) for c in r]) for r in data]
+
+    print(table)

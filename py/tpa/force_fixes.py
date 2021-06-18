@@ -1,7 +1,9 @@
+from typing import List
+
 from geopy.geocoders import Nominatim
 
-from protos.tpa import Event, Team
-from py.util import SHORT_TO_STATE
+from protos.tpa import EliminationAlliance, Event, Match, Team
+from py.util import OPPOSITE_COLOR, SHORT_TO_STATE
 
 
 def fix_team(team: Team) -> Team:
@@ -215,3 +217,83 @@ def fix_event_geo(event: Event) -> Event:
     event.lat = loc.latitude
     event.lng = loc.longitude
     return event
+
+
+def gen_missing_event_alliances(matches: List[Match]) -> List[EliminationAlliance]:
+    _ea = lambda r, b: {
+        "red": EliminationAlliance(name=f"Alliance {r}"),
+        "blue": EliminationAlliance(name=f"Alliance {b}"),
+    }
+    lookup = {
+        ("qf", 1, 1): _ea(1, 8),
+        ("qf", 2, 1): _ea(4, 5),
+        ("qf", 3, 1): _ea(2, 7),
+        ("qf", 4, 1): _ea(3, 6),
+    }
+    team_to_alliance = {}
+
+    def add_wlt_to_alliance(keys: List[str], field: str):
+        for i in [0, 1, 2]:
+            try:
+                if field == "wins":
+                    team_to_alliance[keys[i]].status.record.wins += 1
+                if field == "losses":
+                    team_to_alliance[keys[i]].status.record.losses += 1
+                if field == "ties":
+                    team_to_alliance[keys[i]].status.record.ties += 1
+            except:
+                pass
+            else:
+                return
+
+    for match in matches:
+        tup = (match.comp_level, match.set_number, match.match_number)
+        if tup in lookup:
+            for c in ["red", "blue"]:
+                lookup[tup][c].picks = getattr(match.alliances, c).team_keys
+
+                for tk in getattr(match.alliances, c).team_keys:
+                    team_to_alliance[tk] = lookup[tup][c]
+
+    found_elims = False
+    for match in matches:
+        if match.comp_level in ["qf", "sf", "f"]:
+            found_elims = True
+            if len(match.winning_alliance) > 0:
+                add_wlt_to_alliance(
+                    getattr(match.alliances, match.winning_alliance).team_keys, "wins"
+                )
+                add_wlt_to_alliance(
+                    getattr(
+                        match.alliances, OPPOSITE_COLOR[match.winning_alliance]
+                    ).team_keys,
+                    "losses",
+                )
+            else:
+                for c in OPPOSITE_COLOR.keys():
+                    add_wlt_to_alliance(getattr(match.alliances, c).team_keys, "ties")
+
+    if not found_elims:
+        return []
+
+    last_matches = list(
+        sorted(
+            filter(lambda m: m.comp_level == "f", matches),
+            key=lambda m: -m.match_number,
+        )
+    )
+    if len(last_matches) == 0 or len(team_to_alliance.keys()) == 0:
+        return
+
+    last_match = last_matches[0]
+    team_to_alliance[
+        getattr(last_match.alliances, last_match.winning_alliance).team_keys[0]
+    ].status.status = "won"
+
+    for alliance in team_to_alliance.values():
+        if alliance.status.status != "won":
+            alliance.status.status = "eliminated"
+
+    for i in [1, 2, 3, 4]:
+        yield lookup[("qf", i, 1)]["red"]
+        yield lookup[("qf", i, 1)]["blue"]

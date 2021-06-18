@@ -19,6 +19,7 @@ from py.util import (
     flatten_lists,
     flatten_lists_async,
     get_savepath,
+    tqdm_bar,
     tqdm_bar_async,
 )
 
@@ -259,3 +260,33 @@ async def unused():
                     n += 1
 
                 n += 1
+
+
+@expose
+async def non_1_seed_wins():
+    wins = defaultdict(lambda: 0)
+    years = list(range(2006, 2020))
+    lens = {}
+
+    async with tpa_cm() as tpa:
+        for year in years:
+            for bar, event in tqdm_bar(
+                [
+                    e
+                    async for e in tpa.get_events_by_year(year=year)
+                    if e.event_type in EventType.STANDARD_EVENT_TYPES
+                ]
+            ):
+                bar.set_description(event.key)
+                async for alliance in tpa.get_event_alliances(event_key=event.key):
+                    if alliance.status.status == "won" and "1" not in alliance.name:
+                        for tk in alliance.picks:
+                            wins[tk] += 1
+                            if tk not in lens:
+                                lens[tk] = (
+                                    max(years)
+                                    - (await tpa.get_team(team_key=tk)).rookie_year
+                                    + 1
+                                )
+
+    print(sorted(wins.items(), key=lambda t: -t[1])[:50])

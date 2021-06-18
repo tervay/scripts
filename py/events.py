@@ -130,3 +130,9 @@ async def bracket_counts():
         n_counts[bracket[-1]] += len(events)
 
     print(n_counts)
+
+
+@expose
+async def test(key):
+    async with tpa_cm() as tpa:
+        print([ea async for ea in tpa.get_event_alliances(event_key=key)])
