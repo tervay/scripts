@@ -43,6 +43,8 @@ RP_FNs = {
         lambda m, c: getattr(m.score_breakdown_2016, c).teleop_defenses_breached,
         lambda m, c: getattr(m.score_breakdown_2016, c).teleop_tower_captured,
     ),
+    2015: (lambda m, c: False, lambda m, c: False),
+    2014: (lambda m, c: False, lambda m, c: False),
 }
 
 RP_THRESHOLDS = {
@@ -196,16 +198,16 @@ async def sim(fe_fp: str, iterations=1000):
 
             if red_pts > blue_pts:
                 for k in m.alliances.red.team_keys:
-                    rps[k] += 2
+                    rps[k] += 2 if year != 2015 else m.alliances.red.score
                     records[k]["wins"] += 1
             elif red_pts == blue_pts:
                 for a in [m.alliances.red, m.alliances.blue]:
                     for k in a.team_keys:
-                        rps[k] += 1
+                        rps[k] += 1 if year != 2015 else a.score
                         records[k]["ties"] += 1
             else:
                 for k in m.alliances.blue.team_keys:
-                    rps[k] += 2
+                    rps[k] += 2 if year != 2015 else m.alliances.blue.score
                     records[k]["wins"] += 1
 
             for a in [m.alliances.red, m.alliances.blue]:

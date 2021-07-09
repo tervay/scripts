@@ -81,10 +81,18 @@ async def copr_table(event_key: str, sort_by="rp"):
 
     async with tpa_cm() as tpa:
         matches = [m async for m in tpa.get_event_matches(event_key=event_key)]
-        teams = [t async for t in tpa.get_event_teams(event_key=event_key)]
+        teams = set()
+        for m in matches:
+            for a in [m.alliances.red, m.alliances.blue]:
+                teams.update(a.team_keys)
+
+        teams = sorted(list(teams), key=lambda t: int(t[3:]))
+        teams = [await tpa.get_team(team_key=t) for t in teams]
         match = matches[35]
         _, sb = betterproto.which_one_of(match, "score_breakdown")
-        sb = sb.red.to_dict(casing=betterproto.Casing.SNAKE)
+        sb = sb.red.to_dict(
+            casing=betterproto.Casing.SNAKE, include_default_values=True
+        )
 
         components = [k for k, v in sb.items() if type(v) in [int, float]]
         sort_index = components.index(sort_by)
@@ -99,10 +107,13 @@ async def copr_table(event_key: str, sort_by="rp"):
             return copr_fn
 
         for c in components:
-            table.add_column(c)
-            coprs[c] = get_component_opr(
-                Schedule(teams=teams, matches=matches), make_copr_fn(c)
-            )
+            try:
+                coprs[c] = get_component_opr(
+                    Schedule(teams=teams, matches=matches), make_copr_fn(c)
+                )
+                table.add_column(c)
+            except:
+                print(f"failed on {c}")
 
         for tk in list(coprs.values())[0]:
             row = [(tk)] + [(round(coprs[c][tk], 2)) for c in components]

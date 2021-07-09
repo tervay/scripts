@@ -9,7 +9,7 @@ from protos.tpa import EliminationAlliance
 from py.cli import expose
 from py.tba import EventType
 from py.tpa import tpa_cm
-from py.util import file_cm, get_savepath, tqdm_bar
+from py.util import file_cm, get_savepath, tqdm_bar, tqdm_bar_async
 
 
 def elim_perms(seeds, n, disallowed):
@@ -136,3 +136,40 @@ async def bracket_counts():
 async def test(key):
     async with tpa_cm() as tpa:
         print([ea async for ea in tpa.get_event_alliances(event_key=key)])
+
+
+@expose
+async def retention_2021():
+    results = {}
+    async with tpa_cm() as tpa:
+        for bar, event in tqdm_bar(
+            [
+                e
+                async for e in tpa.get_events_by_year(year=2020)
+                if e.event_type in EventType.NON_CMP_EVENT_TYPES
+            ]
+        ):
+            played_in_2021 = []
+            bar.set_description(event.key)
+            teams = [t async for t in tpa.get_event_teams(event_key=event.key)]
+            if len(teams) == 0:
+                continue
+
+            for team in teams:
+                team_events = [
+                    e
+                    async for e in tpa.get_team_events_by_year(
+                        team_key=team.key, year=2021
+                    )
+                ]
+
+                if len(team_events) > 1:
+                    played_in_2021.append(team)
+
+            results[event.key] = (len(played_in_2021), len(teams))
+
+    with file_cm(get_savepath("out.csv"), "w+") as f:
+        for e, (p2021, p2020) in sorted(
+            results.items(), key=lambda t: -t[1][0] / t[1][1]
+        ):
+            print(f"{e},{p2020},{p2021},{p2021/p2020}", file=f)

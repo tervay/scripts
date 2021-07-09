@@ -242,7 +242,11 @@ async def district_from_states(
                 elif team.rookie_year == year - 1:
                     pts[team.key].append(5)
 
-    n_qualified = dcmp_fraction * len(pts.keys())
+    n_qualified = int(round(dcmp_fraction * len(pts.keys())))
+    n_qualified -= (
+        n_qualified % -6
+    )  # round up to nearest multiple of 6 to prevent surrogates
+
     for i, (team, team_pts) in enumerate(
         sorted(pts.items(), key=lambda t: -sum(t[1])), start=1
     ):
@@ -264,7 +268,7 @@ async def district_from_states(
         get_savepath(f'districts/{states.replace(",", "-")}_{year}.txt'), "w+"
     ) as f:
         for team, team_pts in sorted(pts.items(), key=lambda t: -sum(t[1]))[
-            : int(round(n_qualified))
+            :n_qualified
         ]:
             f.write(f"{team[3:]}\n")
 
@@ -272,7 +276,7 @@ async def district_from_states(
         get_savepath(f'districts/{states.replace(",", "-")}_{year}_pts.txt'), "w+"
     ) as f:
         for team, team_pts in sorted(pts.items(), key=lambda t: -sum(t[1]))[
-            : int(round(n_qualified))
+            :n_qualified
         ]:
             f.write(f"{team[3:]}\t{sum(team_pts)}\n")
 
