@@ -144,7 +144,7 @@ message Team_Event_Status_playoff {
 message Event_Ranking {
   message Rankings {
     int32 matches_played = 1;
-    int32 qual_average = 2;
+    double qual_average = 2;
     repeated double extra_stats = 3;
     repeated double sort_orders = 4;
     WLT_Record record = 5;
@@ -331,6 +331,9 @@ message Match {
     Match_Score_Breakdown_2020 score_breakdown_2020 = 19;
   }
   reserved 20 to 30;
+
+  int32 red_rp = 31;
+  int32 blue_rp = 32;
 }
 message Match_alliance {
   int32 score = 1;

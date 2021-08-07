@@ -1,14 +1,16 @@
 import datetime
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Iterable, List, Tuple, TypeVar, Union
+from typing import Callable, Generator, Iterable, List, Optional, Tuple, TypeVar, Union
 
 from async_lru import alru_cache
+from rich.table import Table
 from tqdm.asyncio import tqdm as atqdm
 from tqdm.rich import tqdm
 
 from protos.tpa import (
     Event,
+    Match,
     MatchScoreBreakdown2015,
     MatchScoreBreakdown2016,
     MatchScoreBreakdown2017,
@@ -164,17 +166,19 @@ def tqdm_bar(iterable: Iterable[T]) -> Tuple[tqdm, T]:
         yield (bar, item)
 
 
-async def tqdm_bar_async(iterable: Iterable[T]) -> Tuple[atqdm, T]:
+async def tqdm_bar_async(
+    iterable: Iterable[T],
+) -> Generator[Tuple[atqdm, T], None, None]:
     bar = atqdm(iterable)
     for item in bar:
         yield (bar, item)
 
 
-def flatten_lists(lists):
+def flatten_lists(lists: List[List[T]]) -> List[T]:
     return [item for sublist in lists for item in sublist]
 
 
-async def flatten_lists_async(lists):
+async def flatten_lists_async(lists: List[List[T]]) -> List[T]:
     return [item for sublist in lists async for item in sublist]
 
 
@@ -187,6 +191,18 @@ async def flatten_lists_aiter(lists):
 def sort_events(events: List[Event]) -> List[Event]:
     return sorted(
         events, key=lambda e: datetime.datetime.strptime(e.end_date, "%Y-%m-%d")
+    )
+
+
+def sort_matches(matches: List[Match]) -> List[Match]:
+    match_type_order = ["qm", "ef", "qf", "sf", "f"]
+    return sorted(
+        matches,
+        key=lambda m: (
+            match_type_order.index(m.comp_level),
+            m.set_number,
+            m.match_number,
+        ),
     )
 
 
@@ -211,3 +227,22 @@ def is_official_event(event: Event) -> bool:
 def chunkify(a, n):
     k, m = divmod(len(a), n)
     return list(a[i * k + min(i, m) : (i + 1) * k + min(i + 1, m)] for i in range(n))
+
+
+def make_table(col_names: List[str], row_vals: List[List[any]]) -> Table:
+    table = Table(show_header=True, header_style="bold magenta")
+    for col in col_names:
+        table.add_column(col)
+
+    for row in row_vals:
+        table.add_row(*[str(r) for r in row])
+
+    return table
+
+
+def find(a: Iterable[T], cond: Callable[[T], bool]) -> Optional[T]:
+    for i in a:
+        if cond(i):
+            return i
+
+    return None

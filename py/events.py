@@ -2,14 +2,22 @@ from collections import defaultdict
 from itertools import combinations
 from typing import List
 
+import plotly.graph_objects as go
 from rich import print
-from tqdm.rich import tqdm, trange
 
 from protos.tpa import EliminationAlliance
 from py.cli import expose
 from py.tba import EventType
 from py.tpa import tpa_cm
-from py.util import file_cm, get_savepath, tqdm_bar, tqdm_bar_async
+from py.util import (
+    OPPOSITE_COLOR,
+    file_cm,
+    find,
+    get_savepath,
+    make_table,
+    sort_matches,
+    tqdm_bar,
+)
 
 
 def elim_perms(seeds, n, disallowed):
@@ -173,3 +181,208 @@ async def retention_2021():
             results.items(), key=lambda t: -t[1][0] / t[1][1]
         ):
             print(f"{e},{p2020},{p2021},{p2021/p2020}", file=f)
+
+
+@expose
+async def biggest_chokes(year):
+    out = []
+
+    async with tpa_cm() as tpa:
+        for bar, event in tqdm_bar(
+            [
+                e
+                async for e in tpa.get_events_by_year(year=year)
+                if e.event_type in EventType.NON_CMP_EVENT_TYPES
+            ]
+        ):
+            bar.set_description(event.key)
+            rankings = await tpa.get_event_rankings(event_key=event.key)
+            if len(rankings.rankings) == 0:
+                continue
+
+            rp1 = rankings.rankings[0].sort_orders[0]
+            rp2 = rankings.rankings[1].sort_orders[0]
+            blowout_ratio = rp1 / rp2
+
+            results = [a async for a in tpa.get_event_alliances(event_key=event.key)]
+            results.sort(key=lambda ea: int(ea.name[-1]))
+
+            if results[0].status.status != "won":
+                out.append([event.key, rp1, rp2, blowout_ratio])
+
+    out.sort(key=lambda r: r[-1])
+    print(make_table(col_names=["Event Key", "1st", "2nd", "Ratio"], row_vals=out))
+
+
+@expose
+async def lowest_winners(year):
+    out = []
+    async with tpa_cm() as tpa:
+        for bar, event in tqdm_bar(
+            [
+                e
+                async for e in tpa.get_events_by_year(year=year)
+                if e.event_type in EventType.NON_CMP_EVENT_TYPES
+            ]
+        ):
+            bar.set_description(event.key)
+            rankings = await tpa.get_event_rankings(event_key=event.key)
+            if len(rankings.rankings) == 0:
+                continue
+
+            alliances = [a async for a in tpa.get_event_alliances(event_key=event.key)]
+            winner = find(alliances, lambda a: a.status.status == "won")
+            if winner is None:
+                continue
+
+            fp = winner.picks[1]
+            fp_rank = find(rankings.rankings, lambda r: r.team_key == fp).rank
+
+            out.append(
+                [
+                    event.short_name,
+                    winner.name[-1],
+                    winner.picks[0][3:],
+                    fp[3:],
+                    fp_rank,
+                    len(rankings.rankings),
+                ]
+            )
+
+    out.sort(key=lambda r: r[4])
+    print(
+        make_table(
+            col_names=["Key", "Seed", "Captain", "First Pick", "FP Rank", "# Teams"],
+            row_vals=out,
+        )
+    )
+
+    for last in out[-2:][::-1]:
+        print(
+            f"{year}: {last[0]}; alliance {last[1]} captain {last[2]} first picks {last[3]} (rank {last[4]}/{last[5]})"
+        )
+
+
+@expose
+async def lowest_winners2():
+    out = []
+    async with tpa_cm() as tpa:
+        for year in range(2010, 2021):
+            for bar, event in tqdm_bar(
+                [
+                    e
+                    async for e in tpa.get_events_by_year(year=year)
+                    if e.event_type in EventType.NON_CMP_EVENT_TYPES
+                ]
+            ):
+                bar.set_description(event.key)
+                rankings = await tpa.get_event_rankings(event_key=event.key)
+                if len(rankings.rankings) == 0:
+                    continue
+
+                alliances = [
+                    a async for a in tpa.get_event_alliances(event_key=event.key)
+                ]
+                winner = find(alliances, lambda a: a.status.status == "won")
+                if winner is None:
+                    continue
+
+                fp = winner.picks[1]
+                fp_rank = find(rankings.rankings, lambda r: r.team_key == fp).rank
+
+                out.append(
+                    [
+                        event.short_name,
+                        winner.name[-1],
+                        winner.picks[0][3:],
+                        fp[3:],
+                        fp_rank,
+                        len(rankings.rankings),
+                        event.year,
+                        fp_rank / len(rankings.rankings),
+                    ]
+                )
+
+    out.sort(key=lambda r: r[-1])
+    print(
+        make_table(
+            col_names=["Key", "Seed", "Captain", "First Pick", "FP Rank", "# Teams"],
+            row_vals=out,
+        )
+    )
+
+    for last in out[-10:][::-1]:
+        print(
+            f"{last[-2]}: {last[0]}; alliance {last[1]} captain {last[2]} first picks {last[3]} (rank {last[4]}/{last[5]})"
+        )
+
+
+@expose
+async def ranks_over_time(event_key: str):
+    rp = defaultdict(lambda: 0)
+    team_rp_history = defaultdict(list)
+    averages = defaultdict(lambda: [0])
+    async with tpa_cm() as tpa:
+        teams = [t async for t in tpa.get_event_teams(event_key=event_key)]
+        matches = [
+            m
+            async for m in tpa.get_event_matches(event_key=event_key)
+            if m.comp_level == "qm"
+        ]
+        matches = sort_matches(matches)
+
+        for match in matches:
+            for tk in [
+                tk
+                for tk in match.alliances.blue.team_keys
+                if tk
+                not in (
+                    match.alliances.blue.surrogate_team_keys
+                    + match.alliances.blue.dq_team_keys
+                )
+            ]:
+                team_rp_history[tk].append(match.blue_rp)
+
+            for tk in [
+                tk
+                for tk in match.alliances.red.team_keys
+                if tk
+                not in (
+                    match.alliances.red.surrogate_team_keys
+                    + match.alliances.red.dq_team_keys
+                )
+            ]:
+                team_rp_history[tk].append(match.red_rp)
+
+            for tk in (
+                match.alliances.blue.dq_team_keys + match.alliances.red.dq_team_keys
+            ):
+                team_rp_history[tk].append(0)
+
+            for t in teams:
+                if t.key not in team_rp_history:
+                    team_rp_history[t.key].append(0)
+
+            for tk, history in team_rp_history.items():
+                averages[tk].append(round(sum(history) / len(history), 2))
+                # averages[tk].append(sum(history))
+
+    fig = go.Figure()
+
+    for tk, averages in sorted(averages.items(), key=lambda t: int(t[0][3:])):
+        fig.add_trace(
+            go.Scatter(
+                x=list(range(1, len(matches) + 1)),
+                y=averages,
+                mode="lines",
+                name=tk,
+            )
+        )
+
+    fig.update_layout(
+        title=f"{event_key} RP avg over time",
+        xaxis_title="Qual Match #",
+        yaxis_title="RP Avg",
+        legend_title="Teams",
+    )
+    fig.show()

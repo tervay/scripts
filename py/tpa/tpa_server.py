@@ -1,8 +1,14 @@
-from typing import AsyncIterator, ForwardRef, OrderedDict
+from typing import AsyncIterator, ForwardRef
 
 from protos.tpa import *
 from py.tba import tba
-from py.tpa.force_fixes import fix_event, fix_team, gen_missing_event_alliances
+from py.tpa.force_fixes import (
+    fix_event,
+    fix_event_alliance,
+    fix_match,
+    fix_team,
+    gen_missing_event_alliances,
+)
 
 SBs = {
     2015: (MatchScoreBreakdown2015, MatchScoreBreakdown2015Alliance),
@@ -16,7 +22,7 @@ SBs = {
 
 def tba_match_to_tpa_match(m) -> Match:
     if "score_breakdown" not in m or m["score_breakdown"] is None:
-        return Match().from_dict(m)
+        return fix_match(Match().from_dict(m))
 
     sb = m["score_breakdown"].copy()
     del m["score_breakdown"]
@@ -35,7 +41,7 @@ def tba_match_to_tpa_match(m) -> Match:
     if "2020" in m.event_key:
         m.score_breakdown_2020 = MatchScoreBreakdown2020().from_dict(sb)
 
-    return m
+    return fix_match(m)
 
 
 class TPAService(TpaBase):
@@ -94,8 +100,8 @@ class TPAService(TpaBase):
         self, event_key: str
     ) -> AsyncIterator[ForwardRef("EliminationAlliance")]:
         try:
-            for a in tba.event_alliances(event=event_key):
-                yield EliminationAlliance().from_dict(a)
+            for i, a in enumerate(tba.event_alliances(event=event_key), start=1):
+                yield fix_event_alliance(EliminationAlliance().from_dict(a), i)
         except TypeError:
             if event_key == "2007sac":
                 return
@@ -157,8 +163,7 @@ class TPAService(TpaBase):
         return EventOpRs().from_dict(tba.event_oprs(event=event_key))
 
     async def get_event_rankings(self, event_key: str) -> "EventRanking":
-        print("called get_event_rankings")
-        return None
+        return EventRanking().from_dict(tba.event_rankings(event=event_key))
 
     async def get_event_simple(self, event_key: str) -> "EventSimple":
         print("called get_event_simple")
@@ -223,8 +228,9 @@ class TPAService(TpaBase):
     async def get_team_awards_by_year(
         self, team_key: str, year: int
     ) -> AsyncIterator[ForwardRef("Award")]:
-        print("called get_team_awards_by_year")
-        return None
+        awards = tba.team_awards(team_key, year=year)
+        for award in awards:
+            yield Award().from_dict(award)
 
     async def get_team_districts(
         self, team_key: str

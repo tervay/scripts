@@ -1,6 +1,7 @@
 ### Setup
 
 ```bash
+$ sudo apt-get install python3-dev graphviz libgraphviz-dev pkg-config
 $ pip install -r requirements.txt
 $ echo "key = 'MyTBAkey'" > key.py
 $ python main.py tpa

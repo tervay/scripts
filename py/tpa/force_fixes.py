@@ -219,6 +219,50 @@ def fix_event_geo(event: Event) -> Event:
     return event
 
 
+def fix_event_alliance(ea: EliminationAlliance, seed: int) -> EliminationAlliance:
+    ea.name = f"Alliance {seed}"
+    return ea
+
+
+def fix_match(m: Match) -> Match:
+    year = int(m.event_key[:4])
+    blue_rp, red_rp = 0, 0
+    if year == 2015:
+        red_rp = m.alliances.red.score
+        blue_rp = m.alliances.blue.score
+    elif year < 2018:
+        if m.alliances.red.score > m.alliances.blue.score:
+            red_rp += 2
+        elif m.alliances.red.score < m.alliances.blue.score:
+            blue_rp += 2
+        else:
+            red_rp += 1
+            blue_rp += 1
+
+    if year in [2016, 2017]:
+        _rp_count = lambda c: (
+            {
+                2016: int(getattr(m.score_breakdown_2016, c).teleop_defenses_breached)
+                + int(getattr(m.score_breakdown_2016, c).teleop_tower_captured),
+                2017: int(
+                    getattr(m.score_breakdown_2017, c).k_pa_ranking_point_achieved
+                )
+                + int(getattr(m.score_breakdown_2017, c).rotor_ranking_point_achieved),
+            }[year]
+        )
+
+        blue_rp += _rp_count("blue")
+        red_rp += _rp_count("red")
+    elif year in [2018, 2019, 2020]:
+        blue_rp = getattr(m, f"score_breakdown_{year}").blue.rp
+        red_rp = getattr(m, f"score_breakdown_{year}").red.rp
+
+    print(m.key, red_rp, blue_rp)
+    m.red_rp = red_rp
+    m.blue_rp = blue_rp
+    return m
+
+
 def gen_missing_event_alliances(matches: List[Match]) -> List[EliminationAlliance]:
     _ea = lambda r, b: {
         "red": EliminationAlliance(name=f"Alliance {r}"),
