@@ -4,10 +4,23 @@ from geopy.geocoders import Nominatim
 
 from protos.tpa import EliminationAlliance, Event, Match, Team
 from py.util import OPPOSITE_COLOR, SHORT_TO_STATE
+from collections import defaultdict
+
+elos = defaultdict(lambda: 0)
+with open("elo_2019.csv", "r") as f:
+    for line in f.readlines():
+        team, elo = line.split(",")
+        elos[int(team)] = float(elo)
 
 
 def fix_team(team: Team) -> Team:
-    for f in [fix_team_city, fix_team_state_prov, fix_team_country, fix_team_geo]:
+    for f in [
+        fix_team_city,
+        fix_team_state_prov,
+        fix_team_country,
+        fix_team_geo,
+        fix_team_elos,
+    ]:
         team = f(team)
 
     return team
@@ -122,6 +135,11 @@ def fix_team_geo(team: Team) -> Team:
 
     team.lat = loc.latitude
     team.lng = loc.longitude
+    return team
+
+
+def fix_team_elos(team: Team) -> Team:
+    team.yearly_elos[2019] = elos[team.team_number]
     return team
 
 

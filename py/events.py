@@ -4,6 +4,7 @@ from typing import List
 
 import plotly.graph_objects as go
 from rich import print
+from tqdm.rich import trange
 
 from protos.tpa import EliminationAlliance
 from py.cli import expose
@@ -18,6 +19,7 @@ from py.util import (
     sort_matches,
     tqdm_bar,
 )
+from grpclib.exceptions import GRPCError
 
 
 def elim_perms(seeds, n, disallowed):
@@ -384,5 +386,50 @@ async def ranks_over_time(event_key: str):
         xaxis_title="Qual Match #",
         yaxis_title="RP Avg",
         legend_title="Teams",
+    )
+    fig.show()
+
+
+@expose
+async def compare_events(year_start: int, year_end: int, *ekeys):
+    event_history = defaultdict(dict)
+    async with tpa_cm() as tpa:
+        for year in trange(year_start, year_end + 1):
+            for ekey in ekeys:
+                try:
+                    event = await tpa.get_event(event_key=f"{year}{ekey}")
+                except GRPCError:
+                    continue
+
+                event_teams = [
+                    t async for t in tpa.get_event_teams(event_key=f"{year}{ekey}")
+                ]
+                event_elos = [t.yearly_elos[2019] for t in event_teams]
+                event_elos.sort(reverse=True)
+                num_teams = len(event_elos)
+                top_quartile = int(round(num_teams / 4))
+                event_history[ekey][year] = (
+                    sum(event_elos[:top_quartile]) / top_quartile
+                )
+
+    fig = go.Figure()
+    max_elo = 0
+    for ekey, history in event_history.items():
+        data = [(year, elo) for year, elo in history.items()]
+        max_elo = max(max_elo, max(t[1] for t in data))
+        data.sort(key=lambda t: t[0])
+        fig.add_trace(
+            go.Scatter(
+                x=[t[0] for t in data],
+                y=[t[1] for t in data],
+                mode="lines",
+                name=ekey,
+            )
+        )
+
+    fig.update_yaxes(range=[1500, 1800])
+    fig.update_layout(
+        legend_title="Events",
+        xaxis={"tickmode": "array", "tickvals": list(range(year_start, year_end + 1))},
     )
     fig.show()

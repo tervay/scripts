@@ -43,6 +43,7 @@ message Team {
   int32 rookie_year = 17;
   string motto = 18;
   map<string, string> home_championship = 19;
+  map<int32, double> yearly_elos = 20;
 }
 message Team_Robot {
   int32 year = 1;

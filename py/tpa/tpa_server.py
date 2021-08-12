@@ -217,6 +217,7 @@ class TPAService(TpaBase):
         return None
 
     async def get_team(self, team_key: str) -> "Team":
+        print("returning info about team")
         return fix_team(Team().from_dict(tba.team(team=team_key)))
 
     async def get_team_awards(
