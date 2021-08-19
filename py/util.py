@@ -1,5 +1,6 @@
 import datetime
 from contextlib import contextmanager
+from math import sqrt
 from pathlib import Path
 from typing import Callable, Generator, Iterable, List, Optional, Tuple, TypeVar, Union
 
@@ -39,6 +40,8 @@ OPPOSITE_COLOR = {"blue": "red", "red": "blue"}
 
 MAX_TEAMS_PAGE_NUM = 17
 MAX_TEAMS_PAGE_RANGE = 17 + 1
+CURRENT_YEAR = datetime.datetime.today().year
+CURRENT_YEAR_RANGE = CURRENT_YEAR + 1
 
 STATE_TO_SHORT = {
     "Alabama": "AL",
@@ -246,3 +249,28 @@ def find(a: Iterable[T], cond: Callable[[T], bool]) -> Optional[T]:
             return i
 
     return None
+
+
+def wilson_sort(
+    objs: List[T],
+    positive: Callable[[T], float],
+    negative: Callable[[T], float],
+    minimum_total: float = 0,
+    z: float = 1.96,
+) -> List[T]:
+    def confidence(ups, downs):
+        n = ups + downs
+
+        if n == 0:
+            return 0
+
+        phat = float(ups) / n
+        return (
+            phat + z * z / (2 * n) - z * sqrt((phat * (1 - phat) + z * z / (4 * n)) / n)
+        ) / (1 + z * z / n)
+
+    return [
+        i
+        for i in sorted(objs, key=lambda e: -confidence(positive(e), negative(e)))
+        if (positive(i) + negative(i)) >= minimum_total
+    ]

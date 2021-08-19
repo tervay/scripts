@@ -3,6 +3,7 @@ from itertools import combinations
 from typing import List
 
 import plotly.graph_objects as go
+from grpclib.exceptions import GRPCError
 from rich import print
 from tqdm.rich import trange
 
@@ -11,6 +12,7 @@ from py.cli import expose
 from py.tba import EventType
 from py.tpa import tpa_cm
 from py.util import (
+    CURRENT_YEAR_RANGE,
     OPPOSITE_COLOR,
     file_cm,
     find,
@@ -19,7 +21,6 @@ from py.util import (
     sort_matches,
     tqdm_bar,
 )
-from grpclib.exceptions import GRPCError
 
 
 def elim_perms(seeds, n, disallowed):
@@ -433,3 +434,32 @@ async def compare_events(year_start: int, year_end: int, *ekeys):
         xaxis={"tickmode": "array", "tickvals": list(range(year_start, year_end + 1))},
     )
     fig.show()
+
+
+@expose
+async def division_buddies():
+    count = defaultdict(lambda: 0)
+    async with tpa_cm() as tpa:
+        for year in range(2001, CURRENT_YEAR_RANGE):
+            for bar, event in tqdm_bar(
+                [
+                    e
+                    async for e in tpa.get_events_by_year(year=year)
+                    if e.event_type == EventType.CMP_DIVISION
+                ]
+            ):
+                bar.set_description(event.key)
+                teams = [t async for t in tpa.get_event_teams(event_key=event.key)]
+                for t1 in teams:
+                    for t2 in teams:
+                        if t1.key == t2.key:
+                            continue
+
+                        combo = tuple(sorted([t1.team_number, t2.team_number]))
+                        count[combo] += 0.5
+
+    table = []
+    for (t1, t2), c in sorted(count.items(), key=lambda t: -t[1])[:50]:
+        table.append([t1, t2, c])
+
+    print(make_table(["T1", "T2", "#"], table))

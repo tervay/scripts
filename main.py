@@ -1,10 +1,13 @@
 import asyncio
+import os
 import warnings
+from datetime import timedelta
 from sys import argv
 
+import colorama
+import humanize
 import pretty_errors
 import requests_cache
-from colorama import init
 from grpclib.server import Server
 
 import py.awards
@@ -14,21 +17,31 @@ import py.events
 import py.geo
 import py.graphing
 import py.html
+import py.matches
 import py.scout
 import py.sim
 import py.teams
 from py.cli import run_main
 from py.tpa import TPAService
+from py.util import CURRENT_YEAR
 
 warnings.filterwarnings("ignore")
 
-init()
-requests_cache.install_cache("requests_cache")
+colorama.init()
+
+requests_cache.install_cache(
+    "requests_cache",
+    urls_expire_after={
+        f"*{CURRENT_YEAR}*": timedelta(days=30),
+        "*": -1,
+    },
+)
 
 
 async def start_server():
     server = Server([TPAService()])
-    print("starting")
+    cache_size = humanize.naturalsize(os.stat("requests_cache.sqlite").st_size)
+    print(f"starting with cache size of {cache_size}")
     await server.start("127.0.0.1", "1337")
     print("waiting")
     await server.wait_closed()

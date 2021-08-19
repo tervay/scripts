@@ -1,3 +1,5 @@
+import inspect
+from pprint import pprint
 from typing import AsyncIterator, ForwardRef
 
 from protos.tpa import *
@@ -18,6 +20,15 @@ SBs = {
     2019: (MatchScoreBreakdown2019, MatchScoreBreakdown2019Alliance),
     2020: (MatchScoreBreakdown2020, MatchScoreBreakdown2020Alliance),
 }
+
+
+def print_current_args():
+    stack = inspect.stack()
+    frame = stack[1][0]
+    fn_name = frame.f_code.co_name
+    fn_args = inspect.getargvalues(frame).locals
+    arg_str = ", ".join([f"{k}={v}" for k, v in fn_args.items() if k != "self"])
+    print(f"{fn_name}({arg_str})")
 
 
 def tba_match_to_tpa_match(m) -> Match:
@@ -48,49 +59,49 @@ class TPAService(TpaBase):
     async def get_district_events(
         self, district_key: str
     ) -> AsyncIterator[ForwardRef("Event")]:
-        print("called get_district_events")
+        print_current_args()  #  get_district_events
         return None
 
     async def get_district_events_keys(
         self, district_key: str
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_district_events_keys")
+        print_current_args()  #  get_district_events_keys
         return None
 
     async def get_district_events_simple(
         self, district_key: str
     ) -> AsyncIterator[ForwardRef("EventSimple")]:
-        print("called get_district_events_simple")
+        print_current_args()  #  get_district_events_simple
         return None
 
     async def get_district_rankings(
         self, district_key: str
     ) -> AsyncIterator[ForwardRef("DistrictRanking")]:
-        print("called get_district_rankings")
+        print_current_args()  #  get_district_rankings
         return None
 
     async def get_district_teams(
         self, district_key: str
     ) -> AsyncIterator[ForwardRef("Team")]:
-        print("called get_district_teams")
+        print_current_args()  #  get_district_teams
         return None
 
     async def get_district_teams_keys(
         self, district_key: str
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_district_teams_keys")
+        print_current_args()  #  get_district_teams_keys
         return None
 
     async def get_district_teams_simple(
         self, district_key: str
     ) -> AsyncIterator[ForwardRef("TeamSimple")]:
-        print("called get_district_teams_simple")
+        print_current_args()  #  get_district_teams_simple
         return None
 
     async def get_districts_by_year(
         self, year: int
     ) -> AsyncIterator[ForwardRef("DistrictList")]:
-        print("called get_districts_by_year")
+        print_current_args()  #  get_districts_by_year
         return None
 
     async def get_event(self, event_key: str) -> "Event":
@@ -99,6 +110,7 @@ class TPAService(TpaBase):
     async def get_event_alliances(
         self, event_key: str
     ) -> AsyncIterator[ForwardRef("EliminationAlliance")]:
+        print_current_args()
         try:
             for i, a in enumerate(tba.event_alliances(event=event_key), start=1):
                 yield fix_event_alliance(EliminationAlliance().from_dict(a), i)
@@ -114,11 +126,13 @@ class TPAService(TpaBase):
     async def get_event_awards(
         self, event_key: str
     ) -> AsyncIterator[ForwardRef("Award")]:
+        print_current_args()
         awards = tba.event_awards(event=event_key)
         for a in awards:
             yield Award().from_dict(a)
 
     async def get_event_district_points(self, event_key: str) -> "EventDistrictPoints":
+        print_current_args()
         try:
             edp = tba.event_district_points(event=event_key)
         except TypeError:
@@ -131,18 +145,19 @@ class TPAService(TpaBase):
         return EventDistrictPoints().from_dict(edp)
 
     async def get_event_insights(self, event_key: str) -> "EventInsights":
-        print("called get_event_insights")
+        print_current_args()  #  get_event_insights
         return None
 
     async def get_event_match_timeseries(
         self, event_key: str
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_event_match_timeseries")
+        print_current_args()  #  get_event_match_timeseries
         return None
 
     async def get_event_matches(
         self, event_key: str
     ) -> AsyncIterator[ForwardRef("Match")]:
+        print_current_args()
         for m in tba.event_matches(event=event_key):
             m_ = tba_match_to_tpa_match(m)
             yield m_
@@ -150,28 +165,31 @@ class TPAService(TpaBase):
     async def get_event_matches_keys(
         self, event_key: str
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_event_matches_keys")
+        print_current_args()  #  get_event_matches_keys
         return None
 
     async def get_event_matches_simple(
         self, event_key: str
     ) -> AsyncIterator[ForwardRef("MatchSimple")]:
-        print("called get_event_matches_simple")
+        print_current_args()  #  get_event_matches_simple
         return None
 
     async def get_event_op_rs(self, event_key: str) -> "EventOpRs":
+        print_current_args()
         return EventOpRs().from_dict(tba.event_oprs(event=event_key))
 
     async def get_event_rankings(self, event_key: str) -> "EventRanking":
+        print_current_args()
         return EventRanking().from_dict(tba.event_rankings(event=event_key))
 
     async def get_event_simple(self, event_key: str) -> "EventSimple":
-        print("called get_event_simple")
+        print_current_args()  #  get_event_simple
         return None
 
     async def get_event_teams(
         self, event_key: str
     ) -> AsyncIterator[ForwardRef("Team")]:
+        print_current_args()
         teams = tba.event_teams(event=event_key)
         for t in teams:
             yield fix_team(Team().from_dict(t))
@@ -179,16 +197,17 @@ class TPAService(TpaBase):
     async def get_event_teams_keys(
         self, event_key: str
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_event_teams_keys")
+        print_current_args()  #  get_event_teams_keys
         return None
 
     async def get_event_teams_simple(
         self, event_key: str
     ) -> AsyncIterator[ForwardRef("TeamSimple")]:
-        print("called get_event_teams_simple")
+        print_current_args()  #  get_event_teams_simple
         return None
 
     async def get_events_by_year(self, year: int) -> AsyncIterator[ForwardRef("Event")]:
+        print_current_args()
         events = tba.events(year=year)
         for e in events:
             yield fix_event(Event().from_dict(e))
@@ -196,39 +215,40 @@ class TPAService(TpaBase):
     async def get_events_by_year_keys(
         self, year: int
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_events_by_year_keys")
+        print_current_args()  #  get_events_by_year_keys
         return None
 
     async def get_events_by_year_simple(
         self, year: int
     ) -> AsyncIterator[ForwardRef("EventSimple")]:
-        print("called get_events_by_year_simple")
+        print_current_args()  #  get_events_by_year_simple
         return None
 
     async def get_match(self, match_key: str) -> "Match":
         return tba_match_to_tpa_match(tba.match(key=match_key))
 
     async def get_match_simple(self, match_key: str) -> "MatchSimple":
-        print("called get_match_simple")
+        print_current_args()  #  get_match_simple
         return None
 
     async def get_match_zebra(self, match_key: str) -> "Zebra":
-        print("called get_match_zebra")
+        print_current_args()  #  get_match_zebra
         return None
 
     async def get_team(self, team_key: str) -> "Team":
-        print("returning info about team")
+        print_current_args()
         return fix_team(Team().from_dict(tba.team(team=team_key)))
 
     async def get_team_awards(
         self, team_key: str
     ) -> AsyncIterator[ForwardRef("Award")]:
-        print("called get_team_awards")
+        print_current_args()  #  get_team_awards
         return None
 
     async def get_team_awards_by_year(
         self, team_key: str, year: int
     ) -> AsyncIterator[ForwardRef("Award")]:
+        print_current_args()
         awards = tba.team_awards(team_key, year=year)
         for award in awards:
             yield Award().from_dict(award)
@@ -236,78 +256,81 @@ class TPAService(TpaBase):
     async def get_team_districts(
         self, team_key: str
     ) -> AsyncIterator[ForwardRef("DistrictList")]:
-        print("called get_team_districts")
+        print_current_args()  #  get_team_districts
         return None
 
     async def get_team_event_awards(
         self, team_key: str, event_key: str
     ) -> AsyncIterator[ForwardRef("Award")]:
+        print_current_args()
         for a in tba.team_awards(team=team_key, event=event_key):
             yield Award().from_dict(a)
 
     async def get_team_event_matches(
         self, team_key: str, event_key: str
     ) -> AsyncIterator[ForwardRef("Match")]:
-        print("called get_team_event_matches")
+        print_current_args()  #  get_team_event_matches
         return None
 
     async def get_team_event_matches_keys(
         self, team_key: str, event_key: str
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_team_event_matches_keys")
+        print_current_args()  #  get_team_event_matches_keys
         return None
 
     async def get_team_event_matches_simple(
         self, team_key: str, event_key: str
     ) -> AsyncIterator[ForwardRef("Match")]:
-        print("called get_team_event_matches_simple")
+        print_current_args()  #  get_team_event_matches_simple
         return None
 
     async def get_team_event_status(
         self, team_key: str, event_key: str
     ) -> "TeamEventStatus":
-        print("called get_team_event_status")
+        print_current_args()  #  get_team_event_status
         return None
 
     async def get_team_events(
         self, team_key: str
     ) -> AsyncIterator[ForwardRef("Event")]:
-        print("called get_team_events")
+        print_current_args()  #  get_team_events
         return None
 
     async def get_team_events_by_year(
         self, team_key: str, year: int
     ) -> AsyncIterator[ForwardRef("Event")]:
+        print_current_args()
         for e in tba.team_events(team=team_key, year=year):
             yield fix_event(Event().from_dict(e))
 
     async def get_team_events_by_year_keys(
         self, team_key: str, year: int
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_team_events_by_year_keys")
+        print_current_args()  #  get_team_events_by_year_keys
         return None
 
     async def get_team_events_by_year_simple(
         self, team_key: str, year: int
     ) -> AsyncIterator[ForwardRef("EventSimple")]:
-        print("called get_team_events_by_year_simple")
+        print_current_args()  #  get_team_events_by_year_simple
         return None
 
     async def get_team_events_keys(
         self, team_key: str
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_team_events_keys")
+        print_current_args()  #  get_team_events_keys
         return None
 
     async def get_team_events_simple(
         self, team_key: str
     ) -> AsyncIterator[ForwardRef("EventSimple")]:
-        print("called get_team_events_simple")
+        print_current_args()  #  get_team_events_simple
         return None
 
     async def get_team_matches_by_year(
         self, team_key: str, year: int
     ) -> AsyncIterator[ForwardRef("Match")]:
+        print_current_args()
         for m in tba.team_matches(team=team_key, year=year):
             m_ = tba_match_to_tpa_match(m)
             yield m_
@@ -315,85 +338,88 @@ class TPAService(TpaBase):
     async def get_team_matches_by_year_keys(
         self, team_key: str, year: int
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_team_matches_by_year_keys")
+        print_current_args()  #  get_team_matches_by_year_keys
         return None
 
     async def get_team_matches_by_year_simple(
         self, team_key: str, year: int
     ) -> AsyncIterator[ForwardRef("MatchSimple")]:
-        print("called get_team_matches_by_year_simple")
+        print_current_args()  #  get_team_matches_by_year_simple
         return None
 
     async def get_team_media_by_tag(
         self, team_key: str, media_tag: str
     ) -> AsyncIterator[ForwardRef("Media")]:
-        print("called get_team_media_by_tag")
+        print_current_args()  #  get_team_media_by_tag
         return None
 
     async def get_team_media_by_tag_year(
         self, team_key: str, media_tag: str, year: int
     ) -> AsyncIterator[ForwardRef("Media")]:
-        print("called get_team_media_by_tag_year")
+        print_current_args()  #  get_team_media_by_tag_year
         return None
 
     async def get_team_media_by_year(
         self, team_key: str, year: int
     ) -> AsyncIterator[ForwardRef("Media")]:
-        print("called get_team_media_by_year")
+        print_current_args()  #  get_team_media_by_year
         return None
 
     async def get_team_robots(
         self, team_key: str
     ) -> AsyncIterator[ForwardRef("TeamRobot")]:
-        print("called get_team_robots")
+        print_current_args()  #  get_team_robots
         return None
 
     async def get_team_simple(self, team_key: str) -> "TeamSimple":
-        print("called get_team_simple")
+        print_current_args()  #  get_team_simple
         return None
 
     async def get_team_social_media(
         self, team_key: str
     ) -> AsyncIterator[ForwardRef("Media")]:
-        print("called get_team_social_media")
+        print_current_args()  #  get_team_social_media
         return None
 
     async def get_team_years_participated(
         self, team_key: str
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_team_years_participated")
+        print_current_args()  #  get_team_years_participated
         return None
 
     async def get_teams(self, page_num: int) -> AsyncIterator[ForwardRef("Team")]:
+        print_current_args()
         for t in tba.teams(page=page_num):
             yield fix_team(Team().from_dict(t))
 
     async def get_teams_by_year(
         self, year: int, page_num: int
     ) -> AsyncIterator[ForwardRef("Team")]:
+        print_current_args()
         for t in tba.teams(page=page_num, year=year):
             yield fix_team(Team().from_dict(t))
 
     async def get_teams_by_year_keys(
         self, year: int, page_num: int
     ) -> AsyncIterator[ForwardRef("Response")]:
+        print_current_args()
         for t in tba.teams(year=year, page=page_num, keys=True):
             yield Response(string_value=t)
 
     async def get_teams_by_year_simple(
         self, year: int, page_num: int
     ) -> AsyncIterator[ForwardRef("TeamSimple")]:
-        print("called get_teams_by_year_simple")
+        print_current_args()  #  get_teams_by_year_simple
         return None
 
     async def get_teams_keys(
         self, page_num: int
     ) -> AsyncIterator[ForwardRef("Response")]:
-        print("called get_teams_keys")
+        print_current_args()  #  get_teams_keys
         return None
 
     async def get_teams_simple(
         self, page_num: int
     ) -> AsyncIterator[ForwardRef("TeamSimple")]:
-        print("called get_teams_simple")
+        print_current_args()  #  get_teams_simple
         return None

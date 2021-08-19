@@ -1,13 +1,12 @@
 from collections import defaultdict
 
+import plotly.graph_objects as go
 from rich import print
 from tqdm.rich import trange
 
 from py.cli import expose
 from py.tba import AwardType, EventType
 from py.tpa import tpa_cm
-
-import plotly.graph_objects as go
 
 
 @expose

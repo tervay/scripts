@@ -1,10 +1,10 @@
+from collections import defaultdict
 from typing import List
 
 from geopy.geocoders import Nominatim
 
 from protos.tpa import EliminationAlliance, Event, Match, Team
 from py.util import OPPOSITE_COLOR, SHORT_TO_STATE
-from collections import defaultdict
 
 elos = defaultdict(lambda: 0)
 with open("elo_2019.csv", "r") as f:
@@ -243,6 +243,33 @@ def fix_event_alliance(ea: EliminationAlliance, seed: int) -> EliminationAllianc
 
 
 def fix_match(m: Match) -> Match:
+    for f in [fix_2015_winners, fix_match_rps, fix_match_alliances]:
+        m = f(m)
+
+    return m
+
+
+def fix_2015_winners(m: Match) -> Match:
+    if "2015" in m.event_key:
+        if m.alliances.red.score > m.alliances.blue.score:
+            m.winning_alliance = "red"
+        elif m.alliances.blue.score > m.alliances.red.score:
+            m.winning_alliance = "blue"
+
+    return m
+
+
+def fix_match_alliances(m: Match) -> Match:
+    if m.winning_alliance == "":
+        m.alliances.tied = [m.alliances.red, m.alliances.blue]
+    else:
+        m.alliances.winner = getattr(m.alliances, m.winning_alliance)
+        m.alliances.loser = getattr(m.alliances, OPPOSITE_COLOR[m.winning_alliance])
+
+    return m
+
+
+def fix_match_rps(m: Match) -> Match:
     year = int(m.event_key[:4])
     blue_rp, red_rp = 0, 0
     if year == 2015:
@@ -275,7 +302,6 @@ def fix_match(m: Match) -> Match:
         blue_rp = getattr(m, f"score_breakdown_{year}").blue.rp
         red_rp = getattr(m, f"score_breakdown_{year}").red.rp
 
-    print(m.key, red_rp, blue_rp)
     m.red_rp = red_rp
     m.blue_rp = blue_rp
     return m

@@ -22,6 +22,7 @@ grpclib==0.4.1
 h2==4.0.0
 hpack==4.0.0
 html5lib==1.0.1
+humanize==3.11.0
 hyperframe==6.0.1
 idna==2.8
 inflection==0.5.1

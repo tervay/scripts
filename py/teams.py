@@ -19,8 +19,10 @@ from py.util import (
     flatten_lists,
     flatten_lists_async,
     get_savepath,
+    make_table,
     tqdm_bar,
     tqdm_bar_async,
+    wilson_sort,
 )
 
 
@@ -290,3 +292,48 @@ async def non_1_seed_wins():
                                 )
 
     print(sorted(wins.items(), key=lambda t: -t[1])[:50])
+
+
+@expose
+async def best_per_seed():
+    records = defaultdict(lambda: defaultdict(lambda: {"wins": 0, "losses": 0}))
+
+    async with tpa_cm() as tpa:
+        for year in range(2006, 2021):
+            for bar, event in tqdm_bar(
+                [
+                    e
+                    async for e in tpa.get_events_by_year(year=year)
+                    if e.event_type in EventType.STANDARD_EVENT_TYPES
+                ]
+            ):
+                bar.set_description(event.key)
+
+                async for alliance in tpa.get_event_alliances(event_key=event.key):
+                    for team in alliance.picks:
+                        records[alliance.name][team][
+                            "wins"
+                        ] += alliance.status.record.wins
+                        records[alliance.name][team][
+                            "losses"
+                        ] += alliance.status.record.losses
+
+    for alliance_name, history in sorted(records.items(), key=lambda t: t[0]):
+        table_data = []
+        top = wilson_sort(
+            {k: v for k, v in history.items() if (v["wins"] + v["losses"]) > 9}.items(),
+            positive=lambda t: t[1]["wins"],
+            negative=lambda t: t[1]["losses"],
+        )
+        for (team, rec) in top[:10]:
+            table_data.append(
+                [
+                    team,
+                    rec["wins"],
+                    rec["losses"],
+                    round(rec["wins"] / (max(rec["losses"] + rec["wins"], 1)) * 100, 1),
+                ]
+            )
+
+        print(alliance_name)
+        print(make_table(["Team", "Wins", "Loss", "WR%"], table_data))

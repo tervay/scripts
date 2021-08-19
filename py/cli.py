@@ -33,6 +33,9 @@ def attempt_to_cast_value(s):
     if s.lower() == "false":
         return False
 
+    if s.lower() in ["none", "null"]:
+        return None
+
     return s
 
 

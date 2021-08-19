@@ -293,6 +293,9 @@ message Match_Simple {
   message Alliances {
     Match_alliance red = 1;
     Match_alliance blue = 2;
+    Match_alliance winner = 3;
+    Match_alliance loser = 4;
+    repeated Match_alliance tied = 5;
   }
   Alliances alliances = 5;
   string winning_alliance = 6;
@@ -309,6 +312,9 @@ message Match {
   message Alliances {
     Match_alliance red = 1;
     Match_alliance blue = 2;
+    Match_alliance winner = 3;
+    Match_alliance loser = 4;
+    repeated Match_alliance tied = 5;
   }
   Alliances alliances = 5;
   string winning_alliance = 6;
