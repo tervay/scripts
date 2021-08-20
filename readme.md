@@ -26,6 +26,12 @@ $ python main.py sim sim out/fake_events/2019nycmp/2019nycmp_fe.pb
 $ python main.py sim save_draft out/fake_events/2019nycmp/2019nycmp_fe.pb
 $ python main.py event_gen tba out/fake_events/2019nycmp/2019nycmp_fe.pb
 ```
+or
+```bash
+$ python main.py event_gen district_from_all 2019
+$ python main.py event_gen create_and_sim_district out/districts/all_2019_pts.txt 8
+```
+
 
 ### Formatting
 

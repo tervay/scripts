@@ -20,6 +20,7 @@ import py.html
 import py.matches
 import py.scout
 import py.sim
+import py.test
 import py.teams
 from py.cli import run_main
 from py.tpa import TPAService
