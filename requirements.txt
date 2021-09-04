@@ -3,6 +3,7 @@ async-lru==1.0.2
 attrs==21.2.0
 betterproto==2.0.0b3
 black==21.5b2
+blessed==1.18.1
 CacheControl==0.12.6
 certifi==2019.11.28
 chardet==3.0.4
@@ -14,6 +15,7 @@ cycler==0.10.0
 decorator==4.4.2
 distlib==0.3.0
 distro==1.4.0
+enlighten==1.10.1
 geographiclib==1.50
 geopy==2.1.0
 grpcio==1.38.0
@@ -48,6 +50,7 @@ pep517==0.8.2
 Pillow==8.2.0
 plotly==5.1.0
 pluggy==0.13.1
+prefixed==0.3.2
 pretty-errors==1.2.21
 progress==1.5
 protobuf==3.17.2
@@ -76,4 +79,5 @@ toml==0.10.2
 tqdm==4.61.0
 url-normalize==1.4.3
 urllib3==1.25.8
+wcwidth==0.2.5
 webencodings==0.5.1
