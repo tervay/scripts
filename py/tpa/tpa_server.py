@@ -1,5 +1,6 @@
 import inspect
 from pprint import pprint
+from py.util import MAX_TEAMS_PAGE_RANGE
 from typing import AsyncIterator, ForwardRef
 
 from protos.tpa import *
@@ -423,3 +424,10 @@ class TPAService(TpaBase):
     ) -> AsyncIterator[ForwardRef("TeamSimple")]:
         print_current_args()  #  get_teams_simple
         return None
+
+    async def get_all_teams_by_year(self, year: int) -> AsyncIterator["Team"]:
+        print_current_args()
+        for pg_num in range(MAX_TEAMS_PAGE_RANGE):
+            team_page = tba.teams(page=pg_num, year=year)
+            for team in team_page:
+                yield fix_team(Team().from_dict(team))

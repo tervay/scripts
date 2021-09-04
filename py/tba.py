@@ -57,6 +57,8 @@ class EventType:
         CMP_DIVISION,
     }
 
+    QUALIFYING_EVENT_TYPES = {REGIONAL, DISTRICT}
+
 
 class AwardType:
     CHAIRMANS = 0

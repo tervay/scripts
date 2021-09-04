@@ -923,4 +923,7 @@ service TPA {
   rpc getDistrictTeamsKeys(DistrictKey) returns (stream Response) {}
   /* Gets a list of team district rankings for the given district. */
   rpc getDistrictRankings(DistrictKey) returns (stream District_Ranking) {}
+
+  // Custom fns
+  rpc getAllTeamsByYear(Year) returns (stream Team) {}
 }

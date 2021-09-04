@@ -2,13 +2,20 @@ import datetime
 from contextlib import contextmanager
 from math import sqrt
 from pathlib import Path
-from typing import Callable, Generator, Iterable, List, Optional, Tuple, TypeVar, Union
+from typing import (
+    AsyncGenerator,
+    AsyncIterator,
+    Callable,
+    Generator,
+    Iterable,
+    List,
+    Optional,
+    Tuple,
+    TypeVar,
+    Union,
+)
 
 from async_lru import alru_cache
-from rich.table import Table
-from tqdm.asyncio import tqdm as atqdm
-from tqdm.rich import tqdm
-
 from protos.tpa import (
     Event,
     Match,
@@ -19,7 +26,12 @@ from protos.tpa import (
     MatchScoreBreakdown2019,
     MatchScoreBreakdown2020,
     Schedule,
+    TpaStub,
 )
+from rich.table import Table
+from tqdm.asyncio import tqdm as atqdm
+from tqdm.rich import tqdm
+
 from py.tba import EventType
 from py.tpa.context_manager import tpa_cm
 
@@ -37,6 +49,7 @@ MatchScoreBreakdown = Union[
 T = TypeVar("T")
 
 OPPOSITE_COLOR = {"blue": "red", "red": "blue"}
+ENABLE_GEOCODING = False
 
 MAX_TEAMS_PAGE_NUM = 17
 MAX_TEAMS_PAGE_RANGE = 17 + 1
@@ -163,9 +176,10 @@ def clamp(num, min_value, max_value):
     return max(min(num, max_value), min_value)
 
 
-def tqdm_bar(iterable: Iterable[T]) -> Tuple[tqdm, T]:
+def tqdm_bar(iterable: List[T]) -> Generator[Tuple[tqdm, T], None, None]:
     bar = tqdm(iterable)
     for item in bar:
+        item = item  # type: T # type-hint hack since tqdm doesn't have type support
         yield (bar, item)
 
 
@@ -274,3 +288,36 @@ def wilson_sort(
         for i in sorted(objs, key=lambda e: -confidence(positive(e), negative(e)))
         if (positive(i) + negative(i)) >= minimum_total
     ]
+
+
+async def all_events_with_bar(
+    tpa: TpaStub, year_start: int, year_end: int, condition: Callable[[Event], bool]
+) -> AsyncIterator[Event]:
+    events = []  # type: List[Event]
+    for year in range(year_start, year_end + 1):
+        async for event in tpa.get_events_by_year(year=year):
+            if condition(event):
+                events.append(event)
+
+    for bar, event in tqdm_bar(events):
+        bar.set_description(event.key.rjust(10))
+        yield event
+
+
+class Leaderboard(list):
+    def __init__(
+        self,
+        fn: Callable = lambda t: t,
+        highest_first: bool = True,
+        limit: Optional[int] = None,
+    ) -> None:
+        self.fn = fn
+        self.highest_first = highest_first
+        self.limit = limit
+
+    def append(self, __object) -> None:
+        super().append(__object)
+        self.sort(reverse=self.highest_first, key=self.fn)
+        if self.limit is not None:
+            while len(self) > self.limit:
+                del self[-1]

@@ -4,7 +4,7 @@ from typing import List
 from geopy.geocoders import Nominatim
 
 from protos.tpa import EliminationAlliance, Event, Match, Team
-from py.util import OPPOSITE_COLOR, SHORT_TO_STATE
+from py.util import ENABLE_GEOCODING, OPPOSITE_COLOR, SHORT_TO_STATE
 
 elos = defaultdict(lambda: 0)
 with open("elo_2019.csv", "r") as f:
@@ -122,19 +122,20 @@ def fix_team_country(team: Team) -> Team:
 
 
 def fix_team_geo(team: Team) -> Team:
-    nom = Nominatim(user_agent="frcscripts")
-    try:
-        loc = nom.geocode(f"{team.city}, {team.state_prov}, {team.country}")
-    except:
-        print(f"Could not locate {team}")
-        return team
+    if ENABLE_GEOCODING:
+        nom = Nominatim(user_agent="frcscripts")
+        try:
+            loc = nom.geocode(f"{team.city}, {team.state_prov}, {team.country}")
+        except:
+            print(f"Could not locate {team}")
+            return team
 
-    if loc is None:
-        print(f"Could not locate {team}")
-        return team
+        if loc is None:
+            print(f"Could not locate {team}")
+            return team
 
-    team.lat = loc.latitude
-    team.lng = loc.longitude
+        team.lat = loc.latitude
+        team.lng = loc.longitude
     return team
 
 
@@ -239,6 +240,9 @@ def fix_event_geo(event: Event) -> Event:
 
 def fix_event_alliance(ea: EliminationAlliance, seed: int) -> EliminationAlliance:
     ea.name = f"Alliance {seed}"
+    if ea.status.status == "won":
+        ea.status.level = "w"
+
     return ea
 
 

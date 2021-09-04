@@ -3,16 +3,20 @@ from collections import defaultdict
 
 import pandas as pd
 from rich import print
+from rich.pretty import pprint
 from tqdm.asyncio import tqdm
 from tqdm.rich import tqdm as tqdm_sync
 from tqdm.rich import trange
+import plotly.graph_objects as go
 
 from py.cli import expose
 from py.tba import EventType, tba
 from py.tpa import tpa_cm
 from py.util import (
+    CURRENT_YEAR_RANGE,
     MAX_TEAMS_PAGE_NUM,
     MAX_TEAMS_PAGE_RANGE,
+    all_events_with_bar,
     file_cm,
     filter_completed_events,
     filter_official_events,
@@ -337,3 +341,149 @@ async def best_per_seed():
 
         print(alliance_name)
         print(make_table(["Team", "Wins", "Loss", "WR%"], table_data))
+
+
+@expose
+async def epr():
+    psr_num = defaultdict(lambda: {"qf": 0, "sf": 0, "f": 0, "w": 0, "": 0})
+    ppsr_num = defaultdict(lambda: {i: 0 for i in range(9)})
+    states = dict()
+    event_counts = defaultdict(lambda: 0)
+    elim_counts = defaultdict(lambda: 0)
+    unpicked_points = 0
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa,
+            2010,
+            2020,
+            lambda e: (
+                e.event_type in EventType.SEASON_EVENT_TYPES
+                and e.key not in ["2015micmp", "2016micmp"]
+                and "(Cancelled)" not in e.name
+            ),
+        ):
+            finishes = defaultdict(lambda: "")
+            seeds = defaultdict(lambda: 0)
+            good = True
+            async for alliance in tpa.get_event_alliances(event_key=event.key):
+                try:
+                    int(alliance.name[-1])
+                except:
+                    good = False
+                    break
+
+                for tk in alliance.picks:
+                    finishes[tk] = alliance.status.level
+                    seeds[tk] = int(alliance.name[-1])
+                    elim_counts[tk] += 1
+            if not good:
+                continue
+
+            async for team in tpa.get_event_teams(event_key=event.key):
+                psr_num[team.key][finishes[team.key]] += 1
+                ppsr_num[team.key][seeds[team.key]] += 1
+                event_counts[team.key] += 1
+                states[team.key] = team.state_prov
+
+        psr = {}
+        for team, finishes in psr_num.items():
+            psr[team] = (
+                finishes["qf"] * 1
+                + finishes["sf"] * 2
+                + finishes["f"] * 3
+                + finishes["w"] * 4
+                + finishes[""] * unpicked_points
+            ) / event_counts[team]
+
+        ppsr = {}
+        for team, seeds in ppsr_num.items():
+            fake_psr_num = defaultdict(
+                lambda: {"qf": 0, "sf": 0, "f": 0, "w": 0, "": 0}
+            )
+            n = 0
+            for seed, count in seeds.items():
+                n += count
+                d = {
+                    0: "",
+                    1: "w",
+                    2: "f",
+                    3: "sf",
+                    4: "sf",
+                    5: "qf",
+                    6: "qf",
+                    7: "qf",
+                    8: "qf",
+                }
+                fake_psr_num[team][d[seed]] += count
+
+            ppsr[team] = (
+                fake_psr_num[team]["qf"] * 1
+                + fake_psr_num[team]["sf"] * 2
+                + fake_psr_num[team]["f"] * 3
+                + fake_psr_num[team]["w"] * 4
+                + fake_psr_num[team][""] * unpicked_points
+            ) / event_counts[team]
+
+        epsr = {k: psr[k] - ppsr[k] for k in psr.keys()}
+        xpsr = {k: psr[k] * epsr[k] for k in psr.keys()}
+        f = open("out.txt", "w+")
+        print(
+            make_table(
+                ["Team", "Events", "PSR", "PPSR", "EPSR", "xPSR"],
+                [
+                    [
+                        t[3:],
+                        event_counts[t],
+                        round(psr[t], 3),
+                        round(ppsr[t], 3),
+                        round(epsr[t], 3),
+                        round(xpsr[t], 3),
+                    ]
+                    for t in sorted(psr.keys(), key=lambda k: -xpsr[k])
+                    if elim_counts[t] >= 5
+                ],
+            ),
+            file=f,
+        )
+
+        fig = go.Figure()
+        keys = [k for k in epsr.keys() if elim_counts[k] >= 5]
+        fig.add_trace(
+            go.Scatter(
+                x=[psr[k] for k in keys],
+                y=[epsr[k] for k in keys],
+                text=[f"{k[3:]} ({event_counts[k]})" for k in keys],
+                mode="markers",
+            )
+        )
+        fig.update_layout(
+            title="FRC Expected Playoff Success Rating vs Playoff Success Rating",
+            xaxis_title="Playoff Success Rating",
+            yaxis_title="Expected Playoff Success Rating",
+        )
+        fig.add_annotation(
+            x=3.5,
+            y=0.75,
+            showarrow=False,
+            text="Historically good,\noverperforms",
+        )
+        fig.add_annotation(
+            x=3.5,
+            y=-1,
+            showarrow=False,
+            text="Historically good,\nunderperforms",
+        )
+        fig.add_annotation(
+            x=0,
+            y=-1,
+            showarrow=False,
+            text="Historically bad,\nunderperforms",
+        )
+        fig.add_annotation(
+            x=0,
+            y=0.75,
+            showarrow=False,
+            text="Historically bad,\noverperforms",
+        )
+
+        fig.show()

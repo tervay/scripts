@@ -6,10 +6,13 @@ import statistics
 from collections import defaultdict
 from math import log
 from typing import Dict, List
+from rich.pretty import pprint
+from rich import print
 
 from betterproto import Casing
 from colorama import Fore
-from tqdm.rich import trange
+from tqdm.rich import trange, tqdm
+from tqdm.asyncio import tqdm as atqdm
 
 from protos.tpa import (
     Event,
@@ -29,6 +32,7 @@ from py.util import (
     MAX_TEAMS_PAGE_RANGE,
     SHORT_TO_STATE,
     STATE_TO_SHORT,
+    Leaderboard,
     chunkify,
     file_cm,
     flatten_lists_async,
@@ -154,7 +158,7 @@ async def save_real_schedule(event_key, fname=None):
 async def district_from_states(
     states: str,
     year: int,
-    dcmp_fraction: float = 0.35,
+    dcmp_fraction_or_count: float = 0.35,
     double_1_events=True,
     take_2_best=False,
 ):
@@ -165,120 +169,56 @@ async def district_from_states(
             SHORT_TO_STATE.get(s.upper(), s) for s in allowlist
         )
 
-    pts = defaultdict(list)
-    cmp_qual = defaultdict(lambda: False)
-
+    results = defaultdict(lambda: Leaderboard(limit=2))
     async with tpa_cm() as tpa:
-        teams = []
-        for i in trange(MAX_TEAMS_PAGE_RANGE):
-            pg = [t async for t in tpa.get_teams_by_year(year=year, page_num=i)]
-            teams.extend(pg)
-
-        for bar, team in tqdm_bar(teams):
-            bar.set_description(team.key)
-            if (team.state_prov in allowlist) or (states is None):
-                events = [
-                    e
-                    async for e in tpa.get_team_events_by_year(
-                        team_key=team.key, year=year
-                    )
-                ]
-                if any([e.event_type in EventType.CMP_EVENT_TYPES for e in events]):
-                    cmp_qual[team.key] = True
-
-                for e in events:
-                    async for award in tpa.get_team_event_awards(
-                        team_key=team.key, event_key=e.key
-                    ):
-                        if (
-                            award.award_type in AwardType.CMP_QUALIFYING_AWARDS
-                            and e.event_type == EventType.REGIONAL
-                        ):
-                            cmp_qual[team.key] = True
-
-                events = [
-                    e for e in events if e.event_type in EventType.NON_CMP_EVENT_TYPES
-                ]
-                events = sort_events(events)
-
-                if take_2_best:
-                    for event in events:
-                        dpts = await tpa.get_event_district_points(event_key=event.key)
-                        if team.key not in dpts.points:
-                            continue
-
-                        pts[team.key].append(
-                            dpts.points[team.key].total
-                            / (
-                                1
-                                if event.event_type
-                                not in {
-                                    EventType.DISTRICT_CMP,
-                                    EventType.DISTRICT_CMP_DIVISION,
-                                }
-                                else 3
-                            )
-                        )
-                        pts[team.key].sort(reverse=True)
-                        pts[team.key] = pts[team.key][:2]
-                else:
-                    n = 0
-                    for event in events:
-                        if n == 2:
-                            break
-
-                        dpts = await tpa.get_event_district_points(event_key=event.key)
-                        if team.key not in dpts.points:
-                            continue
-
-                        pts[team.key].append(dpts.points[team.key].total)
-                        n += 1
-
-                if team.key in pts and len(pts[team.key]) == 1 and double_1_events:
-                    pts[team.key].append(pts[team.key][0])
-
-                if team.rookie_year == year:
-                    pts[team.key].append(10)
-                elif team.rookie_year == year - 1:
-                    pts[team.key].append(5)
-
-    n_qualified = int(round(dcmp_fraction * len(pts.keys())))
-    n_qualified -= (
-        n_qualified % -6
-    )  # round up to nearest multiple of 6 to prevent surrogates
-
-    for i, (team, team_pts) in enumerate(
-        sorted(pts.items(), key=lambda t: -sum(t[1])), start=1
-    ):
-        team_color = Fore.GREEN if i < n_qualified else Fore.RED
-
-        pts_str = [str(p).rjust(2) for p in team_pts]
-        pts_str = " + ".join(pts_str).ljust(12)
-        cmp_str = f"{Fore.GREEN}✓" if cmp_qual[team] else ""
-
-        print(
-            f"{Fore.RESET}{str(i).rjust(3)}. {team_color}{team[3:].rjust(4)}{Fore.RESET} "
-            + f"{pts_str} = {sum(team_pts)}\t{cmp_str}"
+        events = sort_events(
+            [
+                e
+                async for e in tpa.get_events_by_year(year=year)
+                if e.event_type in EventType.QUALIFYING_EVENT_TYPES
+            ]
         )
+        for bar, event in tqdm_bar(events):
+            bar.set_description(event.key.rjust(10))
+            dpts_ = await tpa.get_event_district_points(event_key=event.key)
+            for team_key, dpts in dpts_.points.items():
+                if take_2_best or len(results[team_key]) < 2:
+                    results[team_key].append(dpts.total)
+
+        if states is None:
+            teams_allowed = set()
+        else:
+            teams_allowed = {
+                t.key
+                async for t in atqdm(tpa.get_all_teams_by_year(year=year))
+                if (states is None) or (t.state_prov in allowlist)
+            }
+
+        if dcmp_fraction_or_count > 1:
+            count = dcmp_fraction_or_count
+        else:
+            count = int(
+                round(
+                    len((results.keys() if states is None else teams_allowed))
+                    * dcmp_fraction_or_count
+                )
+            )
+
+        total_leaderboard = Leaderboard(lambda t: t[1], limit=count)
+
+        for tk, pt_board in results.items():
+            if states is None or tk in teams_allowed:
+                if double_1_events and len(pt_board) == 1:
+                    pt_board.append(pt_board[0])
+                total_leaderboard.append((tk, sum(pt_board)))
 
     if states is None:
         states = "all"
-
     with file_cm(
         get_savepath(f'districts/{states.replace(",", "-")}_{year}.txt'), "w+"
     ) as f:
-        for team, team_pts in sorted(pts.items(), key=lambda t: -sum(t[1]))[
-            :n_qualified
-        ]:
-            f.write(f"{team[3:]}\n")
-
-    with file_cm(
-        get_savepath(f'districts/{states.replace(",", "-")}_{year}_pts.txt'), "w+"
-    ) as f:
-        for team, team_pts in sorted(pts.items(), key=lambda t: -sum(t[1]))[
-            :n_qualified
-        ]:
-            f.write(f"{team[3:]}\t{sum(team_pts)}\n")
+        for tk, pts in total_leaderboard:
+            f.write(f"{tk[3:]}\t{pts}\n")
 
 
 @expose

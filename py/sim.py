@@ -18,7 +18,13 @@ from protos.tpa import (
 from py.cli import expose
 from py.scout import get_component_opr, opr_component
 from py.tpa.context_manager import tpa_cm
-from py.util import file_cm, get_real_event_schedule, is_official_event, tqdm_bar
+from py.util import (
+    file_cm,
+    get_real_event_schedule,
+    is_official_event,
+    make_table,
+    tqdm_bar,
+)
 
 RP_FNs = {
     2019: (
@@ -63,6 +69,7 @@ async def sim(fe_fp: str, iterations=1000):
         fake_event = FakeEvent.FromString(f.read())
 
     rankings_file = fe_fp.replace("_fe.pb", "_ranks.tsv")
+    opr_file = fe_fp.replace("_fe.pb", "_oprs.txt")
 
     schedule = fake_event.schedule
     year = fake_event.inner_event.year
@@ -234,6 +241,30 @@ async def sim(fe_fp: str, iterations=1000):
                 )
 
         f.write(fake_event.SerializeToString())
+
+    with file_cm(opr_file, "w+") as f:
+        table = []
+        i = 1
+        for tk, rp in tqdm(sorted(rps.items(), key=lambda t: -t[1])):
+            table.append(
+                [
+                    i,
+                    tk[3:],
+                    round(rp / (iterations * 10), 2),
+                    round(sum(team_rp1[tk]) / len(team_rp1[tk]), 2),
+                    round(sum(team_rp2[tk]) / len(team_rp2[tk]), 2),
+                    round(sum(team_opr[tk]) / len(team_opr[tk]), 2),
+                ]
+            )
+            i += 1
+
+        print(
+            make_table(
+                col_names=["#", "Team", "RP", "RP1", "RP2", "OPR"],
+                row_vals=table,
+            ),
+            file=f,
+        )
 
 
 @expose
