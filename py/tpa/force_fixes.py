@@ -8,11 +8,8 @@ from geopy.geocoders import Nominatim
 from protos.tpa import EliminationAlliance, Event, Match, Team
 from py.util import ENABLE_GEOCODING, OPPOSITE_COLOR, SHORT_TO_STATE
 
-elos = defaultdict(dict)
-for fname in os.listdir("py/data/elos/"):
-    f = open(f"py/data/elos/{fname}", "r")
-    elos[int(fname.split(".")[0])] = defaultdict(lambda: 0, json.load(f))
-    f.close()
+with open("py/data/elos.json", "r") as f:
+    raw_elos = json.load(f)
 
 
 with open("py/data/regions.json", "r") as f:
@@ -41,7 +38,7 @@ def fix_event(event: Event) -> Event:
 
 
 def fix_team_region(team: Team) -> Team:
-    team.region = regions.get(team.key, "")
+    team.region.name = regions.get(team.key, "")
     return team
 
 
@@ -152,8 +149,11 @@ def fix_team_geo(team: Team) -> Team:
 
 
 def fix_team_elos(team: Team) -> Team:
-    for year, all_elos in elos.items():
-        team.yearly_elos[year] = all_elos[str(team.team_number)]
+    team.yearly_elos = {
+        int(k): v
+        for k, v in raw_elos[str(team.team_number)].items()
+        if v not in [None, 0.0]
+    }
 
     return team
 
