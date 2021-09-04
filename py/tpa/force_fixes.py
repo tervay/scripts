@@ -8,10 +8,10 @@ from geopy.geocoders import Nominatim
 from protos.tpa import EliminationAlliance, Event, Match, Team
 from py.util import ENABLE_GEOCODING, OPPOSITE_COLOR, SHORT_TO_STATE
 
-elos = defaultdict(lambda: defaultdict(lambda: 0))
+elos = defaultdict(dict)
 for fname in os.listdir("py/data/elos/"):
     f = open(f"py/data/elos/{fname}", "r")
-    elos[int(fname.split(".")[0])] = json.load(f)
+    elos[int(fname.split(".")[0])] = defaultdict(lambda: 0, json.load(f))
     f.close()
 
 
