@@ -1,25 +1,25 @@
+import json
 import statistics
 from collections import defaultdict
 
 import pandas as pd
+import plotly.graph_objects as go
 from rich import print
 from rich.pretty import pprint
 from tqdm.asyncio import tqdm
 from tqdm.rich import tqdm as tqdm_sync
 from tqdm.rich import trange
-import plotly.graph_objects as go
 
 from py.cli import expose
 from py.tba import EventType, tba
 from py.tpa import tpa_cm
 from py.util import (
-    CURRENT_YEAR_RANGE,
+    CURRENT_YEAR,
     MAX_TEAMS_PAGE_NUM,
     MAX_TEAMS_PAGE_RANGE,
     all_events_with_bar,
     file_cm,
     filter_completed_events,
-    filter_official_events,
     flatten_lists,
     flatten_lists_async,
     get_savepath,
@@ -31,8 +31,9 @@ from py.util import (
 
 
 @expose
-def about(num):
-    print(tba.team(num, simple=True))
+async def about(num):
+    async with tpa_cm() as tpa:
+        pprint(await tpa.get_team(team_key=f"frc{num}"))
 
 
 @expose
@@ -487,3 +488,21 @@ async def epr():
         )
 
         fig.show()
+
+
+@expose
+async def generate_regions():
+    async with tpa_cm() as tpa:
+        f = open("py/data/regions.json", "w+")
+        region = {}
+        async for district in tpa.get_districts_by_year(year=CURRENT_YEAR):
+            async for district_team in tpa.get_district_teams(
+                district_key=district.key
+            ):
+                region[district_team.key] = district.abbreviation
+
+        async for team in tpa.get_all_teams_by_year(year=CURRENT_YEAR):
+            if team.key not in region:
+                region[team.key] = team.state_prov
+
+        json.dump(region, f)

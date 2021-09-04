@@ -1,6 +1,7 @@
-from py.cli import expose
 from pprint import pprint
-from py.multiproc.mp import call, sum_, FnArgs
+
+from py.cli import expose
+from py.multiproc.mp import FnArgs, call, sum_
 
 
 @expose

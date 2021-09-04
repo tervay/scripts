@@ -1,3 +1,5 @@
+import json
+import os
 from collections import defaultdict
 from typing import List
 
@@ -6,11 +8,15 @@ from geopy.geocoders import Nominatim
 from protos.tpa import EliminationAlliance, Event, Match, Team
 from py.util import ENABLE_GEOCODING, OPPOSITE_COLOR, SHORT_TO_STATE
 
-elos = defaultdict(lambda: 0)
-with open("elo_2019.csv", "r") as f:
-    for line in f.readlines():
-        team, elo = line.split(",")
-        elos[int(team)] = float(elo)
+elos = defaultdict(lambda: defaultdict(lambda: 0))
+for fname in os.listdir("py/data/elos/"):
+    f = open(f"py/data/elos/{fname}", "r")
+    elos[int(fname.split(".")[0])] = json.load(f)
+    f.close()
+
+
+with open("py/data/regions.json", "r") as f:
+    regions = json.load(f)
 
 
 def fix_team(team: Team) -> Team:
@@ -20,6 +26,7 @@ def fix_team(team: Team) -> Team:
         fix_team_country,
         fix_team_geo,
         fix_team_elos,
+        fix_team_region,
     ]:
         team = f(team)
 
@@ -31,6 +38,11 @@ def fix_event(event: Event) -> Event:
         event = f(event)
 
     return event
+
+
+def fix_team_region(team: Team) -> Team:
+    team.region = regions.get(team.key, "")
+    return team
 
 
 def fix_team_city(team: Team) -> Team:
@@ -140,7 +152,9 @@ def fix_team_geo(team: Team) -> Team:
 
 
 def fix_team_elos(team: Team) -> Team:
-    team.yearly_elos[2019] = elos[team.team_number]
+    for year, all_elos in elos.items():
+        team.yearly_elos[year] = all_elos[str(team.team_number)]
+
     return team
 
 

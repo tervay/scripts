@@ -1,3 +1,3 @@
 from . import *
-from .tpa import *
 from .multiproc import *
+from .tpa import *

@@ -2,8 +2,9 @@ import multiprocessing as mp
 from time import sleep
 from typing import Callable, Dict, List, NamedTuple
 
-from py.util import flatten_lists
 from tqdm import tqdm
+
+from py.util import flatten_lists
 
 
 class FnArgs(NamedTuple):

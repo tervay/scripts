@@ -6,13 +6,13 @@ import statistics
 from collections import defaultdict
 from math import log
 from typing import Dict, List
-from rich.pretty import pprint
-from rich import print
 
 from betterproto import Casing
 from colorama import Fore
-from tqdm.rich import trange, tqdm
+from rich import print
+from rich.pretty import pprint
 from tqdm.asyncio import tqdm as atqdm
+from tqdm.rich import tqdm, trange
 
 from protos.tpa import (
     Event,

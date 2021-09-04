@@ -1,6 +1,4 @@
 import inspect
-from pprint import pprint
-from py.util import MAX_TEAMS_PAGE_RANGE
 from typing import AsyncIterator, ForwardRef
 
 from protos.tpa import *
@@ -12,6 +10,7 @@ from py.tpa.force_fixes import (
     fix_team,
     gen_missing_event_alliances,
 )
+from py.util import MAX_TEAMS_PAGE_RANGE
 
 SBs = {
     2015: (MatchScoreBreakdown2015, MatchScoreBreakdown2015Alliance),
@@ -85,7 +84,8 @@ class TPAService(TpaBase):
         self, district_key: str
     ) -> AsyncIterator[ForwardRef("Team")]:
         print_current_args()  #  get_district_teams
-        return None
+        for team in tba.district_teams(district=district_key):
+            yield fix_team(Team().from_dict(team))
 
     async def get_district_teams_keys(
         self, district_key: str
@@ -103,7 +103,8 @@ class TPAService(TpaBase):
         self, year: int
     ) -> AsyncIterator[ForwardRef("DistrictList")]:
         print_current_args()  #  get_districts_by_year
-        return None
+        for district in tba.districts(year=year):
+            yield DistrictList().from_dict(district)
 
     async def get_event(self, event_key: str) -> "Event":
         return fix_event(Event().from_dict(tba.event(event=event_key)))

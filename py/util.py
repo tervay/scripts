@@ -3,7 +3,6 @@ from contextlib import contextmanager
 from math import sqrt
 from pathlib import Path
 from typing import (
-    AsyncGenerator,
     AsyncIterator,
     Callable,
     Generator,
@@ -16,6 +15,10 @@ from typing import (
 )
 
 from async_lru import alru_cache
+from rich.table import Table
+from tqdm.asyncio import tqdm as atqdm
+from tqdm.rich import tqdm
+
 from protos.tpa import (
     Event,
     Match,
@@ -28,10 +31,6 @@ from protos.tpa import (
     Schedule,
     TpaStub,
 )
-from rich.table import Table
-from tqdm.asyncio import tqdm as atqdm
-from tqdm.rich import tqdm
-
 from py.tba import EventType
 from py.tpa.context_manager import tpa_cm
 
@@ -291,13 +290,22 @@ def wilson_sort(
 
 
 async def all_events_with_bar(
-    tpa: TpaStub, year_start: int, year_end: int, condition: Callable[[Event], bool]
+    tpa: TpaStub,
+    year_start: int,
+    year_end: int,
+    condition: Callable[[Event], bool],
+    limit: Optional[int] = None,
 ) -> AsyncIterator[Event]:
     events = []  # type: List[Event]
-    for year in range(year_start, year_end + 1):
-        async for event in tpa.get_events_by_year(year=year):
-            if condition(event):
-                events.append(event)
+    try:
+        for year in range(year_start, year_end + 1):
+            async for event in tpa.get_events_by_year(year=year):
+                if condition(event) and (limit is None or len(events) < limit):
+                    events.append(event)
+                    if len(events) == limit:
+                        raise StopIteration()
+    except (StopIteration, StopAsyncIteration):
+        pass
 
     for bar, event in tqdm_bar(events):
         bar.set_description(event.key.rjust(10))

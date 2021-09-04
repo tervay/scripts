@@ -20,8 +20,8 @@ import py.html
 import py.matches
 import py.scout
 import py.sim
-import py.test
 import py.teams
+import py.test
 from py.cli import run_main
 from py.tpa import TPAService
 from py.util import CURRENT_YEAR
