@@ -112,6 +112,22 @@ STATE_TO_SHORT = {
     "West Virginia": "WV",
     "Wisconsin": "WI",
     "Wyoming": "WY",
+    # Canada
+    "Newfoundland": "NL",
+    "Prince Edward Island": "PE",
+    "Nova Scotia": "NS",
+    "New Brunswick": "NB",
+    "Quebec": "QC",
+    "Québec": "QC",
+    "Ontario": "ON",
+    "Manitoba": "MB",
+    "Alberta": "AB",
+    "British Columbia": "BC",
+    "Yukon": "YT",
+    "Yukon Territory": "YT",
+    "Northwest Territories": "NT",
+    "Nunavut": "NU",
+    "Saskatchewan": "SK",
 }
 SHORT_TO_STATE = dict(map(reversed, STATE_TO_SHORT.items()))
 

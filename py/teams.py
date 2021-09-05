@@ -346,9 +346,10 @@ async def best_per_seed():
 
 @expose
 async def epr():
+    min_elim_appearances = 5
     psr_num = defaultdict(lambda: {"qf": 0, "sf": 0, "f": 0, "w": 0, "": 0})
     ppsr_num = defaultdict(lambda: {i: 0 for i in range(9)})
-    states = dict()
+    team_colors = dict()
     event_counts = defaultdict(lambda: 0)
     elim_counts = defaultdict(lambda: 0)
     unpicked_points = 0
@@ -384,7 +385,7 @@ async def epr():
                 psr_num[team.key][finishes[team.key]] += 1
                 ppsr_num[team.key][seeds[team.key]] += 1
                 event_counts[team.key] += 1
-                states[team.key] = team.state_prov
+                team_colors[team.key] = team.region.color
 
         psr = {}
         for team, finishes in psr_num.items():
@@ -441,19 +442,20 @@ async def epr():
                         round(xpsr[t], 3),
                     ]
                     for t in sorted(psr.keys(), key=lambda k: -xpsr[k])
-                    if elim_counts[t] >= 5
+                    if elim_counts[t] >= min_elim_appearances
                 ],
             ),
             file=f,
         )
 
         fig = go.Figure()
-        keys = [k for k in epsr.keys() if elim_counts[k] >= 5]
+        keys = [k for k in epsr.keys() if elim_counts[k] >= min_elim_appearances]
         fig.add_trace(
             go.Scatter(
                 x=[psr[k] for k in keys],
                 y=[epsr[k] for k in keys],
                 text=[f"{k[3:]} ({event_counts[k]})" for k in keys],
+                marker_color=[team_colors[k] for k in keys],
                 mode="markers",
             )
         )

@@ -1,7 +1,12 @@
 import inspect
 from collections import namedtuple
-from typing import Callable, Dict, Union
+from rich.pretty import pprint
 
+from tqdm.std import tqdm
+from py.tpa.context_manager import tpa_cm
+from py.util import CURRENT_YEAR, CURRENT_YEAR_RANGE, STATE_TO_SHORT
+from typing import Callable, Dict, Union
+import json
 import inflection
 import yaml
 
@@ -234,3 +239,92 @@ def generate_server():
             )
             print(f"        print('called {method_name}')")
             print("        return None")
+
+
+@expose
+async def regions():
+    hand_map_states = {
+        "USA": {
+            "California": ["CA"],
+            "Midwest": [
+                "OK",
+                "ND",
+                "SD",
+                "KS",
+                "WI",
+                "IL",
+                "NE",
+                "MO",
+                "IA",
+            ],
+            "Desert": ["NV", "AZ"],
+            "New York": ["NY"],
+            "Bluegrass": ["TN", "KY"],
+            "Mountain": ["CO", "UT", "ID", "WY", "MT"],
+            "South": ["AR", "LA", "MS", "AL"],
+            "Florida": ["FL"],
+            "Minnesota": ["MN"],
+            "WOW": ["WV", "OH", "PA"],
+            "South Carolina": ["SC"],
+            "Hawaii": ["HI"],
+        },
+        "Canada": {
+            "Quebec": ["QC", "NS", "NB"],
+            "Alberta": ["AB", "SK"],
+            "British Columbia": ["BC"],
+        },
+    }
+
+    hand_map_countries = {
+        **{
+            "Europe": [
+                "United Kingdom",
+                "Kingdom",
+                "Armenia",
+                "Italy",
+                "Bosnia-Herzegovina",
+                "Spain",
+                "Denmark",
+                "Greece",
+                "France",
+                "Netherlands",
+                "Switzerland",
+                "Croatia",
+                "Czech Republic",
+                "Germany",
+                "Poland",
+                "Sweden",
+                "Norway",
+            ],
+            "South America": ["Brazil", "Chile", "Colombia", "Paraguay", "Ecuador"],
+            "China": ["China", "Chinese Taipei"],
+            "Africa": ["Ethiopia", "South Africa", "Libya"],
+            "Oceania": ["Vietnam", "New Zealand", "Japan", "Indonesia", "Singapore"],
+        },
+        **{c: [c] for c in ["Australia", "Turkey", "Mexico", "Israel"]},
+    }
+
+    async with tpa_cm() as tpa:
+        region = {}
+        for year in tqdm(range(1992, CURRENT_YEAR_RANGE)):
+            async for district in tpa.get_districts_by_year(year=year):
+                async for district_team in tpa.get_district_teams(
+                    district_key=district.key
+                ):
+                    region[district_team.key] = district.abbreviation
+
+            async for team in tpa.get_all_teams_by_year(year=year):
+                if team.key not in region:
+                    if team.country in ["USA", "Canada"]:
+                        for region_name, region_states in hand_map_states[
+                            team.country
+                        ].items():
+                            if STATE_TO_SHORT[team.state_prov] in region_states:
+                                region[team.key] = region_name
+                    else:
+                        for region_name, region_countries in hand_map_countries.items():
+                            if team.country in region_countries:
+                                region[team.key] = region_name
+
+        with open("py/data/all_regions.json", "w+") as f:
+            print(json.dumps(region), file=f)

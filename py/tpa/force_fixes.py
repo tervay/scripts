@@ -39,6 +39,21 @@ def fix_event(event: Event) -> Event:
 
 def fix_team_region(team: Team) -> Team:
     team.region.name = regions.get(team.key, "")
+    team.region.color = {
+        "fim": "#0076B6",
+        "ne": "#006D00",
+        "chs": "#CC8400",
+        "ont": "#134A8E",
+        "fit": "#A71930",
+        "in": "#CCAC00",
+        "fma": "#C542F5",
+        "fnc": "#FFC0CB",
+        "pnw": "#69BE28",
+        # "pch": "",
+        "Minnesota": "#660066",
+        "New York": "#0C2340",
+        "California": "#E56B6F",
+    }.get(team.region.name, "#808080")
     return team
 
 
@@ -110,7 +125,7 @@ def fix_team_state_prov(team: Team) -> Team:
             team.team_number, d[team.state_prov].get(0, team.state_prov)
         )
 
-    if team.state_prov in SHORT_TO_STATE and team.country == "USA":
+    if team.state_prov in SHORT_TO_STATE and team.country in ["USA", "Canada"]:
         team.state_prov = SHORT_TO_STATE[team.state_prov]
 
     return team
@@ -151,7 +166,7 @@ def fix_team_geo(team: Team) -> Team:
 def fix_team_elos(team: Team) -> Team:
     team.yearly_elos = {
         int(k): v
-        for k, v in raw_elos[str(team.team_number)].items()
+        for k, v in raw_elos.get(str(team.team_number), dict()).items()
         if v not in [None, 0.0]
     }
 
