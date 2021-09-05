@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package tpa;
+import "google/protobuf/empty.proto";
 
 message API_Status {
   int32 current_season = 1;
@@ -931,4 +932,5 @@ service TPA {
 
   // Custom fns
   rpc getAllTeamsByYear(Year) returns (stream Team) {}
+  rpc getAllTeams(google.protobuf.Empty) returns (stream Team) {}
 }

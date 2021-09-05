@@ -432,3 +432,10 @@ class TPAService(TpaBase):
             team_page = tba.teams(page=pg_num, year=year)
             for team in team_page:
                 yield fix_team(Team().from_dict(team))
+
+    async def get_all_teams(self) -> AsyncIterator["Team"]:
+        print_current_args()
+        for pg_num in range(MAX_TEAMS_PAGE_RANGE):
+            team_page = tba.teams(page=pg_num)
+            for team in team_page:
+                yield fix_team(Team().from_dict(team))

@@ -328,3 +328,4 @@ async def regions():
 
         with open("py/data/all_regions.json", "w+") as f:
             print(json.dumps(region), file=f)
+    
