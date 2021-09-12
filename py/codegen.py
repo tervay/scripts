@@ -1,16 +1,16 @@
 import inspect
-from collections import namedtuple
-from rich.pretty import pprint
-
-from tqdm.std import tqdm
-from py.tpa.context_manager import tpa_cm
-from py.util import CURRENT_YEAR, CURRENT_YEAR_RANGE, STATE_TO_SHORT
-from typing import Callable, Dict, Union
 import json
+from collections import namedtuple
+from typing import Callable, Dict, Union
+
 import inflection
 import yaml
+from rich.pretty import pprint
+from tqdm.std import tqdm
 
 from py.cli import expose
+from py.tpa.context_manager import tpa_cm
+from py.util import CURRENT_YEAR, CURRENT_YEAR_RANGE, STATE_TO_SHORT
 
 
 class Model:
@@ -328,4 +328,3 @@ async def regions():
 
         with open("py/data/all_regions.json", "w+") as f:
             print(json.dumps(region), file=f)
-    

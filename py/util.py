@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import (
     AsyncIterator,
     Callable,
+    Dict,
     Generator,
     Iterable,
     List,
@@ -15,6 +16,8 @@ from typing import (
 )
 
 from async_lru import alru_cache
+from rich import get_console
+from rich.bar import Bar
 from rich.table import Table
 from tqdm.asyncio import tqdm as atqdm
 from tqdm.rich import tqdm
@@ -270,6 +273,50 @@ def make_table(col_names: List[str], row_vals: List[List[any]]) -> Table:
         table.add_row(*[str(r) for r in row])
 
     return table
+
+
+def make_table_from_dict(
+    d: Dict[str, any],
+    sort_by=lambda r: r[1],
+    reverse=True,
+    round_to: Optional[int] = None,
+    max_width: Optional[int] = None,
+) -> Table:
+    if max_width is None:
+        max_width = round(get_console().width * 0.5)
+
+    keys = [k for k in d.keys()]
+    rows = []
+    for k in keys:
+        row = [k]
+        if type(d[k]) is list:
+            row.extend([v if round_to is None else round(v, round_to) for v in d[k]])
+        else:
+            row.append(d[k] if round_to is None else round(d[k], round_to))
+        rows.append(row)
+
+    rows.sort(key=sort_by, reverse=reverse)
+    max_value = round(max([sort_by(rows[0]), sort_by(rows[-1])]))
+
+    for row in rows:
+        row.append(
+            "".join(
+                [
+                    [c for c in s.__rich_repr__()][0]
+                    for s in Bar(
+                        size=(sort_by(row) * max_width / max_value),
+                        begin=0,
+                        end=max_width,
+                        width=round(sort_by(row) * max_width / max_value),
+                    ).__rich_console__(
+                        console=get_console(), options=get_console().options
+                    )
+                    if s.text != "\n"
+                ]
+            )
+        )
+
+    return make_table(col_names=["K", "V"], row_vals=rows)
 
 
 def find(a: Iterable[T], cond: Callable[[T], bool]) -> Optional[T]:

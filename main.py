@@ -6,9 +6,9 @@ from sys import argv
 
 import colorama
 import humanize
-import pretty_errors
 import requests_cache
 from grpclib.server import Server
+from rich.traceback import install
 
 import py.awards
 import py.codegen
@@ -25,6 +25,8 @@ import py.test
 from py.cli import run_main
 from py.tpa import TPAService
 from py.util import CURRENT_YEAR
+
+install(show_locals=True)
 
 warnings.filterwarnings("ignore")
 

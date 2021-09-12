@@ -1,15 +1,16 @@
-from collections import defaultdict
-from typing import Callable, Dict, Tuple
+from typing import Callable, Dict
 
 import betterproto
 import numpy as np
 from rich import print
+from rich.pretty import pprint
 from rich.table import Table
+from scipy import optimize
 
 from protos.tpa import Match, Schedule
 from py.cli import expose
 from py.tpa.context_manager import tpa_cm
-from py.util import OPPOSITE_COLOR, file_cm
+from py.util import OPPOSITE_COLOR, make_table, make_table_from_dict
 
 
 def opr_component(m: Match, color: str) -> float:
@@ -123,3 +124,48 @@ async def copr_table(event_key: str, sort_by="rp"):
     [table.add_row(*[str(c) for c in r]) for r in data]
 
     print(table)
+
+
+@expose
+async def opr(event_key: str):
+    async with tpa_cm() as tpa:
+        team_to_indx = {
+            t.key: i
+            for i, t in enumerate(
+                [t async for t in tpa.get_event_teams(event_key=event_key)]
+            )
+        }
+        indx_to_team = {v: k for k, v in team_to_indx.items()}
+        matches = [
+            m
+            async for m in tpa.get_event_matches(event_key=event_key)
+            if m.comp_level == "qm"
+        ]
+
+        def individual_match_error(x, m_number: int) -> float:
+            ret = 0
+            for alliance in [
+                matches[m_number].alliances.blue,
+                matches[m_number].alliances.red,
+            ]:
+                predicted_score = 0
+                for tk in alliance.team_keys:
+                    predicted_score += x[team_to_indx[tk]]
+
+                ret += abs(alliance.score - predicted_score)
+
+            return ret
+
+        def score_fn(x):
+            return sum([individual_match_error(x, i) for i in range(len(matches))])
+
+        x0 = [0 for _ in range(len(team_to_indx.keys()))]
+        lower_bounds = [0 for _ in range(len(team_to_indx.keys()))]
+        upper_bounds = [200 for _ in range(len(team_to_indx.keys()))]
+        bounds = optimize.Bounds(lower_bounds, upper_bounds)
+        res = optimize.minimize(
+            score_fn, x0, method="trust-constr", bounds=bounds, options={"disp": True}
+        )
+
+        oprs = {indx_to_team[i]: x for i, x in enumerate(res.x)}
+        print(make_table_from_dict(oprs, round_to=2))
