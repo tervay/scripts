@@ -5,6 +5,7 @@ from typing import List
 import plotly.graph_objects as go
 from grpclib.exceptions import GRPCError
 from rich import print
+from rich.pretty import pprint
 from tqdm.rich import trange
 
 from protos.tpa import EliminationAlliance
@@ -14,10 +15,12 @@ from py.tpa import tpa_cm
 from py.util import (
     CURRENT_YEAR_RANGE,
     OPPOSITE_COLOR,
+    all_events_with_bar,
     file_cm,
     find,
     get_savepath,
     make_table,
+    make_table_from_dict,
     sort_matches,
     tqdm_bar,
 )
@@ -463,3 +466,30 @@ async def division_buddies():
         table.append([t1, t2, c])
 
     print(make_table(["T1", "T2", "#"], table))
+
+
+@expose
+async def international(year: int):
+    pcts = dict()
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa,
+            year_start=year,
+            year_end=year,
+            condition=lambda e: e.event_type in EventType.NON_CMP_EVENT_TYPES,
+        ):
+            total = 0
+            intntl = 0
+            async for team in tpa.get_event_teams(event_key=event.key):
+                total += 1
+                if team.country != event.country:
+                    intntl += 1
+
+            pcts[event.short_name] = round(100 * intntl / total, 2)
+
+    print(
+        make_table_from_dict(
+            {k: v for k, v in pcts.items() if v != 0},
+            col_names=["Event", "%"],
+        )
+    )

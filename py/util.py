@@ -281,6 +281,7 @@ def make_table_from_dict(
     reverse=True,
     round_to: Optional[int] = None,
     max_width: Optional[int] = None,
+    col_names: List[str] = ["K", "V"],
 ) -> Table:
     if max_width is None:
         max_width = round(get_console().width * 0.5)
@@ -316,7 +317,7 @@ def make_table_from_dict(
             )
         )
 
-    return make_table(col_names=["K", "V"], row_vals=rows)
+    return make_table(col_names=col_names, row_vals=rows)
 
 
 def find(a: Iterable[T], cond: Callable[[T], bool]) -> Optional[T]:
