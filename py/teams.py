@@ -1,8 +1,7 @@
 import json
-from typing import Optional
-from protos.tpa import Color
 import statistics
 from collections import defaultdict
+from typing import Optional
 
 import pandas as pd
 import plotly.graph_objects as go
@@ -12,6 +11,7 @@ from tqdm.asyncio import tqdm
 from tqdm.rich import tqdm as tqdm_sync
 from tqdm.rich import trange
 
+from protos.tpa import Color
 from py.cli import expose
 from py.tba import EventType, tba
 from py.tpa import tpa_cm

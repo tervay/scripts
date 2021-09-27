@@ -1,12 +1,12 @@
 import json
 import os
 from collections import defaultdict
-from py.tba import EventType
 from typing import List
 
 from geopy.geocoders import Nominatim
 
 from protos.tpa import Color, EliminationAlliance, Event, Match, Team
+from py.tba import EventType
 from py.util import ENABLE_GEOCODING, OPPOSITE_COLOR, SHORT_TO_STATE
 
 with open("py/data/elos.json", "r") as f:
@@ -36,8 +36,6 @@ def fix_event(event: Event) -> Event:
         event = f(event)
 
     return event
-
-
 
 
 def fix_team_region(team: Team) -> Team:

@@ -15,6 +15,8 @@ from typing import (
     Union,
 )
 
+import bar_chart_race as bcr
+import pandas as pd
 from async_lru import alru_cache
 from rich import get_console
 from rich.bar import Bar
@@ -393,3 +395,30 @@ class Leaderboard(list):
         if self.limit is not None:
             while len(self) > self.limit:
                 del self[-1]
+
+
+class BarChartRaceHelper:
+    def __init__(self) -> None:
+        self.all_teams = [str(n) for n in range(1, 10000)]
+        self.df = pd.DataFrame(columns=self.all_teams, dtype="int32")
+
+    def update(self, counts: Dict[str, int], date: str):
+        self.df = self.df.append(
+            pd.DataFrame(
+                [[int(counts[t]) for t in self.all_teams]],
+                columns=self.all_teams,
+                dtype="int32",
+                index=[date],
+            )
+        )
+
+    def make(self, filename: str, title: str, bars: int, period_length: int = 500):
+        self.df = self.df.loc[:, (self.df != 0).any(axis=0)]
+        bcr.bar_chart_race(
+            df=self.df,
+            filename=f"out/{filename}",
+            n_bars=bars,
+            title=title,
+            period_length=period_length,
+            steps_per_period=int(round(60 / 1000 * period_length)),
+        )
