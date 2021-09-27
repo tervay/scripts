@@ -26,6 +26,12 @@ from py.util import (
 )
 
 
+@expose
+async def event_info(key: str):
+    async with tpa_cm() as tpa:
+        pprint(await tpa.get_event(event_key=key))
+
+
 def elim_perms(seeds, n, disallowed):
     perms = list(combinations(seeds, n))
     for d in disallowed:

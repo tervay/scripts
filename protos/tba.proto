@@ -3,6 +3,10 @@ syntax = "proto3";
 package tpa;
 import "google/protobuf/empty.proto";
 
+enum Color {
+  RED = 0; BLUE = 1;
+}
+
 message API_Status {
   int32 current_season = 1;
   int32 max_season = 2;
@@ -286,9 +290,9 @@ message Event_Insights_2018 {
   double winning_scale_ownership_percentage_teleop = 37;
 }
 message Event_OPRs {
-  map<string, string> oprs = 1;
-  map<string, string> dprs = 2;
-  map<string, string> ccwms = 3;
+  map<string, float> oprs = 1;
+  map<string, float> dprs = 2;
+  map<string, float> ccwms = 3;
 }
 
 message Match_Simple {
@@ -353,6 +357,7 @@ message Match_alliance {
   repeated string team_keys = 2;
   repeated string surrogate_team_keys = 3;
   repeated string dq_team_keys = 4;
+  Color color = 5;
 }
 message Zebra {
   string key = 1;

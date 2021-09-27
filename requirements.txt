@@ -1,6 +1,7 @@
 appdirs==1.4.4
 async-lru==1.0.2
 attrs==21.2.0
+bar-chart-race==0.1.0
 betterproto==2.0.0b3
 black==21.8b0
 blessed==1.18.1
@@ -54,7 +55,6 @@ platformdirs==2.3.0
 plotly==5.3.1
 pluggy==1.0.0
 prefixed==0.3.2
-pretty-errors==1.2.24
 progress==1.6
 protobuf==3.17.3
 py==1.10.0

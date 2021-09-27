@@ -1,4 +1,6 @@
 import json
+from typing import Optional
+from protos.tpa import Color
 import statistics
 from collections import defaultdict
 
@@ -508,3 +510,64 @@ async def generate_regions():
                 region[team.key] = team.state_prov
 
         json.dump(region, f)
+
+
+@expose
+async def pyth_opr(event: str, n: Optional[float] = None):
+    async with tpa_cm() as tpa:
+        count = defaultdict(lambda: 0)
+        good = defaultdict(lambda: 0)
+        partner_oprs = defaultdict(list)
+        opp_oprs = defaultdict(list)
+        oprs = await tpa.get_event_op_rs(event_key=event)
+        event_details = await tpa.get_event(event_key=event)
+        async for match in tpa.get_event_matches(event_key=event):
+            if match.comp_level != "qm":
+                continue
+
+            for winner in match.alliances.winner.team_keys:
+                good[winner] += 1
+
+            red_total_opr = sum([oprs.oprs[k] for k in match.alliances.red.team_keys])
+            blue_total_opr = sum([oprs.oprs[k] for k in match.alliances.blue.team_keys])
+            for a in [match.alliances.red, match.alliances.blue]:
+                for tk in a.team_keys:
+                    count[tk] += 1
+                    partner_oprs[tk].append(
+                        red_total_opr if a.color == Color.RED else blue_total_opr
+                    )
+                    opp_oprs[tk].append(
+                        red_total_opr if a.color == Color.BLUE else blue_total_opr
+                    )
+
+        keys = sorted(list(good.keys()), key=lambda k: int(k[3:]))
+
+        if n is None:
+            ns = {
+                tk: ((sum(partner_oprs[tk]) + sum(opp_oprs[tk])) / count[tk]) ** 0.287
+                for tk in keys
+            }
+        else:
+            ns = {tk: n for tk in keys}
+
+        luck = {
+            tk: good[tk]
+            - (1 / (1 + ((sum(opp_oprs[tk]) / sum(partner_oprs[tk])) ** ns[tk])))
+            * count[tk]
+            for tk in keys
+        }
+        fig = go.Figure(
+            data=go.Scatter(
+                y=[luck[k] for k in keys],
+                x=[oprs.oprs[k] for k in keys],
+                text=[k[3:] for k in keys],
+                textposition="bottom center",
+                mode="markers+text",
+            )
+        )
+        fig.update_layout(
+            title=f"{event_details.year} {event_details.name} - n := {n}",
+            xaxis_title="OPR",
+            yaxis_title="Wins Above Expected",
+        )
+        fig.show()

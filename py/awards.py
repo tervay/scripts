@@ -1,8 +1,19 @@
 from collections import defaultdict
+from protos.tpa import Event
+from typing import Dict, List
+from py.util import sort_events
+from tabulate import tabulate
+
+import numpy as np
+import bar_chart_race as bcr
+
+from datetime import datetime
+
+import pandas as pd
 
 import plotly.graph_objects as go
 from rich import print
-from tqdm.rich import trange
+from tqdm.rich import trange, tqdm
 
 from py.cli import expose
 from py.tba import AwardType, EventType
@@ -129,3 +140,55 @@ async def banner_compare(*teams):
         )
 
     fig.show()
+
+
+@expose
+async def banner_bar_chart():
+    async with tpa_cm() as tpa:
+        date_to_events = defaultdict(list)  # type: Dict[str, List[Event]]
+        for year in trange(1992, 2022):
+            for event in sort_events(
+                [
+                    e
+                    async for e in tpa.get_events_by_year(year=year)
+                    if e.event_type in EventType.SEASON_EVENT_TYPES
+                ]
+            ):
+                date_to_events[event.end_date].append(event)
+
+        all_teams = [str(n) for n in range(1, 10000)]
+        df = pd.DataFrame(columns=all_teams, dtype="int32")
+        banners = {k: 0 for k in all_teams}
+        for date, events in tqdm(
+            sorted(
+                date_to_events.items(),
+                key=lambda t: datetime.strptime(t[0], "%Y-%m-%d"),
+            )
+        ):
+            for event in events:
+                async for award in tpa.get_event_awards(event_key=event.key):
+                    if award.award_type in AwardType.BLUE_BANNER_AWARDS:
+                        for recipient in award.recipient_list:
+                            if (recipient.team_key is not None) and (
+                                len(recipient.team_key) > 3
+                            ):
+                                banners[recipient.team_key[3:]] += 1
+
+            df = df.append(
+                pd.DataFrame(
+                    [[int(banners[t]) for t in all_teams]],
+                    columns=all_teams,
+                    dtype="int32",
+                    index=[date],
+                )
+            )
+
+    df = df.loc[:, (df != 0).any(axis=0)]
+    bcr.bar_chart_race(
+        df=df,
+        filename=f"banner_history.mp4",
+        n_bars=25,
+        title="Top 25 in Blue Banners 1992-2021",
+        period_length=500,
+        steps_per_period=10 * 3,
+    )
