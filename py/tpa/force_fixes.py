@@ -9,6 +9,11 @@ from protos.tpa import Color, EliminationAlliance, Event, Match, Team
 from py.tba import EventType
 from py.util import ENABLE_GEOCODING, OPPOSITE_COLOR, SHORT_TO_STATE
 
+import statbotics
+
+sb = statbotics.Statbotics()
+
+
 with open("py/data/elos.json", "r") as f:
     raw_elos = json.load(f)
 
@@ -170,6 +175,8 @@ def fix_team_elos(team: Team) -> Team:
         for k, v in raw_elos.get(str(team.team_number), dict()).items()
         if v not in [None, 0.0]
     }
+
+    # team.yearly_elos = {2022: sb.get_team(team.team_number)["elo"]}
 
     return team
 

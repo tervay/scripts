@@ -708,12 +708,12 @@ message District_Ranking {
   string team_key = 1;
   int32 rank = 2;
   int32 rookie_bonus = 3;
-  int32 point_total = 4;
+  float point_total = 4;
   message EventPoints {
     bool district_cmp = 1;
-    int32 total = 2;
+    float total = 2;
     int32 alliance_points = 3;
-    int32 elim_points = 4;
+    float elim_points = 4;
     int32 award_points = 5;
     string event_key = 6;
     int32 qual_points = 7;

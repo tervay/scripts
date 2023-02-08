@@ -1,5 +1,6 @@
 import datetime
 from contextlib import contextmanager
+from io import TextIOWrapper
 from math import sqrt
 from pathlib import Path
 from typing import (
@@ -34,6 +35,7 @@ from protos.tpa import (
     MatchScoreBreakdown2019,
     MatchScoreBreakdown2020,
     Schedule,
+    Team,
     TpaStub,
 )
 from py.tba import EventType
@@ -150,7 +152,7 @@ def team_key_to_num(s: str) -> int:
 
 
 @contextmanager
-def file_cm(path, mode):
+def file_cm(path, mode) -> TextIOWrapper:
     create_dir_if_not_exists("/".join(path.split("/")[:-1]))
     f = open(path, mode)
     try:
@@ -330,6 +332,18 @@ def find(a: Iterable[T], cond: Callable[[T], bool]) -> Optional[T]:
     return None
 
 
+def _confidence(ups, downs, z=1.96):
+    n = ups + downs
+
+    if n == 0:
+        return 0
+
+    phat = float(ups) / n
+    return (
+        phat + z * z / (2 * n) - z * sqrt((phat * (1 - phat) + z * z / (4 * n)) / n)
+    ) / (1 + z * z / n)
+
+
 def wilson_sort(
     objs: List[T],
     positive: Callable[[T], float],
@@ -337,20 +351,9 @@ def wilson_sort(
     minimum_total: float = 0,
     z: float = 1.96,
 ) -> List[T]:
-    def confidence(ups, downs):
-        n = ups + downs
-
-        if n == 0:
-            return 0
-
-        phat = float(ups) / n
-        return (
-            phat + z * z / (2 * n) - z * sqrt((phat * (1 - phat) + z * z / (4 * n)) / n)
-        ) / (1 + z * z / n)
-
     return [
         i
-        for i in sorted(objs, key=lambda e: -confidence(positive(e), negative(e)))
+        for i in sorted(objs, key=lambda e: -_confidence(positive(e), negative(e), z=z))
         if (positive(i) + negative(i)) >= minimum_total
     ]
 
@@ -422,3 +425,7 @@ class BarChartRaceHelper:
             period_length=period_length,
             steps_per_period=int(round(60 / 1000 * period_length)),
         )
+
+
+def event_is_official(event: Event):
+    return event.event_type in EventType.STANDARD_EVENT_TYPES

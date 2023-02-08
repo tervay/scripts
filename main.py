@@ -12,6 +12,7 @@ from rich.traceback import install
 
 import py.awards
 import py.codegen
+import py.elo
 import py.event_gen
 import py.events
 import py.geo
@@ -19,9 +20,11 @@ import py.graphing
 import py.html
 import py.matches
 import py.scout
+import py.sheets
 import py.sim
 import py.teams
 import py.test
+import py.write
 from py.cli import run_main
 from py.tpa import TPAService
 from py.util import CURRENT_YEAR

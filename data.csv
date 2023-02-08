@@ -1,0 +1,1532 @@
+2014,1,303.0,177,Bobcat Robotics,South Windsor,Connecticut,True,0,12,16,30.0,5,63.0,20,16,30.0,0,66.0,42,42,90.0,0,174.0
+2014,2,303.0,195,CyberKnights,Southington,Connecticut,True,0,22,16,0.0,5,43.0,20,16,30.0,5,71.0,66,48,60.0,15,189.0
+2014,3,289.0,230,Gaelhawks,Shelton,Connecticut,True,0,12,10,30.0,5,57.0,12,14,20.0,0,46.0,54,42,90.0,0,186.0
+2014,4,284.0,558,Elm City Robo Squad,New Haven,Connecticut,True,0,12,15,0.0,5,32.0,14,16,30.0,15,75.0,54,48,60.0,15,177.0
+2014,5,259.0,78,AIR STRIKE,Newport,Rhode Island,True,0,20,16,0.0,10,46.0,20,15,30.0,10,75.0,39,39,30.0,30,138.0
+2014,6,256.0,3467,Windham Windup,Windham,New Hampshire,True,0,18,14,30.0,10,72.0,22,16,30.0,8,76.0,48,36,0.0,24,108.0
+2014,7,225.0,1519,Mechanical Mayhem,Bedford,New Hampshire,True,0,14,15,20.0,5,54.0,22,16,20.0,8,66.0,54,36,0.0,15,105.0
+2014,8,223.0,4055,NRG,Winchester,Connecticut,True,0,12,2,0.0,0,14.0,20,14,20.0,5,59.0,36,9,90.0,15,150.0
+2014,9,202.0,716,Who'sCTEKS,Falls Village,Connecticut,False,0,20,16,10.0,5,51.0,16,12,0.0,0,28.0,54,39,30.0,0,123.0
+2014,10,196.0,131,CHAOS,Manchester,New Hampshire,False,0,16,15,20.0,5,56.0,18,16,20.0,5,59.0,48,33,0.0,0,81.0
+2014,11,190.0,228,GUS Robotics,Meriden,Connecticut,True,0,20,15,0.0,8,43.0,12,12,0.0,0,24.0,48,30,30.0,15,123.0
+2014,12,186.0,2168,Aluminum Falcons,Groton,Connecticut,False,0,16,12,0.0,5,33.0,16,16,20.0,5,57.0,30,21,30.0,15,96.0
+2014,13,183.0,5122,robOTies,Old Town,Maine,True,10,14,12,20.0,0,46.0,14,14,0.0,0,28.0,36,3,60.0,0,99.0
+2014,14,182.0,811,Wild Cards,Nashua,New Hampshire,True,0,12,9,0.0,10,31.0,12,5,20.0,0,37.0,42,12,30.0,30,114.0
+2014,15,178.0,2067,Apple Pi,Guilford,Connecticut,True,0,18,14,10.0,0,42.0,16,15,10.0,5,46.0,36,24,0.0,30,90.0
+2014,16,177.0,125,NUTRONs,Boston,Massachusetts,True,0,10,12,0.0,0,22.0,18,15,30.0,5,68.0,42,45,0.0,0,87.0
+2014,17,176.0,1153,Timberwolves,Walpole,Massachusetts,True,0,10,0,0.0,5,15.0,16,13,10.0,5,44.0,57,45,0.0,15,117.0
+2014,18,174.0,58,The Riot Crew,South Portland,Maine,True,0,15,14,30.0,5,64.0,10,13,10.0,5,38.0,42,15,0.0,15,72.0
+2014,19,165.0,3525,The Nuts & Bolts of Fury,Waterbury,Connecticut,True,0,14,12,0.0,5,31.0,16,11,0.0,5,32.0,42,30,30.0,0,102.0
+2014,20,153.0,2648,Infinite Loop,Oakland,Maine,True,0,15,12,0.0,8,35.0,16,12,20.0,10,58.0,30,0,0.0,30,60.0
+2014,21,147.0,176,Aces High,Windsor Locks,Connecticut,True,0,22,16,20.0,5,63.0,18,15,10.0,5,48.0,36,0,0.0,0,36.0
+2014,22,147.0,175,Buzz Robotics,Enfield,Connecticut,True,0,16,14,10.0,0,40.0,20,15,10.0,5,50.0,24,33,0.0,0,57.0
+2014,23,146.0,3930,SMART  Spruce Mountain Area Robotics Team,Jay,Maine,False,0,14,8,0.0,13,35.0,10,2,20.0,10,42.0,39,0,0.0,30,69.0
+2014,24,141.0,133,B.E.R.T.,Standish,Maine,True,0,16,13,10.0,5,44.0,20,15,20.0,0,55.0,42,0,0.0,0,42.0
+2014,25,141.0,172,Northern Force,Falmouth,Maine,False,0,14,11,10.0,5,40.0,12,4,10.0,0,26.0,48,27,0.0,0,75.0
+2014,26,140.0,2877,LigerBots,Newton,Massachusetts,True,0,14,6,30.0,5,55.0,16,14,20.0,5,55.0,30,0,0.0,0,30.0
+2014,27,136.0,319,Big Bad Bob,Alton,New Hampshire,True,0,19,15,10.0,5,49.0,16,13,10.0,0,39.0,48,0,0.0,0,48.0
+2014,28,134.0,1735,Green Reapers,Worcester,Massachusetts,True,0,12,10,0.0,5,27.0,16,11,0.0,8,35.0,48,0,0.0,24,72.0
+2014,29,130.0,237,Black Magic Robotics,Watertown,Connecticut,False,0,14,13,20.0,5,52.0,16,15,0.0,5,36.0,42,0,0.0,0,42.0
+2014,30,127.0,1073,The Force Team,Hollis,New Hampshire,False,0,13,8,0.0,5,26.0,10,13,10.0,5,38.0,45,18,0.0,0,63.0
+2014,31,126.0,4473,Delta Prime Robotics,Farmingdale,Maine,False,5,8,4,10.0,0,22.0,16,11,30.0,0,57.0,42,0,0.0,0,42.0
+2014,32,118.0,138,Entropy,Amherst,New Hampshire,False,0,24,16,30.0,5,75.0,20,11,0.0,0,31.0,12,0,0.0,0,12.0
+2014,33,118.0,1100,Inverse Polarity,Northborough/Southborough,Massachusetts,False,0,10,0,0.0,5,15.0,18,14,10.0,10,52.0,36,0,0.0,15,51.0
+2014,34,117.0,4564,Orange Chaos,Brewer,Maine,False,5,18,15,10.0,5,48.0,10,10,0.0,5,25.0,39,0,0.0,0,39.0
+2014,35,116.0,4908,Duxbury Dragons,Duxbury,Massachusetts,False,10,10,5,10.0,5,30.0,12,10,10.0,8,40.0,36,0,0.0,0,36.0
+2014,36,113.0,1058,PVC Pirates,Londonderry,New Hampshire,False,0,9,13,0.0,5,27.0,16,12,0.0,10,38.0,21,27,0.0,0,48.0
+2014,37,111.0,1991,Dragons,Hartford,Connecticut,False,0,14,10,30.0,0,54.0,16,13,10.0,0,39.0,18,0,0.0,0,18.0
+2014,38,111.0,166,Chop Shop,Merrimack,New Hampshire,False,0,14,12,10.0,5,41.0,14,9,0.0,5,28.0,42,0,0.0,0,42.0
+2014,39,105.0,2064,The Panther Project,Middlebury,Connecticut,False,0,12,4,20.0,0,36.0,14,8,0.0,5,27.0,42,0,0.0,0,42.0
+2014,40,105.0,178,The 2nd Law Enforcers,Farmington,Connecticut,False,0,12,9,10.0,5,36.0,16,13,10.0,0,39.0,30,0,0.0,0,30.0
+2014,41,105.0,4048,Redshift,Westborough,Massachusetts,False,0,14,14,0.0,0,28.0,18,14,10.0,5,47.0,24,6,0.0,0,30.0
+2014,42,102.0,4909,Bionics,Billerica,Massachusetts,False,10,12,10,0.0,13,35.0,16,14,0.0,0,30.0,12,0,0.0,15,27.0
+2014,43,97.0,4761,The Robockets,Reading,Massachusetts,False,5,12,2,30.0,0,44.0,10,8,0.0,0,18.0,30,0,0.0,0,30.0
+2014,44,96.0,999,MechaRAMS,Cheshire,Connecticut,False,0,6,1,30.0,0,37.0,14,9,0.0,0,23.0,36,0,0.0,0,36.0
+2014,45,96.0,69,HYPER,Quincy,Massachusetts,False,0,12,4,0.0,0,16.0,16,14,20.0,0,50.0,30,0,0.0,0,30.0
+2014,46,96.0,246,Overclocked,Boston,Massachusetts,False,0,16,10,0.0,0,26.0,20,15,0.0,5,40.0,30,0,0.0,0,30.0
+2014,47,95.0,236,Techno-Ticks,Old Lyme,Connecticut,True,0,16,13,20.0,5,54.0,18,13,10.0,0,41.0
+2014,48,94.0,1517,AMP'D UP,Concord,New Hampshire,False,0,16,13,10.0,0,39.0,18,13,0.0,0,31.0,24,0,0.0,0,24.0
+2014,49,90.0,4925,The Resistance,Wolfeboro,New Hampshire,True,10,10,10,0.0,0,20.0,16,12,0.0,8,36.0,0,0,0.0,24,24.0
+2014,50,87.0,61,The Intimidators,Upton,Massachusetts,False,0,14,9,0.0,5,28.0,14,12,10.0,5,41.0,18,0,0.0,0,18.0
+2014,51,87.0,4958,Robocats,Langdon,New Hampshire,False,10,16,12,10.0,0,38.0,10,0,0.0,5,15.0,24,0,0.0,0,24.0
+2014,52,86.0,3461,Operation PEACCE Robotics,Bristol,Connecticut,False,0,8,7,0.0,5,20.0,16,11,10.0,5,42.0,24,0,0.0,0,24.0
+2014,53,85.0,190,Gompei and the H.E.R.D.,Worcester,Massachusetts,True,0,14,11,30.0,0,55.0,14,11,0.0,5,30.0
+2014,54,81.0,2084,Robots by the C,Manchester,Massachusetts,False,0,12,6,10.0,5,33.0,14,11,0.0,5,30.0,18,0,0.0,0,18.0
+2014,55,80.0,5112,The Gongoliers,Foster and Glocester ,Rhode Island,False,10,12,5,0.0,5,22.0,18,12,10.0,8,48.0
+2014,56,77.0,1099,DiscoTechs,Brookfield,Connecticut,False,0,8,8,10.0,5,31.0,16,12,0.0,0,28.0,18,0,0.0,0,18.0
+2014,57,76.0,4905,Andromeda One,Ayer,Massachusetts,True,10,16,10,0.0,8,34.0,8,0,0.0,0,8.0,0,0,0.0,24,24.0
+2014,58,74.0,5129,Digital Devils,Plainville,Connecticut,False,10,8,0,0.0,5,13.0,12,1,30.0,8,51.0
+2014,59,70.0,4555,Sprocketology,Skowhegan,Maine,False,5,8,3,30.0,0,41.0,8,6,10.0,0,24.0
+2014,60,68.0,5000,Hammerheads,Hingham,Massachusetts,False,10,10,0,0.0,0,10.0,12,1,30.0,5,48.0
+2014,61,62.0,663,Robonauts,Whitinsville,Massachusetts,False,0,8,3,10.0,0,21.0,10,1,30.0,0,41.0
+2014,62,61.0,1699,Robocats,Colchester,Connecticut,False,0,10,7,30.0,0,47.0,8,6,0.0,0,14.0
+2014,63,59.0,3323,Potential Energy,Litchfield,New Hampshire,False,0,9,1,30.0,0,40.0,10,9,0.0,0,19.0
+2014,64,59.0,348,Norwell Robotics,Norwell,Massachusetts,False,0,10,5,10.0,0,25.0,16,13,0.0,5,34.0
+2014,65,58.0,3499,River's Edge Robotics,Durham,New Hampshire,False,0,14,11,0.0,0,25.0,10,3,20.0,0,33.0
+2014,66,58.0,213,The Dirty Birds,Keene,New Hampshire,False,0,16,15,10.0,0,41.0,12,5,0.0,0,17.0
+2014,67,57.0,1350,The Rambots,Providence,Rhode Island,False,0,18,15,10.0,0,43.0,8,6,0.0,0,14.0
+2014,68,57.0,126,Gael Force,Clinton,Massachusetts,True,0,12,7,0.0,5,24.0,16,12,0.0,5,33.0
+2014,69,56.0,5163,The Aluminum Warriors,Hopkinton,Massachusetts,False,10,12,0,0.0,0,12.0,8,1,20.0,5,34.0
+2014,70,56.0,3718,Junkyard Battalion,New Britain,Connecticut,False,0,14,9,10.0,0,33.0,14,9,0.0,0,23.0
+2014,71,55.0,885,Ro-bovines,Randolph Center,Vermont,False,0,12,5,0.0,0,17.0,12,16,10.0,0,38.0
+2014,72,55.0,5265,Radical Impact,Portland,Maine,False,10,9,0,0.0,5,14.0,10,11,10.0,0,31.0
+2014,73,52.0,1922,Oz-Ram,Contoocook,New Hampshire,False,0,14,10,0.0,0,24.0,12,11,0.0,5,28.0
+2014,74,52.0,3958,Schrodinger's Cat,Boston,Massachusetts,False,0,12,7,0.0,5,24.0,14,9,0.0,5,28.0
+2014,75,51.0,1761,STEAMpunk Tigers,Lynn,Massachusetts,False,0,14,11,0.0,0,25.0,12,4,10.0,0,26.0
+2014,76,51.0,95,Grasshoppers,White River Junction,Vermont,False,0,14,12,0.0,0,26.0,10,10,0.0,5,25.0
+2014,77,51.0,3451,The ANOMALY,Sanford,Maine,False,0,13,6,0.0,0,19.0,18,14,0.0,0,32.0
+2014,78,50.0,1124,UberBots,Avon,Connecticut,False,0,8,0,0.0,5,13.0,14,3,20.0,0,37.0
+2014,79,50.0,2423,The KwarQs,Watertown,Massachusetts,False,0,8,8,0.0,0,16.0,16,13,0.0,5,34.0
+2014,80,49.0,97,Bionic Beef,Cambridge,Massachusetts,False,0,13,11,10.0,0,34.0,10,5,0.0,0,15.0
+2014,81,49.0,839,Rosie Robotics,Agawam,Massachusetts,False,0,12,7,0.0,0,19.0,8,2,10.0,10,30.0
+2014,82,49.0,509,Red Storm,Bedford,New Hampshire,False,0,13,0,0.0,0,13.0,18,13,0.0,5,36.0
+2014,83,49.0,4906,The Collective,Waterville,Maine,False,10,10,3,0.0,5,18.0,8,8,0.0,5,21.0
+2014,84,48.0,501,The PowerKnights,Manchester,New Hampshire,False,0,9,0,0.0,5,14.0,14,10,10.0,0,34.0
+2014,85,48.0,1071,Team MAX,Wolcott,Connecticut,False,0,16,10,0.0,5,31.0,14,3,0.0,0,17.0
+2014,86,47.0,3466,VIKINGS ROBOTICS,Westford,Massachusetts,False,0,6,0,0.0,0,6.0,18,13,10.0,0,41.0
+2014,87,47.0,3566,Gone Fishin',Southborough,Massachusetts,False,0,14,9,0.0,0,23.0,10,4,10.0,0,24.0
+2014,88,47.0,4034,Pelham πthons Team 4034,Pelham,New Hampshire,False,0,16,14,0.0,5,35.0,12,0,0.0,0,12.0
+2014,89,46.0,3597,Robo-Rangers,Kittery,Maine,False,0,6,1,20.0,0,27.0,10,9,0.0,0,19.0
+2014,90,46.0,3280,Rhode Rebels,Providence,Rhode Island,False,0,12,2,10.0,0,24.0,10,7,0.0,5,22.0
+2014,91,46.0,467,Colonials,Shrewsbury,Massachusetts,False,0,10,0,0.0,5,15.0,14,12,0.0,5,31.0
+2014,92,45.0,3479,crimson tide,everett,Massachusetts,False,0,14,10,0.0,0,24.0,12,9,0.0,0,21.0
+2014,93,44.0,121,Rhode Warriors,Middletown,Rhode Island,False,0,10,3,10.0,0,23.0,12,9,0.0,0,21.0
+2014,94,44.0,157,AZTECHS,Marlborough,Massachusetts,False,0,14,0,0.0,5,19.0,8,7,10.0,0,25.0
+2014,95,43.0,1687,Highlander Robotics,Worcester,Massachusetts,False,0,10,2,10.0,0,22.0,8,8,0.0,5,21.0
+2014,96,43.0,181,Birds Of Prey,Hartford,Connecticut,False,0,14,11,0.0,0,25.0,12,6,0.0,0,18.0
+2014,97,42.0,1786,The Robotics Team,Dublin,New Hampshire,False,0,12,2,20.0,0,34.0,8,0,0.0,0,8.0
+2014,98,42.0,1768,Nashoba Robotics,Bolton,Massachusetts,False,0,10,4,0.0,0,14.0,14,4,10.0,0,28.0
+2014,99,42.0,2370,IBOTS,Rutland,Vermont,False,0,8,0,0.0,5,13.0,16,13,0.0,0,29.0
+2014,100,40.0,4546,Shockwave,Dover,New Hampshire,False,5,10,0,0.0,8,18.0,12,5,0.0,0,17.0
+2014,101,40.0,5142,Robo Dominators,West Haven,Connecticut,False,10,10,0,0.0,8,18.0,12,0,0.0,0,12.0
+2014,102,39.0,2836,Team Beta,Woodbury,Connecticut,False,0,6,0,0.0,0,6.0,10,3,20.0,0,33.0
+2014,103,39.0,3623,TerrorBots,Leominster,Massachusetts,False,0,8,9,0.0,0,17.0,12,10,0.0,0,22.0
+2014,104,38.0,155,The TechnoNuts,Berlin,Connecticut,False,0,8,0,0.0,0,8.0,14,11,0.0,5,30.0
+2014,105,38.0,3654,TechTigers,Middletown,Connecticut,False,0,10,0,0.0,5,15.0,14,9,0.0,0,23.0
+2014,106,38.0,5286,Trojonix,Saco,Maine,False,10,10,0,0.0,8,18.0,10,0,0.0,0,10.0
+2014,107,37.0,4628,Sintian Robotics,Hamden,Connecticut,False,5,8,10,0.0,0,18.0,14,0,0.0,0,14.0
+2014,108,36.0,571,Team Paragon,Windsor,Connecticut,False,0,6,11,0.0,5,22.0,14,0,0.0,0,14.0
+2014,109,35.0,3236,TRIFORCE,Franklin,Massachusetts,False,0,14,9,0.0,0,23.0,12,0,0.0,0,12.0
+2014,110,33.0,3719,STEM Whalers,New London ,Connecticut,False,0,8,1,0.0,0,9.0,15,9,0.0,0,24.0
+2014,111,33.0,2876,Devilbotz,Burlington,Massachusetts,False,0,12,3,0.0,0,15.0,12,6,0.0,0,18.0
+2014,112,32.0,1831,Screaming Eagles,Gilford,New Hampshire,False,0,10,14,0.0,0,24.0,8,0,0.0,0,8.0
+2014,113,32.0,3464,Sim-City,Simsbury,Connecticut,False,0,8,0,0.0,0,8.0,14,10,0.0,0,24.0
+2014,114,30.0,4557,FullMetal Falcons,Middletown,Connecticut,False,5,10,0,0.0,0,10.0,10,0,0.0,5,15.0
+2014,115,29.0,88,TJ²,Bridgewater,Massachusetts,False,0,12,0,0.0,0,12.0,12,0,0.0,5,17.0
+2014,116,28.0,4176,Iron Tigers,North Easton,Massachusetts,True,0,10,4,0.0,0,14.0,12,2,0.0,0,14.0
+2014,117,28.0,5347,Gryphons,Weston,Massachusetts,False,10,8,0,0.0,0,8.0,10,0,0.0,0,10.0
+2014,118,26.0,3634,Spark City,Bridgeport,Connecticut,False,0,8,0,0.0,0,8.0,6,2,10.0,0,18.0
+2014,119,26.0,4929,Maroon Monsoon,Haverhill,Massachusetts,False,10,10,0,0.0,0,10.0,6,0,0.0,0,6.0
+2014,120,25.0,2170,Galvanized Guardians,Glastonbury,Connecticut,False,0,8,6,0.0,0,14.0,6,5,0.0,0,11.0
+2014,121,24.0,2079,4H ALARM Robotics,Franklin,Massachusetts,False,0,8,8,0.0,0,16.0,8,0,0.0,0,8.0
+2014,122,24.0,1247,Blood. Sweat. and Gears,North Sutton,New Hampshire,False,0,14,0,0.0,0,14.0,10,0,0.0,0,10.0
+2014,123,24.0,1965,Firebirds,Allston,Massachusetts,False,0,10,0,0.0,0,10.0,14,0,0.0,0,14.0
+2014,124,24.0,4311,Swampscott Currents,Swampscott,Massachusetts,False,0,12,0,0.0,0,12.0,12,0,0.0,0,12.0
+2014,125,24.0,3555,Aluminati,Storrs Mansfield,Connecticut,False,0,12,0,0.0,0,12.0,12,0,0.0,0,12.0
+2014,126,24.0,3609,Duct Tape Dragons,Portland,Maine,False,0,12,0,0.0,0,12.0,12,0,0.0,0,12.0
+2014,127,24.0,1721,Tidal Force,Concord,New Hampshire,False,0,12,0,0.0,0,12.0,12,0,0.0,0,12.0
+2014,128,24.0,4987,MegaRams,Worcester,Massachusetts,False,10,9,0,0.0,5,14.0
+2014,129,24.0,4474,Silver Circuit,Kingston,Massachusetts,False,5,6,0,0.0,0,6.0,8,0,0.0,5,13.0
+2014,130,23.0,238,Crusaders,Manchester,New Hampshire,False,0,12,0,0.0,0,12.0,6,0,0.0,5,11.0
+2014,131,23.0,1973,Burning Tiger   #1973,Boston,Massachusetts,False,0,6,0,0.0,5,11.0,12,0,0.0,0,12.0
+2014,132,23.0,2342,Team Phoenix,Nashua,New Hampshire,False,0,12,0,0.0,0,12.0,6,0,0.0,5,11.0
+2014,133,22.0,2713,iRaiders,Melrose,Massachusetts,False,0,12,0,0.0,0,12.0,10,0,0.0,0,10.0
+2014,134,21.0,4572,BArlow RobAutics,Redding,Connecticut,False,5,6,0,0.0,0,6.0,10,0,0.0,0,10.0
+2014,135,21.0,3104,The Cyber Rams,Stamford,Connecticut,False,0,10,0,0.0,5,15.0,6,0,0.0,0,6.0
+2014,136,21.0,3585,Rogue Robots of 4-H,Charlestown,New Hampshire,False,0,6,0,0.0,5,11.0,10,0,0.0,0,10.0
+2014,137,20.0,4097,Devilbots,Northampton,Massachusetts,False,0,12,0,0.0,0,12.0,8,0,0.0,0,8.0
+2014,138,19.0,4169,Warrior Robotics,Sudbury,Massachusetts,False,0,8,1,10.0,0,19.0
+2014,139,19.0,2871,Beantown Botz,Roxbury,Massachusetts,False,0,7,0,0.0,0,7.0,12,0,0.0,0,12.0
+2014,140,19.0,4796,Cyber Dragons,Hyde Park,Massachusetts,False,5,8,0,0.0,0,8.0,6,0,0.0,0,6.0
+2014,141,18.0,3146,GRANBY GRUNTS,Granby,Connecticut,False,0,10,0,0.0,0,10.0,8,0,0.0,0,8.0
+2014,142,18.0,2262,Robo-Panthers,Holliston,Massachusetts,False,0,10,0,0.0,0,10.0,8,0,0.0,0,8.0
+2014,143,16.0,4041,Iron Tigers,Gardiner,Maine,False,0,10,0,0.0,0,10.0,6,0,0.0,0,6.0
+2014,144,16.0,3182,Athena's Warriors,Hartford,Connecticut,False,0,8,0,0.0,0,8.0,8,0,0.0,0,8.0
+2014,145,16.0,3205,Patriots,Concord,Massachusetts,False,0,8,0,0.0,0,8.0,8,0,0.0,0,8.0
+2014,146,16.0,4042,Murphy's Lawyers,South China,Maine,False,0,8,0,0.0,0,8.0,8,0,0.0,0,8.0
+2014,147,15.0,1277,The Robotomies,Groton,Massachusetts,False,0,13,0,0.0,0,13.0,2,0,0.0,0,2.0
+2014,148,15.0,3780,Robot Unicorns,Providence,Rhode Island,False,0,4,0,0.0,0,4.0,11,0,0.0,0,11.0
+2014,149,15.0,2621,Bucs,Bedford,Massachusetts,False,0,10,0,0.0,0,10.0,5,0,0.0,0,5.0
+2014,150,15.0,3927,RAW-Robotics ,Weymouth,Massachusetts,False,0,5,0,0.0,0,5.0,10,0,0.0,0,10.0
+2014,151,15.0,1757,Wolverines,Westwood,Massachusetts,False,0,5,0,0.0,0,5.0,10,0,0.0,0,10.0
+2014,152,14.0,1027,Mechatronic Maniacs,West Springfield,Massachusetts,False,0,4,0,0.0,0,4.0,10,0,0.0,0,10.0
+2014,153,14.0,1307,Robosaints,Dover,New Hampshire,False,0,6,0,0.0,0,6.0,8,0,0.0,0,8.0
+2014,154,14.0,1289,Gearheadz,Lawrence,Massachusetts,False,0,8,0,0.0,0,8.0,6,0,0.0,0,6.0
+2014,155,14.0,1740,Cyber Colonels,Ledyard,Connecticut,False,0,8,0,0.0,0,8.0,6,0,0.0,0,6.0
+2014,156,14.0,1474,Titans,Tewksbury,Massachusetts,False,0,8,0,0.0,0,8.0,6,0,0.0,0,6.0
+2014,157,12.0,2785,Prometheus,Kent,Connecticut,False,0,4,0,0.0,0,4.0,8,0,0.0,0,8.0
+2014,158,12.0,4151,SCRAP 4151,Weymouth,Massachusetts,False,0,4,0,0.0,0,4.0,8,0,0.0,0,8.0
+2014,159,11.0,151,Tough Techs,Nashua,New Hampshire,False,0,5,0,0.0,0,5.0,6,0,0.0,0,6.0
+2014,160,11.0,4793,OOBotics,old Orchard Beach,Maine,False,5,6,0,0.0,0,6.0
+2014,161,10.0,1512,The Big Red,Concord,New Hampshire,False,0,10,0,0.0,0,10.0
+2014,162,10.0,173,RAGE Robotics ⚙️,Tolland,Connecticut,False,0,6,0,0.0,0,6.0,4,0,0.0,0,4.0
+2015,1,365.0,1519,Mechanical Mayhem,Bedford,New Hampshire,True,0,22,16,30.0,5,73.0,22,16,30.0,5,73.0,66,48,90.0,15,219.0
+2015,2,334.0,195,CyberKnights,Southington,Connecticut,True,0,9,8,0.0,10,27.0,22,16,30.0,5,73.0,66,48,90.0,30,234.0
+2015,3,249.0,2067,Apple Pi,Guilford,Connecticut,True,0,17,11,10.0,5,43.0,18,13,10.0,0,41.0,48,3,90.0,24,165.0
+2015,4,242.0,1768,Nashoba Robotics,Bolton,Massachusetts,True,0,22,16,0.0,5,43.0,21,15,20.0,5,61.0,63,45,30.0,0,138.0
+2015,5,232.0,2170,Galvanized Guardians,Glastonbury,Connecticut,True,0,19,14,0.0,5,38.0,19,15,20.0,5,59.0,60,45,30.0,0,135.0
+2015,6,230.0,1100,Inverse Polarity,Northborough/Southborough,Massachusetts,False,0,13,8,0.0,5,26.0,13,12,30.0,5,60.0,30,39,60.0,15,144.0
+2015,7,230.0,175,Buzz Robotics,Enfield,Connecticut,True,0,14,15,10.0,5,44.0,17,13,0.0,0,30.0,57,39,60.0,0,156.0
+2015,8,226.0,230,Gaelhawks,Shelton,Connecticut,True,0,21,16,30.0,0,67.0,18,16,30.0,5,69.0,42,33,0.0,15,90.0
+2015,9,218.0,236,Techno-Ticks,Old Lyme,Connecticut,True,0,22,16,30.0,5,73.0,14,7,10.0,0,31.0,42,12,60.0,0,114.0
+2015,10,214.0,2877,LigerBots,Newton,Massachusetts,True,0,12,12,10.0,10,44.0,18,15,20.0,0,53.0,54,33,0.0,30,117.0
+2015,11,201.0,3146,GRANBY GRUNTS,Granby,Connecticut,True,0,18,12,30.0,0,60.0,17,12,10.0,0,39.0,60,42,0.0,0,102.0
+2015,12,192.0,125,NUTRONs,Boston,Massachusetts,True,0,18,15,20.0,5,58.0,22,16,10.0,5,53.0,42,24,0.0,15,81.0
+2015,13,191.0,4564,Orange Chaos,Brewer,Maine,False,0,22,16,30.0,5,73.0,18,15,20.0,5,58.0,51,9,0.0,0,60.0
+2015,14,191.0,558,Elm City Robo Squad,New Haven,Connecticut,True,0,14,13,20.0,5,52.0,16,16,10.0,10,52.0,39,18,0.0,30,87.0
+2015,15,187.0,501,The PowerKnights,Manchester,New Hampshire,False,0,15,9,0.0,5,29.0,8,6,30.0,0,44.0,54,30,30.0,0,114.0
+2015,16,180.0,246,Overclocked,Boston,Massachusetts,True,0,17,12,10.0,5,44.0,19,13,30.0,5,67.0,42,27,0.0,0,69.0
+2015,17,178.0,88,TJ²,Bridgewater,Massachusetts,True,0,20,15,10.0,5,50.0,16,14,0.0,5,35.0,51,27,0.0,15,93.0
+2015,18,174.0,5687,The Outliers,Portland,Maine,True,10,10,4,30.0,5,49.0,19,16,30.0,8,73.0,27,0,0.0,15,42.0
+2015,19,172.0,3467,Windham Windup,Windham,New Hampshire,True,0,18,16,0.0,5,39.0,19,13,0.0,5,37.0,45,21,30.0,0,96.0
+2015,20,172.0,319,Big Bad Bob,Alton,New Hampshire,True,0,14,14,20.0,5,53.0,12,12,0.0,5,29.0,48,42,0.0,0,90.0
+2015,21,167.0,2836,Team Beta,Woodbury,Connecticut,True,0,16,15,0.0,5,36.0,19,14,0.0,5,38.0,57,36,0.0,0,93.0
+2015,22,166.0,237,Black Magic Robotics,Watertown,Connecticut,True,0,18,13,20.0,0,51.0,11,6,0.0,5,22.0,33,30,30.0,0,93.0
+2015,23,166.0,133,B.E.R.T.,Standish,Maine,True,0,16,14,20.0,5,55.0,17,11,30.0,5,63.0,33,0,0.0,15,48.0
+2015,24,161.0,61,The Intimidators,Upton,Massachusetts,False,0,16,14,20.0,5,55.0,21,15,20.0,5,61.0,45,0,0.0,0,45.0
+2015,25,159.0,58,The Riot Crew,South Portland,Maine,True,0,20,14,20.0,5,59.0,21,15,20.0,5,61.0,39,0,0.0,0,39.0
+2015,26,157.0,1124,UberBots,Avon,Connecticut,True,0,14,12,0.0,0,26.0,16,13,10.0,5,44.0,36,6,30.0,15,87.0
+2015,27,157.0,999,MechaRAMS,Cheshire,Connecticut,True,0,20,15,0.0,0,35.0,18,14,0.0,0,32.0,54,36,0.0,0,90.0
+2015,28,155.0,2342,Team Phoenix,Nashua,New Hampshire,True,0,21,15,10.0,5,51.0,22,16,10.0,5,53.0,51,0,0.0,0,51.0
+2015,29,142.0,155,The TechnoNuts,Berlin,Connecticut,True,0,12,7,10.0,5,34.0,17,13,10.0,5,45.0,48,0,0.0,15,63.0
+2015,30,138.0,2168,Aluminum Falcons,Groton,Connecticut,True,0,13,5,30.0,0,48.0,19,14,0.0,0,33.0,42,0,0.0,15,57.0
+2015,31,134.0,5735,Control Freaks,Wayland,Massachusetts,True,10,15,12,10.0,8,45.0,14,8,0.0,0,22.0,33,0,0.0,24,57.0
+2015,32,132.0,126,Gael Force,Clinton,Massachusetts,True,0,15,2,20.0,0,37.0,19,13,10.0,5,47.0,48,0,0.0,0,48.0
+2015,33,131.0,5122,robOTies,Old Town,Maine,True,5,15,13,10.0,0,38.0,19,14,10.0,0,43.0,45,0,0.0,0,45.0
+2015,34,130.0,173,RAGE Robotics ⚙️,Tolland,Connecticut,True,0,13,13,30.0,0,56.0,16,12,10.0,0,38.0,36,0,0.0,0,36.0
+2015,35,126.0,95,Grasshoppers,White River Junction,Vermont,False,0,17,16,30.0,5,68.0,13,11,10.0,0,34.0,24,0,0.0,0,24.0
+2015,36,121.0,176,Aces High,Windsor Locks,Connecticut,True,0,18,14,0.0,5,37.0,21,15,10.0,8,54.0,30,0,0.0,0,30.0
+2015,37,120.0,172,Northern Force,Falmouth,Maine,True,0,16,12,0.0,5,33.0,20,14,0.0,8,42.0,45,0,0.0,0,45.0
+2015,38,117.0,4909,Bionics,Billerica,Massachusetts,True,5,20,15,0.0,0,35.0,16,11,0.0,5,32.0,30,0,0.0,15,45.0
+2015,39,115.0,811,Wild Cards,Nashua,New Hampshire,True,0,13,13,20.0,8,54.0,17,12,0.0,8,37.0,24,0,0.0,0,24.0
+2015,40,113.0,2064,The Panther Project,Middlebury,Connecticut,True,0,15,10,10.0,0,35.0,8,1,30.0,0,39.0,39,0,0.0,0,39.0
+2015,41,112.0,3930,SMART  Spruce Mountain Area Robotics Team,Jay,Maine,False,0,11,15,0.0,8,34.0,20,14,10.0,10,54.0,24,0,0.0,0,24.0
+2015,42,111.0,4048,Redshift,Westborough,Massachusetts,True,0,22,16,10.0,0,48.0,15,9,0.0,0,24.0,39,0,0.0,0,39.0
+2015,43,111.0,1058,PVC Pirates,Londonderry,New Hampshire,True,0,11,10,10.0,5,36.0,10,7,0.0,10,27.0,33,0,0.0,15,48.0
+2015,44,110.0,138,Entropy,Amherst,New Hampshire,False,0,19,13,20.0,0,52.0,16,13,0.0,5,34.0,9,15,0.0,0,24.0
+2015,45,108.0,1735,Green Reapers,Worcester,Massachusetts,False,0,8,2,0.0,8,18.0,18,12,30.0,0,60.0,30,0,0.0,0,30.0
+2015,46,107.0,885,Ro-bovines,Randolph Center,Vermont,False,0,16,9,0.0,5,30.0,18,16,10.0,0,44.0,33,0,0.0,0,33.0
+2015,47,105.0,2876,Devilbotz,Burlington,Massachusetts,True,0,14,10,0.0,5,29.0,18,12,10.0,0,40.0,36,0,0.0,0,36.0
+2015,48,103.0,467,Colonials,Shrewsbury,Massachusetts,True,0,10,5,10.0,10,35.0,12,0,0.0,5,17.0,21,0,0.0,30,51.0
+2015,49,102.0,4055,NRG,Winchester,Connecticut,False,0,17,12,0.0,5,34.0,17,10,0.0,5,32.0,36,0,0.0,0,36.0
+2015,50,99.0,3464,Sim-City,Simsbury,Connecticut,True,0,4,1,30.0,0,35.0,6,2,20.0,0,28.0,36,0,0.0,0,36.0
+2015,51,97.0,166,Chop Shop,Merrimack,New Hampshire,True,0,19,13,0.0,5,37.0,17,11,0.0,5,33.0,27,0,0.0,0,27.0
+2015,52,96.0,1073,The Force Team,Hollis,New Hampshire,False,0,17,12,10.0,5,44.0,14,12,0.0,5,31.0,21,0,0.0,0,21.0
+2015,53,96.0,4905,Andromeda One,Ayer,Massachusetts,False,5,19,14,0.0,0,33.0,21,15,0.0,10,46.0,12,0,0.0,0,12.0
+2015,54,95.0,213,The Dirty Birds,Keene,New Hampshire,False,0,9,4,0.0,5,18.0,9,11,30.0,0,50.0,27,0,0.0,0,27.0
+2015,55,95.0,3718,Junkyard Battalion,New Britain,Connecticut,False,0,11,3,0.0,0,14.0,18,12,30.0,0,60.0,21,0,0.0,0,21.0
+2015,56,95.0,78,AIR STRIKE,Newport,Rhode Island,True,0,19,14,0.0,5,38.0,14,11,0.0,8,33.0,0,0,0.0,24,24.0
+2015,57,92.0,1099,DiscoTechs,Brookfield,Connecticut,False,0,7,6,10.0,0,23.0,19,13,10.0,0,42.0,27,0,0.0,0,27.0
+2015,58,83.0,663,Robonauts,Whitinsville,Massachusetts,False,0,11,3,20.0,0,34.0,9,2,20.0,0,31.0,18,0,0.0,0,18.0
+2015,59,82.0,4761,The Robockets,Reading,Massachusetts,False,0,16,10,10.0,5,41.0,14,7,0.0,5,26.0,15,0,0.0,0,15.0
+2015,60,74.0,5265,Radical Impact,Portland,Maine,False,5,7,1,30.0,5,43.0,16,10,0.0,0,26.0
+2015,61,71.0,2648,Infinite Loop,Oakland,Maine,True,0,10,10,0.0,10,30.0,16,10,0.0,0,26.0,15,0,0.0,0,15.0
+2015,62,70.0,348,Norwell Robotics,Norwell,Massachusetts,False,0,21,15,0.0,5,41.0,17,12,0.0,0,29.0
+2015,63,65.0,190,Gompei and the H.E.R.D.,Worcester,Massachusetts,True,0,12,4,20.0,0,36.0,12,7,10.0,0,29.0
+2015,64,65.0,2713,iRaiders,Melrose,Massachusetts,False,0,14,5,10.0,0,29.0,16,10,10.0,0,36.0
+2015,65,65.0,5782,Sullivan 4H-Newport,Newport,New Hampshire,False,10,9,0,0.0,8,17.0,17,11,10.0,0,38.0
+2015,66,63.0,1786,The Robotics Team,Dublin,New Hampshire,False,0,12,11,0.0,0,23.0,9,1,30.0,0,40.0
+2015,67,63.0,1991,Dragons,Hartford,Connecticut,False,0,12,9,0.0,0,21.0,16,16,10.0,0,42.0
+2015,68,62.0,3566,Gone Fishin',Southborough,Massachusetts,True,0,9,0,0.0,0,9.0,19,14,20.0,0,53.0
+2015,69,62.0,4557,FullMetal Falcons,Middletown,Connecticut,False,0,14,4,20.0,5,43.0,13,6,0.0,0,19.0
+2015,70,62.0,3205,Patriots,Concord,Massachusetts,False,0,10,13,0.0,0,23.0,16,13,10.0,0,39.0
+2015,71,62.0,1831,Screaming Eagles,Gilford,New Hampshire,False,0,18,12,10.0,0,40.0,14,8,0.0,0,22.0
+2015,72,62.0,5112,The Gongoliers,Foster and Glocester ,Rhode Island,False,5,12,9,0.0,8,29.0,17,11,0.0,0,28.0
+2015,73,62.0,178,The 2nd Law Enforcers,Farmington,Connecticut,False,0,16,11,0.0,10,37.0,7,0,0.0,0,7.0,18,0,0.0,0,18.0
+2015,74,61.0,3525,The Nuts & Bolts of Fury,Waterbury,Connecticut,False,0,13,2,0.0,0,15.0,18,13,10.0,5,46.0
+2015,75,60.0,157,AZTECHS,Marlborough,Massachusetts,False,0,16,10,0.0,5,31.0,15,9,0.0,5,29.0
+2015,76,60.0,839,Rosie Robotics,Agawam,Massachusetts,False,0,13,6,0.0,10,29.0,15,11,0.0,5,31.0
+2015,77,59.0,4908,Duxbury Dragons,Duxbury,Massachusetts,False,5,9,1,30.0,0,40.0,11,3,0.0,0,14.0
+2015,78,59.0,316,LUNATECS,Carneys Point,New Jersey,False,0,20,14,20.0,5,59.0
+2015,79,59.0,3609,Duct Tape Dragons,Portland,Maine,False,0,16,9,0.0,0,25.0,11,3,20.0,0,34.0
+2015,80,59.0,5494,Bizarbots Robotics,Holbrook,Massachusetts,False,10,10,0,0.0,5,15.0,16,10,0.0,8,34.0
+2015,81,58.0,2084,Robots by the C,Manchester,Massachusetts,False,0,7,14,0.0,0,21.0,15,7,10.0,5,37.0
+2015,82,57.0,1517,AMP'D UP,Concord,New Hampshire,False,0,15,8,0.0,0,23.0,15,14,0.0,5,34.0
+2015,83,56.0,2079,4H ALARM Robotics,Franklin,Massachusetts,False,0,14,10,0.0,0,24.0,10,2,20.0,0,32.0
+2015,84,56.0,228,GUS Robotics,Meriden,Connecticut,True,0,10,10,10.0,8,38.0,9,4,0.0,5,18.0
+2015,85,56.0,1699,Robocats,Colchester,Connecticut,False,0,12,8,0.0,0,20.0,18,13,0.0,5,36.0
+2015,86,55.0,3958,Schrodinger's Cat,Boston,Massachusetts,False,0,12,7,0.0,5,24.0,15,11,0.0,5,31.0
+2015,87,54.0,2523,Tech Storm,Saint Johnsbury,Vermont,False,0,7,0,0.0,0,7.0,12,5,30.0,0,47.0
+2015,88,54.0,1307,Robosaints,Dover,New Hampshire,False,0,12,1,30.0,0,43.0,7,4,0.0,0,11.0
+2015,89,54.0,69,HYPER,Quincy,Massachusetts,False,0,9,4,10.0,0,23.0,12,4,10.0,5,31.0
+2015,90,54.0,3451,The ANOMALY,Sanford,Maine,False,0,15,10,0.0,0,25.0,15,9,0.0,5,29.0
+2015,91,54.0,5506,Midcoast MAINEiacs Robotics Team,Searsport,Maine,False,10,14,8,0.0,0,22.0,14,0,0.0,8,22.0
+2015,92,54.0,5422,Stormgears FRC,Westford,Massachusetts,True,10,7,0,0.0,8,15.0,5,0,0.0,0,5.0,0,0,0.0,24,24.0
+2015,93,52.0,1474,Titans,Tewksbury,Massachusetts,False,0,14,0,0.0,0,14.0,15,3,20.0,0,38.0
+2015,94,51.0,3236,TRIFORCE,Franklin,Massachusetts,False,0,11,7,0.0,0,18.0,13,10,10.0,0,33.0
+2015,95,50.0,5746,Human Error,Deep River,Connecticut,False,10,12,5,0.0,8,25.0,10,0,0.0,5,15.0
+2015,96,48.0,4041,Iron Tigers,Gardiner,Maine,False,0,11,9,0.0,0,20.0,14,9,0.0,5,28.0
+2015,97,47.0,4906,The Collective,Waterville,Maine,False,5,17,12,0.0,0,29.0,13,0,0.0,0,13.0
+2015,98,46.0,177,Bobcat Robotics,South Windsor,Connecticut,False,0,5,0,0.0,5,10.0,16,10,10.0,0,36.0
+2015,99,46.0,4042,Murphy's Lawyers,South China,Maine,False,0,13,3,0.0,0,16.0,9,6,10.0,5,30.0
+2015,100,45.0,3719,STEM Whalers,New London ,Connecticut,False,0,11,1,10.0,0,22.0,15,8,0.0,0,23.0
+2015,101,45.0,3466,VIKINGS ROBOTICS,Westford,Massachusetts,False,0,17,11,0.0,0,28.0,12,5,0.0,0,17.0
+2015,102,44.0,716,Who'sCTEKS,Falls Village,Connecticut,False,0,14,9,0.0,5,28.0,11,0,0.0,5,16.0
+2015,103,43.0,1071,Team MAX,Wolcott,Connecticut,False,0,13,0,0.0,5,18.0,14,1,10.0,0,25.0
+2015,104,43.0,5738,warriors,Central Falls,Rhode Island,False,10,11,10,0.0,0,21.0,7,0,0.0,5,12.0
+2015,105,42.0,97,Bionic Beef,Cambridge,Massachusetts,False,0,7,2,20.0,0,29.0,13,0,0.0,0,13.0
+2015,106,42.0,3314,Mechanical Mustangs,Clifton,New Jersey,True,0,16,11,10.0,5,42.0
+2015,107,42.0,5286,Trojonix,Saco,Maine,False,5,8,0,0.0,5,13.0,11,3,10.0,0,24.0
+2015,108,42.0,5459,Ipswich TIGERS,Ipswich,Massachusetts,False,10,12,0,0.0,0,12.0,12,0,0.0,8,20.0
+2015,109,41.0,131,CHAOS,Manchester,New Hampshire,False,0,15,6,0.0,0,21.0,11,9,0.0,0,20.0
+2015,110,41.0,3623,TerrorBots,Leominster,Massachusetts,False,0,17,11,0.0,0,28.0,13,0,0.0,0,13.0
+2015,111,41.0,571,Team Paragon,Windsor,Connecticut,False,0,15,10,0.0,0,25.0,11,0,0.0,5,16.0
+2015,112,41.0,5491,Hard Reset,Winchendon,Massachusetts,False,10,8,0,0.0,5,13.0,13,0,0.0,5,18.0
+2015,113,40.0,1512,The Big Red,Concord,New Hampshire,False,0,6,2,10.0,0,18.0,11,1,10.0,0,22.0
+2015,114,38.0,2370,IBOTS,Rutland,Vermont,False,0,11,0,0.0,0,11.0,10,2,10.0,5,27.0
+2015,115,38.0,1729,Team Inconceivable!,Peterborough,New Hampshire,False,0,18,11,0.0,0,29.0,9,0,0.0,0,9.0
+2015,116,37.0,1027,Mechatronic Maniacs,West Springfield,Massachusetts,False,0,4,5,10.0,5,24.0,8,0,0.0,5,13.0
+2015,117,36.0,5000,Hammerheads,Hingham,Massachusetts,False,5,16,11,0.0,0,27.0,4,0,0.0,0,4.0
+2015,118,36.0,3597,Robo-Rangers,Kittery,Maine,False,0,13,0,0.0,0,13.0,14,9,0.0,0,23.0
+2015,119,36.0,5471,W.Hi.R.R.,Winthrop,Maine,False,10,12,2,0.0,0,14.0,12,0,0.0,0,12.0
+2015,120,35.0,1153,Timberwolves,Walpole,Massachusetts,False,0,9,0,0.0,0,9.0,12,4,10.0,0,26.0
+2015,121,35.0,5400,WARP,Worcester,Massachusetts,False,10,10,0,0.0,8,18.0,7,0,0.0,0,7.0
+2015,122,35.0,5686,Wirecats,Simsbury,Connecticut,False,10,8,0,0.0,5,13.0,4,0,0.0,8,12.0
+2015,123,34.0,181,Birds Of Prey,Hartford,Connecticut,False,0,9,10,0.0,0,19.0,12,3,0.0,0,15.0
+2015,124,34.0,1757,Wolverines,Westwood,Massachusetts,False,0,11,3,0.0,0,14.0,11,9,0.0,0,20.0
+2015,125,34.0,4311,Swampscott Currents,Swampscott,Massachusetts,False,0,16,9,0.0,0,25.0,9,0,0.0,0,9.0
+2015,126,34.0,5129,Digital Devils,Plainville,Connecticut,False,5,15,9,0.0,0,24.0,5,0,0.0,0,5.0
+2015,127,34.0,2423,The KwarQs,Watertown,Massachusetts,False,0,14,9,0.0,0,23.0,6,0,0.0,5,11.0
+2015,128,34.0,5752,Bevbotics,Beverly,Massachusetts,False,10,8,0,0.0,0,8.0,8,3,0.0,5,16.0
+2015,129,33.0,1922,Oz-Ram,Contoocook,New Hampshire,False,0,11,0,0.0,5,16.0,12,0,0.0,5,17.0
+2015,130,33.0,5556,Carriagetown Robotics,Amesbury,Massachusetts,False,10,12,0,0.0,0,12.0,6,0,0.0,5,11.0
+2015,131,32.0,4925,The Resistance,Wolfeboro,New Hampshire,False,5,13,5,0.0,0,18.0,9,0,0.0,0,9.0
+2015,132,32.0,5563,Phalanx,Lynn,Massachusetts,False,10,10,0,0.0,0,10.0,12,0,0.0,0,12.0
+2015,133,31.0,121,Rhode Warriors,Middletown,Rhode Island,False,0,13,8,0.0,0,21.0,10,0,0.0,0,10.0
+2015,134,31.0,4169,Warrior Robotics,Sudbury,Massachusetts,False,0,15,6,0.0,0,21.0,10,0,0.0,0,10.0
+2015,135,31.0,1965,Firebirds,Allston,Massachusetts,False,0,9,0,0.0,5,14.0,11,6,0.0,0,17.0
+2015,136,31.0,4929,Maroon Monsoon,Haverhill,Massachusetts,False,5,14,0,0.0,0,14.0,12,0,0.0,0,12.0
+2015,137,31.0,4546,Shockwave,Dover,New Hampshire,False,0,13,0,0.0,0,13.0,13,0,0.0,5,18.0
+2015,138,30.0,4176,Iron Tigers,North Easton,Massachusetts,False,0,4,9,0.0,0,13.0,12,0,0.0,5,17.0
+2015,139,29.0,1740,Cyber Colonels,Ledyard,Connecticut,False,0,5,0,0.0,0,5.0,15,9,0.0,0,24.0
+2015,140,27.0,1350,The Rambots,Providence,Rhode Island,False,0,7,4,10.0,0,21.0,6,0,0.0,0,6.0
+2015,141,26.0,1289,Gearheadz,Lawrence,Massachusetts,False,0,14,0,0.0,0,14.0,11,1,0.0,0,12.0
+2015,142,26.0,4151,SCRAP 4151,Weymouth,Massachusetts,False,0,7,0,0.0,5,12.0,9,0,0.0,5,14.0
+2015,143,25.0,509,Red Storm,Bedford,New Hampshire,False,0,6,0,0.0,0,6.0,14,5,0.0,0,19.0
+2015,144,25.0,2785,Prometheus,Kent,Connecticut,False,0,13,0,0.0,0,13.0,12,0,0.0,0,12.0
+2015,145,25.0,4958,Robocats,Langdon,New Hampshire,False,5,12,0,0.0,0,12.0,8,0,0.0,0,8.0
+2015,146,24.0,1811,FRESH,Newark,New Jersey,False,0,13,11,0.0,0,24.0
+2015,147,24.0,4572,BArlow RobAutics,Redding,Connecticut,False,0,10,0,0.0,0,10.0,14,0,0.0,0,14.0
+2015,148,24.0,5347,Gryphons,Weston,Massachusetts,False,5,5,0,0.0,0,5.0,14,0,0.0,0,14.0
+2015,149,24.0,3634,Spark City,Bridgeport,Connecticut,False,0,11,0,0.0,0,11.0,13,0,0.0,0,13.0
+2015,150,24.0,238,Crusaders,Manchester,New Hampshire,False,0,11,0,0.0,5,16.0,8,0,0.0,0,8.0
+2015,151,24.0,5633,Hyde Cyber Wolves,Bath,Maine,False,10,7,0,0.0,0,7.0,7,0,0.0,0,7.0
+2015,152,23.0,4796,Cyber Dragons,Hyde Park,Massachusetts,False,0,10,6,0.0,0,16.0,7,0,0.0,0,7.0
+2015,153,23.0,5142,Robo Dominators,West Haven,Connecticut,False,5,6,0,0.0,0,6.0,12,0,0.0,0,12.0
+2015,154,23.0,5163,The Aluminum Warriors,Hopkinton,Massachusetts,False,5,9,0,0.0,0,9.0,9,0,0.0,0,9.0
+2015,155,22.0,3585,Rogue Robots of 4-H,Charlestown,New Hampshire,False,0,4,0,0.0,0,4.0,11,7,0.0,0,18.0
+2015,156,22.0,4474,Silver Circuit,Kingston,Massachusetts,False,0,4,0,0.0,5,9.0,13,0,0.0,0,13.0
+2015,157,20.0,3182,Athena's Warriors,Hartford,Connecticut,False,0,12,0,0.0,0,12.0,8,0,0.0,0,8.0
+2015,158,20.0,151,Tough Techs,Nashua,New Hampshire,False,0,8,0,0.0,0,8.0,12,0,0.0,0,12.0
+2015,159,20.0,3654,TechTigers,Middletown,Connecticut,False,0,11,0,0.0,0,11.0,9,0,0.0,0,9.0
+2015,160,19.0,4097,Devilbots,Northampton,Massachusetts,False,0,6,7,0.0,0,13.0,6,0,0.0,0,6.0
+2015,161,19.0,4987,MegaRams,Worcester,Massachusetts,False,5,6,0,0.0,0,6.0,8,0,0.0,0,8.0
+2015,162,18.0,4473,Delta Prime Robotics,Farmingdale,Maine,False,0,5,0,0.0,0,5.0,13,0,0.0,0,13.0
+2015,163,18.0,1973,Burning Tiger   #1973,Boston,Massachusetts,False,0,8,0,0.0,0,8.0,10,0,0.0,0,10.0
+2015,164,17.0,3555,Aluminati,Storrs Mansfield,Connecticut,False,0,6,0,0.0,0,6.0,11,0,0.0,0,11.0
+2015,165,17.0,3104,The Cyber Rams,Stamford,Connecticut,False,0,7,0,0.0,0,7.0,10,0,0.0,0,10.0
+2015,166,17.0,1277,The Robotomies,Groton,Massachusetts,False,0,9,0,0.0,0,9.0,8,0,0.0,0,8.0
+2015,167,16.0,3499,River's Edge Robotics,Durham,New Hampshire,False,0,12,0,0.0,0,12.0,4,0,0.0,0,4.0
+2015,168,16.0,1721,Tidal Force,Concord,New Hampshire,False,0,6,0,0.0,0,6.0,10,0,0.0,0,10.0
+2015,169,16.0,4034,Pelham πthons Team 4034,Pelham,New Hampshire,False,0,7,0,0.0,0,7.0,9,0,0.0,0,9.0
+2015,170,15.0,102,The Gearheads,Somerville,New Jersey,True,0,10,0,0.0,5,15.0
+2015,171,15.0,3461,Operation PEACCE Robotics,Bristol,Connecticut,False,0,9,0,0.0,0,9.0,6,0,0.0,0,6.0
+2015,172,14.0,4555,Sprocketology,Skowhegan,Maine,False,0,4,0,0.0,0,4.0,10,0,0.0,0,10.0
+2015,173,14.0,4628,Sintian Robotics,Hamden,Connecticut,False,0,5,0,0.0,0,5.0,9,0,0.0,0,9.0
+2015,174,14.0,1761,STEAMpunk Tigers,Lynn,Massachusetts,False,0,9,0,0.0,0,9.0,5,0,0.0,0,5.0
+2015,175,14.0,2262,Robo-Panthers,Holliston,Massachusetts,False,0,8,0,0.0,0,8.0,6,0,0.0,0,6.0
+2015,176,14.0,3780,Robot Unicorns,Providence,Rhode Island,False,0,8,0,0.0,0,8.0,6,0,0.0,0,6.0
+2015,177,12.0,3323,Potential Energy,Litchfield,New Hampshire,False,0,5,0,0.0,0,5.0,7,0,0.0,0,7.0
+2015,178,10.0,1247,Blood. Sweat. and Gears,North Sutton,New Hampshire,False,0,4,0,0.0,0,4.0,6,0,0.0,0,6.0
+2015,179,10.0,5766,ET Robotics,Hawthorn,Massachusetts,False,10
+2016,1,324.0,125,NUTRONs,Boston,Massachusetts,True,0,17,16,20.0,10,63.0,10,15,20.0,0,45.0,66,45,90.0,15,216.0
+2016,2,321.0,195,CyberKnights,Southington,Connecticut,True,0,19,13,30.0,0,62.0,22,16,30.0,5,73.0,51,45,90.0,0,186.0
+2016,3,317.0,1519,Mechanical Mayhem,Bedford,New Hampshire,True,0,20,16,30.0,8,74.0,22,16,30.0,10,78.0,63,42,30.0,30,165.0
+2016,4,289.0,133,B.E.R.T.,Standish,Maine,True,0,20,14,10.0,5,49.0,21,16,30.0,5,72.0,60,48,60.0,0,168.0
+2016,5,275.0,4564,Orange Chaos,Brewer,Maine,True,0,22,16,10.0,5,53.0,19,14,10.0,5,48.0,66,48,60.0,0,174.0
+2016,6,263.0,230,Gaelhawks,Shelton,Connecticut,True,0,19,14,10.0,10,53.0,17,15,20.0,5,57.0,51,42,30.0,30,153.0
+2016,7,227.0,558,Elm City Robo Squad,New Haven,Connecticut,True,0,22,16,30.0,5,73.0,17,16,30.0,10,73.0,36,30,0.0,15,81.0
+2016,8,226.0,319,Big Bad Bob,Alton,New Hampshire,True,0,22,16,30.0,0,68.0,22,16,30.0,0,68.0,57,33,0.0,0,90.0
+2016,9,223.0,177,Bobcat Robotics,South Windsor,Connecticut,True,0,20,16,30.0,0,66.0,18,11,20.0,0,49.0,54,39,0.0,15,108.0
+2016,10,221.0,1768,Nashoba Robotics,Bolton,Massachusetts,True,0,10,11,30.0,5,56.0,15,12,10.0,5,42.0,42,36,30.0,15,123.0
+2016,11,220.0,238,Crusaders,Manchester,New Hampshire,False,0,22,16,20.0,5,63.0,21,15,20.0,5,61.0,33,3,60.0,0,96.0
+2016,12,208.0,126,Gael Force,Clinton,Massachusetts,True,0,21,15,10.0,5,51.0,20,14,0.0,0,34.0,57,36,30.0,0,123.0
+2016,13,207.0,1058,PVC Pirates,Londonderry,New Hampshire,True,0,19,16,30.0,5,70.0,18,15,30.0,5,68.0,36,33,0.0,0,69.0
+2016,14,206.0,2168,Aluminum Falcons,Groton,Connecticut,True,0,13,10,0.0,5,28.0,14,6,20.0,0,40.0,42,6,90.0,0,138.0
+2016,15,194.0,166,Chop Shop,Merrimack,New Hampshire,True,0,17,11,0.0,10,38.0,20,15,20.0,5,60.0,54,27,0.0,15,96.0
+2016,16,187.0,1153,Timberwolves,Walpole,Massachusetts,True,0,18,12,0.0,0,30.0,18,15,20.0,5,58.0,60,39,0.0,0,99.0
+2016,17,176.0,176,Aces High,Windsor Locks,Connecticut,True,0,17,14,10.0,5,46.0,18,16,10.0,5,49.0,42,9,30.0,0,81.0
+2016,18,166.0,6153,Blue Crew,Farmington,Maine,True,10,11,2,30.0,8,51.0,15,13,0.0,5,33.0,48,0,0.0,24,72.0
+2016,19,163.0,4905,Andromeda One,Ayer,Massachusetts,True,0,21,15,10.0,10,56.0,21,15,20.0,0,56.0,51,0,0.0,0,51.0
+2016,20,156.0,1124,UberBots,Avon,Connecticut,True,0,12,10,0.0,5,27.0,16,14,10.0,5,45.0,54,30,0.0,0,84.0
+2016,21,152.0,78,AIR STRIKE,Newport,Rhode Island,True,0,19,16,20.0,5,60.0,22,16,10.0,5,53.0,39,0,0.0,0,39.0
+2016,22,152.0,2648,Infinite Loop,Oakland,Maine,True,0,15,16,10.0,10,51.0,14,10,0.0,5,29.0,42,0,0.0,30,72.0
+2016,23,143.0,172,Northern Force,Falmouth,Maine,True,0,16,5,0.0,8,29.0,18,12,10.0,5,45.0,45,0,0.0,24,69.0
+2016,24,142.0,175,Buzz Robotics,Enfield,Connecticut,True,0,10,6,30.0,0,46.0,16,14,0.0,0,30.0,39,27,0.0,0,66.0
+2016,25,142.0,999,MechaRAMS,Cheshire,Connecticut,True,0,16,11,0.0,5,32.0,19,13,0.0,0,32.0,33,15,30.0,0,78.0
+2016,26,141.0,228,GUS Robotics,Meriden,Connecticut,True,0,7,13,10.0,0,30.0,21,15,30.0,0,66.0,45,0,0.0,0,45.0
+2016,27,141.0,5813,Morpheus,Concord,New Hampshire,True,10,19,15,10.0,8,52.0,15,13,10.0,5,43.0,36,0,0.0,0,36.0
+2016,28,141.0,2067,Apple Pi,Guilford,Connecticut,True,0,11,7,0.0,0,18.0,19,14,10.0,5,48.0,51,24,0.0,0,75.0
+2016,29,139.0,4761,The Robockets,Reading,Massachusetts,True,0,19,14,10.0,10,53.0,11,3,10.0,5,29.0,27,0,0.0,30,57.0
+2016,30,138.0,1099,DiscoTechs,Brookfield,Connecticut,True,0,21,15,20.0,5,61.0,17,12,10.0,5,44.0,33,0,0.0,0,33.0
+2016,31,138.0,2370,IBOTS,Rutland,Vermont,True,0,13,2,10.0,0,25.0,21,15,20.0,0,56.0,42,0,0.0,15,57.0
+2016,32,136.0,4048,Redshift,Westborough,Massachusetts,False,0,14,13,20.0,0,47.0,17,12,10.0,5,44.0,45,0,0.0,0,45.0
+2016,33,132.0,2064,The Panther Project,Middlebury,Connecticut,True,0,10,15,20.0,0,45.0,16,11,0.0,0,27.0,48,12,0.0,0,60.0
+2016,34,131.0,5846,SouthCoast Corsairs,North Dartmouth,Massachusetts,True,10,12,5,0.0,8,25.0,10,1,20.0,5,36.0,39,21,0.0,0,60.0
+2016,35,129.0,5687,The Outliers,Portland,Maine,False,5,18,15,10.0,5,48.0,18,13,0.0,0,31.0,45,0,0.0,0,45.0
+2016,36,125.0,1729,Team Inconceivable!,Peterborough,New Hampshire,True,0,17,12,0.0,0,29.0,19,13,20.0,5,57.0,39,0,0.0,0,39.0
+2016,37,124.0,5686,Wirecats,Simsbury,Connecticut,True,5,14,1,30.0,0,45.0,19,12,10.0,0,41.0,33,0,0.0,0,33.0
+2016,38,122.0,839,Rosie Robotics,Agawam,Massachusetts,True,0,18,11,30.0,0,59.0,20,14,0.0,5,39.0,24,0,0.0,0,24.0
+2016,39,121.0,88,TJ²,Bridgewater,Massachusetts,True,0,16,11,30.0,5,62.0,17,12,0.0,0,29.0,30,0,0.0,0,30.0
+2016,40,121.0,246,Overclocked,Boston,Massachusetts,False,0,6,5,10.0,5,26.0,15,9,0.0,8,32.0,48,0,0.0,15,63.0
+2016,41,120.0,3467,Windham Windup,Windham,New Hampshire,False,0,15,12,0.0,5,32.0,18,13,0.0,0,31.0,39,18,0.0,0,57.0
+2016,42,119.0,1831,Screaming Eagles,Gilford,New Hampshire,False,0,14,11,30.0,5,60.0,12,14,10.0,5,41.0,18,0,0.0,0,18.0
+2016,43,117.0,1100,Inverse Polarity,Northborough/Southborough,Massachusetts,False,0,14,1,10.0,5,30.0,18,12,10.0,5,45.0,27,0,0.0,15,42.0
+2016,44,115.0,155,The TechnoNuts,Berlin,Connecticut,False,0,17,12,0.0,0,29.0,13,13,30.0,0,56.0,30,0,0.0,0,30.0
+2016,45,112.0,2877,LigerBots,Newton,Massachusetts,False,0,16,14,0.0,5,35.0,19,14,0.0,5,38.0,24,0,0.0,15,39.0
+2016,46,110.0,4557,FullMetal Falcons,Middletown,Connecticut,False,0,12,7,0.0,13,32.0,11,7,10.0,5,33.0,30,0,0.0,15,45.0
+2016,47,109.0,1735,Green Reapers,Worcester,Massachusetts,False,0,9,0,0.0,5,14.0,20,14,10.0,0,44.0,36,0,0.0,15,51.0
+2016,48,109.0,5962,perSEVERE,Lowell,Massachusetts,False,10,15,13,0.0,8,36.0,16,12,0.0,5,33.0,15,0,0.0,15,30.0
+2016,49,108.0,3461,Operation PEACCE Robotics,Bristol,Connecticut,False,0,13,4,30.0,0,47.0,9,1,30.0,0,40.0,21,0,0.0,0,21.0
+2016,50,107.0,4055,NRG,Winchester,Connecticut,False,0,15,3,10.0,0,28.0,17,9,0.0,5,31.0,48,0,0.0,0,48.0
+2016,51,101.0,2876,Devilbotz,Burlington,Massachusetts,False,0,17,12,10.0,0,39.0,18,12,0.0,5,35.0,27,0,0.0,0,27.0
+2016,52,100.0,181,Birds Of Prey,Hartford,Connecticut,True,0,20,14,10.0,0,44.0,14,5,10.0,0,29.0,27,0,0.0,0,27.0
+2016,53,98.0,467,Colonials,Shrewsbury,Massachusetts,False,0,12,4,20.0,5,41.0,16,10,0.0,10,36.0,21,0,0.0,0,21.0
+2016,54,97.0,95,Grasshoppers,White River Junction,Vermont,False,0,12,4,10.0,0,26.0,21,15,20.0,0,56.0,15,0,0.0,0,15.0
+2016,55,95.0,4909,Bionics,Billerica,Massachusetts,False,0,16,11,0.0,8,35.0,19,13,10.0,0,42.0,18,0,0.0,0,18.0
+2016,56,94.0,1277,The Robotomies,Groton,Massachusetts,False,0,20,14,0.0,0,34.0,14,13,0.0,0,27.0,33,0,0.0,0,33.0
+2016,57,90.0,190,Gompei and the H.E.R.D.,Worcester,Massachusetts,True,0,15,9,0.0,0,24.0,22,16,20.0,8,66.0
+2016,58,89.0,1699,Robocats,Colchester,Connecticut,False,0,10,2,20.0,5,37.0,13,4,0.0,5,22.0,30,0,0.0,0,30.0
+2016,59,89.0,885,Ro-bovines,Randolph Center,Vermont,False,0,16,13,10.0,0,39.0,16,10,0.0,0,26.0,24,0,0.0,0,24.0
+2016,60,89.0,811,Wild Cards,Nashua,New Hampshire,False,0,12,10,0.0,5,27.0,11,12,10.0,5,38.0,24,0,0.0,0,24.0
+2016,61,84.0,2084,Robots by the C,Manchester,Massachusetts,False,0,18,12,10.0,5,45.0,11,7,0.0,0,18.0,21,0,0.0,0,21.0
+2016,62,82.0,131,CHAOS,Manchester,New Hampshire,False,0,20,14,0.0,5,39.0,19,14,10.0,0,43.0
+2016,63,78.0,3930,SMART  Spruce Mountain Area Robotics Team,Jay,Maine,True,0,17,15,20.0,5,57.0,13,8,0.0,0,21.0
+2016,64,77.0,1512,The Big Red,Concord,New Hampshire,False,0,15,9,0.0,0,24.0,13,1,30.0,0,44.0,9,0,0.0,0,9.0
+2016,65,77.0,5422,Stormgears FRC,Westford,Massachusetts,True,5,10,3,0.0,8,21.0,10,2,10.0,5,27.0,0,0,0.0,24,24.0
+2016,66,68.0,5563,Phalanx,Lynn,Massachusetts,False,5,8,0,0.0,0,8.0,13,0,30.0,0,43.0,12,0,0.0,0,12.0
+2016,67,67.0,4176,Iron Tigers,North Easton,Massachusetts,False,0,10,0,0.0,0,10.0,11,0,0.0,10,21.0,36,0,0.0,0,36.0
+2016,68,65.0,6161,Equilibrium,Gray,Maine,False,10,13,1,30.0,0,44.0,11,0,0.0,0,11.0
+2016,69,62.0,213,The Dirty Birds,Keene,New Hampshire,False,0,17,13,10.0,0,40.0,12,10,0.0,0,22.0
+2016,70,61.0,5112,The Gongoliers,Foster and Glocester ,Rhode Island,False,0,9,1,10.0,5,25.0,18,13,0.0,5,36.0
+2016,71,59.0,69,HYPER,Quincy,Massachusetts,False,0,14,8,0.0,5,27.0,17,10,0.0,5,32.0
+2016,72,57.0,4151,SCRAP 4151,Weymouth,Massachusetts,False,0,14,0,0.0,10,24.0,10,3,10.0,10,33.0
+2016,73,56.0,5746,Human Error,Deep River,Connecticut,False,5,13,2,20.0,0,35.0,16,0,0.0,0,16.0
+2016,74,56.0,138,Entropy,Amherst,New Hampshire,False,0,14,9,0.0,5,28.0,14,4,10.0,0,28.0
+2016,75,56.0,2342,Team Phoenix,Nashua,New Hampshire,False,0,12,7,0.0,10,29.0,15,7,0.0,5,27.0
+2016,76,55.0,5633,Hyde Cyber Wolves,Bath,Maine,False,5,5,0,0.0,0,5.0,14,1,30.0,0,45.0
+2016,77,55.0,4908,Duxbury Dragons,Duxbury,Massachusetts,False,0,12,11,0.0,5,28.0,12,5,10.0,0,27.0
+2016,78,53.0,1786,The Robotics Team,Dublin,New Hampshire,False,0,9,6,30.0,0,45.0,8,0,0.0,0,8.0
+2016,79,53.0,58,The Riot Crew,South Portland,Maine,False,0,15,11,0.0,5,31.0,13,9,0.0,0,22.0
+2016,80,51.0,5000,Hammerheads,Hingham,Massachusetts,False,0,14,12,0.0,0,26.0,16,9,0.0,0,25.0
+2016,81,51.0,4546,Shockwave,Dover,New Hampshire,False,0,13,5,0.0,5,23.0,17,11,0.0,0,28.0
+2016,82,50.0,501,The PowerKnights,Manchester,New Hampshire,False,0,13,6,0.0,0,19.0,13,3,10.0,5,31.0
+2016,83,50.0,4473,Delta Prime Robotics,Farmingdale,Maine,False,0,16,0,0.0,0,16.0,14,5,10.0,5,34.0
+2016,84,49.0,716,Who'sCTEKS,Falls Village,Connecticut,False,0,17,10,0.0,0,27.0,9,3,10.0,0,22.0
+2016,85,49.0,6201,The Highlanders,Somerville,Massachusetts,False,10,16,10,0.0,0,26.0,8,0,0.0,5,13.0
+2016,86,48.0,3609,Duct Tape Dragons,Portland,Maine,False,0,11,1,20.0,0,32.0,9,7,0.0,0,16.0
+2016,87,48.0,2262,Robo-Panthers,Holliston,Massachusetts,False,0,10,0,0.0,0,10.0,17,11,10.0,0,38.0
+2016,88,48.0,348,Norwell Robotics,Norwell,Massachusetts,False,0,18,12,0.0,0,30.0,12,6,0.0,0,18.0
+2016,89,48.0,5556,Carriagetown Robotics,Amesbury,Massachusetts,False,5,15,10,0.0,0,25.0,15,3,0.0,0,18.0
+2016,90,48.0,5902,The Wire Clippers,Portsmouth,New Hampshire,False,10,12,0,0.0,8,20.0,13,0,0.0,5,18.0
+2016,91,47.0,3314,Mechanical Mustangs,Clifton,New Jersey,True,0,19,13,10.0,5,47.0
+2016,92,47.0,4906,The Collective,Waterville,Maine,False,0,12,8,0.0,0,20.0,17,10,0.0,0,27.0
+2016,93,47.0,1991,Dragons,Hartford,Connecticut,True,0,15,8,0.0,0,23.0,10,9,0.0,5,24.0
+2016,94,46.0,173,RAGE Robotics ⚙️,Tolland,Connecticut,False,0,9,0,0.0,0,9.0,12,10,10.0,5,37.0
+2016,95,46.0,3958,Schrodinger's Cat,Boston,Massachusetts,False,0,13,14,0.0,0,27.0,10,9,0.0,0,19.0
+2016,96,46.0,157,AZTECHS,Marlborough,Massachusetts,False,0,11,0,0.0,5,16.0,15,10,0.0,5,30.0
+2016,97,45.0,237,Black Magic Robotics,Watertown,Connecticut,False,0,14,9,0.0,0,23.0,14,8,0.0,0,22.0
+2016,98,45.0,4929,Maroon Monsoon,Haverhill,Massachusetts,False,0,18,13,0.0,0,31.0,14,0,0.0,0,14.0
+2016,99,44.0,4555,Sprocketology,Skowhegan,Maine,False,0,8,0,0.0,0,8.0,14,2,20.0,0,36.0
+2016,100,44.0,3182,Athena's Warriors,Hartford,Connecticut,False,0,10,2,20.0,5,37.0,7,0,0.0,0,7.0
+2016,101,44.0,2170,Galvanized Guardians,Glastonbury,Connecticut,False,0,10,9,0.0,0,19.0,16,9,0.0,0,25.0
+2016,102,44.0,2836,Team Beta,Woodbury,Connecticut,False,0,15,9,0.0,0,24.0,12,8,0.0,0,20.0
+2016,103,43.0,5735,Control Freaks,Wayland,Massachusetts,False,5,8,0,0.0,0,8.0,14,6,10.0,0,30.0
+2016,104,43.0,236,Techno-Ticks,Old Lyme,Connecticut,True,0,16,10,0.0,5,31.0,12,0,0.0,0,12.0
+2016,105,42.0,2079,4H ALARM Robotics,Franklin,Massachusetts,False,0,14,0,0.0,0,14.0,13,0,10.0,5,28.0
+2016,106,42.0,5752,Bevbotics,Beverly,Massachusetts,False,5,14,9,0.0,0,23.0,10,4,0.0,0,14.0
+2016,107,41.0,5122,robOTies,Old Town,Maine,False,0,11,3,0.0,0,14.0,12,5,10.0,0,27.0
+2016,108,41.0,151,Tough Techs,Nashua,New Hampshire,False,0,11,0,0.0,0,11.0,16,9,0.0,5,30.0
+2016,109,40.0,3719,STEM Whalers,New London ,Connecticut,False,0,8,4,10.0,0,22.0,11,7,0.0,0,18.0
+2016,110,40.0,3464,Sim-City,Simsbury,Connecticut,False,0,17,11,0.0,0,28.0,12,0,0.0,0,12.0
+2016,111,40.0,3205,Patriots,Concord,Massachusetts,False,0,12,0,0.0,0,12.0,17,11,0.0,0,28.0
+2016,112,40.0,5491,Hard Reset,Winchendon,Massachusetts,False,5,10,0,0.0,0,10.0,16,9,0.0,0,25.0
+2016,113,40.0,5856,Bullbots,Waterbury,Connecticut,False,10,11,0,0.0,5,16.0,9,0,0.0,5,14.0
+2016,114,39.0,4311,Swampscott Currents,Swampscott,Massachusetts,False,0,7,8,0.0,0,15.0,15,9,0.0,0,24.0
+2016,115,38.0,1721,Tidal Force,Concord,New Hampshire,False,0,11,2,10.0,0,23.0,10,0,0.0,5,15.0
+2016,116,38.0,1071,Team MAX,Wolcott,Connecticut,False,0,9,6,0.0,5,20.0,11,7,0.0,0,18.0
+2016,117,38.0,2713,iRaiders,Melrose,Massachusetts,False,0,12,4,0.0,0,16.0,14,8,0.0,0,22.0
+2016,118,36.0,1073,The Force Team,Hollis,New Hampshire,True,0,12,9,0.0,0,21.0,6,4,0.0,5,15.0
+2016,119,36.0,1350,The Rambots,Providence,Rhode Island,False,0,9,0,0.0,0,9.0,16,11,0.0,0,27.0
+2016,120,36.0,509,Red Storm,Bedford,New Hampshire,False,0,13,5,0.0,0,18.0,12,6,0.0,0,18.0
+2016,121,36.0,3323,Potential Energy,Litchfield,New Hampshire,False,0,15,10,0.0,0,25.0,11,0,0.0,0,11.0
+2016,122,36.0,4097,Devilbots,Northampton,Massachusetts,False,0,12,0,0.0,0,12.0,13,6,0.0,5,24.0
+2016,123,36.0,6224,Saint Dominators,Auburn,Maine,False,10,13,4,0.0,0,17.0,9,0,0.0,0,9.0
+2016,124,36.0,5506,Midcoast MAINEiacs Robotics Team,Searsport,Maine,False,5,6,0,0.0,5,11.0,10,0,0.0,10,20.0
+2016,125,35.0,3146,GRANBY GRUNTS,Granby,Connecticut,False,0,8,12,0.0,0,20.0,12,3,0.0,0,15.0
+2016,126,35.0,5844,Phoenix Tech,Boston,Massachusetts,False,10,7,0,0.0,5,12.0,8,0,0.0,5,13.0
+2016,127,34.0,3236,TRIFORCE,Franklin,Massachusetts,False,0,7,0,0.0,0,7.0,16,11,0.0,0,27.0
+2016,128,34.0,5969,English Skunkworks,Jamaica Plain,Massachusetts,False,10,6,0,0.0,5,11.0,12,1,0.0,0,13.0
+2016,129,34.0,3654,TechTigers,Middletown,Connecticut,False,0,14,0,0.0,5,19.0,10,0,0.0,5,15.0
+2016,130,33.0,121,Rhode Warriors,Middletown,Rhode Island,False,0,15,10,0.0,0,25.0,8,0,0.0,0,8.0
+2016,131,32.0,4474,Silver Circuit,Kingston,Massachusetts,False,0,14,3,10.0,0,27.0,5,0,0.0,0,5.0
+2016,132,31.0,178,The 2nd Law Enforcers,Farmington,Connecticut,False,0,6,0,0.0,0,6.0,15,10,0.0,0,25.0
+2016,133,31.0,3451,The ANOMALY,Sanford,Maine,False,0,7,0,0.0,0,7.0,15,9,0.0,0,24.0
+2016,134,31.0,5459,Ipswich TIGERS,Ipswich,Massachusetts,False,5,10,0,0.0,0,10.0,11,0,0.0,5,16.0
+2016,135,30.0,4169,Warrior Robotics,Sudbury,Massachusetts,False,0,13,0,0.0,0,13.0,12,0,0.0,5,17.0
+2016,136,29.0,2785,Prometheus,Kent,Connecticut,False,0,11,0,0.0,0,11.0,13,0,0.0,5,18.0
+2016,137,29.0,6172,The Mad Dogs,Fairfield,Maine,False,10,7,0,0.0,0,7.0,12,0,0.0,0,12.0
+2016,138,29.0,5958,Blue Wave Robotics,Providence,Rhode Island,False,10,7,0,0.0,0,7.0,12,0,0.0,0,12.0
+2016,139,26.0,1517,AMP'D UP,Concord,New Hampshire,False,0,9,8,0.0,0,17.0,9,0,0.0,0,9.0
+2016,140,26.0,1474,Titans,Tewksbury,Massachusetts,False,0,8,0,0.0,0,8.0,11,7,0.0,0,18.0
+2016,141,26.0,3525,The Nuts & Bolts of Fury,Waterbury,Connecticut,False,0,9,5,0.0,0,14.0,12,0,0.0,0,12.0
+2016,142,26.0,571,Team Paragon,Windsor,Connecticut,False,0,13,0,0.0,5,18.0,8,0,0.0,0,8.0
+2016,143,25.0,4572,BArlow RobAutics,Redding,Connecticut,False,0,14,0,0.0,0,14.0,11,0,0.0,0,11.0
+2016,144,24.0,4925,The Resistance,Wolfeboro,New Hampshire,False,0,7,0,0.0,5,12.0,12,0,0.0,0,12.0
+2016,145,24.0,3780,Robot Unicorns,Providence,Rhode Island,False,0,12,0,0.0,0,12.0,12,0,0.0,0,12.0
+2016,146,23.0,3104,The Cyber Rams,Stamford,Connecticut,False,0,6,0,0.0,0,6.0,15,2,0.0,0,17.0
+2016,147,23.0,1289,Gearheadz,Lawrence,Massachusetts,False,0,11,0,0.0,0,11.0,7,0,0.0,5,12.0
+2016,148,22.0,3466,VIKINGS ROBOTICS,Westford,Massachusetts,False,0,9,8,0.0,0,17.0,5,0,0.0,0,5.0
+2016,149,22.0,3623,TerrorBots,Leominster,Massachusetts,False,0,13,0,0.0,0,13.0,9,0,0.0,0,9.0
+2016,150,22.0,1761,STEAMpunk Tigers,Lynn,Massachusetts,False,0,5,0,0.0,5,10.0,12,0,0.0,0,12.0
+2016,151,22.0,5471,W.Hi.R.R.,Winthrop,Maine,False,5,10,0,0.0,0,10.0,7,0,0.0,0,7.0
+2016,152,21.0,1740,Cyber Colonels,Ledyard,Connecticut,False,0,6,9,0.0,0,15.0,6,0,0.0,0,6.0
+2016,153,21.0,1757,Wolverines,Westwood,Massachusetts,False,0,7,0,0.0,0,7.0,14,0,0.0,0,14.0
+2016,154,21.0,3566,Gone Fishin',Southborough,Massachusetts,False,0,4,0,0.0,0,4.0,12,0,0.0,5,17.0
+2016,155,20.0,4041,Iron Tigers,Gardiner,Maine,False,0,9,0,0.0,0,9.0,11,0,0.0,0,11.0
+2016,156,20.0,3634,Spark City,Bridgeport,Connecticut,False,0,11,0,0.0,0,11.0,9,0,0.0,0,9.0
+2016,157,20.0,5494,Bizarbots Robotics,Holbrook,Massachusetts,False,5,4,0,0.0,0,4.0,11,0,0.0,0,11.0
+2016,158,19.0,1922,Oz-Ram,Contoocook,New Hampshire,False,0,11,0,0.0,0,11.0,8,0,0.0,0,8.0
+2016,159,19.0,5400,WARP,Worcester,Massachusetts,False,5,5,0,0.0,0,5.0,9,0,0.0,0,9.0
+2016,160,18.0,1307,Robosaints,Dover,New Hampshire,False,0,8,0,0.0,0,8.0,10,0,0.0,0,10.0
+2016,161,18.0,4628,Sintian Robotics,Hamden,Connecticut,False,0,10,0,0.0,0,10.0,8,0,0.0,0,8.0
+2016,162,17.0,663,Robonauts,Whitinsville,Massachusetts,False,0,11,6,0.0,0,17.0
+2016,163,17.0,1965,Firebirds,Allston,Massachusetts,False,0,8,0,0.0,0,8.0,9,0,0.0,0,9.0
+2016,164,17.0,97,Bionic Beef,Cambridge,Massachusetts,False,0,9,0,0.0,0,9.0,8,0,0.0,0,8.0
+2016,165,16.0,1973,Burning Tiger   #1973,Boston,Massachusetts,True,0,6,0,0.0,0,6.0,10,0,0.0,0,10.0
+2016,166,16.0,1247,Blood. Sweat. and Gears,North Sutton,New Hampshire,False,0,7,0,0.0,0,7.0,9,0,0.0,0,9.0
+2016,167,16.0,5347,Gryphons,Weston,Massachusetts,False,0,7,0,0.0,0,7.0,9,0,0.0,0,9.0
+2016,168,16.0,2423,The KwarQs,Watertown,Massachusetts,False,0,9,0,0.0,0,9.0,7,0,0.0,0,7.0
+2016,169,16.0,4796,Cyber Dragons,Hyde Park,Massachusetts,False,0,5,0,0.0,5,10.0,6,0,0.0,0,6.0
+2016,170,15.0,3718,Junkyard Battalion,New Britain,Connecticut,False,0,8,0,0.0,0,8.0,7,0,0.0,0,7.0
+2016,171,15.0,2523,Tech Storm,Saint Johnsbury,Vermont,False,0,4,0,0.0,0,4.0,6,0,0.0,5,11.0
+2016,172,14.0,3597,Robo-Rangers,Kittery,Maine,False,0,6,0,0.0,0,6.0,8,0,0.0,0,8.0
+2016,173,13.0,5129,Digital Devils,Plainville,Connecticut,False,0,8,0,0.0,0,8.0,5,0,0.0,0,5.0
+2016,174,13.0,3585,Rogue Robots of 4-H,Charlestown,New Hampshire,False,0,6,0,0.0,0,6.0,7,0,0.0,0,7.0
+2016,175,12.0,4042,Murphy's Lawyers,South China,Maine,False,0,8,0,0.0,0,8.0,4,0,0.0,0,4.0
+2016,176,12.0,5163,The Aluminum Warriors,Hopkinton,Massachusetts,False,0,4,0,0.0,0,4.0,8,0,0.0,0,8.0
+2016,177,11.0,5265,Radical Impact,Portland,Maine,False,0,6,0,0.0,0,6.0,5,0,0.0,0,5.0
+2016,178,11.0,1027,Mechatronic Maniacs,West Springfield,Massachusetts,False,0,5,0,0.0,0,5.0,6,0,0.0,0,6.0
+2016,179,10.0,5142,Robo Dominators,West Haven,Connecticut,False,0,4,0,0.0,0,4.0,6,0,0.0,0,6.0
+2016,180,10.0,4958,Robocats,Langdon,New Hampshire,False,0,4,0,0.0,0,4.0,6,0,0.0,0,6.0
+2016,181,9.0,4987,MegaRams,Worcester,Massachusetts,False,0,5,0,0.0,0,5.0,4,0,0.0,0,4.0
+2016,182,8.0,3555,Aluminati,Storrs Mansfield,Connecticut,False,0,4,0,0.0,0,4.0,4,0,0.0,0,4.0
+2017,1,354.0,2168,Aluminum Falcons,Groton,Connecticut,True,0,19,13,30.0,0,62.0,22,16,30.0,5,73.0,66,48,90.0,15,219.0
+2017,2,315.0,195,CyberKnights,Southington,Connecticut,True,0,18,13,10.0,5,46.0,22,16,30.0,0,68.0,63,48,90.0,0,201.0
+2017,3,285.0,1519,Mechanical Mayhem,Bedford,New Hampshire,True,0,21,15,20.0,5,61.0,18,16,30.0,10,74.0,48,42,60.0,0,150.0
+2017,4,277.0,5687,The Outliers,Portland,Maine,True,0,22,16,30.0,5,73.0,22,16,20.0,5,63.0,51,45,30.0,15,141.0
+2017,5,275.0,125,NUTRONs,Boston,Massachusetts,True,0,21,16,20.0,10,67.0,20,14,10.0,5,49.0,60,39,30.0,30,159.0
+2017,6,231.0,558,Elm City Robo Squad,New Haven,Connecticut,True,0,7,13,10.0,5,35.0,17,16,30.0,10,73.0,24,39,30.0,30,123.0
+2017,7,229.0,3719,STEM Whalers,New London ,Connecticut,True,0,18,12,10.0,0,40.0,16,11,0.0,0,27.0,60,42,60.0,0,162.0
+2017,8,222.0,78,AIR STRIKE,Newport,Rhode Island,True,0,15,11,10.0,5,41.0,19,16,0.0,5,40.0,66,45,30.0,0,141.0
+2017,9,218.0,1073,The Force Team,Hollis,New Hampshire,True,0,11,5,10.0,0,26.0,14,9,30.0,10,63.0,36,3,90.0,0,129.0
+2017,10,213.0,6328,Mechanical Advantage,Littleton,Massachusetts,True,10,19,13,0.0,8,40.0,12,8,30.0,5,55.0,54,30,0.0,24,108.0
+2017,11,195.0,5813,Morpheus,Concord,New Hampshire,True,5,14,14,0.0,0,28.0,15,15,10.0,5,45.0,48,9,60.0,0,117.0
+2017,12,195.0,2648,Infinite Loop,Oakland,Maine,True,0,14,8,10.0,5,37.0,16,10,20.0,10,56.0,51,6,30.0,15,102.0
+2017,13,195.0,95,Grasshoppers,White River Junction,Vermont,True,0,18,15,20.0,0,53.0,14,15,30.0,5,64.0,45,33,0.0,0,78.0
+2017,14,188.0,1058,PVC Pirates,Londonderry,New Hampshire,True,0,19,16,30.0,0,65.0,12,15,0.0,0,27.0,51,30,0.0,15,96.0
+2017,15,186.0,4564,Orange Chaos,Brewer,Maine,False,0,22,16,0.0,5,43.0,15,13,10.0,0,38.0,48,12,30.0,15,105.0
+2017,16,185.0,6763,FUSION,Manchester,New Hampshire,True,10,12,6,10.0,5,33.0,20,15,30.0,8,73.0,45,24,0.0,0,69.0
+2017,17,185.0,3464,Sim-City,Simsbury,Connecticut,True,0,22,16,20.0,0,58.0,20,14,0.0,0,34.0,57,36,0.0,0,93.0
+2017,18,181.0,1153,Timberwolves,Walpole,Massachusetts,True,0,13,13,0.0,5,31.0,19,14,10.0,5,48.0,51,36,0.0,15,102.0
+2017,19,162.0,501,The PowerKnights,Manchester,New Hampshire,False,0,20,14,0.0,0,34.0,19,13,10.0,5,47.0,54,27,0.0,0,81.0
+2017,20,161.0,6329,The Bucks' Wrath,Bucksport,Maine,True,10,14,0,0.0,0,14.0,19,13,10.0,5,47.0,57,33,0.0,0,90.0
+2017,21,158.0,2370,IBOTS,Rutland,Vermont,True,0,12,16,30.0,0,58.0,16,14,20.0,5,55.0,45,0,0.0,0,45.0
+2017,22,156.0,2084,Robots by the C,Manchester,Massachusetts,True,0,21,15,20.0,5,61.0,17,14,10.0,0,41.0,54,0,0.0,0,54.0
+2017,23,155.0,177,Bobcat Robotics,South Windsor,Connecticut,True,0,19,16,20.0,0,55.0,16,10,0.0,5,31.0,48,21,0.0,0,69.0
+2017,24,150.0,1721,Tidal Force,Concord,New Hampshire,True,0,18,10,20.0,5,53.0,22,16,0.0,5,43.0,39,0,0.0,15,54.0
+2017,25,147.0,1071,Team MAX,Wolcott,Connecticut,True,0,15,9,0.0,10,34.0,16,13,30.0,0,59.0,24,0,0.0,30,54.0
+2017,26,147.0,131,CHAOS,Manchester,New Hampshire,True,0,14,12,10.0,0,36.0,21,15,10.0,5,51.0,33,27,0.0,0,60.0
+2017,27,143.0,4905,Andromeda One,Ayer,Massachusetts,True,0,19,13,0.0,10,42.0,18,12,0.0,8,38.0,39,0,0.0,24,63.0
+2017,28,140.0,3623,TerrorBots,Leominster,Massachusetts,True,0,22,16,30.0,5,73.0,14,13,10.0,0,37.0,30,0,0.0,0,30.0
+2017,29,138.0,4761,The Robockets,Reading,Massachusetts,False,0,18,15,0.0,5,38.0,19,13,30.0,8,70.0,30,0,0.0,0,30.0
+2017,30,135.0,4176,Iron Tigers,North Easton,Massachusetts,True,0,13,3,20.0,10,46.0,21,15,20.0,0,56.0,33,0,0.0,0,33.0
+2017,31,133.0,230,Gaelhawks,Shelton,Connecticut,True,0,13,10,0.0,5,28.0,16,14,10.0,5,45.0,42,18,0.0,0,60.0
+2017,32,132.0,133,B.E.R.T.,Standish,Maine,False,0,16,16,0.0,0,32.0,17,14,10.0,5,46.0,39,15,0.0,0,54.0
+2017,33,129.0,6201,The Highlanders,Somerville,Massachusetts,True,5,18,12,0.0,5,35.0,17,12,10.0,5,44.0,45,0,0.0,0,45.0
+2017,34,129.0,5422,Stormgears FRC,Westford,Massachusetts,True,0,14,0,0.0,10,24.0,17,11,10.0,13,51.0,30,0,0.0,24,54.0
+2017,35,127.0,6337,Terror Bytes,Pittsfield,Maine,False,10,11,0,0.0,0,11.0,20,14,10.0,8,52.0,39,0,0.0,15,54.0
+2017,36,124.0,213,The Dirty Birds,Keene,New Hampshire,False,0,19,14,10.0,0,43.0,16,13,10.0,0,39.0,42,0,0.0,0,42.0
+2017,37,123.0,3654,TechTigers,Middletown,Connecticut,False,0,14,14,30.0,5,63.0,10,9,0.0,5,24.0,36,0,0.0,0,36.0
+2017,38,122.0,4151,SCRAP 4151,Weymouth,Massachusetts,True,0,20,14,20.0,5,59.0,9,0,0.0,0,9.0,24,0,0.0,30,54.0
+2017,39,120.0,1991,Dragons,Hartford,Connecticut,True,0,16,1,30.0,5,52.0,19,13,10.0,5,47.0,21,0,0.0,0,21.0
+2017,40,120.0,2067,Apple Pi,Guilford,Connecticut,True,0,21,15,10.0,5,51.0,18,13,0.0,5,36.0,18,0,0.0,15,33.0
+2017,41,117.0,4169,Warrior Robotics,Sudbury,Massachusetts,False,0,10,14,20.0,5,49.0,11,7,20.0,0,38.0,30,0,0.0,0,30.0
+2017,42,117.0,58,The Riot Crew,South Portland,Maine,False,0,21,15,0.0,5,41.0,13,10,20.0,0,43.0,33,0,0.0,0,33.0
+2017,43,116.0,5846,SouthCoast Corsairs,North Dartmouth,Massachusetts,True,5,16,0,0.0,5,21.0,19,15,20.0,0,54.0,36,0,0.0,0,36.0
+2017,44,115.0,348,Norwell Robotics,Norwell,Massachusetts,False,0,22,16,0.0,5,43.0,21,15,0.0,0,36.0,36,0,0.0,0,36.0
+2017,45,114.0,5563,Phalanx,Lynn,Massachusetts,False,0,8,4,30.0,0,42.0,12,5,10.0,0,27.0,45,0,0.0,0,45.0
+2017,46,114.0,2342,Team Phoenix,Nashua,New Hampshire,False,0,19,12,10.0,5,46.0,17,10,0.0,5,32.0,21,0,0.0,15,36.0
+2017,47,111.0,88,TJ²,Bridgewater,Massachusetts,False,0,14,13,30.0,0,57.0,12,10,0.0,5,27.0,27,0,0.0,0,27.0
+2017,48,111.0,1922,Oz-Ram,Contoocook,New Hampshire,False,0,15,11,0.0,0,26.0,19,14,20.0,5,58.0,27,0,0.0,0,27.0
+2017,49,107.0,4909,Bionics,Billerica,Massachusetts,False,0,20,14,10.0,5,49.0,11,5,0.0,0,16.0,42,0,0.0,0,42.0
+2017,50,106.0,999,MechaRAMS,Cheshire,Connecticut,False,0,10,0,0.0,0,10.0,19,15,20.0,0,54.0,42,0,0.0,0,42.0
+2017,51,106.0,3467,Windham Windup,Windham,New Hampshire,True,0,9,0,0.0,10,19.0,15,6,0.0,0,21.0,36,0,0.0,30,66.0
+2017,52,105.0,4908,Duxbury Dragons,Duxbury,Massachusetts,False,0,13,1,30.0,0,44.0,12,9,10.0,0,31.0,30,0,0.0,0,30.0
+2017,53,105.0,1757,Wolverines,Westwood,Massachusetts,False,0,17,10,10.0,0,37.0,18,13,10.0,0,41.0,27,0,0.0,0,27.0
+2017,54,104.0,4906,The Collective,Waterville,Maine,False,0,19,12,0.0,5,36.0,10,1,30.0,0,41.0,27,0,0.0,0,27.0
+2017,55,104.0,173,RAGE Robotics ⚙️,Tolland,Connecticut,False,0,11,1,0.0,5,17.0,12,1,30.0,5,48.0,39,0,0.0,0,39.0
+2017,56,103.0,5735,Control Freaks,Wayland,Massachusetts,False,0,20,14,0.0,0,34.0,17,11,0.0,5,33.0,36,0,0.0,0,36.0
+2017,57,101.0,716,Who'sCTEKS,Falls Village,Connecticut,False,0,19,15,10.0,0,44.0,10,3,20.0,0,33.0,24,0,0.0,0,24.0
+2017,58,99.0,3958,Schrodinger's Cat,Boston,Massachusetts,False,0,13,2,20.0,0,35.0,12,2,30.0,5,49.0,15,0,0.0,0,15.0
+2017,59,98.0,236,Techno-Ticks,Old Lyme,Connecticut,True,0,20,14,30.0,0,64.0,13,11,10.0,0,34.0
+2017,60,95.0,6690,MV roboPride,Concord,New Hampshire,False,10,16,10,0.0,5,31.0,13,0,0.0,8,21.0,33,0,0.0,0,33.0
+2017,61,91.0,238,Crusaders,Manchester,New Hampshire,True,0,10,4,0.0,5,19.0,16,9,30.0,5,60.0,12,0,0.0,0,12.0
+2017,62,90.0,190,Gompei and the H.E.R.D.,Worcester,Massachusetts,True,0,13,15,20.0,0,48.0,14,13,10.0,5,42.0
+2017,63,89.0,181,Birds Of Prey,Hartford,Connecticut,False,0,10,3,30.0,0,43.0,15,10,0.0,0,25.0,21,0,0.0,0,21.0
+2017,64,85.0,4041,Iron Tigers,Gardiner,Maine,False,0,18,11,10.0,0,39.0,14,4,10.0,0,28.0,18,0,0.0,0,18.0
+2017,65,84.0,5556,Carriagetown Robotics,Amesbury,Massachusetts,False,0,13,4,30.0,0,47.0,17,11,0.0,0,28.0,9,0,0.0,0,9.0
+2017,66,80.0,2523,Tech Storm,Saint Johnsbury,Vermont,False,0,11,11,10.0,0,32.0,17,11,0.0,5,33.0,15,0,0.0,0,15.0
+2017,67,75.0,6731,Record Robotics,Belmont,Massachusetts,False,10,14,0,0.0,5,19.0,7,1,30.0,8,46.0
+2017,68,73.0,6324,The Blue Devils,Salem,New Hampshire,True,10,11,7,0.0,0,18.0,13,0,0.0,8,21.0,0,0,0.0,24,24.0
+2017,69,65.0,121,Rhode Warriors,Middletown,Rhode Island,False,0,21,15,0.0,0,36.0,17,12,0.0,0,29.0
+2017,70,64.0,467,Colonials,Shrewsbury,Massachusetts,False,0,17,11,10.0,8,46.0,10,0,0.0,8,18.0
+2017,71,62.0,6675,Ingenious Innovators,New Britain,Connecticut,False,10,9,0,0.0,8,17.0,16,4,10.0,5,35.0
+2017,72,60.0,228,GUS Robotics,Meriden,Connecticut,False,0,11,4,10.0,5,30.0,14,6,10.0,0,30.0
+2017,73,60.0,138,Entropy,Amherst,New Hampshire,False,0,18,12,10.0,0,40.0,13,7,0.0,0,20.0
+2017,74,60.0,319,Big Bad Bob,Alton,New Hampshire,False,0,15,13,0.0,5,33.0,15,12,0.0,0,27.0
+2017,75,58.0,3461,Operation PEACCE Robotics,Bristol,Connecticut,False,0,13,0,0.0,8,21.0,15,2,20.0,0,37.0
+2017,76,57.0,6620,The Northmengineers,North Smithfield,Rhode Island,False,10,5,0,0.0,0,5.0,15,2,20.0,5,42.0
+2017,77,57.0,4055,NRG,Winchester,Connecticut,False,0,12,2,10.0,5,29.0,15,13,0.0,0,28.0
+2017,78,57.0,1831,Screaming Eagles,Gilford,New Hampshire,False,0,17,14,0.0,0,31.0,14,12,0.0,0,26.0
+2017,79,57.0,1735,Green Reapers,Worcester,Massachusetts,False,0,15,0,0.0,8,23.0,14,10,0.0,10,34.0
+2017,80,56.0,3236,TRIFORCE,Franklin,Massachusetts,False,0,17,10,0.0,5,32.0,11,8,0.0,5,24.0
+2017,81,55.0,175,Buzz Robotics,Enfield,Connecticut,True,0,8,12,0.0,0,20.0,18,12,0.0,5,35.0
+2017,82,54.0,663,Robonauts,Whitinsville,Massachusetts,False,0,15,0,0.0,0,15.0,12,7,20.0,0,39.0
+2017,83,54.0,5000,Hammerheads,Hingham,Massachusetts,False,0,17,11,0.0,0,28.0,16,10,0.0,0,26.0
+2017,84,53.0,3205,Patriots,Concord,Massachusetts,False,0,16,10,10.0,0,36.0,11,6,0.0,0,17.0
+2017,85,52.0,69,HYPER,Quincy,Massachusetts,False,0,12,7,0.0,5,24.0,17,11,0.0,0,28.0
+2017,86,52.0,4557,FullMetal Falcons,Middletown,Connecticut,False,0,15,7,0.0,8,30.0,14,8,0.0,0,22.0
+2017,87,51.0,157,AZTECHS,Marlborough,Massachusetts,False,0,16,9,10.0,0,35.0,11,0,0.0,5,16.0
+2017,88,51.0,1517,AMP'D UP,Concord,New Hampshire,False,0,16,10,0.0,0,26.0,15,10,0.0,0,25.0
+2017,89,51.0,839,Rosie Robotics,Agawam,Massachusetts,False,0,11,3,0.0,5,19.0,18,14,0.0,0,32.0
+2017,90,49.0,1289,Gearheadz,Lawrence,Massachusetts,False,0,10,0,0.0,5,15.0,15,9,10.0,0,34.0
+2017,91,49.0,2064,The Panther Project,Middlebury,Connecticut,False,0,17,10,0.0,0,27.0,7,5,0.0,10,22.0
+2017,92,48.0,1740,Cyber Colonels,Ledyard,Connecticut,False,0,14,2,20.0,0,36.0,12,0,0.0,0,12.0
+2017,93,48.0,4048,Redshift,Westborough,Massachusetts,False,0,9,6,10.0,5,30.0,13,0,0.0,5,18.0
+2017,94,48.0,1786,The Robotics Team,Dublin,New Hampshire,False,0,13,10,0.0,0,23.0,16,9,0.0,0,25.0
+2017,95,48.0,1768,Nashoba Robotics,Bolton,Massachusetts,False,0,17,9,0.0,5,31.0,8,9,0.0,0,17.0
+2017,96,48.0,1124,UberBots,Avon,Connecticut,False,0,13,8,0.0,0,21.0,14,8,0.0,5,27.0
+2017,97,47.0,178,The 2nd Law Enforcers,Farmington,Connecticut,True,0,9,1,20.0,0,30.0,4,8,0.0,5,17.0
+2017,98,47.0,5752,Bevbotics,Beverly,Massachusetts,False,0,11,7,10.0,0,28.0,14,5,0.0,0,19.0
+2017,99,47.0,5112,The Gongoliers,Foster and Glocester ,Rhode Island,False,0,15,1,0.0,5,21.0,12,4,10.0,0,26.0
+2017,100,47.0,246,Overclocked,Boston,Massachusetts,False,0,10,8,0.0,0,18.0,18,11,0.0,0,29.0
+2017,101,47.0,176,Aces High,Windsor Locks,Connecticut,False,0,18,12,0.0,0,30.0,10,7,0.0,0,17.0
+2017,102,47.0,885,Ro-bovines,Randolph Center,Vermont,False,0,13,8,0.0,0,21.0,15,11,0.0,0,26.0
+2017,103,47.0,6691,Torque,Wolfeboro,New Hampshire,False,10,16,9,0.0,0,25.0,7,5,0.0,0,12.0
+2017,104,47.0,6367,The ElectroLights,Dorchester Center,Massachusetts,False,10,6,0,0.0,8,14.0,14,9,0.0,0,23.0
+2017,105,46.0,6529,Beantown Blitz,Roxbury Crossing,Massachusetts,False,10,9,0,0.0,0,9.0,6,1,20.0,0,27.0
+2017,106,46.0,5962,perSEVERE,Lowell,Massachusetts,False,5,9,0,0.0,0,9.0,13,4,10.0,5,32.0
+2017,107,45.0,172,Northern Force,Falmouth,Maine,False,0,11,0,0.0,5,16.0,15,9,0.0,5,29.0
+2017,108,44.0,97,Bionic Beef,Cambridge,Massachusetts,False,0,11,0,0.0,0,11.0,11,12,10.0,0,33.0
+2017,109,44.0,237,Black Magic Robotics,Watertown,Connecticut,False,0,8,0,0.0,0,8.0,17,11,0.0,8,36.0
+2017,110,43.0,1761,STEAMpunk Tigers,Lynn,Massachusetts,False,0,7,6,0.0,0,13.0,11,9,10.0,0,30.0
+2017,111,42.0,1100,Inverse Polarity,Northborough/Southborough,Massachusetts,False,0,8,10,0.0,0,18.0,11,3,10.0,0,24.0
+2017,112,42.0,2170,Galvanized Guardians,Glastonbury,Connecticut,False,0,12,5,0.0,5,22.0,12,3,0.0,5,20.0
+2017,113,41.0,1307,Robosaints,Dover,New Hampshire,False,0,15,0,0.0,0,15.0,13,3,10.0,0,26.0
+2017,114,41.0,4546,Shockwave,Dover,New Hampshire,False,0,14,0,0.0,0,14.0,16,11,0.0,0,27.0
+2017,115,41.0,3146,GRANBY GRUNTS,Granby,Connecticut,False,0,11,0,0.0,5,16.0,13,7,0.0,5,25.0
+2017,116,40.0,5459,Ipswich TIGERS,Ipswich,Massachusetts,False,0,12,3,0.0,0,15.0,12,3,10.0,0,25.0
+2017,117,40.0,155,The TechnoNuts,Berlin,Connecticut,False,0,10,0,0.0,5,15.0,9,11,0.0,5,25.0
+2017,118,40.0,3930,SMART  Spruce Mountain Area Robotics Team,Jay,Maine,False,0,12,2,0.0,5,19.0,11,0,0.0,10,21.0
+2017,119,39.0,2262,Robo-Panthers,Holliston,Massachusetts,False,0,9,5,10.0,0,24.0,15,0,0.0,0,15.0
+2017,120,39.0,1247,Blood. Sweat. and Gears,North Sutton,New Hampshire,False,0,9,0,0.0,0,9.0,18,12,0.0,0,30.0
+2017,121,39.0,166,Chop Shop,Merrimack,New Hampshire,False,0,8,0,0.0,0,8.0,14,9,0.0,8,31.0
+2017,122,39.0,2877,LigerBots,Newton,Massachusetts,False,0,10,0,0.0,5,15.0,13,6,0.0,5,24.0
+2017,123,38.0,1027,Mechatronic Maniacs,West Springfield,Massachusetts,False,0,7,0,0.0,0,7.0,13,8,10.0,0,31.0
+2017,124,38.0,6346,Cybears Robotics Team,Norwalk,Connecticut,False,10,11,0,0.0,5,16.0,12,0,0.0,0,12.0
+2017,125,37.0,5129,Digital Devils,Plainville,Connecticut,False,0,17,11,0.0,0,28.0,9,0,0.0,0,9.0
+2017,126,37.0,1350,The Rambots,Providence,Rhode Island,False,0,16,9,0.0,0,25.0,12,0,0.0,0,12.0
+2017,127,37.0,3634,Spark City,Bridgeport,Connecticut,False,0,12,0,0.0,0,12.0,16,9,0.0,0,25.0
+2017,128,36.0,4097,Devilbots,Northampton,Massachusetts,False,0,14,11,0.0,0,25.0,11,0,0.0,0,11.0
+2017,129,36.0,5856,Bullbots,Waterbury,Connecticut,False,5,16,6,0.0,0,22.0,9,0,0.0,0,9.0
+2017,130,35.0,4034,Pelham πthons Team 4034,Pelham,New Hampshire,False,0,7,4,0.0,0,11.0,12,2,10.0,0,24.0
+2017,131,35.0,126,Gael Force,Clinton,Massachusetts,True,0,8,0,0.0,0,8.0,15,12,0.0,0,27.0
+2017,132,35.0,1099,DiscoTechs,Brookfield,Connecticut,False,0,16,9,0.0,0,25.0,10,0,0.0,0,10.0
+2017,133,34.0,6333,Scavenger Robotics,Putnam,Connecticut,False,10,8,0,0.0,8,16.0,8,0,0.0,0,8.0
+2017,134,33.0,5506,Midcoast MAINEiacs Robotics Team,Searsport,Maine,False,0,8,0,0.0,0,8.0,12,3,10.0,0,25.0
+2017,135,33.0,3566,Gone Fishin',Southborough,Massachusetts,False,0,10,9,0.0,0,19.0,12,2,0.0,0,14.0
+2017,136,33.0,1965,Firebirds,Allston,Massachusetts,False,0,5,0,0.0,0,5.0,14,9,0.0,5,28.0
+2017,137,33.0,4572,BArlow RobAutics,Redding,Connecticut,False,0,13,0,0.0,0,13.0,14,6,0.0,0,20.0
+2017,138,31.0,6762,Oscats,Hillsborough,New Hampshire,False,10,6,0,0.0,5,11.0,10,0,0.0,0,10.0
+2017,139,30.0,6723,Mechanical Mounties,Williamstown,Massachusetts,False,10,7,0,0.0,5,12.0,8,0,0.0,0,8.0
+2017,140,29.0,2876,Devilbotz,Burlington,Massachusetts,False,0,4,0,0.0,0,4.0,13,7,0.0,5,25.0
+2017,141,29.0,4925,The Resistance,Wolfeboro,New Hampshire,False,0,9,0,0.0,0,9.0,14,6,0.0,0,20.0
+2017,142,29.0,3466,VIKINGS ROBOTICS,Westford,Massachusetts,False,0,12,4,0.0,0,16.0,13,0,0.0,0,13.0
+2017,143,29.0,6224,Saint Dominators,Auburn,Maine,False,5,12,0,0.0,0,12.0,12,0,0.0,0,12.0
+2017,144,29.0,6617,NASA BHS Black Hawks Robotics Club,Bellingham,Massachusetts,False,10,10,0,0.0,0,10.0,9,0,0.0,0,9.0
+2017,145,28.0,2713,iRaiders,Melrose,Massachusetts,False,0,12,0,0.0,5,17.0,11,0,0.0,0,11.0
+2017,146,27.0,2836,Team Beta,Woodbury,Connecticut,False,0,14,0,0.0,0,14.0,13,0,0.0,0,13.0
+2017,147,27.0,5902,The Wire Clippers,Portsmouth,New Hampshire,False,5,7,0,0.0,5,12.0,10,0,0.0,0,10.0
+2017,148,26.0,6153,Blue Crew,Farmington,Maine,False,5,10,0,0.0,0,10.0,9,2,0.0,0,11.0
+2017,149,26.0,3609,Duct Tape Dragons,Portland,Maine,False,0,13,0,0.0,0,13.0,13,0,0.0,0,13.0
+2017,150,25.0,1729,Team Inconceivable!,Peterborough,New Hampshire,False,0,12,0,0.0,0,12.0,12,1,0.0,0,13.0
+2017,151,25.0,571,Team Paragon,Windsor,Connecticut,False,0,15,0,0.0,5,20.0,5,0,0.0,0,5.0
+2017,152,25.0,4473,Delta Prime Robotics,Farmingdale,Maine,False,0,14,0,0.0,0,14.0,11,0,0.0,0,11.0
+2017,153,25.0,509,Red Storm,Bedford,New Hampshire,False,0,11,0,0.0,5,16.0,9,0,0.0,0,9.0
+2017,154,23.0,2423,The KwarQs,Watertown,Massachusetts,False,0,16,0,0.0,0,16.0,7,0,0.0,0,7.0
+2017,155,23.0,1277,The Robotomies,Groton,Massachusetts,False,0,9,0,0.0,0,9.0,14,0,0.0,0,14.0
+2017,156,23.0,5142,Robo Dominators,West Haven,Connecticut,False,0,12,0,0.0,0,12.0,11,0,0.0,0,11.0
+2017,157,23.0,5122,robOTies,Old Town,Maine,False,0,10,0,0.0,5,15.0,8,0,0.0,0,8.0
+2017,158,23.0,6301,Nerointellect-sim Engineering & Robot Design Soiree   N.E.R.D.S.,Taunton,Massachusetts,False,10,4,0,0.0,0,4.0,9,0,0.0,0,9.0
+2017,159,22.0,5491,Hard Reset,Winchendon,Massachusetts,False,0,10,0,0.0,0,10.0,12,0,0.0,0,12.0
+2017,160,22.0,6335,Terminal Velocity,Burlington,Massachusetts,False,10,6,0,0.0,0,6.0,6,0,0.0,0,6.0
+2017,161,21.0,3525,The Nuts & Bolts of Fury,Waterbury,Connecticut,True,0,16,0,0.0,0,16.0,5,0,0.0,0,5.0
+2017,162,21.0,4555,Sprocketology,Skowhegan,Maine,False,0,8,0,0.0,0,8.0,13,0,0.0,0,13.0
+2017,163,21.0,5347,Gryphons,Weston,Massachusetts,False,0,12,0,0.0,0,12.0,9,0,0.0,0,9.0
+2017,164,21.0,4987,MegaRams,Worcester,Massachusetts,False,0,12,0,0.0,0,12.0,9,0,0.0,0,9.0
+2017,165,21.0,5844,Phoenix Tech,Boston,Massachusetts,False,5,5,0,0.0,0,5.0,11,0,0.0,0,11.0
+2017,166,20.0,3182,Athena's Warriors,Hartford,Connecticut,False,0,9,0,0.0,0,9.0,11,0,0.0,0,11.0
+2017,167,20.0,6161,Equilibrium,Gray,Maine,False,5,8,0,0.0,0,8.0,7,0,0.0,0,7.0
+2017,168,20.0,811,Wild Cards,Nashua,New Hampshire,False,0,7,0,0.0,5,12.0,8,0,0.0,0,8.0
+2017,169,19.0,1699,Robocats,Colchester,Connecticut,False,0,9,0,0.0,0,9.0,10,0,0.0,0,10.0
+2017,170,19.0,6172,The Mad Dogs,Fairfield,Maine,False,5,5,0,0.0,0,5.0,9,0,0.0,0,9.0
+2017,171,19.0,2079,4H ALARM Robotics,Franklin,Massachusetts,False,0,6,0,0.0,5,11.0,8,0,0.0,0,8.0
+2017,172,17.0,4958,Robocats,Langdon,New Hampshire,False,0,11,0,0.0,0,11.0,6,0,0.0,0,6.0
+2017,173,17.0,5633,Hyde Cyber Wolves,Bath,Maine,False,0,7,0,0.0,0,7.0,10,0,0.0,0,10.0
+2017,174,17.0,1474,Titans,Tewksbury,Massachusetts,False,0,9,0,0.0,0,9.0,8,0,0.0,0,8.0
+2017,175,17.0,3451,The ANOMALY,Sanford,Maine,False,0,4,0,0.0,0,4.0,8,0,0.0,5,13.0
+2017,176,17.0,5969,English Skunkworks,Jamaica Plain,Massachusetts,False,5,4,0,0.0,0,4.0,8,0,0.0,0,8.0
+2017,177,17.0,1973,Burning Tiger   #1973,Boston,Massachusetts,False,0,6,0,0.0,0,6.0,6,0,0.0,5,11.0
+2017,178,16.0,4796,Cyber Dragons,Hyde Park,Massachusetts,False,0,10,0,0.0,0,10.0,6,0,0.0,0,6.0
+2017,179,15.0,5746,Human Error,Deep River,Connecticut,False,0,4,0,0.0,0,4.0,11,0,0.0,0,11.0
+2017,180,15.0,3104,The Cyber Rams,Stamford,Connecticut,False,0,5,0,0.0,0,5.0,10,0,0.0,0,10.0
+2017,181,15.0,5471,W.Hi.R.R.,Winthrop,Maine,False,0,6,0,0.0,0,6.0,9,0,0.0,0,9.0
+2017,182,15.0,3597,Robo-Rangers,Kittery,Maine,False,0,9,0,0.0,0,9.0,6,0,0.0,0,6.0
+2017,183,15.0,1512,The Big Red,Concord,New Hampshire,False,0,8,0,0.0,0,8.0,7,0,0.0,0,7.0
+2017,184,14.0,4042,Murphy's Lawyers,South China,Maine,False,0,10,0,0.0,0,10.0,4,0,0.0,0,4.0
+2017,185,14.0,151,Tough Techs,Nashua,New Hampshire,False,0,9,0,0.0,0,9.0,5,0,0.0,0,5.0
+2017,186,14.0,3555,Aluminati,Storrs Mansfield,Connecticut,False,0,7,0,0.0,0,7.0,7,0,0.0,0,7.0
+2017,187,13.0,4929,Maroon Monsoon,Haverhill,Massachusetts,False,0,6,0,0.0,0,6.0,7,0,0.0,0,7.0
+2017,188,12.0,5265,Radical Impact,Portland,Maine,False,0,7,0,0.0,0,7.0,5,0,0.0,0,5.0
+2017,189,12.0,4628,Sintian Robotics,Hamden,Connecticut,False,0,6,0,0.0,0,6.0,6,0,0.0,0,6.0
+2017,190,11.0,4311,Swampscott Currents,Swampscott,Massachusetts,False,0,5,0,0.0,0,5.0,6,0,0.0,0,6.0
+2017,191,10.0,3323,Potential Energy,Litchfield,New Hampshire,False,0,6,0,0.0,0,6.0,4,0,0.0,0,4.0
+2017,192,10.0,3780,Robot Unicorns,Providence,Rhode Island,False,0,6,0,0.0,0,6.0,4,0,0.0,0,4.0
+2017,193,10.0,5686,Wirecats,Simsbury,Connecticut,False,0,6,0,0.0,0,6.0,4,0,0.0,0,4.0
+2017,194,9.0,2785,Prometheus,Kent,Connecticut,False,0,9,0,0.0,0,9.0
+2017,195,5.0,6241,CowTech,San Jose,California,False,5
+2018,1,365.0,319,Big Bad Bob,Alton,New Hampshire,True,0,19,16,30.0,8,73.0,22,16,30.0,5,73.0,66,48,90.0,15,219.0
+2018,2,363.0,195,CyberKnights,Southington,Connecticut,True,0,21,15,30.0,5,71.0,22,16,30.0,5,73.0,66,48,90.0,15,219.0
+2018,3,294.0,177,Bobcat Robotics,South Windsor,Connecticut,True,0,20,14,20.0,5,59.0,21,16,30.0,0,67.0,63,45,60.0,0,168.0
+2018,4,286.0,176,Aces High,Windsor Locks,Connecticut,True,0,17,16,30.0,5,68.0,19,15,20.0,5,59.0,54,45,60.0,0,159.0
+2018,5,278.0,133,B.E.R.T.,Standish,Maine,True,0,22,16,30.0,0,68.0,22,16,30.0,10,78.0,60,42,30.0,0,132.0
+2018,6,272.0,230,Gaelhawks,Shelton,Connecticut,True,0,22,16,30.0,5,73.0,20,16,20.0,5,61.0,54,39,30.0,15,138.0
+2018,7,267.0,125,NUTRONs,Boston,Massachusetts,True,0,20,15,20.0,10,65.0,19,15,10.0,5,49.0,51,42,30.0,30,153.0
+2018,8,254.0,78,AIR STRIKE,Newport,Rhode Island,True,0,17,16,20.0,5,58.0,20,16,20.0,5,61.0,39,6,60.0,30,135.0
+2018,9,234.0,5687,The Outliers,Portland,Maine,True,0,21,16,30.0,5,72.0,19,15,30.0,5,69.0,57,36,0.0,0,93.0
+2018,10,220.0,1519,Mechanical Mayhem,Bedford,New Hampshire,True,0,22,16,20.0,5,63.0,19,16,30.0,5,70.0,39,33,0.0,15,87.0
+2018,11,209.0,238,Crusaders,Manchester,New Hampshire,True,0,22,16,30.0,5,73.0,21,15,20.0,5,61.0,36,9,30.0,0,75.0
+2018,12,206.0,88,TJ²,Bridgewater,Massachusetts,True,0,20,14,30.0,5,69.0,21,15,30.0,5,71.0,30,36,0.0,0,66.0
+2018,13,198.0,4564,Orange Chaos,Brewer,Maine,False,0,19,14,30.0,5,68.0,21,15,20.0,5,61.0,42,27,0.0,0,69.0
+2018,14,195.0,175,Buzz Robotics,Enfield,Connecticut,True,0,16,10,0.0,0,26.0,18,12,10.0,0,40.0,60,39,30.0,0,129.0
+2018,15,190.0,2168,Aluminum Falcons,Groton,Connecticut,True,0,18,15,30.0,0,63.0,19,16,30.0,5,70.0,36,21,0.0,0,57.0
+2018,16,185.0,5846,SouthCoast Corsairs,North Dartmouth,Massachusetts,True,0,9,5,0.0,5,19.0,21,15,10.0,0,46.0,27,3,90.0,0,120.0
+2018,17,180.0,4557,FullMetal Falcons,Middletown,Connecticut,True,0,17,12,0.0,8,37.0,16,14,10.0,10,50.0,51,27,0.0,15,93.0
+2018,18,177.0,3236,TRIFORCE,Franklin,Massachusetts,True,0,14,10,10.0,5,39.0,17,11,20.0,0,48.0,57,33,0.0,0,90.0
+2018,19,173.0,95,Grasshoppers,White River Junction,Vermont,False,0,18,14,10.0,5,47.0,22,16,20.0,5,63.0,39,24,0.0,0,63.0
+2018,20,168.0,6328,Mechanical Advantage,Littleton,Massachusetts,True,5,13,10,0.0,10,33.0,22,16,30.0,5,73.0,42,0,0.0,15,57.0
+2018,21,161.0,237,Black Magic Robotics,Watertown,Connecticut,True,0,15,9,0.0,5,29.0,19,14,10.0,5,48.0,42,12,30.0,0,84.0
+2018,22,161.0,6933,Archytas,Bethel,Vermont,True,10,20,15,20.0,8,63.0,20,14,10.0,8,52.0,21,0,0.0,15,36.0
+2018,23,157.0,1729,Team Inconceivable!,Peterborough,New Hampshire,True,0,18,15,0.0,0,33.0,18,13,10.0,5,46.0,48,30,0.0,0,78.0
+2018,24,156.0,2877,LigerBots,Newton,Massachusetts,True,0,16,11,0.0,5,32.0,18,15,20.0,8,61.0,48,15,0.0,0,63.0
+2018,25,153.0,1058,PVC Pirates,Londonderry,New Hampshire,False,0,19,15,20.0,5,59.0,17,14,10.0,5,46.0,33,0,0.0,15,48.0
+2018,26,152.0,558,Elm City Robo Squad,New Haven,Connecticut,True,0,14,13,10.0,10,47.0,18,13,0.0,5,36.0,36,18,0.0,15,69.0
+2018,27,151.0,6763,FUSION,Manchester,New Hampshire,False,5,15,12,10.0,5,42.0,21,15,20.0,0,56.0,48,0,0.0,0,48.0
+2018,28,148.0,5813,Morpheus,Concord,New Hampshire,True,0,19,14,10.0,5,48.0,20,15,20.0,0,55.0,45,0,0.0,0,45.0
+2018,29,148.0,7127,LongMetal,Longmeadow,Massachusetts,False,10,9,1,20.0,10,40.0,15,0,0.0,8,23.0,51,0,0.0,24,75.0
+2018,30,147.0,7153,Aetos Dios (Eagles of Zeus),Manchester,Connecticut,True,10,13,2,30.0,8,53.0,9,1,30.0,5,45.0,15,0,0.0,24,39.0
+2018,31,146.0,2170,Galvanized Guardians,Glastonbury,Connecticut,True,0,13,6,0.0,5,24.0,19,14,0.0,5,38.0,54,30,0.0,0,84.0
+2018,32,142.0,6329,The Bucks' Wrath,Bucksport,Maine,True,5,17,13,10.0,5,45.0,18,15,20.0,0,53.0,39,0,0.0,0,39.0
+2018,33,139.0,2067,Apple Pi,Guilford,Connecticut,True,0,15,12,0.0,5,32.0,18,14,10.0,8,50.0,33,0,0.0,24,57.0
+2018,34,136.0,467,Colonials,Shrewsbury,Massachusetts,True,0,13,8,0.0,10,31.0,15,10,0.0,5,30.0,45,0,0.0,30,75.0
+2018,35,135.0,1073,The Force Team,Hollis,New Hampshire,True,0,15,12,0.0,5,32.0,16,12,10.0,5,43.0,45,0,0.0,15,60.0
+2018,36,134.0,1100,Inverse Polarity,Northborough/Southborough,Massachusetts,True,0,16,10,10.0,0,36.0,14,11,20.0,5,50.0,48,0,0.0,0,48.0
+2018,37,131.0,3623,TerrorBots,Leominster,Massachusetts,True,0,13,3,30.0,0,46.0,14,6,20.0,0,40.0,45,0,0.0,0,45.0
+2018,38,128.0,58,The Riot Crew,South Portland,Maine,True,0,22,16,20.0,5,63.0,17,13,0.0,5,35.0,30,0,0.0,0,30.0
+2018,39,126.0,1071,Team MAX,Wolcott,Connecticut,True,0,7,8,0.0,0,15.0,18,12,10.0,5,45.0,51,0,0.0,15,66.0
+2018,40,126.0,61,The Intimidators,Upton,Massachusetts,False,0,18,12,0.0,0,30.0,17,14,0.0,5,36.0,45,0,0.0,15,60.0
+2018,41,122.0,4905,Andromeda One,Ayer,Massachusetts,True,0,16,11,0.0,8,35.0,19,14,10.0,5,48.0,39,0,0.0,0,39.0
+2018,42,119.0,3461,Operation PEACCE Robotics,Bristol,Connecticut,True,0,19,13,10.0,0,42.0,16,13,10.0,8,47.0,30,0,0.0,0,30.0
+2018,43,118.0,4909,Bionics,Billerica,Massachusetts,True,0,17,11,0.0,5,33.0,19,13,10.0,10,52.0,33,0,0.0,0,33.0
+2018,44,116.0,811,Wild Cards,Nashua,New Hampshire,False,0,17,13,10.0,5,45.0,15,5,10.0,5,35.0,36,0,0.0,0,36.0
+2018,45,105.0,6201,The Highlanders,Somerville,Massachusetts,False,0,13,9,0.0,0,22.0,18,13,10.0,0,41.0,42,0,0.0,0,42.0
+2018,46,104.0,138,Entropy,Amherst,New Hampshire,False,0,16,13,10.0,0,39.0,21,15,20.0,0,56.0,9,0,0.0,0,9.0
+2018,47,103.0,663,Robonauts,Whitinsville,Massachusetts,True,0,19,13,10.0,0,42.0,18,12,10.0,0,40.0,21,0,0.0,0,21.0
+2018,48,103.0,2836,Team Beta,Woodbury,Connecticut,False,0,17,13,10.0,0,40.0,17,10,0.0,0,27.0,36,0,0.0,0,36.0
+2018,49,102.0,4041,Iron Tigers,Gardiner,Maine,False,0,19,14,10.0,5,48.0,16,9,0.0,5,30.0,24,0,0.0,0,24.0
+2018,50,100.0,2370,IBOTS,Rutland,Vermont,False,0,21,15,0.0,5,41.0,19,13,0.0,0,32.0,27,0,0.0,0,27.0
+2018,51,99.0,3555,Aluminati,Storrs Mansfield,Connecticut,False,0,15,4,10.0,0,29.0,17,12,0.0,5,34.0,36,0,0.0,0,36.0
+2018,52,98.0,5856,Bullbots,Waterbury,Connecticut,False,0,18,14,20.0,0,52.0,12,7,0.0,0,19.0,27,0,0.0,0,27.0
+2018,53,95.0,2342,Team Phoenix,Nashua,New Hampshire,False,0,17,12,0.0,10,39.0,15,12,0.0,5,32.0,24,0,0.0,0,24.0
+2018,54,94.0,1289,Gearheadz,Lawrence,Massachusetts,False,0,14,7,0.0,0,21.0,12,1,30.0,0,43.0,30,0,0.0,0,30.0
+2018,55,94.0,5422,Stormgears FRC,Westford,Massachusetts,True,0,12,0,0.0,8,20.0,10,3,0.0,10,23.0,27,0,0.0,24,51.0
+2018,56,92.0,4176,Iron Tigers,North Easton,Massachusetts,False,0,8,0,0.0,0,8.0,15,1,30.0,5,51.0,33,0,0.0,0,33.0
+2018,57,88.0,1768,Nashoba Robotics,Bolton,Massachusetts,False,0,12,11,0.0,5,28.0,12,12,10.0,5,39.0,21,0,0.0,0,21.0
+2018,58,88.0,5735,Control Freaks,Wayland,Massachusetts,False,0,15,9,0.0,0,24.0,18,12,10.0,0,40.0,24,0,0.0,0,24.0
+2018,59,87.0,5962,perSEVERE,Lowell,Massachusetts,True,0,9,0,0.0,0,9.0,8,0,0.0,10,18.0,30,0,0.0,30,60.0
+2018,60,85.0,999,MechaRAMS,Cheshire,Connecticut,False,0,9,9,0.0,0,18.0,17,11,10.0,5,43.0,24,0,0.0,0,24.0
+2018,61,84.0,1699,Robocats,Colchester,Connecticut,False,0,16,11,0.0,0,27.0,16,11,10.0,5,42.0,15,0,0.0,0,15.0
+2018,62,80.0,1153,Timberwolves,Walpole,Massachusetts,False,0,16,12,0.0,0,28.0,15,4,10.0,5,34.0,18,0,0.0,0,18.0
+2018,63,75.0,236,Techno-Ticks,Old Lyme,Connecticut,True,0,15,15,10.0,0,40.0,14,11,10.0,0,35.0
+2018,64,75.0,5000,Hammerheads,Hingham,Massachusetts,False,0,17,12,0.0,0,29.0,20,14,0.0,0,34.0,12,0,0.0,0,12.0
+2018,65,73.0,131,CHAOS,Manchester,New Hampshire,False,0,18,14,10.0,0,42.0,17,14,0.0,0,31.0
+2018,66,67.0,6224,Saint Dominators,Auburn,Maine,False,0,18,13,10.0,0,41.0,11,5,10.0,0,26.0
+2018,67,67.0,3930,SMART  Spruce Mountain Area Robotics Team,Jay,Maine,False,0,13,4,10.0,10,37.0,7,0,0.0,5,12.0,18,0,0.0,0,18.0
+2018,68,65.0,121,Rhode Warriors,Middletown,Rhode Island,False,0,12,2,30.0,0,44.0,12,9,0.0,0,21.0
+2018,69,60.0,178,The 2nd Law Enforcers,Farmington,Connecticut,False,0,15,9,0.0,0,24.0,13,13,10.0,0,36.0
+2018,70,59.0,23,PNTA Pilgrim Nuclear Technology Alliance,Plymouth,Massachusetts,False,0,14,5,0.0,0,19.0,17,13,10.0,0,40.0
+2018,71,58.0,6367,The ElectroLights,Dorchester Center,Massachusetts,False,5,6,9,0.0,5,20.0,12,11,10.0,0,33.0
+2018,72,58.0,2876,Devilbotz,Burlington,Massachusetts,False,0,16,11,0.0,5,32.0,16,10,0.0,0,26.0
+2018,73,58.0,509,Red Storm,Bedford,New Hampshire,False,0,14,4,0.0,5,23.0,17,13,0.0,5,35.0
+2018,74,57.0,2064,The Panther Project,Middlebury,Connecticut,False,0,11,11,0.0,0,22.0,13,2,20.0,0,35.0
+2018,75,57.0,228,GUS Robotics,Meriden,Connecticut,False,0,16,10,0.0,0,26.0,14,12,0.0,5,31.0
+2018,76,56.0,4906,The Collective,Waterville,Maine,False,0,13,9,0.0,0,22.0,12,2,20.0,0,34.0
+2018,77,56.0,190,Gompei and the H.E.R.D.,Worcester,Massachusetts,True,0,12,7,0.0,0,19.0,15,12,10.0,0,37.0
+2018,78,56.0,181,Birds Of Prey,Hartford,Connecticut,False,0,13,11,0.0,5,29.0,13,14,0.0,0,27.0
+2018,79,55.0,348,Norwell Robotics,Norwell,Massachusetts,False,0,16,11,0.0,0,27.0,17,11,0.0,0,28.0
+2018,80,55.0,1721,Tidal Force,Concord,New Hampshire,False,0,16,10,0.0,0,26.0,17,12,0.0,0,29.0
+2018,81,54.0,155,The TechnoNuts,Berlin,Connecticut,False,0,8,8,0.0,8,24.0,12,3,10.0,5,30.0
+2018,82,54.0,213,The Dirty Birds,Keene,New Hampshire,False,0,14,9,0.0,0,23.0,18,13,0.0,0,31.0
+2018,83,53.0,5112,The Gongoliers,Foster and Glocester ,Rhode Island,False,0,10,4,10.0,0,24.0,14,10,0.0,5,29.0
+2018,84,52.0,1517,AMP'D UP,Concord,New Hampshire,False,0,12,1,30.0,0,43.0,9,0,0.0,0,9.0
+2018,85,52.0,5506,Midcoast MAINEiacs Robotics Team,Searsport,Maine,False,0,6,0,0.0,5,11.0,14,2,20.0,5,41.0
+2018,86,52.0,1965,Firebirds,Allston,Massachusetts,False,0,13,0,0.0,0,13.0,12,2,20.0,5,39.0
+2018,87,52.0,3719,STEM Whalers,New London ,Connecticut,False,0,7,7,10.0,5,29.0,11,2,10.0,0,23.0
+2018,88,52.0,3597,Robo-Rangers,Kittery,Maine,False,0,12,7,0.0,5,24.0,17,11,0.0,0,28.0
+2018,89,51.0,839,Rosie Robotics,Agawam,Massachusetts,False,0,10,7,0.0,5,22.0,13,6,10.0,0,29.0
+2018,90,50.0,4908,Duxbury Dragons,Duxbury,Massachusetts,False,0,16,10,0.0,0,26.0,15,9,0.0,0,24.0
+2018,91,50.0,246,Overclocked,Boston,Massachusetts,False,0,16,9,0.0,0,25.0,16,9,0.0,0,25.0
+2018,92,49.0,2648,Infinite Loop,Oakland,Maine,False,0,13,11,0.0,0,24.0,14,11,0.0,0,25.0
+2018,93,49.0,3958,Schrodinger's Cat,Boston,Massachusetts,False,0,15,9,0.0,5,29.0,10,10,0.0,0,20.0
+2018,94,49.0,6335,Terminal Velocity,Burlington,Massachusetts,False,5,14,6,0.0,5,25.0,13,6,0.0,0,19.0
+2018,95,48.0,157,AZTECHS,Marlborough,Massachusetts,True,0,16,12,0.0,0,28.0,12,8,0.0,0,20.0
+2018,96,48.0,501,The PowerKnights,Manchester,New Hampshire,False,0,5,0,0.0,0,5.0,19,14,0.0,10,43.0
+2018,97,48.0,3467,Windham Windup,Windham,New Hampshire,False,0,18,13,0.0,5,36.0,12,0,0.0,0,12.0
+2018,98,47.0,6731,Record Robotics,Belmont,Massachusetts,False,5,6,0,0.0,0,6.0,14,2,20.0,0,36.0
+2018,99,46.0,4311,Swampscott Currents,Swampscott,Massachusetts,False,0,5,0,0.0,0,5.0,10,1,30.0,0,41.0
+2018,100,46.0,4555,Sprocketology,Skowhegan,Maine,False,0,5,0,0.0,0,5.0,10,1,30.0,0,41.0
+2018,101,46.0,2084,Robots by the C,Manchester,Massachusetts,False,0,9,13,0.0,0,22.0,14,10,0.0,0,24.0
+2018,102,46.0,1099,DiscoTechs,Brookfield,Connecticut,False,0,12,7,0.0,0,19.0,16,11,0.0,0,27.0
+2018,103,44.0,3466,VIKINGS ROBOTICS,Westford,Massachusetts,False,0,12,1,20.0,0,33.0,11,0,0.0,0,11.0
+2018,104,44.0,716,Who'sCTEKS,Falls Village,Connecticut,False,0,12,6,0.0,0,18.0,13,3,10.0,0,26.0
+2018,105,44.0,5494,Bizarbots Robotics,Holbrook,Massachusetts,False,0,13,0,0.0,5,18.0,12,4,10.0,0,26.0
+2018,106,44.0,5563,Phalanx,Lynn,Massachusetts,False,0,14,8,0.0,0,22.0,15,7,0.0,0,22.0
+2018,107,44.0,126,Gael Force,Clinton,Massachusetts,True,0,11,0,0.0,0,11.0,16,12,0.0,5,33.0
+2018,108,44.0,6172,The Mad Dogs,Fairfield,Maine,False,0,14,6,0.0,0,20.0,13,6,0.0,5,24.0
+2018,109,44.0,6153,Blue Crew,Farmington,Maine,False,0,14,0,0.0,0,14.0,15,10,0.0,5,30.0
+2018,110,44.0,6324,The Blue Devils,Salem,New Hampshire,False,5,15,10,0.0,0,25.0,14,0,0.0,0,14.0
+2018,111,43.0,6620,The Northmengineers,North Smithfield,Rhode Island,False,5,11,1,20.0,0,32.0,6,0,0.0,0,6.0
+2018,112,43.0,3146,GRANBY GRUNTS,Granby,Connecticut,False,0,13,5,0.0,0,18.0,12,8,0.0,5,25.0
+2018,113,43.0,5686,Wirecats,Simsbury,Connecticut,False,0,11,5,0.0,0,16.0,15,7,0.0,5,27.0
+2018,114,43.0,172,Northern Force,Falmouth,Maine,False,0,10,2,0.0,0,12.0,14,9,0.0,8,31.0
+2018,115,42.0,5122,robOTies,Old Town,Maine,False,0,7,0,0.0,0,7.0,4,1,30.0,0,35.0
+2018,116,42.0,5129,Digital Devils,Plainville,Connecticut,False,0,4,1,30.0,0,35.0,7,0,0.0,0,7.0
+2018,117,42.0,5142,Robo Dominators,West Haven,Connecticut,False,0,10,3,20.0,0,33.0,9,0,0.0,0,9.0
+2018,118,41.0,3464,Sim-City,Simsbury,Connecticut,False,0,11,5,0.0,0,16.0,16,9,0.0,0,25.0
+2018,119,41.0,571,Team Paragon,Windsor,Connecticut,False,0,12,10,0.0,5,27.0,11,3,0.0,0,14.0
+2018,120,39.0,4546,Shockwave,Dover,New Hampshire,False,0,13,0,0.0,0,13.0,10,6,10.0,0,26.0
+2018,121,39.0,5746,Human Error,Deep River,Connecticut,False,0,14,4,10.0,0,28.0,11,0,0.0,0,11.0
+2018,122,39.0,4169,Warrior Robotics,Sudbury,Massachusetts,False,0,9,0,0.0,0,9.0,12,3,10.0,5,30.0
+2018,123,39.0,173,RAGE Robotics ⚙️,Tolland,Connecticut,False,0,10,0,0.0,0,10.0,16,13,0.0,0,29.0
+2018,124,39.0,4761,The Robockets,Reading,Massachusetts,False,0,12,0,0.0,0,12.0,12,10,0.0,5,27.0
+2018,125,38.0,6691,Torque,Wolfeboro,New Hampshire,False,5,7,2,20.0,0,29.0,4,0,0.0,0,4.0
+2018,126,38.0,4055,NRG,Winchester,Connecticut,False,0,12,8,0.0,0,20.0,12,6,0.0,0,18.0
+2018,127,38.0,3654,TechTigers,Middletown,Connecticut,False,0,11,5,0.0,5,21.0,9,0,0.0,8,17.0
+2018,128,38.0,7240,Nitro Knights,Cambridge,Massachusetts,False,10,9,0,0.0,5,14.0,14,0,0.0,0,14.0
+2018,129,37.0,5265,Radical Impact,Portland,Maine,False,0,12,11,0.0,0,23.0,14,0,0.0,0,14.0
+2018,130,37.0,69,HYPER,Quincy,Massachusetts,False,0,8,0,0.0,0,8.0,13,11,0.0,5,29.0
+2018,131,37.0,2713,iRaiders,Melrose,Massachusetts,False,0,11,0,0.0,0,11.0,16,10,0.0,0,26.0
+2018,132,37.0,7266,NBHS Steampunks,North Brookfield,Massachusetts,False,10,8,0,0.0,5,13.0,9,0,0.0,5,14.0
+2018,133,36.0,2079,4H ALARM Robotics,Franklin,Massachusetts,False,0,12,3,10.0,0,25.0,11,0,0.0,0,11.0
+2018,134,36.0,2523,Tech Storm,Saint Johnsbury,Vermont,False,0,9,4,0.0,0,13.0,14,9,0.0,0,23.0
+2018,135,36.0,3609,Duct Tape Dragons,Portland,Maine,False,0,12,0,0.0,0,12.0,15,9,0.0,0,24.0
+2018,136,36.0,97,Bionic Beef,Cambridge,Massachusetts,False,0,7,0,0.0,5,12.0,13,6,0.0,5,24.0
+2018,137,35.0,6762,Oscats,Hillsborough,New Hampshire,False,5,6,0,0.0,0,6.0,15,9,0.0,0,24.0
+2018,138,35.0,7314,Tornadoes,Franklin,New Hampshire,False,10,4,0,0.0,0,4.0,13,0,0.0,8,21.0
+2018,139,34.0,1512,The Big Red,Concord,New Hampshire,False,0,10,0,0.0,0,10.0,14,10,0.0,0,24.0
+2018,140,34.0,4048,Redshift,Westborough,Massachusetts,False,0,8,0,0.0,5,13.0,13,3,0.0,5,21.0
+2018,141,33.0,3323,Potential Energy,Litchfield,New Hampshire,False,0,7,0,0.0,0,7.0,11,5,10.0,0,26.0
+2018,142,33.0,3205,Patriots,Concord,Massachusetts,False,0,8,9,0.0,0,17.0,8,8,0.0,0,16.0
+2018,143,33.0,4473,Delta Prime Robotics,Farmingdale,Maine,False,0,11,0,0.0,0,11.0,15,7,0.0,0,22.0
+2018,144,33.0,7164,RHODE REBELS,Providence,Rhode Island,False,10,10,0,0.0,0,10.0,8,0,0.0,5,13.0
+2018,145,32.0,4097,Devilbots,Northampton,Massachusetts,False,0,9,4,10.0,0,23.0,9,0,0.0,0,9.0
+2018,146,32.0,5556,Carriagetown Robotics,Amesbury,Massachusetts,False,0,13,3,10.0,0,26.0,6,0,0.0,0,6.0
+2018,147,32.0,885,Ro-bovines,Randolph Center,Vermont,False,0,12,10,0.0,0,22.0,10,0,0.0,0,10.0
+2018,148,32.0,4572,BArlow RobAutics,Redding,Connecticut,False,0,8,0,0.0,0,8.0,15,9,0.0,0,24.0
+2018,149,32.0,7126,Atom.OS,Newmarket,New Hampshire,False,10,11,0,0.0,0,11.0,11,0,0.0,0,11.0
+2018,150,31.0,1247,Blood. Sweat. and Gears,North Sutton,New Hampshire,False,0,13,0,0.0,0,13.0,14,4,0.0,0,18.0
+2018,151,30.0,1991,Dragons,Hartford,Connecticut,False,0,11,0,0.0,0,11.0,10,9,0.0,0,19.0
+2018,152,30.0,1474,Titans,Tewksbury,Massachusetts,False,0,11,0,0.0,0,11.0,12,7,0.0,0,19.0
+2018,153,29.0,6895,Mechanical Madness 4-H,Walpole,New Hampshire,False,10,7,0,0.0,5,12.0,7,0,0.0,0,7.0
+2018,154,28.0,166,Chop Shop,Merrimack,New Hampshire,False,0,6,0,0.0,5,11.0,9,0,0.0,8,17.0
+2018,155,28.0,7133,STEAM Makers,Farmington,New Hampshire,False,10,5,0,0.0,5,10.0,8,0,0.0,0,8.0
+2018,156,27.0,3499,River's Edge Robotics,Durham,New Hampshire,False,0,5,0,0.0,0,5.0,9,3,10.0,0,22.0
+2018,157,27.0,4929,Maroon Monsoon,Haverhill,Massachusetts,False,0,6,8,0.0,0,14.0,5,8,0.0,0,13.0
+2018,158,27.0,6346,Cybears Robotics Team,Norwalk,Connecticut,False,5,8,0,0.0,0,8.0,14,0,0.0,0,14.0
+2018,159,27.0,5902,The Wire Clippers,Portsmouth,New Hampshire,False,0,9,0,0.0,0,9.0,13,0,0.0,5,18.0
+2018,160,27.0,6161,Equilibrium,Gray,Maine,False,0,12,0,0.0,0,12.0,10,0,0.0,5,15.0
+2018,161,27.0,1085,Aquatic Robotics,Avon,Connecticut,False,0,7,0,0.0,5,12.0,10,0,0.0,5,15.0
+2018,162,27.0,4151,SCRAP 4151,Weymouth,Massachusetts,False,0,7,0,0.0,10,17.0,10,0,0.0,0,10.0
+2018,163,26.0,3525,The Nuts & Bolts of Fury,Waterbury,Connecticut,False,0,10,0,0.0,0,10.0,8,8,0.0,0,16.0
+2018,164,26.0,5347,Gryphons,Weston,Massachusetts,False,0,10,0,0.0,0,10.0,16,0,0.0,0,16.0
+2018,165,26.0,6337,Terror Bytes,Pittsfield,Maine,False,5,15,0,0.0,0,15.0,6,0,0.0,0,6.0
+2018,166,26.0,3182,Athena's Warriors,Hartford,Connecticut,False,0,14,0,0.0,0,14.0,12,0,0.0,0,12.0
+2018,167,26.0,7259,Mechanical Mustangs,Granby,Massachusetts,False,10,7,0,0.0,5,12.0,4,0,0.0,0,4.0
+2018,168,25.0,1922,Oz-Ram,Contoocook,New Hampshire,False,0,7,0,0.0,0,7.0,13,0,0.0,5,18.0
+2018,169,25.0,6690,MV roboPride,Concord,New Hampshire,False,5,9,0,0.0,0,9.0,11,0,0.0,0,11.0
+2018,170,25.0,6811,Gunnery Gears,Washington,Connecticut,False,10,9,0,0.0,0,9.0,6,0,0.0,0,6.0
+2018,171,23.0,4034,Pelham πthons Team 4034,Pelham,New Hampshire,False,0,8,0,0.0,0,8.0,15,0,0.0,0,15.0
+2018,172,23.0,5633,Hyde Cyber Wolves,Bath,Maine,False,0,8,0,0.0,0,8.0,15,0,0.0,0,15.0
+2018,173,23.0,6333,Scavenger Robotics,Putnam,Connecticut,False,5,13,0,0.0,0,13.0,5,0,0.0,0,5.0
+2018,174,23.0,6301,Nerointellect-sim Engineering & Robot Design Soiree   N.E.R.D.S.,Taunton,Massachusetts,False,5,9,0,0.0,0,9.0,9,0,0.0,0,9.0
+2018,175,22.0,2262,Robo-Panthers,Holliston,Massachusetts,False,0,15,0,0.0,0,15.0,7,0,0.0,0,7.0
+2018,176,22.0,4958,Robocats,Langdon,New Hampshire,False,0,9,0,0.0,0,9.0,13,0,0.0,0,13.0
+2018,177,22.0,7212,LCS Warriors,Lebanon,New Hampshire,False,10,12,0,0.0,0,12.0
+2018,178,21.0,4796,Cyber Dragons,Hyde Park,Massachusetts,False,0,11,0,0.0,0,11.0,10,0,0.0,0,10.0
+2018,179,21.0,6723,Mechanical Mounties,Williamstown,Massachusetts,False,5,5,0,0.0,0,5.0,11,0,0.0,0,11.0
+2018,180,21.0,5459,Ipswich TIGERS,Ipswich,Massachusetts,False,0,10,0,0.0,0,10.0,11,0,0.0,0,11.0
+2018,181,21.0,7269,ISB VoltBots,Cambridge,Massachusetts,False,10,11,0,0.0,0,11.0
+2018,182,20.0,1740,Cyber Colonels,Ledyard,Connecticut,False,0,6,0,0.0,0,6.0,14,0,0.0,0,14.0
+2018,183,20.0,4925,The Resistance,Wolfeboro,New Hampshire,False,0,9,0,0.0,0,9.0,11,0,0.0,0,11.0
+2018,184,20.0,3566,Gone Fishin',Southborough,Massachusetts,False,0,9,0,0.0,0,9.0,11,0,0.0,0,11.0
+2018,185,20.0,3451,The ANOMALY,Sanford,Maine,False,0,11,0,0.0,0,11.0,9,0,0.0,0,9.0
+2018,186,20.0,5471,W.Hi.R.R.,Winthrop,Maine,False,0,9,0,0.0,0,9.0,11,0,0.0,0,11.0
+2018,187,19.0,1831,Screaming Eagles,Gilford,New Hampshire,False,0,9,0,0.0,0,9.0,10,0,0.0,0,10.0
+2018,188,18.0,5752,Bevbotics,Beverly,Massachusetts,False,0,7,0,0.0,0,7.0,6,5,0.0,0,11.0
+2018,189,18.0,4042,Murphy's Lawyers,South China,Maine,False,0,11,0,0.0,0,11.0,7,0,0.0,0,7.0
+2018,190,18.0,2423,The KwarQs,Watertown,Massachusetts,False,0,10,0,0.0,0,10.0,8,0,0.0,0,8.0
+2018,191,18.0,1307,Robosaints,Dover,New Hampshire,False,0,10,0,0.0,0,10.0,8,0,0.0,0,8.0
+2018,192,18.0,6812,Andover Snowflakes,Andover,Massachusetts,False,10,8,0,0.0,0,8.0
+2018,193,17.0,4987,MegaRams,Worcester,Massachusetts,False,0,9,0,0.0,0,9.0,8,0,0.0,0,8.0
+2018,194,17.0,6529,Beantown Blitz,Roxbury Crossing,Massachusetts,False,5,5,0,0.0,0,5.0,7,0,0.0,0,7.0
+2018,195,16.0,1757,Wolverines,Westwood,Massachusetts,False,0,8,0,0.0,0,8.0,8,0,0.0,0,8.0
+2018,196,15.0,1027,Mechatronic Maniacs,West Springfield,Massachusetts,False,0,5,0,0.0,0,5.0,6,4,0.0,0,10.0
+2018,197,15.0,3634,Spark City,Bridgeport,Connecticut,False,0,4,0,0.0,0,4.0,11,0,0.0,0,11.0
+2018,198,15.0,1350,The Rambots,Providence,Rhode Island,False,0,10,0,0.0,0,10.0,5,0,0.0,0,5.0
+2018,199,15.0,1277,The Robotomies,Groton,Massachusetts,False,0,6,0,0.0,0,6.0,9,0,0.0,0,9.0
+2018,200,14.0,2785,Prometheus,Kent,Connecticut,False,0,4,0,0.0,0,4.0,10,0,0.0,0,10.0
+2018,201,14.0,1735,Green Reapers,Worcester,Massachusetts,False,0,4,0,0.0,0,4.0,10,0,0.0,0,10.0
+2018,202,14.0,5491,Hard Reset,Winchendon,Massachusetts,False,0,8,0,0.0,0,8.0,6,0,0.0,0,6.0
+2018,203,13.0,151,Tough Techs,Nashua,New Hampshire,False,0,6,0,0.0,0,6.0,7,0,0.0,0,7.0
+2018,204,12.0,1786,The Robotics Team,Dublin,New Hampshire,False,0,6,0,0.0,0,6.0,6,0,0.0,0,6.0
+2018,205,11.0,1761,STEAMpunk Tigers,Lynn,Massachusetts,False,0,4,0,0.0,0,4.0,7,0,0.0,0,7.0
+2018,206,10.0,3104,The Cyber Rams,Stamford,Connecticut,False,0,10,0,0.0,0,10.0
+2018,207,10.0,7306,Epping High School,Epping,New Hampshire,False,10
+2018,208,8.0,1973,Burning Tiger   #1973,Boston,Massachusetts,False,0,4,0,0.0,0,4.0,4,0,0.0,0,4.0
+2018,209,6.0,1124,UberBots,Avon,Connecticut,False,0,6,0,0.0,0,6.0
+2019,1,350.0,2168,Aluminum Falcons,Groton,Connecticut,True,0,20,16,30.0,5,71.0,21,16,30.0,5,72.0,57,45,90.0,15,207.0
+2019,2,338.0,125,NUTRONs,Boston,Massachusetts,True,0,15,12,0.0,10,37.0,19,16,30.0,5,70.0,66,45,90.0,30,231.0
+2019,3,308.0,195,CyberKnights,Southington,Connecticut,True,0,20,16,30.0,5,71.0,19,16,30.0,10,75.0,54,48,30.0,30,162.0
+2019,4,294.0,230,Gaelhawks,Shelton,Connecticut,True,0,19,15,30.0,5,69.0,21,15,10.0,5,51.0,60,39,60.0,15,174.0
+2019,5,292.0,176,Aces High,Windsor Locks,Connecticut,True,0,22,16,20.0,5,63.0,22,16,30.0,5,73.0,57,39,60.0,0,156.0
+2019,6,292.0,5687,The Outliers,Portland,Maine,True,0,21,16,30.0,5,72.0,22,16,30.0,5,73.0,60,42,30.0,15,147.0
+2019,7,288.0,319,Big Bad Bob,Alton,New Hampshire,True,0,19,16,30.0,5,70.0,18,16,20.0,5,59.0,66,48,30.0,15,159.0
+2019,8,267.0,133,B.E.R.T.,Standish,Maine,True,0,22,16,30.0,5,73.0,19,15,20.0,5,59.0,63,42,30.0,0,135.0
+2019,9,235.0,78,AIR STRIKE,Newport,Rhode Island,True,0,22,16,30.0,8,76.0,22,16,30.0,10,78.0,45,36,0.0,0,81.0
+2019,10,222.0,558,Elm City Robo Squad,New Haven,Connecticut,True,0,18,14,10.0,5,47.0,15,14,0.0,8,37.0,27,6,90.0,15,138.0
+2019,11,211.0,1519,Mechanical Mayhem,Bedford,New Hampshire,True,0,22,16,30.0,5,73.0,20,15,20.0,5,60.0,48,30,0.0,0,78.0
+2019,12,204.0,1922,Oz-Ram,Contoocook,New Hampshire,True,0,21,15,20.0,5,61.0,19,14,30.0,5,68.0,39,21,0.0,15,75.0
+2019,13,204.0,1768,Nashoba Robotics,Bolton,Massachusetts,True,0,17,15,20.0,5,57.0,17,15,20.0,5,57.0,54,36,0.0,0,90.0
+2019,14,195.0,2370,IBOTS,Rutland,Vermont,True,0,15,15,10.0,5,45.0,20,14,30.0,5,69.0,51,30,0.0,0,81.0
+2019,15,175.0,1153,Timberwolves,Walpole,Massachusetts,True,0,21,15,10.0,5,51.0,16,12,10.0,5,43.0,42,9,30.0,0,81.0
+2019,16,171.0,95,Grasshoppers,White River Junction,Vermont,False,0,19,14,10.0,0,43.0,17,16,30.0,5,68.0,36,24,0.0,0,60.0
+2019,17,167.0,3555,Aluminati,Storrs Mansfield,Connecticut,True,0,15,10,0.0,5,30.0,15,10,20.0,5,50.0,54,33,0.0,0,87.0
+2019,18,164.0,4311,Swampscott Currents,Swampscott,Massachusetts,True,0,16,14,0.0,0,30.0,18,13,10.0,0,41.0,21,12,60.0,0,93.0
+2019,19,158.0,1729,Team Inconceivable!,Peterborough,New Hampshire,True,0,15,13,0.0,5,33.0,19,15,20.0,8,62.0,39,0,0.0,24,63.0
+2019,20,157.0,509,Red Storm,Bedford,New Hampshire,True,0,15,6,0.0,0,21.0,22,16,20.0,0,58.0,51,27,0.0,0,78.0
+2019,21,155.0,237,Black Magic Robotics,Watertown,Connecticut,True,0,16,13,10.0,5,44.0,15,10,0.0,5,30.0,48,33,0.0,0,81.0
+2019,22,152.0,1073,The Force Team,Hollis,New Hampshire,True,0,15,7,20.0,5,47.0,16,10,0.0,13,39.0,36,0,0.0,30,66.0
+2019,23,149.0,69,HYPER,Quincy,Massachusetts,False,0,19,14,20.0,0,53.0,21,15,10.0,5,51.0,45,0,0.0,0,45.0
+2019,24,146.0,4909,Bionics,Billerica,Massachusetts,True,0,15,15,0.0,5,35.0,21,15,20.0,13,69.0,42,0,0.0,0,42.0
+2019,25,145.0,88,TJ²,Bridgewater,Massachusetts,True,0,18,15,20.0,5,58.0,18,14,20.0,5,57.0,30,0,0.0,0,30.0
+2019,26,142.0,238,Crusaders,Manchester,New Hampshire,False,0,14,8,0.0,5,27.0,18,15,10.0,0,43.0,45,27,0.0,0,72.0
+2019,27,139.0,3146,GRANBY GRUNTS,Granby,Connecticut,True,0,17,13,0.0,5,35.0,21,15,0.0,5,41.0,45,18,0.0,0,63.0
+2019,28,138.0,177,Bobcat Robotics,South Windsor,Connecticut,True,0,20,16,20.0,0,56.0,20,14,0.0,0,34.0,33,15,0.0,0,48.0
+2019,29,136.0,1058,PVC Pirates,Londonderry,New Hampshire,True,0,18,13,0.0,5,36.0,16,13,10.0,10,49.0,51,0,0.0,0,51.0
+2019,30,132.0,4761,The Robockets,Reading,Massachusetts,False,0,20,15,20.0,0,55.0,22,16,30.0,0,68.0,9,0,0.0,0,9.0
+2019,31,132.0,4041,Iron Tigers,Gardiner,Maine,False,0,20,14,10.0,5,49.0,16,14,0.0,5,35.0,48,0,0.0,0,48.0
+2019,32,131.0,3654,TechTigers,Middletown,Connecticut,True,0,15,2,30.0,0,47.0,17,12,0.0,10,39.0,15,0,0.0,30,45.0
+2019,33,131.0,7127,LongMetal,Longmeadow,Massachusetts,False,5,10,9,0.0,0,19.0,17,12,10.0,5,44.0,48,0,0.0,15,63.0
+2019,34,131.0,172,Northern Force,Falmouth,Maine,True,0,16,11,0.0,5,32.0,19,14,0.0,0,33.0,51,0,0.0,15,66.0
+2019,35,130.0,3467,Windham Windup,Windham,New Hampshire,True,0,14,7,0.0,0,21.0,17,12,10.0,10,49.0,27,3,30.0,0,60.0
+2019,36,128.0,7416,Northern Horizons,Bethlehem,New Hampshire,False,10,13,1,30.0,5,49.0,17,11,0.0,8,36.0,18,0,0.0,15,33.0
+2019,37,126.0,173,RAGE Robotics ⚙️,Tolland,Connecticut,True,0,15,10,0.0,5,30.0,20,15,20.0,5,60.0,36,0,0.0,0,36.0
+2019,38,124.0,7869,The Fun Gang,New Haven,Connecticut,False,10,6,3,20.0,5,34.0,14,1,30.0,5,50.0,30,0,0.0,0,30.0
+2019,39,124.0,1474,Titans,Tewksbury,Massachusetts,False,0,21,15,0.0,5,41.0,19,14,0.0,5,38.0,45,0,0.0,0,45.0
+2019,40,123.0,4905,Andromeda One,Ayer,Massachusetts,False,0,13,12,10.0,10,45.0,20,14,0.0,5,39.0,39,0,0.0,0,39.0
+2019,41,122.0,6329,The Bucks' Wrath,Bucksport,Maine,False,0,18,14,10.0,5,47.0,15,12,10.0,5,42.0,33,0,0.0,0,33.0
+2019,42,120.0,7438,Brain Busters,Sherborn,Massachusetts,False,10,17,10,20.0,8,55.0,12,4,10.0,5,31.0,24,0,0.0,0,24.0
+2019,43,116.0,58,The Riot Crew,South Portland,Maine,False,0,17,15,10.0,0,42.0,18,14,0.0,0,32.0,42,0,0.0,0,42.0
+2019,44,115.0,178,The 2nd Law Enforcers,Farmington,Connecticut,False,0,16,11,0.0,0,27.0,19,14,20.0,5,58.0,30,0,0.0,0,30.0
+2019,45,114.0,2067,Apple Pi,Guilford,Connecticut,False,0,12,4,10.0,5,31.0,15,11,10.0,8,44.0,39,0,0.0,0,39.0
+2019,46,113.0,181,Birds Of Prey,Hartford,Connecticut,False,0,19,14,10.0,5,48.0,12,12,0.0,8,32.0,33,0,0.0,0,33.0
+2019,47,112.0,1071,Team MAX,Wolcott,Connecticut,False,0,14,5,0.0,10,29.0,16,13,10.0,5,44.0,39,0,0.0,0,39.0
+2019,48,109.0,228,GUS Robotics,Meriden,Connecticut,False,0,14,12,0.0,0,26.0,18,13,10.0,0,41.0,42,0,0.0,0,42.0
+2019,49,108.0,2523,Tech Storm,Saint Johnsbury,Vermont,False,0,14,1,30.0,0,45.0,19,14,0.0,0,33.0,30,0,0.0,0,30.0
+2019,50,107.0,2877,LigerBots,Newton,Massachusetts,False,0,17,13,10.0,0,40.0,14,12,0.0,5,31.0,36,0,0.0,0,36.0
+2019,51,105.0,6691,Torque,Wolfeboro,New Hampshire,False,0,17,12,10.0,0,39.0,9,3,30.0,0,42.0,24,0,0.0,0,24.0
+2019,52,105.0,3958,Schrodinger's Cat,Boston,Massachusetts,False,0,16,11,0.0,0,27.0,16,10,20.0,5,51.0,27,0,0.0,0,27.0
+2019,53,102.0,1277,The Robotomies,Groton,Massachusetts,False,0,10,2,20.0,0,32.0,12,2,20.0,0,34.0,36,0,0.0,0,36.0
+2019,54,102.0,7407,Wired Boars,Wallingford,Connecticut,False,10,11,7,0.0,0,18.0,17,11,10.0,0,38.0,36,0,0.0,0,36.0
+2019,55,101.0,3236,TRIFORCE,Franklin,Massachusetts,False,0,19,13,10.0,0,42.0,18,14,0.0,0,32.0,27,0,0.0,0,27.0
+2019,56,98.0,716,Who'sCTEKS,Falls Village,Connecticut,False,0,18,13,10.0,5,46.0,7,11,10.0,0,28.0,24,0,0.0,0,24.0
+2019,57,97.0,501,The PowerKnights,Manchester,New Hampshire,False,0,13,6,10.0,0,29.0,19,13,10.0,5,47.0,21,0,0.0,0,21.0
+2019,58,97.0,5422,Stormgears FRC,Westford,Massachusetts,True,0,4,0,0.0,5,9.0,10,0,0.0,15,25.0,33,0,0.0,30,63.0
+2019,59,95.0,1735,Green Reapers,Worcester,Massachusetts,False,0,10,0,0.0,10,20.0,18,12,0.0,0,30.0,30,0,0.0,15,45.0
+2019,60,93.0,5813,Morpheus,Concord,New Hampshire,False,0,12,3,20.0,0,35.0,12,13,10.0,5,40.0,18,0,0.0,0,18.0
+2019,61,90.0,5735,Control Freaks,Wayland,Massachusetts,False,0,9,1,30.0,0,40.0,15,14,0.0,0,29.0,21,0,0.0,0,21.0
+2019,62,88.0,166,Chop Shop,Merrimack,New Hampshire,False,0,14,13,0.0,5,32.0,16,11,0.0,5,32.0,24,0,0.0,0,24.0
+2019,63,85.0,1721,Tidal Force,Concord,New Hampshire,False,0,12,8,0.0,5,25.0,13,10,0.0,10,33.0,12,0,0.0,15,27.0
+2019,64,84.0,6328,Mechanical Advantage,Littleton,Massachusetts,True,0,8,0,0.0,8,16.0,8,1,30.0,5,44.0,0,0,0.0,24,24.0
+2019,65,83.0,190,Gompei and the H.E.R.D.,Worcester,Massachusetts,True,0,17,14,0.0,5,36.0,19,13,10.0,5,47.0
+2019,66,79.0,126,Gael Force,Clinton,Massachusetts,True,0,17,14,10.0,10,51.0,14,9,0.0,5,28.0
+2019,67,76.0,6161,Equilibrium,Gray,Maine,False,0,19,13,10.0,0,42.0,12,2,20.0,0,34.0
+2019,68,71.0,4929,Maroon Monsoon,Haverhill,Massachusetts,False,0,14,10,0.0,0,24.0,19,13,10.0,5,47.0
+2019,69,70.0,2876,Devilbotz,Burlington,Massachusetts,False,0,11,11,10.0,0,32.0,17,11,10.0,0,38.0
+2019,70,70.0,4564,Orange Chaos,Brewer,Maine,False,0,15,9,0.0,5,29.0,15,11,10.0,5,41.0
+2019,71,67.0,236,Techno-Ticks,Old Lyme,Connecticut,True,0,15,9,0.0,0,24.0,13,10,20.0,0,43.0
+2019,72,67.0,131,CHAOS,Manchester,New Hampshire,False,0,11,11,0.0,5,27.0,13,12,10.0,5,40.0
+2019,73,63.0,7795,Norse Code,Winthrop,Massachusetts,False,10,15,9,0.0,5,29.0,10,9,0.0,5,24.0
+2019,74,62.0,885,Ro-bovines,Randolph Center,Vermont,False,0,11,1,15.0,0,27.0,14,1,20.0,0,35.0
+2019,75,61.0,3461,Operation PEACCE Robotics,Bristol,Connecticut,False,0,10,0,0.0,0,10.0,17,14,20.0,0,51.0
+2019,76,61.0,4906,The Collective,Waterville,Maine,False,0,17,11,10.0,0,38.0,14,9,0.0,0,23.0
+2019,77,61.0,1100,Inverse Polarity,Northborough/Southborough,Massachusetts,False,0,13,5,0.0,5,23.0,11,12,10.0,5,38.0
+2019,78,60.0,6723,Mechanical Mounties,Williamstown,Massachusetts,False,0,15,1,20.0,0,36.0,10,4,10.0,0,24.0
+2019,79,60.0,6153,Blue Crew,Farmington,Maine,False,0,14,12,0.0,5,31.0,16,13,0.0,0,29.0
+2019,80,60.0,5962,perSEVERE,Lowell,Massachusetts,False,0,14,3,0.0,10,27.0,13,5,0.0,0,18.0,15,0,0.0,0,15.0
+2019,81,59.0,6367,The ElectroLights,Dorchester Center,Massachusetts,False,0,9,11,10.0,0,30.0,15,9,0.0,5,29.0
+2019,82,59.0,571,Team Paragon,Windsor,Connecticut,False,0,17,11,0.0,5,33.0,13,8,0.0,5,26.0
+2019,83,59.0,4557,FullMetal Falcons,Middletown,Connecticut,False,0,11,8,0.0,8,27.0,16,11,0.0,5,32.0
+2019,84,58.0,5112,The Gongoliers,Foster and Glocester ,Rhode Island,False,0,10,6,0.0,5,21.0,10,2,20.0,5,37.0
+2019,85,58.0,2648,Infinite Loop,Oakland,Maine,False,0,18,12,0.0,0,30.0,13,5,10.0,0,28.0
+2019,86,58.0,61,The Intimidators,Upton,Massachusetts,False,0,13,5,10.0,5,33.0,15,10,0.0,0,25.0
+2019,87,57.0,23,PNTA Pilgrim Nuclear Technology Alliance,Plymouth,Massachusetts,False,0,14,8,0.0,5,27.0,11,4,10.0,5,30.0
+2019,88,57.0,5846,SouthCoast Corsairs,North Dartmouth,Massachusetts,False,0,17,12,0.0,0,29.0,15,13,0.0,0,28.0
+2019,89,57.0,3597,Robo-Rangers,Kittery,Maine,False,0,14,9,0.0,5,28.0,17,12,0.0,0,29.0
+2019,90,57.0,7462,Disruptive Technologies,Danbury,Connecticut,True,10,8,0,0.0,8,16.0,7,0,0.0,0,7.0,0,0,0.0,24,24.0
+2019,91,55.0,4796,Cyber Dragons,Hyde Park,Massachusetts,False,0,11,1,30.0,0,42.0,13,0,0.0,0,13.0
+2019,92,55.0,3719,STEM Whalers,New London ,Connecticut,False,0,13,6,10.0,0,29.0,5,6,10.0,5,26.0
+2019,93,55.0,5902,The Wire Clippers,Portsmouth,New Hampshire,False,0,11,5,10.0,5,31.0,13,6,0.0,5,24.0
+2019,94,54.0,6324,The Blue Devils,Salem,New Hampshire,False,0,13,0,15.0,0,28.0,12,4,10.0,0,26.0
+2019,95,54.0,2836,Team Beta,Woodbury,Connecticut,False,0,13,10,0.0,0,23.0,18,13,0.0,0,31.0
+2019,96,53.0,3205,Patriots,Concord,Massachusetts,False,0,6,4,10.0,0,20.0,11,2,20.0,0,33.0
+2019,97,51.0,4169,Warrior Robotics,Sudbury,Massachusetts,False,0,14,2,10.0,0,26.0,11,9,0.0,5,25.0
+2019,98,50.0,1991,Dragons,Hartford,Connecticut,False,0,17,12,0.0,0,29.0,12,9,0.0,0,21.0
+2019,99,49.0,213,The Dirty Birds,Keene,New Hampshire,False,0,17,12,10.0,0,39.0,10,0,0.0,0,10.0
+2019,100,48.0,4572,BArlow RobAutics,Redding,Connecticut,False,0,5,0,0.0,0,5.0,11,7,20.0,5,43.0
+2019,101,47.0,6201,The Highlanders,Somerville,Massachusetts,False,0,5,0,0.0,0,5.0,16,11,10.0,5,42.0
+2019,102,47.0,663,Robonauts,Whitinsville,Massachusetts,False,0,15,9,0.0,0,24.0,13,10,0.0,0,23.0
+2019,103,47.0,4151,SCRAP 4151,Weymouth,Massachusetts,False,0,15,9,0.0,0,24.0,14,9,0.0,0,23.0
+2019,104,46.0,2423,The KwarQs,Watertown,Massachusetts,False,0,9,0,0.0,5,14.0,15,12,0.0,5,32.0
+2019,105,45.0,138,Entropy,Amherst,New Hampshire,False,0,14,8,0.0,0,22.0,15,8,0.0,0,23.0
+2019,106,45.0,467,Colonials,Shrewsbury,Massachusetts,False,0,10,6,0.0,10,26.0,11,3,0.0,5,19.0
+2019,107,45.0,6933,Archytas,Bethel,Vermont,False,5,9,0,0.0,5,14.0,14,7,0.0,5,26.0
+2019,108,44.0,1307,Robosaints,Dover,New Hampshire,False,0,6,0,0.0,0,6.0,7,1,30.0,0,38.0
+2019,109,44.0,6763,FUSION,Manchester,New Hampshire,False,0,11,0,0.0,0,11.0,11,2,20.0,0,33.0
+2019,110,44.0,4958,Robocats,Langdon,New Hampshire,False,0,16,10,0.0,0,26.0,8,10,0.0,0,18.0
+2019,111,44.0,1099,DiscoTechs,Brookfield,Connecticut,False,0,12,9,0.0,0,21.0,14,9,0.0,0,23.0
+2019,112,44.0,3464,Sim-City,Simsbury,Connecticut,False,0,13,6,0.0,0,19.0,14,6,0.0,5,25.0
+2019,113,43.0,2084,Robots by the C,Manchester,Massachusetts,False,0,11,3,10.0,5,29.0,12,2,0.0,0,14.0
+2019,114,43.0,121,Rhode Warriors,Middletown,Rhode Island,False,0,12,7,0.0,0,19.0,14,10,0.0,0,24.0
+2019,115,42.0,7153,Aetos Dios (Eagles of Zeus),Manchester,Connecticut,False,5,12,2,10.0,0,24.0,8,0,0.0,5,13.0
+2019,116,41.0,151,Tough Techs,Nashua,New Hampshire,False,0,10,7,0.0,0,17.0,15,9,0.0,0,24.0
+2019,117,41.0,2712,Power Surge 4-H Robotics,Waterbury,Connecticut,False,0,12,7,0.0,0,19.0,10,7,0.0,5,22.0
+2019,118,41.0,5752,Bevbotics,Beverly,Massachusetts,False,0,13,0,0.0,0,13.0,16,12,0.0,0,28.0
+2019,119,41.0,5686,Wirecats,Simsbury,Connecticut,False,0,10,0,0.0,0,10.0,13,8,0.0,10,31.0
+2019,120,40.0,4055,NRG,Winchester,Connecticut,False,0,13,3,10.0,0,26.0,9,5,0.0,0,14.0
+2019,121,40.0,4176,Iron Tigers,North Easton,Massachusetts,False,0,9,10,0.0,0,19.0,8,8,0.0,5,21.0
+2019,122,40.0,6811,Gunnery Gears,Washington,Connecticut,False,5,15,9,0.0,0,24.0,11,0,0.0,0,11.0
+2019,123,40.0,7694,THE IRON LIONS,West Hartford,Connecticut,False,10,13,0,0.0,0,13.0,14,3,0.0,0,17.0
+2019,124,39.0,1761,STEAMpunk Tigers,Lynn,Massachusetts,False,0,4,0,0.0,0,4.0,12,13,10.0,0,35.0
+2019,125,39.0,157,AZTECHS,Marlborough,Massachusetts,False,0,10,5,0.0,0,15.0,15,9,0.0,0,24.0
+2019,126,39.0,3451,The ANOMALY,Sanford,Maine,False,0,8,0,0.0,0,8.0,18,13,0.0,0,31.0
+2019,127,39.0,3566,Gone Fishin',Southborough,Massachusetts,False,0,7,0,0.0,0,7.0,16,11,0.0,5,32.0
+2019,128,39.0,246,Overclocked,Boston,Massachusetts,False,0,11,0,0.0,5,16.0,10,8,0.0,5,23.0
+2019,129,37.0,6301,Nerointellect-sim Engineering & Robot Design Soiree   N.E.R.D.S.,Taunton,Massachusetts,False,0,8,0,0.0,0,8.0,13,6,10.0,0,29.0
+2019,130,37.0,6337,Terror Bytes,Pittsfield,Maine,False,0,14,10,0.0,0,24.0,9,4,0.0,0,13.0
+2019,131,37.0,811,Wild Cards,Nashua,New Hampshire,False,0,17,13,0.0,0,30.0,7,0,0.0,0,7.0
+2019,132,37.0,1247,Blood. Sweat. and Gears,North Sutton,New Hampshire,False,0,14,0,0.0,0,14.0,12,11,0.0,0,23.0
+2019,133,37.0,2064,The Panther Project,Middlebury,Connecticut,False,0,9,0,0.0,0,9.0,12,11,0.0,5,28.0
+2019,134,37.0,5000,Hammerheads,Hingham,Massachusetts,False,0,12,0,0.0,0,12.0,15,10,0.0,0,25.0
+2019,135,36.0,155,The TechnoNuts,Berlin,Connecticut,False,0,4,0,0.0,0,4.0,11,6,10.0,5,32.0
+2019,136,36.0,7133,STEAM Makers,Farmington,New Hampshire,False,5,8,0,0.0,0,8.0,11,2,10.0,0,23.0
+2019,137,36.0,6762,Oscats,Hillsborough,New Hampshire,False,0,12,0,0.0,0,12.0,15,9,0.0,0,24.0
+2019,138,36.0,4048,Redshift,Westborough,Massachusetts,False,0,7,0,0.0,5,12.0,10,9,0.0,5,24.0
+2019,139,36.0,7913,"Bear"ly Functioning,Bristol,New Hampshire,False,10,12,0,0.0,0,12.0,6,0,0.0,8,14.0
+2019,140,36.0,7822,Generals Robotics,South Hamilton,Massachusetts,False,10,12,0,0.0,0,12.0,6,0,0.0,8,14.0
+2019,141,35.0,4546,Shockwave,Dover,New Hampshire,False,0,11,0,0.0,5,16.0,10,9,0.0,0,19.0
+2019,142,34.0,6172,The Mad Dogs,Fairfield,Maine,False,0,10,0,0.0,0,10.0,8,6,10.0,0,24.0
+2019,143,34.0,97,Bionic Beef,Cambridge,Massachusetts,False,0,10,0,0.0,0,10.0,14,10,0.0,0,24.0
+2019,144,34.0,1517,AMP'D UP,Concord,New Hampshire,False,0,16,9,0.0,0,25.0,9,0,0.0,0,9.0
+2019,145,34.0,7674,RaiderBots,Rochester,New Hampshire,False,10,7,0,0.0,5,12.0,12,0,0.0,0,12.0
+2019,146,33.0,999,MechaRAMS,Cheshire,Connecticut,False,0,8,0,0.0,0,8.0,10,5,10.0,0,25.0
+2019,147,33.0,7907,Spartan Robotics,Whitefield,New Hampshire,False,10,8,4,0.0,0,12.0,6,0,0.0,5,11.0
+2019,148,32.0,4925,The Resistance,Wolfeboro,New Hampshire,False,0,16,11,0.0,0,27.0,5,0,0.0,0,5.0
+2019,149,32.0,5556,Carriagetown Robotics,Amesbury,Massachusetts,False,0,8,0,0.0,0,8.0,12,7,0.0,5,24.0
+2019,150,32.0,5856,Bullbots,Waterbury,Connecticut,False,0,14,0,0.0,0,14.0,14,4,0.0,0,18.0
+2019,151,31.0,3623,TerrorBots,Leominster,Massachusetts,False,0,5,5,10.0,0,20.0,4,7,0.0,0,11.0
+2019,152,31.0,6224,Saint Dominators,Auburn,Maine,False,0,11,9,0.0,0,20.0,11,0,0.0,0,11.0
+2019,153,31.0,1350,The Rambots,Providence,Rhode Island,False,0,9,0,0.0,0,9.0,14,8,0.0,0,22.0
+2019,154,30.0,1757,Wolverines,Westwood,Massachusetts,False,0,6,0,0.0,0,6.0,12,12,0.0,0,24.0
+2019,155,30.0,6690,MV roboPride,Concord,New Hampshire,False,0,4,0,0.0,0,4.0,16,10,0.0,0,26.0
+2019,156,30.0,4097,Devilbots,Northampton,Massachusetts,False,0,9,0,0.0,5,14.0,12,4,0.0,0,16.0
+2019,157,29.0,348,Norwell Robotics,Norwell,Massachusetts,False,0,7,0,0.0,0,7.0,8,4,10.0,0,22.0
+2019,158,29.0,1027,Mechatronic Maniacs,West Springfield,Massachusetts,False,0,8,0,0.0,0,8.0,11,10,0.0,0,21.0
+2019,159,29.0,2262,Robo-Panthers,Holliston,Massachusetts,False,0,12,0,0.0,0,12.0,12,5,0.0,0,17.0
+2019,160,28.0,3323,Potential Energy,Litchfield,New Hampshire,False,0,8,3,10.0,0,21.0,7,0,0.0,0,7.0
+2019,161,28.0,175,Buzz Robotics,Enfield,Connecticut,True,0,11,7,0.0,0,18.0,8,2,0.0,0,10.0
+2019,162,28.0,5459,Ipswich TIGERS,Ipswich,Massachusetts,False,0,10,0,0.0,8,18.0,10,0,0.0,0,10.0
+2019,163,27.0,5563,Phalanx,Lynn,Massachusetts,False,0,10,0,0.0,0,10.0,12,5,0.0,0,17.0
+2019,164,27.0,7266,NBHS Steampunks,North Brookfield,Massachusetts,False,5,9,0,0.0,5,14.0,8,0,0.0,0,8.0
+2019,165,26.0,4034,Pelham πthons Team 4034,Pelham,New Hampshire,False,0,13,0,0.0,0,13.0,13,0,0.0,0,13.0
+2019,166,26.0,7314,Tornadoes,Franklin,New Hampshire,False,5,11,0,0.0,5,16.0,5,0,0.0,0,5.0
+2019,167,25.0,5494,Bizarbots Robotics,Holbrook,Massachusetts,False,0,6,0,0.0,0,6.0,11,0,0.0,8,19.0
+2019,168,24.0,4987,MegaRams,Worcester,Massachusetts,False,0,10,0,0.0,0,10.0,14,0,0.0,0,14.0
+2019,169,24.0,6895,Mechanical Madness 4-H,Walpole,New Hampshire,False,5,9,0,0.0,0,9.0,10,0,0.0,0,10.0
+2019,170,23.0,3930,SMART  Spruce Mountain Area Robotics Team,Jay,Maine,False,0,6,0,0.0,0,6.0,14,3,0.0,0,17.0
+2019,171,23.0,2342,Team Phoenix,Nashua,New Hampshire,False,0,4,0,0.0,5,9.0,9,0,0.0,5,14.0
+2019,172,22.0,4473,Delta Prime Robotics,Farmingdale,Maine,False,0,9,4,0.0,0,13.0,9,0,0.0,0,9.0
+2019,173,22.0,2713,iRaiders,Melrose,Massachusetts,False,0,7,0,0.0,0,7.0,10,0,0.0,5,15.0
+2019,174,21.0,6620,The Northmengineers,North Smithfield,Rhode Island,False,0,8,0,0.0,0,8.0,10,3,0.0,0,13.0
+2019,175,21.0,1289,Gearheadz,Lawrence,Massachusetts,False,0,8,0,0.0,0,8.0,13,0,0.0,0,13.0
+2019,176,21.0,1699,Robocats,Colchester,Connecticut,False,0,9,0,0.0,0,9.0,12,0,0.0,0,12.0
+2019,177,21.0,3182,Athena's Warriors,Hartford,Connecticut,False,0,10,0,0.0,0,10.0,6,0,0.0,5,11.0
+2019,178,21.0,7126,Atom.OS,Newmarket,New Hampshire,False,5,9,0,0.0,0,9.0,7,0,0.0,0,7.0
+2019,179,21.0,3525,The Nuts & Bolts of Fury,Waterbury,Connecticut,False,0,8,0,0.0,5,13.0,8,0,0.0,0,8.0
+2019,180,21.0,7760,PomTech,Pomfret,Connecticut,False,10,6,0,0.0,5,11.0
+2019,181,20.0,1965,Firebirds,Allston,Massachusetts,False,0,13,0,0.0,0,13.0,7,0,0.0,0,7.0
+2019,182,20.0,5142,Robo Dominators,West Haven,Connecticut,False,0,9,0,0.0,0,9.0,11,0,0.0,0,11.0
+2019,183,20.0,2079,4H ALARM Robotics,Franklin,Massachusetts,False,0,6,0,0.0,0,6.0,9,0,0.0,5,14.0
+2019,184,19.0,1786,The Robotics Team,Dublin,New Hampshire,False,0,10,0,0.0,0,10.0,9,0,0.0,0,9.0
+2019,185,18.0,1831,Screaming Eagles,Gilford,New Hampshire,False,0,6,0,0.0,0,6.0,12,0,0.0,0,12.0
+2019,186,18.0,3609,Duct Tape Dragons,Portland,Maine,False,0,11,0,0.0,0,11.0,7,0,0.0,0,7.0
+2019,187,18.0,839,Rosie Robotics,Agawam,Massachusetts,False,0,11,0,0.0,0,11.0,7,0,0.0,0,7.0
+2019,188,17.0,5491,Hard Reset,Winchendon,Massachusetts,False,0,4,0,0.0,0,4.0,13,0,0.0,0,13.0
+2019,189,17.0,3634,Spark City,Bridgeport,Connecticut,False,0,5,0,0.0,0,5.0,12,0,0.0,0,12.0
+2019,190,16.0,5633,Hyde Cyber Wolves,Bath,Maine,False,0,12,0,0.0,0,12.0,4,0,0.0,0,4.0
+2019,191,16.0,1512,The Big Red,Concord,New Hampshire,False,0,5,0,0.0,0,5.0,11,0,0.0,0,11.0
+2019,192,16.0,2785,Prometheus,Kent,Connecticut,False,0,6,0,0.0,0,6.0,10,0,0.0,0,10.0
+2019,193,16.0,6346,Cybears Robotics Team,Norwalk,Connecticut,False,0,7,0,0.0,0,7.0,9,0,0.0,0,9.0
+2019,194,15.0,6333,Scavenger Robotics,Putnam,Connecticut,False,0,9,0,0.0,0,9.0,6,0,0.0,0,6.0
+2019,195,14.0,1740,Cyber Colonels,Ledyard,Connecticut,False,0,5,3,0.0,0,8.0,6,0,0.0,0,6.0
+2019,196,14.0,5265,Radical Impact,Portland,Maine,False,0,9,0,0.0,0,9.0,5,0,0.0,0,5.0
+2019,197,14.0,2170,Galvanized Guardians,Glastonbury,Connecticut,False,0,6,0,0.0,0,6.0,8,0,0.0,0,8.0
+2019,198,14.0,6529,Beantown Blitz,Roxbury Crossing,Massachusetts,False,0,8,0,0.0,0,8.0,6,0,0.0,0,6.0
+2019,199,13.0,5746,Human Error,Deep River,Connecticut,False,0,4,0,0.0,0,4.0,9,0,0.0,0,9.0
+2019,200,13.0,6731,Record Robotics,Belmont,Massachusetts,False,0,8,0,0.0,0,8.0,5,0,0.0,0,5.0
+2019,201,12.0,4908,Duxbury Dragons,Duxbury,Massachusetts,False,0,4,0,0.0,0,4.0,8,0,0.0,0,8.0
+2019,202,11.0,1124,UberBots,Avon,Connecticut,False,0,7,0,0.0,0,7.0,4,0,0.0,0,4.0
+2019,203,10.0,7786,Power Surge,Woodbury,Connecticut,False,10
+2019,204,9.0,7212,LCS Warriors,Lebanon,New Hampshire,False,5,4,0,0.0,0,4.0
+2019,205,5.0,7164,RHODE REBELS,Providence,Rhode Island,False,5
+2019,206,0.0,3466,VIKINGS ROBOTICS,Westford,Massachusetts,False,0
+2019,207,0.0,1973,Burning Tiger   #1973,Boston,Massachusetts,False,0
+2019,208,0.0,5506,Midcoast MAINEiacs Robotics Team,Searsport,Maine,False,0
+2019,209,0.0,3499,River's Edge Robotics,Durham,New Hampshire,False,0
+2019,210,0.0,4042,Murphy's Lawyers,South China,Maine,False,0
+2020,1,95.0,78,AIR STRIKE,Newport,Rhode Island,False,0,17,13,0.0,5,35.0,20,15,20.0,5,60.0
+2020,2,86.0,3566,Gone Fishin',Southborough,Massachusetts,False,0,16,10,10.0,0,36.0,15,15,20.0,0,50.0
+2020,3,80.0,2262,Robo-Panthers,Holliston,Massachusetts,False,0,15,5,30.0,0,50.0,15,10,0.0,5,30.0
+2020,4,78.0,2168,Aluminum Falcons,Groton,Connecticut,False,0,22,16,30.0,10,78.0
+2020,5,73.0,176,Aces High,Windsor Locks,Connecticut,False,0,22,16,30.0,5,73.0
+2020,6,73.0,8085,MOJO,Milford,Connecticut,False,10,20,15,20.0,8,63.0
+2020,7,70.0,88,TJ²,Bridgewater,Massachusetts,False,0,19,16,30.0,5,70.0
+2020,8,67.0,177,Bobcat Robotics,South Windsor,Connecticut,False,0,21,16,30.0,0,67.0
+2020,9,66.0,6329,The Bucks' Wrath,Bucksport,Maine,False,0,21,15,20.0,10,66.0
+2020,10,64.0,4909,Bionics,Billerica,Massachusetts,False,0,20,14,30.0,0,64.0
+2020,11,64.0,6328,Mechanical Advantage,Littleton,Massachusetts,False,0,20,14,20.0,10,64.0
+2020,12,63.0,190,Gompei and the H.E.R.D.,Worcester,Massachusetts,False,0,11,9,10.0,5,35.0,17,11,0.0,0,28.0
+2020,13,62.0,501,The PowerKnights,Manchester,New Hampshire,False,0,18,14,30.0,0,62.0
+2020,14,60.0,166,Chop Shop,Merrimack,New Hampshire,False,0,18,12,30.0,0,60.0
+2020,15,58.0,1740,Cyber Colonels,Ledyard,Connecticut,False,0,16,12,30.0,0,58.0
+2020,16,55.0,8013,Boston Lions,Boston,Massachusetts,False,10,13,0,0.0,5,18.0,17,10,0.0,0,27.0
+2020,17,54.0,1153,Timberwolves,Walpole,Massachusetts,False,0,15,14,20.0,5,54.0
+2020,18,50.0,7407,Wired Boars,Wallingford,Connecticut,False,5,17,13,10.0,5,45.0
+2020,19,49.0,6933,Archytas,Bethel,Vermont,False,0,17,12,20.0,0,49.0
+2020,20,48.0,663,Robonauts,Whitinsville,Massachusetts,False,0,16,12,20.0,0,48.0
+2020,21,48.0,4905,Andromeda One,Ayer,Massachusetts,False,0,22,16,10.0,0,48.0
+2020,22,48.0,4557,FullMetal Falcons,Middletown,Connecticut,False,0,19,14,10.0,5,48.0
+2020,23,48.0,5000,Hammerheads,Hingham,Massachusetts,False,0,19,14,10.0,5,48.0
+2020,24,47.0,7822,Generals Robotics,South Hamilton,Massachusetts,False,5,9,3,30.0,0,42.0
+2020,25,47.0,6201,The Highlanders,Somerville,Massachusetts,False,0,17,12,10.0,8,47.0
+2020,26,45.0,133,B.E.R.T.,Standish,Maine,False,0,19,16,10.0,0,45.0
+2020,27,44.0,3958,Schrodinger's Cat,Boston,Massachusetts,False,0,13,1,30.0,0,44.0
+2020,28,44.0,7760,PomTech,Pomfret,Connecticut,False,5,6,4,0.0,0,10.0,7,2,20.0,0,29.0
+2020,29,44.0,4564,Orange Chaos,Brewer,Maine,False,0,15,14,10.0,5,44.0
+2020,30,41.0,228,GUS Robotics,Meriden,Connecticut,False,0,18,13,10.0,0,41.0
+2020,31,41.0,61,The Intimidators,Upton,Massachusetts,False,0,21,15,0.0,5,41.0
+2020,32,39.0,1517,AMP'D UP,Concord,New Hampshire,False,0,14,5,20.0,0,39.0
+2020,33,39.0,1071,Team MAX,Wolcott,Connecticut,False,0,15,14,10.0,0,39.0
+2020,34,38.0,6723,Mechanical Mounties,Williamstown,Massachusetts,False,0,22,16,0.0,0,38.0
+2020,35,38.0,230,Gaelhawks,Shelton,Connecticut,False,0,16,12,0.0,10,38.0
+2020,36,36.0,6731,Record Robotics,Belmont,Massachusetts,False,0,9,2,20.0,5,36.0
+2020,37,36.0,157,AZTECHS,Marlborough,Massachusetts,False,0,16,10,10.0,0,36.0
+2020,38,36.0,2877,LigerBots,Newton,Massachusetts,False,0,14,7,10.0,5,36.0
+2020,39,36.0,5687,The Outliers,Portland,Maine,False,0,21,15,0.0,0,36.0
+2020,40,36.0,558,Elm City Robo Squad,New Haven,Connecticut,False,0,10,11,0.0,5,26.0,0,0,0.0,10,10.0
+2020,41,36.0,3654,TechTigers,Middletown,Connecticut,False,0,16,10,0.0,10,36.0
+2020,42,35.0,319,Big Bad Bob,Alton,New Hampshire,False,0,15,10,10.0,0,35.0
+2020,43,35.0,2370,IBOTS,Rutland,Vermont,False,0,19,16,0.0,0,35.0
+2020,44,35.0,8046,LakerBots,Meredith,New Hampshire,False,10,16,9,0.0,0,25.0
+2020,45,34.0,1519,Mechanical Mayhem,Bedford,New Hampshire,False,0,19,15,0.0,0,34.0
+2020,46,34.0,2170,Galvanized Guardians,Glastonbury,Connecticut,False,0,14,15,0.0,5,34.0
+2020,47,34.0,7869,The Fun Gang,New Haven,Connecticut,False,5,15,9,0.0,5,29.0
+2020,48,33.0,126,Gael Force,Clinton,Massachusetts,False,0,11,12,10.0,0,33.0
+2020,49,33.0,2067,Apple Pi,Guilford,Connecticut,False,0,17,11,0.0,5,33.0
+2020,50,32.0,3555,Aluminati,Storrs Mansfield,Connecticut,False,0,9,3,20.0,0,32.0
+2020,51,32.0,839,Rosie Robotics,Agawam,Massachusetts,False,0,14,3,10.0,5,32.0
+2020,52,31.0,237,Black Magic Robotics,Watertown,Connecticut,False,0,12,4,10.0,5,31.0
+2020,53,31.0,95,Grasshoppers,White River Junction,Vermont,False,0,18,13,0.0,0,31.0
+2020,54,31.0,121,Rhode Warriors,Middletown,Rhode Island,False,0,18,13,0.0,0,31.0
+2020,55,30.0,5347,Gryphons,Weston,Massachusetts,False,0,10,10,10.0,0,30.0
+2020,56,30.0,5112,The Gongoliers,Foster and Glocester ,Rhode Island,False,0,12,8,10.0,0,30.0
+2020,57,30.0,151,Tough Techs,Nashua,New Hampshire,False,0,13,7,10.0,0,30.0
+2020,58,30.0,1099,DiscoTechs,Brookfield,Connecticut,False,0,18,12,0.0,0,30.0
+2020,59,29.0,6324,The Blue Devils,Salem,New Hampshire,False,0,16,13,0.0,0,29.0
+2020,60,28.0,4572,BArlow RobAutics,Redding,Connecticut,False,0,13,0,15.0,0,28.0
+2020,61,28.0,1991,Dragons,Hartford,Connecticut,False,0,17,11,0.0,0,28.0
+2020,62,28.0,7314,Tornadoes,Franklin,New Hampshire,False,0,17,11,0.0,0,28.0
+2020,63,28.0,1058,PVC Pirates,Londonderry,New Hampshire,False,0,17,11,0.0,0,28.0
+2020,64,27.0,2079,4H ALARM Robotics,Franklin,Massachusetts,False,0,12,5,10.0,0,27.0
+2020,65,27.0,69,HYPER,Quincy,Massachusetts,False,0,16,11,0.0,0,27.0
+2020,66,26.0,1768,Nashoba Robotics,Bolton,Massachusetts,False,0,13,8,0.0,5,26.0
+2020,67,25.0,999,MechaRAMS,Cheshire,Connecticut,False,0,9,1,15.0,0,25.0
+2020,68,25.0,3597,Robo-Rangers,Kittery,Maine,False,0,14,11,0.0,0,25.0
+2020,69,25.0,7694,THE IRON LIONS,West Hartford,Connecticut,False,5,11,9,0.0,0,20.0
+2020,70,25.0,8167,Cognatives,Durham,Connecticut,False,10,10,0,0.0,5,15.0
+2020,71,24.0,1786,The Robotics Team,Dublin,New Hampshire,False,0,11,3,10.0,0,24.0
+2020,72,24.0,2836,Team Beta,Woodbury,Connecticut,False,0,14,10,0.0,0,24.0
+2020,73,24.0,138,Entropy,Amherst,New Hampshire,False,0,15,9,0.0,0,24.0
+2020,74,24.0,4048,Redshift,Westborough,Massachusetts,False,0,10,9,0.0,5,24.0
+2020,75,24.0,716,Who'sCTEKS,Falls Village,Connecticut,False,0,14,5,0.0,5,24.0
+2020,76,23.0,1100,Inverse Polarity,Northborough/Southborough,Massachusetts,False,0,5,0,0.0,8,13.0,0,0,0.0,10,10.0
+2020,77,22.0,131,CHAOS,Manchester,New Hampshire,False,0,14,8,0.0,0,22.0
+2020,78,21.0,6691,Torque,Wolfeboro,New Hampshire,False,0,12,9,0.0,0,21.0
+2020,79,21.0,178,The 2nd Law Enforcers,Farmington,Connecticut,False,0,7,6,0.0,8,21.0
+2020,80,21.0,6811,Gunnery Gears,Washington,Connecticut,False,0,4,0,0.0,0,4.0,12,0,0.0,5,17.0
+2020,81,20.0,6153,Blue Crew,Farmington,Maine,False,0,9,1,10.0,0,20.0
+2020,82,20.0,236,Techno-Ticks,Old Lyme,Connecticut,False,0,12,8,0.0,0,20.0
+2020,83,20.0,8023,LRTC 8023,Lewiston,Maine,False,10,5,0,0.0,5,10.0
+2020,84,19.0,467,Colonials,Shrewsbury,Massachusetts,False,0,6,13,0.0,0,19.0
+2020,85,19.0,2064,The Panther Project,Middlebury,Connecticut,False,0,13,6,0.0,0,19.0
+2020,86,19.0,4929,Maroon Monsoon,Haverhill,Massachusetts,False,0,15,4,0.0,0,19.0
+2020,87,19.0,8421,CRUSADERS,Littleton,New Hampshire,False,10,9,0,0.0,0,9.0
+2020,88,18.0,97,Bionic Beef,Cambridge,Massachusetts,False,0,14,4,0.0,0,18.0
+2020,89,18.0,7913,"Bear"ly Functioning,Bristol,New Hampshire,False,5,13,0,0.0,0,13.0
+2020,90,16.0,3146,GRANBY GRUNTS,Granby,Connecticut,False,0,9,7,0.0,0,16.0
+2020,91,16.0,6161,Equilibrium,Gray,Maine,False,0,10,6,0.0,0,16.0
+2020,92,16.0,1922,Oz-Ram,Contoocook,New Hampshire,False,0,10,6,0.0,0,16.0
+2020,93,15.0,172,Northern Force,Falmouth,Maine,False,0,8,7,0.0,0,15.0
+2020,94,15.0,5746,Human Error,Deep River,Connecticut,False,0,10,0,0.0,5,15.0
+2020,95,14.0,4761,The Robockets,Reading,Massachusetts,False,0,12,2,0.0,0,14.0
+2020,96,14.0,1735,Green Reapers,Worcester,Massachusetts,False,0,14,0,0.0,0,14.0
+2020,97,14.0,4908,Duxbury Dragons,Duxbury,Massachusetts,False,0,14,0,0.0,0,14.0
+2020,98,14.0,5846,SouthCoast Corsairs,North Dartmouth,Massachusetts,False,0,14,0,0.0,0,14.0
+2020,99,13.0,173,RAGE Robotics ⚙️,Tolland,Connecticut,False,0,11,2,0.0,0,13.0
+2020,100,13.0,5856,Bullbots,Waterbury,Connecticut,False,0,13,0,0.0,0,13.0
+2020,101,13.0,6763,FUSION,Manchester,New Hampshire,False,0,13,0,0.0,0,13.0
+2020,102,13.0,1027,Mechatronic Maniacs,West Springfield,Massachusetts,False,0,8,0,0.0,5,13.0
+2020,103,13.0,2342,Team Phoenix,Nashua,New Hampshire,False,0,8,0,0.0,5,13.0
+2020,104,12.0,181,Birds Of Prey,Hartford,Connecticut,False,0,11,1,0.0,0,12.0
+2020,105,12.0,6620,The Northmengineers,North Smithfield,Rhode Island,False,0,12,0,0.0,0,12.0
+2020,106,12.0,6690,MV roboPride,Concord,New Hampshire,False,0,12,0,0.0,0,12.0
+2020,107,12.0,4987,MegaRams,Worcester,Massachusetts,False,0,12,0,0.0,0,12.0
+2020,108,12.0,1831,Screaming Eagles,Gilford,New Hampshire,False,0,12,0,0.0,0,12.0
+2020,109,12.0,7153,Aetos Dios (Eagles of Zeus),Manchester,Connecticut,False,0,12,0,0.0,0,12.0
+2020,110,12.0,23,PNTA Pilgrim Nuclear Technology Alliance,Plymouth,Massachusetts,False,0,12,0,0.0,0,12.0
+2020,111,12.0,3182,Athena's Warriors,Hartford,Connecticut,False,0,7,0,0.0,5,12.0
+2020,112,12.0,7416,Northern Horizons,Bethlehem,New Hampshire,False,5,7,0,0.0,0,7.0
+2020,113,11.0,4169,Warrior Robotics,Sudbury,Massachusetts,False,0,11,0,0.0,0,11.0
+2020,114,11.0,811,Wild Cards,Nashua,New Hampshire,False,0,11,0,0.0,0,11.0
+2020,115,11.0,7133,STEAM Makers,Farmington,New Hampshire,False,0,11,0,0.0,0,11.0
+2020,116,11.0,3104,The Cyber Rams,Stamford,Connecticut,False,0,11,0,0.0,0,11.0
+2020,117,11.0,1247,Blood. Sweat. and Gears,North Sutton,New Hampshire,False,0,11,0,0.0,0,11.0
+2020,118,11.0,6346,Cybears Robotics Team,Norwalk,Connecticut,False,0,11,0,0.0,0,11.0
+2020,119,11.0,1757,Wolverines,Westwood,Massachusetts,False,0,6,0,0.0,5,11.0
+2020,120,11.0,6333,Scavenger Robotics,Putnam,Connecticut,False,0,6,0,0.0,5,11.0
+2020,121,10.0,5902,The Wire Clippers,Portsmouth,New Hampshire,False,0,10,0,0.0,0,10.0
+2020,122,10.0,348,Norwell Robotics,Norwell,Massachusetts,False,0,10,0,0.0,0,10.0
+2020,123,10.0,4055,NRG,Winchester,Connecticut,False,0,10,0,0.0,0,10.0
+2020,124,10.0,6529,Beantown Blitz,Roxbury Crossing,Massachusetts,False,0,10,0,0.0,0,10.0
+2020,125,10.0,8410,Oyster River Robotics,Durham,New Hampshire,False,10
+2020,126,9.0,3205,Patriots,Concord,Massachusetts,False,0,9,0,0.0,0,9.0
+2020,127,9.0,5491,Hard Reset,Winchendon,Massachusetts,False,0,9,0,0.0,0,9.0
+2020,128,8.0,4420,Swarm Storm,Torrington,Connecticut,False,0,8,0,0.0,0,8.0
+2020,129,8.0,1729,Team Inconceivable!,Peterborough,New Hampshire,False,0,8,0,0.0,0,8.0
+2020,130,8.0,1307,Robosaints,Dover,New Hampshire,False,0,8,0,0.0,0,8.0
+2020,131,8.0,4628,Sintian Robotics,Hamden,Connecticut,False,0,8,0,0.0,0,8.0
+2020,132,8.0,1350,The Rambots,Providence,Rhode Island,False,0,8,0,0.0,0,8.0
+2020,133,8.0,246,Overclocked,Boston,Massachusetts,False,0,8,0,0.0,0,8.0
+2020,134,8.0,3623,TerrorBots,Leominster,Massachusetts,False,0,8,0,0.0,0,8.0
+2020,135,7.0,5265,Radical Impact,Portland,Maine,False,0,7,0,0.0,0,7.0
+2020,136,7.0,7164,RHODE REBELS,Providence,Rhode Island,False,0,7,0,0.0,0,7.0
+2020,137,6.0,6301,Nerointellect-sim Engineering & Robot Design Soiree   N.E.R.D.S.,Taunton,Massachusetts,False,0,6,0,0.0,0,6.0
+2020,138,6.0,1512,The Big Red,Concord,New Hampshire,False,0,6,0,0.0,0,6.0
+2020,139,6.0,3719,STEM Whalers,New London ,Connecticut,False,0,6,0,0.0,0,6.0
+2020,140,5.0,5633,Hyde Cyber Wolves,Bath,Maine,False,0,5,0,0.0,0,5.0
+2020,141,5.0,3525,The Nuts & Bolts of Fury,Waterbury,Connecticut,False,0,5,0,0.0,0,5.0
+2020,142,5.0,7795,Norse Code,Winthrop,Massachusetts,False,5
+2020,143,5.0,7907,Spartan Robotics,Whitefield,New Hampshire,False,5
+2020,144,5.0,7438,Brain Busters,Sherborn,Massachusetts,False,5
+2020,145,5.0,7462,Disruptive Technologies,Danbury,Connecticut,False,5
+2020,146,5.0,7674,RaiderBots,Rochester,New Hampshire,False,5
+2020,147,4.0,4151,SCRAP 4151,Weymouth,Massachusetts,False,0,4,0,0.0,0,4.0
+2020,148,4.0,1124,UberBots,Avon,Connecticut,False,0,4,0,0.0,0,4.0
+2020,149,4.0,7126,Atom.OS,Newmarket,New Hampshire,False,0,4,0,0.0,0,4.0
+2020,150,0.0,4925,The Resistance,Wolfeboro,New Hampshire,False,0
+2020,151,0.0,7266,NBHS Steampunks,North Brookfield,Massachusetts,False,0
+2020,152,0.0,1965,Firebirds,Allston,Massachusetts,False,0
+2020,153,0.0,4176,Iron Tigers,North Easton,Massachusetts,False,0
+2020,154,0.0,3467,Windham Windup,Windham,New Hampshire,False,0
+2020,155,0.0,3464,Sim-City,Simsbury,Connecticut,False,0
+2020,156,0.0,5563,Phalanx,Lynn,Massachusetts,False,0
+2020,157,0.0,4546,Shockwave,Dover,New Hampshire,False,0
+2020,158,0.0,6224,Saint Dominators,Auburn,Maine,False,0
+2020,159,0.0,5735,Control Freaks,Wayland,Massachusetts,False,0
+2020,160,0.0,6762,Oscats,Hillsborough,New Hampshire,False,0
+2020,161,0.0,6895,Mechanical Madness 4-H,Walpole,New Hampshire,False,0
+2020,162,0.0,6337,Terror Bytes,Pittsfield,Maine,False,0
+2020,163,0.0,58,The Riot Crew,South Portland,Maine,False,0
+2020,164,0.0,5422,Stormgears FRC,Westford,Massachusetts,False,0
+2020,165,0.0,155,The TechnoNuts,Berlin,Connecticut,False,0
+2020,166,0.0,4097,Devilbots,Northampton,Massachusetts,False,0
+2020,167,0.0,4473,Delta Prime Robotics,Farmingdale,Maine,False,0
+2020,168,0.0,2523,Tech Storm,Saint Johnsbury,Vermont,False,0
+2020,169,0.0,5556,Carriagetown Robotics,Amesbury,Massachusetts,False,0
+2020,170,0.0,5494,Bizarbots Robotics,Holbrook,Massachusetts,False,0
+2020,171,0.0,3930,SMART  Spruce Mountain Area Robotics Team,Jay,Maine,False,0
+2020,172,0.0,1721,Tidal Force,Concord,New Hampshire,False,0
+2020,173,0.0,4311,Swampscott Currents,Swampscott,Massachusetts,False,0
+2020,174,0.0,3323,Potential Energy,Litchfield,New Hampshire,False,0
+2020,175,0.0,5142,Robo Dominators,West Haven,Connecticut,False,0
+2020,176,0.0,3451,The ANOMALY,Sanford,Maine,False,0
+2020,177,0.0,7127,LongMetal,Longmeadow,Massachusetts,False,0
+2020,178,0.0,2785,Prometheus,Kent,Connecticut,False,0
+2020,179,0.0,1761,STEAMpunk Tigers,Lynn,Massachusetts,False,0
+2020,180,0.0,175,Buzz Robotics,Enfield,Connecticut,False,0
+2020,181,0.0,509,Red Storm,Bedford,New Hampshire,False,0
+2020,182,0.0,6367,The ElectroLights,Dorchester Center,Massachusetts,False,0
+2020,183,0.0,4034,Pelham πthons Team 4034,Pelham,New Hampshire,False,0
+2020,184,0.0,2423,The KwarQs,Watertown,Massachusetts,False,0
+2020,185,0.0,1699,Robocats,Colchester,Connecticut,False,0
+2020,186,0.0,2713,iRaiders,Melrose,Massachusetts,False,0
+2020,187,0.0,5459,Ipswich TIGERS,Ipswich,Massachusetts,False,0
+2020,188,0.0,4796,Cyber Dragons,Hyde Park,Massachusetts,False,0
+2020,189,0.0,2712,Power Surge 4-H Robotics,Waterbury,Connecticut,False,0
+2020,190,0.0,213,The Dirty Birds,Keene,New Hampshire,False,0
+2020,191,0.0,3634,Spark City,Bridgeport,Connecticut,False,0
+2020,192,0.0,5962,perSEVERE,Lowell,Massachusetts,False,0
+2020,193,0.0,1289,Gearheadz,Lawrence,Massachusetts,False,0
+2020,194,0.0,3461,Operation PEACCE Robotics,Bristol,Connecticut,False,0
+2020,195,0.0,1073,The Force Team,Hollis,New Hampshire,False,0
+2020,196,0.0,2648,Infinite Loop,Oakland,Maine,False,0
+2020,197,0.0,2876,Devilbotz,Burlington,Massachusetts,False,0
+2020,198,0.0,5752,Bevbotics,Beverly,Massachusetts,False,0
+2020,199,0.0,2084,Robots by the C,Manchester,Massachusetts,False,0
+2020,200,0.0,5813,Morpheus,Concord,New Hampshire,False,0
+2020,201,0.0,571,Team Paragon,Windsor,Connecticut,False,0
+2020,202,0.0,1474,Titans,Tewksbury,Massachusetts,False,0
+2020,203,0.0,4906,The Collective,Waterville,Maine,False,0
+2020,204,0.0,195,CyberKnights,Southington,Connecticut,False,0
+2020,205,0.0,4958,Robocats,Langdon,New Hampshire,False,0
+2020,206,0.0,238,Crusaders,Manchester,New Hampshire,False,0
+2020,207,0.0,125,NUTRONs,Boston,Massachusetts,False,0
+2020,208,0.0,6172,The Mad Dogs,Fairfield,Maine,False,0
+2020,209,0.0,4041,Iron Tigers,Gardiner,Maine,False,0
+2020,210,0.0,1277,The Robotomies,Groton,Massachusetts,False,0
+2022,1,389.0,176,Aces High,Windsor Locks,Connecticut,True,0,22,16,30.0,5,73.0,22,16,30.0,5,73.0,60,48,90.0,15,213.0
+2022,2,368.0,238,Crusaders,Manchester,New Hampshire,False,0,16,15,10.0,5,46.0,22,16,30.0,5,73.0,66,48,90.0,15,219.0
+2022,3,353.0,230,Gaelhawks,Shelton,Connecticut,True,0,21,15,20.0,5,61.0,22,16,30.0,5,73.0,66,48,90.0,15,219.0
+2022,4,330.0,177,Bobcat Robotics,South Windsor,Connecticut,True,0,19,16,30.0,0,65.0,19,16,30.0,5,70.0,57,48,90.0,0,195.0
+2022,5,298.0,133,B.E.R.T.,Standish,Maine,False,0,21,15,10.0,0,46.0,21,16,30.0,5,72.0,60,45,60.0,15,180.0
+2022,6,296.0,6329,The Bucks' Wrath,Bucksport,Maine,False,0,22,16,20.0,5,63.0,19,15,20.0,5,59.0,54,45,60.0,15,174.0
+2022,7,287.0,95,Grasshoppers,White River Junction,Vermont,False,0,20,15,20.0,5,60.0,19,15,20.0,5,59.0,63,45,60.0,0,168.0
+2022,8,259.0,131,CHAOS,Manchester,New Hampshire,False,0,19,14,10.0,5,48.0,17,11,10.0,5,43.0,63,45,60.0,0,168.0
+2022,9,251.0,4905,Andromeda One,Ayer,Massachusetts,True,0,18,12,10.0,10,50.0,22,16,20.0,5,63.0,54,39,30.0,15,138.0
+2022,10,245.0,1153,Timberwolves,Walpole,Massachusetts,True,0,18,14,20.0,5,57.0,19,15,20.0,5,59.0,45,39,30.0,15,129.0
+2022,11,244.0,5687,The Outliers,Portland,Maine,False,0,14,13,10.0,5,42.0,21,15,20.0,5,61.0,57,39,30.0,15,141.0
+2022,12,226.0,319,Big Bad Bob,Alton,New Hampshire,False,0,15,12,10.0,5,42.0,13,12,10.0,5,40.0,57,42,30.0,15,144.0
+2022,13,205.0,1768,Nashoba Robotics,Bolton,Massachusetts,False,0,14,12,10.0,0,36.0,18,13,10.0,5,46.0,39,39,30.0,15,123.0
+2022,14,203.0,88,TJ²,Bridgewater,Massachusetts,True,0,13,9,0.0,0,22.0,19,14,20.0,5,58.0,51,42,30.0,0,123.0
+2022,15,201.0,2370,IBOTS,Rutland,Vermont,False,0,17,12,0.0,5,34.0,18,15,30.0,8,71.0,39,33,0.0,0,72.0
+2022,16,200.0,5846,SouthCoast Corsairs,North Dartmouth,Massachusetts,False,0,16,13,10.0,0,39.0,12,0,0.0,5,17.0,21,3,90.0,0,114.0
+2022,17,196.0,1073,The Force Team,Hollis,New Hampshire,True,0,17,13,0.0,5,35.0,21,15,30.0,5,71.0,27,33,30.0,0,90.0
+2022,18,196.0,228,GUS Robotics,Meriden,Connecticut,False,0,19,14,10.0,5,48.0,18,15,20.0,5,58.0,48,42,0.0,0,90.0
+2022,19,196.0,8085,MOJO,Milford,Connecticut,True,5,16,15,20.0,5,56.0,18,13,0.0,5,36.0,51,33,0.0,15,99.0
+2022,20,188.0,4048,Redshift,Westborough,Massachusetts,False,0,14,8,0.0,5,27.0,16,10,0.0,0,26.0,42,3,90.0,0,135.0
+2022,21,187.0,195,CyberKnights,Southington,Connecticut,True,0,12,2,20.0,5,39.0,20,15,30.0,5,70.0,48,30,0.0,0,78.0
+2022,22,187.0,78,AIR STRIKE,Newport,Rhode Island,False,0,18,13,0.0,5,36.0,17,14,10.0,8,49.0,48,30,0.0,0,78.0
+2022,23,185.0,4564,Orange Chaos,Brewer,Maine,False,0,15,14,30.0,0,59.0,20,15,20.0,5,60.0,45,21,0.0,0,66.0
+2022,24,181.0,6328,Mechanical Advantage,Littleton,Massachusetts,True,0,21,16,30.0,8,75.0,20,16,30.0,10,76.0,0,0,0.0,30,30.0
+2022,25,181.0,6153,Blue Crew,Farmington,Maine,False,0,12,9,0.0,10,31.0,13,0,0.0,8,21.0,51,33,30.0,15,129.0
+2022,26,178.0,2067,Apple Pi,Guilford,Connecticut,False,0,16,11,0.0,5,32.0,16,13,10.0,5,44.0,51,36,0.0,15,102.0
+2022,27,171.0,4909,Bionics,Billerica,Massachusetts,True,0,15,14,10.0,5,44.0,19,13,0.0,5,37.0,54,36,0.0,0,90.0
+2022,28,170.0,126,Gael Force,Clinton,Massachusetts,False,0,19,13,0.0,5,37.0,20,16,20.0,5,61.0,45,27,0.0,0,72.0
+2022,29,169.0,2877,LigerBots,Newton,Massachusetts,False,0,20,15,10.0,5,50.0,15,14,10.0,8,47.0,45,27,0.0,0,72.0
+2022,30,167.0,166,Chop Shop,Merrimack,New Hampshire,True,0,16,11,0.0,8,35.0,14,11,10.0,10,45.0,42,30,0.0,15,87.0
+2022,31,162.0,172,Northern Force,Falmouth,Maine,False,0,17,12,0.0,5,34.0,19,14,0.0,5,38.0,54,36,0.0,0,90.0
+2022,32,161.0,3146,GRANBY GRUNTS,Granby,Connecticut,False,0,12,13,10.0,0,35.0,19,14,10.0,5,48.0,30,18,30.0,0,78.0
+2022,33,160.0,58,The Riot Crew,South Portland,Maine,False,0,18,13,10.0,5,46.0,17,12,10.0,0,39.0,45,30,0.0,0,75.0
+2022,34,159.0,237,Black Magic Robotics,Watertown,Connecticut,False,0,18,13,10.0,5,46.0,19,13,10.0,5,47.0,36,15,0.0,15,66.0
+2022,35,157.0,5735,Control Freaks,Wayland,Massachusetts,True,0,16,10,0.0,0,26.0,16,10,0.0,0,26.0,39,6,60.0,0,105.0
+2022,36,150.0,3461,Operation PEACCE Robotics,Bristol,Connecticut,True,0,9,3,10.0,5,27.0,13,11,0.0,0,24.0,57,42,0.0,0,99.0
+2022,37,145.0,1757,Wolverines,Westwood,Massachusetts,False,0,11,6,0.0,0,17.0,16,14,0.0,5,35.0,42,36,0.0,15,93.0
+2022,38,143.0,1071,Team MAX,Wolcott,Connecticut,False,0,7,0,0.0,8,15.0,9,14,10.0,5,38.0,36,9,30.0,15,90.0
+2022,39,142.0,1027,Mechatronic Maniacs,West Springfield,Massachusetts,False,0,18,12,0.0,0,30.0,16,12,0.0,0,28.0,18,6,60.0,0,84.0
+2022,40,140.0,5813,Morpheus,Concord,New Hampshire,True,0,18,14,30.0,5,67.0,22,16,30.0,5,73.0
+2022,41,140.0,175,Buzz Robotics,Enfield,Connecticut,False,0,14,11,0.0,5,30.0,11,10,0.0,5,26.0,42,12,30.0,0,84.0
+2022,42,138.0,7407,Wired Boars,Wallingford,Connecticut,True,0,22,16,30.0,5,73.0,21,16,20.0,8,65.0
+2022,43,136.0,2168,Aluminum Falcons,Groton,Connecticut,True,0,21,15,20.0,10,66.0,19,16,30.0,5,70.0
+2022,44,132.0,3654,TechTigers,Middletown,Connecticut,True,0,14,0,10.0,10,34.0,16,11,0.0,8,35.0,33,0,0.0,0,33.0
+2022,45,129.0,6933,Archytas,Bethel,Vermont,False,0,11,0,0.0,0,11.0,18,13,10.0,5,46.0,30,12,30.0,0,72.0
+2022,46,126.0,1699,Robocats,Colchester,Connecticut,False,0,15,9,0.0,0,24.0,14,8,0.0,5,27.0,48,27,0.0,0,75.0
+2022,47,122.0,8724,Mayhem,Bedford,New Hampshire,False,10,17,12,10.0,5,44.0,20,14,10.0,0,44.0,24,0,0.0,0,24.0
+2022,48,121.0,2342,Team Phoenix,Nashua,New Hampshire,False,0,10,2,10.0,0,22.0,11,4,10.0,5,30.0,30,24,0.0,15,69.0
+2022,49,121.0,558,Elm City Robo Squad,New Haven,Connecticut,False,0,14,10,0.0,5,29.0,17,13,0.0,5,35.0,36,21,0.0,0,57.0
+2022,50,118.0,3467,Windham Windup,Windham,New Hampshire,True,0,18,15,20.0,5,58.0,19,16,20.0,5,60.0
+2022,51,118.0,1100,Inverse Polarity,Northborough/Southborough,Massachusetts,False,0,11,0,0.0,5,16.0,15,12,0.0,0,27.0,33,27,0.0,15,75.0
+2022,52,117.0,125,NUTRONs,Boston,Massachusetts,True,0,15,15,10.0,5,45.0,21,16,30.0,5,72.0
+2022,53,117.0,1740,Cyber Colonels,Ledyard,Connecticut,False,0,17,11,0.0,5,33.0,18,12,0.0,0,30.0,36,18,0.0,0,54.0
+2022,54,113.0,2648,Infinite Loop,Oakland,Maine,False,0,11,4,10.0,0,25.0,15,1,30.0,0,46.0,42,0,0.0,0,42.0
+2022,55,111.0,155,The TechnoNuts,Berlin,Connecticut,False,0,20,14,10.0,0,44.0,18,12,10.0,0,40.0,27,0,0.0,0,27.0
+2022,56,111.0,8544,Reinforcement,Sutton,Massachusetts,False,10,13,10,0.0,5,28.0,13,6,10.0,8,37.0,36,0,0.0,0,36.0
+2022,57,110.0,7153,Aetos Dios (Eagles of Zeus),Manchester,Connecticut,True,0,20,14,10.0,5,49.0,15,8,0.0,5,28.0,33,0,0.0,0,33.0
+2022,58,110.0,2713,iRaiders,Melrose,Massachusetts,False,0,17,11,0.0,5,33.0,11,9,0.0,0,20.0,42,0,0.0,15,57.0
+2022,59,106.0,509,Red Storm,Bedford,New Hampshire,False,0,12,4,0.0,0,16.0,15,10,0.0,5,30.0,36,24,0.0,0,60.0
+2022,60,104.0,3182,Athena's Warriors,Hartford,Connecticut,True,0,14,7,0.0,0,21.0,13,2,30.0,5,50.0,18,0,0.0,15,33.0
+2022,61,104.0,467,Colonials,Shrewsbury,Massachusetts,False,0,17,11,0.0,10,38.0,14,4,10.0,5,33.0,33,0,0.0,0,33.0
+2022,62,100.0,5563,Phalanx,Lynn,Massachusetts,False,0,11,1,30.0,0,42.0,6,1,30.0,0,37.0,21,0,0.0,0,21.0
+2022,63,99.0,5422,Stormgears FRC,Westford,Massachusetts,True,0,8,8,0.0,8,24.0,10,7,0.0,10,27.0,18,0,0.0,0,18.0
+2022,64,98.0,2262,Robo-Panthers,Holliston,Massachusetts,False,0,12,5,10.0,0,27.0,18,13,10.0,0,41.0,15,15,0.0,0,30.0
+2022,65,97.0,5112,The Gongoliers,Foster and Glocester ,Rhode Island,False,0,10,5,0.0,5,20.0,11,1,30.0,5,47.0,30,0,0.0,0,30.0
+2022,66,97.0,716,Who'sCTEKS,Falls Village,Connecticut,False,0,9,12,0.0,5,26.0,16,11,0.0,5,32.0,39,0,0.0,0,39.0
+2022,67,96.0,3205,Patriots,Concord,Massachusetts,False,0,8,2,20.0,0,30.0,10,2,30.0,0,42.0,24,0,0.0,0,24.0
+2022,68,94.0,8889,Project W,Waterbury,Connecticut,False,10,10,1,30.0,5,46.0,11,0,0.0,0,11.0,12,0,0.0,15,27.0
+2022,69,94.0,8046,LakerBots,Meredith,New Hampshire,False,5,13,6,0.0,0,19.0,16,9,0.0,0,25.0,45,0,0.0,0,45.0
+2022,70,93.0,1922,Oz-Ram,Contoocook,New Hampshire,False,0,10,4,0.0,5,19.0,14,10,0.0,5,29.0,30,0,0.0,15,45.0
+2022,71,89.0,663,Robonauts,Whitinsville,Massachusetts,False,0,16,11,0.0,0,27.0,16,13,0.0,0,29.0,24,9,0.0,0,33.0
+2022,72,88.0,8708,Ov3r1y K0mp13x,Dunbarton,New Hampshire,True,10,12,0,0.0,8,20.0,10,0,0.0,0,10.0,33,0,0.0,15,48.0
+2022,73,87.0,8709,Pathfinder Tech,Palmer,Massachusetts,True,10,11,0,0.0,5,16.0,17,12,0.0,8,37.0,0,0,0.0,24,24.0
+2022,74,82.0,4041,Iron Tigers,Gardiner,Maine,False,0,16,12,0.0,5,33.0,13,9,0.0,0,22.0,27,0,0.0,0,27.0
+2022,75,82.0,1099,DiscoTechs,Brookfield,Connecticut,False,0,15,9,0.0,0,24.0,17,12,0.0,5,34.0,24,0,0.0,0,24.0
+2022,76,81.0,1474,Titans,Tewksbury,Massachusetts,False,0,14,3,20.0,0,37.0,14,9,0.0,0,23.0,21,0,0.0,0,21.0
+2022,77,79.0,236,Techno-Ticks,Old Lyme,Connecticut,False,0,16,13,10.0,0,39.0,16,14,10.0,0,40.0
+2022,78,79.0,7674,RaiderBots,Rochester,New Hampshire,False,0,13,12,0.0,0,25.0,9,5,10.0,0,24.0,30,0,0.0,0,30.0
+2022,79,78.0,6690,MV roboPride,Concord,New Hampshire,False,0,12,3,10.0,0,25.0,14,0,0.0,0,14.0,39,0,0.0,0,39.0
+2022,80,77.0,69,HYPER,Quincy,Massachusetts,False,0,16,11,0.0,5,32.0,17,13,10.0,5,45.0
+2022,81,77.0,6201,The Highlanders,Somerville,Massachusetts,False,0,13,7,0.0,0,20.0,15,9,0.0,0,24.0,33,0,0.0,0,33.0
+2022,82,76.0,61,The Intimidators,Upton,Massachusetts,False,0,6,0,0.0,0,6.0,11,10,0.0,10,31.0,39,0,0.0,0,39.0
+2022,83,75.0,8023,LRTC 8023,Lewiston,Maine,False,5,7,3,30.0,0,40.0,9,0,0.0,0,9.0,21,0,0.0,0,21.0
+2022,84,75.0,1991,Dragons,Hartford,Connecticut,False,0,8,2,10.0,0,20.0,10,3,10.0,5,28.0,27,0,0.0,0,27.0
+2022,85,72.0,1729,Team Inconceivable!,Peterborough,New Hampshire,False,0,6,1,30.0,0,37.0,13,10,0.0,0,23.0,12,0,0.0,0,12.0
+2022,86,65.0,138,Entropy,Amherst,New Hampshire,False,0,14,3,10.0,0,27.0,17,11,10.0,0,38.0
+2022,87,64.0,6324,The Blue Devils,Salem,New Hampshire,False,0,7,0,0.0,0,7.0,12,2,20.0,5,39.0,18,0,0.0,0,18.0
+2022,88,58.0,8013,Boston Lions,Boston,Massachusetts,False,5,14,8,0.0,5,27.0,16,10,0.0,0,26.0
+2022,89,56.0,5494,Bizarbots Robotics,Holbrook,Massachusetts,False,0,9,5,0.0,0,14.0,11,6,10.0,0,27.0,15,0,0.0,0,15.0
+2022,90,53.0,7127,LongMetal,Longmeadow,Massachusetts,False,0,14,1,30.0,0,45.0,8,0,0.0,0,8.0
+2022,91,53.0,157,AZTECHS,Marlborough,Massachusetts,False,0,13,11,0.0,5,29.0,15,9,0.0,0,24.0
+2022,92,51.0,151,Tough Techs,Nashua,New Hampshire,False,0,15,2,20.0,0,37.0,14,0,0.0,0,14.0
+2022,93,49.0,3451,The ANOMALY,Sanford,Maine,False,0,13,10,0.0,0,23.0,13,8,0.0,5,26.0
+2022,94,49.0,3958,Schrodinger's Cat,Boston,Massachusetts,False,0,14,6,0.0,0,20.0,15,9,0.0,5,29.0
+2022,95,47.0,3464,Sim-City,Simsbury,Connecticut,False,0,11,9,0.0,0,20.0,12,5,10.0,0,27.0
+2022,96,45.0,1058,PVC Pirates,Londonderry,New Hampshire,False,0,14,10,0.0,0,24.0,9,12,0.0,0,21.0
+2022,97,45.0,121,Rhode Warriors,Middletown,Rhode Island,False,0,12,0,0.0,0,12.0,19,14,0.0,0,33.0
+2022,98,44.0,2423,The KwarQs,Watertown,Massachusetts,False,0,7,0,0.0,0,7.0,10,2,20.0,5,37.0
+2022,99,44.0,4906,The Collective,Waterville,Maine,False,0,12,8,0.0,5,25.0,12,7,0.0,0,19.0
+2022,100,41.0,6731,Record Robotics,Belmont,Massachusetts,False,0,8,0,0.0,0,8.0,12,1,20.0,0,33.0
+2022,101,41.0,1721,Tidal Force,Concord,New Hampshire,False,0,11,0,0.0,5,16.0,12,3,10.0,0,25.0
+2022,102,41.0,999,MechaRAMS,Cheshire,Connecticut,False,0,13,8,0.0,0,21.0,11,9,0.0,0,20.0
+2022,103,41.0,1512,The Big Red,Concord,New Hampshire,False,0,10,0,0.0,0,10.0,18,13,0.0,0,31.0
+2022,104,41.0,8604,Alpha Centauri,Lexington,Massachusetts,False,10,9,0,0.0,8,17.0,9,0,0.0,5,14.0
+2022,105,40.0,4311,Swampscott Currents,Swampscott,Massachusetts,False,0,12,0,0.0,0,12.0,17,11,0.0,0,28.0
+2022,106,39.0,7907,Spartan Robotics,Whitefield,New Hampshire,False,0,10,1,20.0,0,31.0,8,0,0.0,0,8.0
+2022,107,39.0,571,Team Paragon,Windsor,Connecticut,False,0,13,0,0.0,0,13.0,5,1,20.0,0,26.0
+2022,108,38.0,6333,Scavenger Robotics,Putnam,Connecticut,False,0,12,0,0.0,0,12.0,12,4,10.0,0,26.0
+2022,109,38.0,4572,BArlow RobAutics,Redding,Connecticut,False,0,10,0,0.0,0,10.0,12,11,0.0,5,28.0
+2022,110,38.0,348,Norwell Robotics,Norwell,Massachusetts,False,0,15,10,0.0,0,25.0,13,0,0.0,0,13.0
+2022,111,38.0,3566,Gone Fishin',Southborough,Massachusetts,False,0,9,0,0.0,0,9.0,15,9,0.0,5,29.0
+2022,112,38.0,8626,Cyber Sailors,Scituate,Massachusetts,False,10,13,0,0.0,8,21.0,7,0,0.0,0,7.0
+2022,113,37.0,5856,Bullbots,Waterbury,Connecticut,False,0,17,11,0.0,0,28.0,9,0,0.0,0,9.0
+2022,114,36.0,2064,The Panther Project,Middlebury,Connecticut,False,0,17,10,0.0,0,27.0,9,0,0.0,0,9.0
+2022,115,35.0,5459,Ipswich TIGERS,Ipswich,Massachusetts,False,0,11,9,0.0,0,20.0,11,4,0.0,0,15.0
+2022,116,35.0,1277,The Robotomies,Groton,Massachusetts,False,0,16,10,0.0,0,26.0,9,0,0.0,0,9.0
+2022,117,34.0,5000,Hammerheads,Hingham,Massachusetts,False,0,12,4,10.0,0,26.0,8,0,0.0,0,8.0
+2022,118,34.0,2084,Robots by the C,Manchester,Massachusetts,False,0,9,0,0.0,0,9.0,7,3,10.0,5,25.0
+2022,119,33.0,2712,Power Surge 4-H Robotics,Waterbury,Connecticut,False,0,7,7,0.0,0,14.0,14,0,0.0,5,19.0
+2022,120,32.0,4761,The Robockets,Reading,Massachusetts,False,0,5,0,0.0,0,5.0,12,5,10.0,0,27.0
+2022,121,32.0,7869,The Fun Gang,New Haven,Connecticut,False,0,11,4,10.0,0,25.0,7,0,0.0,0,7.0
+2022,122,32.0,6895,Mechanical Madness 4-H,Walpole,New Hampshire,False,0,11,0,0.0,0,11.0,9,2,10.0,0,21.0
+2022,123,32.0,3719,STEM Whalers,New London ,Connecticut,False,0,12,6,0.0,0,18.0,8,6,0.0,0,14.0
+2022,124,32.0,4097,Devilbots,Northampton,Massachusetts,False,0,8,0,0.0,0,8.0,15,9,0.0,0,24.0
+2022,125,32.0,1247,Blood. Sweat. and Gears,North Sutton,New Hampshire,False,0,13,7,0.0,0,20.0,12,0,0.0,0,12.0
+2022,126,31.0,6723,Mechanical Mounties,Williamstown,Massachusetts,False,0,15,10,0.0,0,25.0,6,0,0.0,0,6.0
+2022,127,31.0,4546,Shockwave,Dover,New Hampshire,False,0,15,9,0.0,0,24.0,7,0,0.0,0,7.0
+2022,128,31.0,5347,Gryphons,Weston,Massachusetts,False,0,10,0,0.0,0,10.0,13,8,0.0,0,21.0
+2022,129,31.0,181,Birds Of Prey,Hartford,Connecticut,False,0,9,0,0.0,0,9.0,14,8,0.0,0,22.0
+2022,130,31.0,8567,Wellesley Robotics - Team Ultraviolet,Wellesley,Massachusetts,False,10,4,0,0.0,8,12.0,4,0,0.0,5,9.0
+2022,131,30.0,190,Gompei and the H.E.R.D.,Worcester,Massachusetts,False,0,10,10,0.0,0,20.0,10,0,0.0,0,10.0
+2022,132,30.0,1831,Screaming Eagles,Gilford,New Hampshire,False,0,12,9,0.0,0,21.0,9,0,0.0,0,9.0
+2022,133,30.0,501,The PowerKnights,Manchester,New Hampshire,False,0,6,0,0.0,0,6.0,12,7,0.0,5,24.0
+2022,134,30.0,6620,The Northmengineers,North Smithfield,Rhode Island,False,0,15,6,0.0,0,21.0,9,0,0.0,0,9.0
+2022,135,30.0,811,Wild Cards,Nashua,New Hampshire,False,0,7,0,0.0,5,12.0,12,6,0.0,0,18.0
+2022,136,30.0,5142,Robo Dominators,West Haven,Connecticut,False,0,12,5,0.0,0,17.0,13,0,0.0,0,13.0
+2022,137,30.0,3323,Potential Energy,Litchfield,New Hampshire,False,0,11,5,0.0,0,16.0,14,0,0.0,0,14.0
+2022,138,28.0,839,Rosie Robotics,Agawam,Massachusetts,False,0,4,0,0.0,0,4.0,15,9,0.0,0,24.0
+2022,139,28.0,6763,FUSION,Manchester,New Hampshire,False,0,15,9,0.0,0,24.0,4,0,0.0,0,4.0
+2022,140,26.0,6161,Equilibrium,Gray,Maine,False,0,8,6,0.0,0,14.0,12,0,0.0,0,12.0
+2022,141,26.0,173,RAGE Robotics ⚙️,Tolland,Connecticut,False,0,13,0,0.0,0,13.0,13,0,0.0,0,13.0
+2022,142,26.0,7694,THE IRON LIONS,West Hartford,Connecticut,False,0,13,0,0.0,0,13.0,13,0,0.0,0,13.0
+2022,143,25.0,4473,Delta Prime Robotics,Farmingdale,Maine,False,0,4,7,0.0,0,11.0,14,0,0.0,0,14.0
+2022,144,25.0,4169,Warrior Robotics,Sudbury,Massachusetts,False,0,11,0,0.0,0,11.0,9,5,0.0,0,14.0
+2022,145,25.0,8167,Cognatives,Durham,Connecticut,False,5,8,0,0.0,0,8.0,12,0,0.0,0,12.0
+2022,146,24.0,8410,Oyster River Robotics,Durham,New Hampshire,False,5,6,0,0.0,0,6.0,10,3,0.0,0,13.0
+2022,147,23.0,2079,4H ALARM Robotics,Franklin,Massachusetts,False,0,6,0,0.0,0,6.0,12,5,0.0,0,17.0
+2022,148,23.0,1965,Firebirds,Allston,Massachusetts,False,0,13,0,0.0,0,13.0,10,0,0.0,0,10.0
+2022,149,22.0,7760,PomTech,Pomfret,Connecticut,False,0,4,0,0.0,0,4.0,14,4,0.0,0,18.0
+2022,150,22.0,1761,STEAMpunk Tigers,Lynn,Massachusetts,False,0,10,0,0.0,0,10.0,12,0,0.0,0,12.0
+2022,151,21.0,97,Bionic Beef,Cambridge,Massachusetts,False,0,12,0,0.0,0,12.0,9,0,0.0,0,9.0
+2022,152,21.0,1124,UberBots,Avon,Connecticut,False,0,12,0,0.0,0,12.0,9,0,0.0,0,9.0
+2022,153,21.0,7822,Generals Robotics,South Hamilton,Massachusetts,False,0,10,0,0.0,0,10.0,11,0,0.0,0,11.0
+2022,154,21.0,5962,perSEVERE,Lowell,Massachusetts,False,0,6,0,0.0,0,6.0,10,0,0.0,5,15.0
+2022,155,20.0,1735,Green Reapers,Worcester,Massachusetts,False,0,11,0,0.0,0,11.0,9,0,0.0,0,9.0
+2022,156,20.0,6346,Cybears Robotics Team,Norwalk,Connecticut,False,0,6,0,0.0,0,6.0,14,0,0.0,0,14.0
+2022,157,19.0,3623,TerrorBots,Leominster,Massachusetts,False,0,5,0,0.0,0,5.0,11,3,0.0,0,14.0
+2022,158,19.0,6367,The ElectroLights,Dorchester Center,Massachusetts,False,0,9,0,0.0,0,9.0,10,0,0.0,0,10.0
+2022,159,19.0,7314,Tornadoes,Franklin,New Hampshire,False,0,6,0,0.0,5,11.0,8,0,0.0,0,8.0
+2022,160,19.0,1350,The Rambots,Providence,Rhode Island,False,0,11,0,0.0,0,11.0,8,0,0.0,0,8.0
+2022,161,18.0,7913,"Bear"ly Functioning,Bristol,New Hampshire,False,0,8,0,0.0,0,8.0,10,0,0.0,0,10.0
+2022,162,18.0,5902,The Wire Clippers,Portsmouth,New Hampshire,False,0,10,0,0.0,0,10.0,8,0,0.0,0,8.0
+2022,163,18.0,4925,The Resistance,Wolfeboro,New Hampshire,False,0,11,0,0.0,0,11.0,7,0,0.0,0,7.0
+2022,164,17.0,246,Overclocked,Boston,Massachusetts,False,0,13,0,0.0,0,13.0,4,0,0.0,0,4.0
+2022,165,17.0,5752,Bevbotics,Beverly,Massachusetts,False,0,9,0,0.0,0,9.0,8,0,0.0,0,8.0
+2022,166,17.0,4628,Sintian Robotics,Hamden,Connecticut,False,0,11,0,0.0,0,11.0,6,0,0.0,0,6.0
+2022,167,17.0,8883,Green Mountain Gears,South Burlington,Vermont,False,10,7,0,0.0,0,7.0
+2022,168,16.0,6529,Beantown Blitz,Roxbury Crossing,Massachusetts,False,0,8,0,0.0,0,8.0,8,0,0.0,0,8.0
+2022,169,16.0,2170,Galvanized Guardians,Glastonbury,Connecticut,False,0,4,0,0.0,5,9.0,7,0,0.0,0,7.0
+2022,170,15.0,1307,Robosaints,Dover,New Hampshire,False,0,9,0,0.0,0,9.0,6,0,0.0,0,6.0
+2022,171,14.0,178,The 2nd Law Enforcers,Farmington,Connecticut,False,0,7,0,0.0,0,7.0,7,0,0.0,0,7.0
+2022,172,13.0,2876,Devilbotz,Burlington,Massachusetts,False,0,6,0,0.0,0,6.0,7,0,0.0,0,7.0
+2022,173,13.0,5265,Radical Impact,Portland,Maine,False,0,7,0,0.0,0,7.0,6,0,0.0,0,6.0
+2022,174,12.0,7462,Disruptive Technologies,Danbury,Connecticut,False,0,6,0,0.0,0,6.0,6,0,0.0,0,6.0
+2022,175,11.0,4987,MegaRams,Worcester,Massachusetts,False,0,7,0,0.0,0,7.0,4,0,0.0,0,4.0
+2022,176,11.0,4034,Pelham πthons Team 4034,Pelham,New Hampshire,False,0,5,0,0.0,0,5.0,6,0,0.0,0,6.0
+2022,177,10.0,4176,Iron Tigers,North Easton,Massachusetts,False,0,5,0,0.0,0,5.0,5,0,0.0,0,5.0
+2022,178,10.0,3634,Spark City,Bridgeport,Connecticut,False,0,10,0,0.0,0,10.0
+2022,179,9.0,6762,Oscats,Hillsborough,New Hampshire,False,0,4,0,0.0,0,4.0,5,0,0.0,0,5.0
+2022,180,8.0,5491,Hard Reset,Winchendon,Massachusetts,False,0,8,0,0.0,0,8.0
+2022,181,5.0,4908,Duxbury Dragons,Duxbury,Massachusetts,False,0,5,0,0.0,0,5.0
+2022,182,5.0,2785,Prometheus,Kent,Connecticut,False,0,5,0,0.0,0,5.0
+2022,183,0.0,2523,Tech Storm,Saint Johnsbury,Vermont,False,0
+2022,184,0.0,4796,Cyber Dragons,Hyde Park,Massachusetts,False,0
+2022,185,0.0,5556,Carriagetown Robotics,Amesbury,Massachusetts,False,0

@@ -7,10 +7,10 @@ from grpclib.exceptions import GRPCError
 from rich import print
 from rich.pretty import pprint
 from tqdm.rich import trange
-
+from rich.table import Table
 from protos.tpa import EliminationAlliance
 from py.cli import expose
-from py.tba import EventType
+from py.tba import AwardType, EventType
 from py.tpa import tpa_cm
 from py.util import (
     CURRENT_YEAR_RANGE,
@@ -24,6 +24,10 @@ from py.util import (
     sort_matches,
     tqdm_bar,
 )
+
+import statbotics
+
+sb = statbotics.Statbotics()
 
 
 @expose
@@ -499,3 +503,97 @@ async def international(year: int):
             col_names=["Event", "%"],
         )
     )
+
+
+@expose
+async def event_weaknesses():
+    codes = [
+        ["mabri"],
+        ["rismi", "ripro"],
+        ["marea"],
+        ["nhgrs"],
+        ["ctwat"],
+        ["melew"],
+        ["mawne"],
+        ["mabos"],
+        ["macma"],
+        ["cthar"],
+        ["mawor"],
+        ["nhdur", "nhsea"],
+    ]
+
+    rows = []
+    async with tpa_cm() as tpa:
+        for code in codes:
+            elos = [[], [], []]
+            for subcode in code:
+                for year in range(2016, 2023):
+                    try:
+                        data = sb.get_event(f"{year}{subcode}")
+                        # elos.append(
+                        #     [data["elo_mean"], data["elo_top24"], data["elo_top8"]]
+                        # )
+
+                        elos[0].append(data["elo_mean"])
+                        elos[1].append(data["elo_top24"])
+                        elos[2].append(data["elo_top8"])
+                    except:
+                        pass
+
+            rows.append(
+                [
+                    subcode,
+                    len(elos[0]),
+                    round(sum(elos[0]) / len(elos[0])),
+                    round(sum(elos[1]) / len(elos[1])),
+                    round(sum(elos[2]) / len(elos[2])),
+                ]
+            )
+
+    rows.sort(key=lambda r: r[-1])
+
+    for row in rows:
+        print(",".join([str(n) for n in row]))
+
+    print(make_table(col_names=["Code", "#", "All", "Top24", "Top8"], row_vals=rows))
+
+
+@expose
+async def lost_qf1_won_event():
+    out = []
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa,
+            year_start=2016,
+            year_end=2022,
+            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+        ):
+            async for award in tpa.get_event_awards(event_key=event.key):
+                if award.award_type == AwardType.WINNER:
+                    team_key = award.recipient_list[0].team_key
+                    matches = sorted(
+                        [
+                            m
+                            async for m in tpa.get_team_event_matches(
+                                team_key=team_key, event_key=event.key
+                            )
+                            if m.comp_level == "qf"
+                        ],
+                        key=lambda m: m.match_number,
+                    )
+
+                    if len(matches) == 0:
+                        continue
+
+                    match = matches[0]
+                    color_played = (
+                        "red" if team_key in match.alliances.red.team_keys else "blue"
+                    )
+                    if match.winning_alliance != color_played:
+                        alliance = "-".join(
+                            [x.team_key[3:] for x in award.recipient_list]
+                        )
+                        out.append([event.key, alliance])
+
+    pprint(out)
+    print(len(out))

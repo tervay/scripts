@@ -1,4 +1,5 @@
 import inspect
+from pprint import pprint
 from typing import AsyncIterator, ForwardRef
 
 from protos.tpa import *
@@ -77,8 +78,12 @@ class TPAService(TpaBase):
     async def get_district_rankings(
         self, district_key: str
     ) -> AsyncIterator[ForwardRef("DistrictRanking")]:
-        print_current_args()  #  get_district_rankings
-        return None
+        try:
+            for a in tba.district_rankings(district=district_key):
+                pprint(a)
+                yield DistrictRanking().from_dict(a)
+        except ValueError:
+            pass
 
     async def get_district_teams(
         self, district_key: str
@@ -271,8 +276,8 @@ class TPAService(TpaBase):
     async def get_team_event_matches(
         self, team_key: str, event_key: str
     ) -> AsyncIterator[ForwardRef("Match")]:
-        print_current_args()  #  get_team_event_matches
-        return None
+        for m in tba.team_matches(team=team_key, event=event_key):
+            yield fix_match(Match().from_dict(m))
 
     async def get_team_event_matches_keys(
         self, team_key: str, event_key: str
@@ -289,8 +294,9 @@ class TPAService(TpaBase):
     async def get_team_event_status(
         self, team_key: str, event_key: str
     ) -> "TeamEventStatus":
-        print_current_args()  #  get_team_event_status
-        return None
+        return TeamEventStatus().from_dict(
+            tba.team_status(team=team_key, event=event_key)
+        )
 
     async def get_team_events(
         self, team_key: str

@@ -1,5 +1,6 @@
 from collections import defaultdict
 from datetime import datetime
+from pprint import pprint
 from typing import Dict, List
 
 import plotly.graph_objects as go
@@ -10,7 +11,7 @@ from protos.tpa import Event
 from py.cli import expose
 from py.tba import AwardType, EventType
 from py.tpa import tpa_cm
-from py.util import BarChartRaceHelper, sort_events
+from py.util import BarChartRaceHelper, sort_events, all_events_with_bar
 
 
 @expose
@@ -173,7 +174,6 @@ async def banner_bar_chart():
         title="Top 25 in Blue Banners 1992-2021",
         bars=25,
     )
-
 
 
 @expose
@@ -391,3 +391,35 @@ async def bcr_finalist_without_win():
         title="Top 25 in Finalists Without A Win 1992-2021",
         bars=25,
     )
+
+
+@expose
+async def chairmans_playoffs(year: int = 2022):
+    levels = defaultdict(lambda: 0)
+
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa,
+            year_start=year,
+            year_end=year,
+            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+        ):
+            async for award in tpa.get_event_awards(event_key=event.key):
+                if award.award_type == AwardType.CHAIRMANS:
+                    performance = await tpa.get_team_event_status(
+                        team_key=award.recipient_list[0].team_key, event_key=event.key
+                    )
+
+                    if "waiting for" in performance.overall_status_str:
+                        continue
+
+                    if performance.playoff_status_str == "--":
+                        levels["np"] += 1
+                        print(award.recipient_list[0].team_key, event.key)
+                    else:
+                        if performance.playoff.status != "eliminated":
+                            levels["w"] += 1
+                        else:
+                            levels[performance.playoff.level] += 1
+
+    pprint(levels)

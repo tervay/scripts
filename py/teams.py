@@ -1,4 +1,5 @@
 import json
+import re
 import statistics
 from collections import defaultdict
 from typing import Optional
@@ -25,6 +26,7 @@ from py.util import (
     flatten_lists,
     flatten_lists_async,
     get_savepath,
+    is_official_event,
     make_table,
     tqdm_bar,
     tqdm_bar_async,
@@ -86,6 +88,13 @@ async def test(n):
     async with tpa_cm() as tpa:
         async for t in tpa.get_teams(page_num=n):
             print(t)
+
+
+@expose
+async def total(year: int = 2023):
+    async with tpa_cm() as tpa:
+        teams = [t async for t in tpa.get_all_teams_by_year(year=year)]
+        print(len(teams))
 
 
 @expose
@@ -571,3 +580,80 @@ async def pyth_opr(event: str, n: Optional[float] = None):
             yaxis_title="Wins Above Expected",
         )
         fig.show()
+
+
+@expose
+async def sponsors():
+    sponsored_by = defaultdict(list)
+
+    async with tpa_cm() as tpa:
+        async for team in tpa.get_all_teams_by_year(year=2022):
+            if team.state_prov in [
+                "Massachusetts",
+                "Maine",
+                "Vermont",
+                "New Hampshire",
+                "Connecticut",
+                "Rhode Island",
+            ]:
+                # if True:
+                print(team.team_number)
+
+                delim_matches = re.findall(r"[^_]/\w|\w\&\w", team.name)
+                sponsors = []
+                end_of_last_sponsor = 0
+                for i in range(len(team.name) - 3):
+                    if team.name[i : i + 3] in delim_matches:
+                        sponsors.append(team.name[end_of_last_sponsor : i + 1])
+                        end_of_last_sponsor = i + 2
+                sponsors.append(team.name[end_of_last_sponsor:])
+
+                for sponsor in sponsors:
+                    key = sponsor.strip().replace(",", ";")
+                    if team.team_number not in sponsored_by[sponsor]:
+                        sponsored_by[key].append(team.team_number)
+
+    with open("sponsors.csv", "w+") as f:
+        for sponsor, teams in sorted(sponsored_by.items(), key=lambda t: -len(t[1])):
+            f.write(f'{sponsor},{len(teams)},{",".join([str(n) for n in teams])}\n')
+
+
+@expose
+async def goat():
+    async with tpa_cm() as tpa:
+        sums = defaultdict(lambda: 0)
+        counts = defaultdict(lambda: 0)
+        async for team in tpa.get_all_teams():
+            for year, elo in sorted(team.yearly_elos.items(), key=lambda t: t[0]):
+                if year in [2020, 2021]:
+                    continue
+
+                sums[team.team_number] += elo - 25
+                counts[team.team_number] += 1
+
+        print(
+            make_table(
+                col_names=["Team", "Sum", "Avg", "Count"],
+                row_vals=[
+                    [k, round(sums[k], 2), round(sums[k] / counts[k], 2), counts[k]]
+                    for k in sorted(
+                        list(sums.keys()),
+                        key=lambda k_: -sums[k_],
+                    )
+                ],
+            )
+        )
+
+        print("==============================================")
+        print(
+            make_table(
+                col_names=["Team", "Sum", "Avg", "Count"],
+                row_vals=[
+                    [k, round(sums[k], 2), round(sums[k] / counts[k], 2), counts[k]]
+                    for k in sorted(
+                        list(sums.keys()),
+                        key=lambda k_: -sums[k_] / counts[k_],
+                    )
+                ],
+            )
+        )
