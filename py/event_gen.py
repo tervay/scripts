@@ -4,12 +4,13 @@ import os
 import random
 import statistics
 from collections import defaultdict
-from math import log
+from math import log, ceil
 from typing import Dict, List
 
 from betterproto import Casing
 from colorama import Fore
-from rich import print
+
+# from rich import print
 from rich.pretty import pprint
 from tqdm.asyncio import tqdm as atqdm
 from tqdm.rich import tqdm, trange
@@ -33,6 +34,8 @@ from py.util import (
     SHORT_TO_STATE,
     STATE_TO_SHORT,
     Leaderboard,
+    all_events_with_bar,
+    all_teams_with_bar,
     chunkify,
     file_cm,
     flatten_lists_async,
@@ -42,6 +45,10 @@ from py.util import (
     tqdm_bar,
     tqdm_bar_async,
 )
+
+import statbotics
+
+sb = statbotics.Statbotics()
 
 save_dir = get_savepath("fake_events")
 
@@ -345,6 +352,56 @@ def divisions(in_fp, n_divs: int, year: int = 2021):
 
 
 @expose
+async def fair_divisions_gen(year: int, states: str, fraction: float = 0.35):
+    out = []
+
+    teams = []
+    # with open("thing.txt", "r") as f:
+    #     for line in f:
+    #         teams.append(int(line.split("\t")[0]))
+
+    async with tpa_cm() as tpa:
+        async for team in all_teams_with_bar(
+            tpa,
+            year=year,
+            condition=lambda t: t.state_prov.replace(" ", "_")
+            in [s.replace(" ", "_") for s in states.split(",")],
+            # condition=lambda t: t.team_number in teams,
+        ):
+            events = [
+                e
+                async for e in tpa.get_team_events_by_year(team_key=team.key, year=year)
+            ]
+            events = sort_events(events)
+            events = [
+                e for e in events if e.event_type in EventType.QUALIFYING_EVENT_TYPES
+            ][:2]
+
+            if len(events) == 1:
+                events = [events[0], events[0]]
+
+            n = 0
+            for event in events:
+                dpts = await tpa.get_event_district_points(event_key=event.key)
+                if team.key not in dpts.points:
+                    continue
+
+                n += dpts.points[team.key].total
+
+            if n > 0:
+                out.append([team.team_number, n])
+
+    if fraction > 1:
+        num_teams = int(fraction)
+    else:
+        num_teams = int(ceil(len(out) * fraction))
+
+    with open("out.txt", "w") as f:
+        for t, p in sorted(out, key=lambda t: -t[1])[:num_teams]:
+            print(f"{t}\t{p}", file=f)
+
+
+@expose
 def fair_divisions(in_fp, n_divs: int):
     with file_cm(in_fp, "r") as f:
         lines = f.readlines()
@@ -358,16 +415,19 @@ def fair_divisions(in_fp, n_divs: int):
 
     eval_limits = {
         "Average": {
+            1: 1,
             2: 1,
             4: 2,
             8: 2,
         },
         "Distribution": {
+            1: 1,
             2: 1,
             4: 2.5,
             8: 2.5,
         },
         "Top Distribution": {
+            1: 1,
             2: 1.5,
             4: 2,
             8: 2,
@@ -388,6 +448,9 @@ def fair_divisions(in_fp, n_divs: int):
     while not valid:
         random.shuffle(teams)
         divs = [sorted(d) for d in chunkify(teams, n_divs)]
+        if n_divs == 1:
+            break
+
         avgs = []
         dists = []
         top_dists = []
@@ -420,9 +483,17 @@ def fair_divisions(in_fp, n_divs: int):
                             valid = True
         n += 1
 
+    def sort(x):
+        s = sb.get_team_year(x, 2023)
+        if s["epa_end"] is None:
+            return 0
+
+        return -s["epa_end"]
+
     for i in range(n_divs):
         with file_cm(get_savepath(f"divs/{i + 1}.txt"), "w+") as f:
-            for n in divs[i]:
+            for n in sorted(divs[i], key=sort):
+                # for n in sorted(divs[i], key=lambda x: -perfs[x]):
                 f.write(f"{n}\n")
 
 

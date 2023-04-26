@@ -17,14 +17,16 @@ import py.event_gen
 import py.events
 import py.geo
 import py.graphing
-import py.html
+import py.html_
 import py.matches
+import py.cope
 import py.scout
 import py.sheets
 import py.sim
 import py.teams
 import py.test
 import py.write
+import py.weekly
 from py.cli import run_main
 from py.tpa import TPAService
 from py.util import CURRENT_YEAR

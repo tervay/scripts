@@ -11,7 +11,7 @@ from py.util import ENABLE_GEOCODING, OPPOSITE_COLOR, SHORT_TO_STATE
 
 import statbotics
 
-sb = statbotics.Statbotics()
+# sb = statbotics.Statbotics()
 
 
 with open("py/data/elos.json", "r") as f:
@@ -257,21 +257,22 @@ def fix_event_country(event: Event) -> Event:
 
 
 def fix_event_geo(event: Event) -> Event:
-    nom = Nominatim(user_agent="frcscripts")
-    try:
-        loc = nom.geocode(f"{event.city}, {event.state_prov}, {event.country}")
-    except:
-        print(f"Could not locate {event}")
-        return event
+    if ENABLE_GEOCODING:
+        nom = Nominatim(user_agent="frcscripts")
+        try:
+            loc = nom.geocode(f"{event.city}, {event.state_prov}, {event.country}")
+        except:
+            print(f"Could not locate {event}")
+            return event
 
-    if loc is None:
-        print(f"Could not locate {event}")
-        event.lat = 0.0
-        event.lng = 0.0
-        return event
+        if loc is None:
+            print(f"Could not locate {event}")
+            event.lat = 0.0
+            event.lng = 0.0
+            return event
 
-    event.lat = loc.latitude
-    event.lng = loc.longitude
+        event.lat = loc.latitude
+        event.lng = loc.longitude
     return event
 
 

@@ -14,10 +14,11 @@ from tqdm.rich import trange
 
 from protos.tpa import Color
 from py.cli import expose
-from py.tba import EventType, tba
+from py.tba import AwardType, EventType, tba
 from py.tpa import tpa_cm
 from py.util import (
     CURRENT_YEAR,
+    CURRENT_YEAR_RANGE,
     MAX_TEAMS_PAGE_NUM,
     MAX_TEAMS_PAGE_RANGE,
     all_events_with_bar,
@@ -341,7 +342,7 @@ async def best_per_seed():
             positive=lambda t: t[1]["wins"],
             negative=lambda t: t[1]["losses"],
         )
-        for (team, rec) in top[:10]:
+        for team, rec in top[:10]:
             table_data.append(
                 [
                     team,
@@ -657,3 +658,58 @@ async def goat():
                 ],
             )
         )
+
+
+@expose
+async def consecutive_div_finals():
+    made = defaultdict(list)
+    start = 2004
+    async with tpa_cm() as tpa:
+        for year in range(start, CURRENT_YEAR_RANGE):
+            async for event in all_events_with_bar(
+                tpa,
+                year_start=year,
+                year_end=year,
+                condition=lambda e: e.event_type == EventType.CMP_DIVISION,
+            ):
+                async for award in tpa.get_event_awards(event_key=event.key):
+                    if award.award_type in [AwardType.FINALIST, AwardType.WINNER]:
+                        for recipient in award.recipient_list:
+                            made[recipient.team_key].append(year)
+
+    def active_streak(years):
+        n = 0
+        if 2023 in years:
+            yr = 2023
+
+            while yr in years:
+                n += 1
+                yr -= 1
+
+                while yr in [2020, 2021]:
+                    yr -= 1
+
+        return n
+
+    def longest_streak(years):
+        best = 0
+        curr = 0
+        for y in range(start, CURRENT_YEAR_RANGE):
+            if y in [2020, 2021]:
+                continue
+
+            if y in years:
+                curr += 1
+            else:
+                best = max(best, curr)
+                curr = 0
+
+        return max(best, curr)
+
+    f = longest_streak
+    for tk, years in sorted(made.items(), key=lambda t: -f(t[1])):
+        active = f(years)
+        if active > 3:
+            print(
+                f'{tk[3:].rjust(4)} - {", ".join([str(s) for s in years])} ({active})'
+            )

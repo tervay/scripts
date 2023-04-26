@@ -10,6 +10,7 @@ from py.tba import EventType
 from py.tpa import tpa_cm
 from py.util import (
     CURRENT_YEAR_RANGE,
+    Leaderboard,
     _confidence,
     all_events_with_bar,
     make_table,
@@ -336,7 +337,10 @@ async def most_matches_fast():
     c = defaultdict(lambda: defaultdict(lambda: 0))
     async with tpa_cm() as tpa:
         async for event in all_events_with_bar(
-            tpa, year_start=2000, year_end=2021, condition=lambda e: True
+            tpa,
+            year_start=2000,
+            year_end=2023,
+            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
         ):
             async for match in tpa.get_event_matches(event_key=event.key):
                 if match.key.startswith("2022mirr_ef"):
@@ -382,6 +386,11 @@ async def most_matches_fast():
 
 @expose
 async def most_cargo():
+    lb = Leaderboard(
+        fn=lambda m: m[2],
+        highest_first=True,
+        limit=50,
+    )
     async with tpa_cm() as tpa:
         async for event in all_events_with_bar(
             tpa,
@@ -390,4 +399,67 @@ async def most_cargo():
             condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
         ):
             async for match in tpa.get_event_matches(event_key=event.key):
-                pass
+                if match.comp_level == "qm":
+                    continue
+
+                if match.score_breakdown_2022 is not None:
+                    lb.append(
+                        [
+                            match.key,
+                            "-".join([x[3:] for x in match.alliances.blue.team_keys]),
+                            match.score_breakdown_2022.blue.match_cargo_total,
+                        ]
+                    )
+                    lb.append(
+                        [
+                            match.key,
+                            "-".join([x[3:] for x in match.alliances.red.team_keys]),
+                            match.score_breakdown_2022.red.match_cargo_total,
+                        ]
+                    )
+
+    pprint(lb)
+
+
+@expose
+async def blowout(year: int):
+    matches = []
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa,
+            year_start=year,
+            year_end=year,
+            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+        ):
+            async for match in tpa.get_event_matches(event_key=event.key):
+                if match.alliances.red.score in [
+                    -1,
+                    0,
+                ] or match.alliances.blue.score in [-1, 0]:
+                    continue
+
+                matches.append(
+                    [
+                        match.key,
+                        match.score_breakdown_2020.red.total_points
+                        - match.score_breakdown_2020.red.foul_points,
+                        match.score_breakdown_2020.blue.total_points
+                        - match.score_breakdown_2020.blue.foul_points,
+                        abs(
+                            (
+                                match.score_breakdown_2020.red.total_points
+                                - match.score_breakdown_2020.red.foul_points
+                            )
+                            - (
+                                match.score_breakdown_2020.blue.total_points
+                                - match.score_breakdown_2020.blue.foul_points
+                            )
+                        ),
+                    ]
+                )
+
+    matches.sort(key=lambda t: -t[-1])
+    for k, rs, bs, diff in matches[:25]:
+        print(
+            f"{k.rjust(20)} {str(rs).rjust(3)} {str(bs).rjust(3)} {str(diff).rjust(4)}"
+        )

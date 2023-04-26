@@ -17,6 +17,8 @@ from typing import (
 )
 
 import bar_chart_race as bcr
+import numpy as np
+import numpy.typing as npt
 import pandas as pd
 from async_lru import alru_cache
 from rich import get_console
@@ -57,8 +59,8 @@ T = TypeVar("T")
 OPPOSITE_COLOR = {"blue": "red", "red": "blue"}
 ENABLE_GEOCODING = False
 
-MAX_TEAMS_PAGE_NUM = 17
-MAX_TEAMS_PAGE_RANGE = 17 + 1
+MAX_TEAMS_PAGE_NUM = 18
+MAX_TEAMS_PAGE_RANGE = 18 + 1
 CURRENT_YEAR = datetime.datetime.today().year
 CURRENT_YEAR_RANGE = CURRENT_YEAR + 1
 
@@ -376,9 +378,31 @@ async def all_events_with_bar(
     except (StopIteration, StopAsyncIteration):
         pass
 
+    events = sort_events(events)
     for bar, event in tqdm_bar(events):
         bar.set_description(event.key.rjust(10))
         yield event
+
+
+async def all_teams_with_bar(
+    tpa: TpaStub,
+    year: int,
+    condition: Callable[[Event], bool],
+    limit: Optional[int] = None,
+) -> AsyncIterator[Event]:
+    teams = []  # type: List[Team]
+    try:
+        async for team in tpa.get_all_teams_by_year(year=year):
+            if condition(team) and (limit is None or len(teams) < limit):
+                teams.append(team)
+                if len(teams) == limit:
+                    raise StopIteration()
+    except (StopIteration, StopAsyncIteration):
+        pass
+
+    for bar, team in tqdm_bar(teams):
+        bar.set_description(team.key.rjust(7))
+        yield team
 
 
 class Leaderboard(list):
@@ -429,3 +453,60 @@ class BarChartRaceHelper:
 
 def event_is_official(event: Event):
     return event.event_type in EventType.STANDARD_EVENT_TYPES
+
+
+class OPRUtils:
+    @staticmethod
+    def build_team_mapping(matches: List[Match]) -> Tuple[List[str], Dict[str, int]]:
+        team_set = set()
+        for match in matches:
+            for color in ["red", "blue"]:
+                for team in getattr(match.alliances, color).team_keys:
+                    team_set.add(team[3:])
+
+        team_list = list(team_set)
+        team_id_map = {}
+        for i, team in enumerate(team_list):
+            team_id_map[team] = i
+
+        return team_list, team_id_map
+
+    @staticmethod
+    def build_s_matrix(
+        matches: List[Match],
+        team_id_map: Dict[str, int],
+        accessor: Callable[[Match, str], float],
+    ) -> npt.NDArray[np.float64]:
+        n = len(team_id_map.keys())
+        s = np.zeros((n, 1))
+        for match in matches:
+            if match.alliances.blue.score == -1:
+                continue
+
+            for color in ["red", "blue"]:
+                alliance_teams = [
+                    team[3:] for team in getattr(match.alliances, color).team_keys
+                ]
+                stat = accessor(match, color)
+                for team in alliance_teams:
+                    s[team_id_map[team]] += stat
+
+        return s
+
+    @staticmethod
+    def build_m_inv_matrix(
+        matches: List[Match], team_id_map: Dict[str, int]
+    ) -> npt.NDArray[np.float64]:
+        n = len(team_id_map.keys())
+        M = np.zeros((n, n))
+        for match in matches:
+            if match.alliances.blue.score == -1:
+                continue
+
+            for color in ["red", "blue"]:
+                alliance_teams = getattr(match.alliances, color).team_keys
+                for team1 in alliance_teams:
+                    for team2 in alliance_teams:
+                        M[team_id_map[team1[3:]], team_id_map[team2[3:]]] += 1
+
+        return np.linalg.pinv(M)

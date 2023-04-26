@@ -10,6 +10,7 @@ from tqdm.rich import trange
 from rich.table import Table
 from protos.tpa import EliminationAlliance
 from py.cli import expose
+from tabulate import tabulate
 from py.tba import AwardType, EventType
 from py.tpa import tpa_cm
 from py.util import (
@@ -27,7 +28,7 @@ from py.util import (
 
 import statbotics
 
-sb = statbotics.Statbotics()
+# sb = statbotics.Statbotics()
 
 
 @expose
@@ -597,3 +598,86 @@ async def lost_qf1_won_event():
 
     pprint(out)
     print(len(out))
+
+
+@expose
+async def vods(team_number: int):
+    async with tpa_cm() as tpa:
+        async for event in tpa.get_team_events(team_key=f"frc{team_number}"):
+            out = []
+            for wc in event.webcasts:
+                if wc.type == "twitch":
+                    out.append(f"https://www.twitch.tv/{wc.channel}/videos")
+                if wc.type == "youtube":
+                    out.append(f"https://www.youtube.com/watch?v={wc.channel}")
+
+            print(f'{event.start_date} - {event.key.rjust(4 + 6)} - {" / ".join(out)}')
+
+
+@expose
+async def triple_plays():
+    out = []
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa,
+            year_start=2000,
+            year_end=2023,
+            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+        ):
+            winners = []
+            wffa = None
+            impact = None
+            async for award in tpa.get_event_awards(event_key=event.key):
+                if award.award_type in AwardType.BLUE_BANNER_AWARDS:
+                    if award.award_type == AwardType.WINNER:
+                        winners = [r.team_key for r in award.recipient_list]
+                    if award.award_type == AwardType.WOODIE_FLOWERS:
+                        wffa = award.recipient_list[0].team_key
+                    if award.award_type == AwardType.CHAIRMANS:
+                        impact = award.recipient_list[0].team_key
+
+            if wffa == impact and wffa in winners:
+                out.append([wffa, event.key])
+
+    print(tabulate(out, headers=["Team", "Event"], tablefmt="pipe"))
+
+
+@expose
+async def regions_by_einstein():
+    counts = defaultdict(int)
+
+    conv = {
+        "Connecticut": "NE",
+        "Massachusetts": "NE",
+        "Maine": "NE",
+        "Rhode Island": "NE",
+        "Vermont": "NE",
+        "New Hampshire": "NE",
+        "New Jersey": "FMA",
+        "Pennsylvania": "FMA",
+        "Delaware": "FMA",
+        "Virginia": "CHS",
+        "Maryland": "CHS",
+        "District of Columbia": "CHS",
+        "Oregon": "PNW",
+        "Washington": "PNW",
+        "New Mexico": "FIT",
+        "Texas": "FIT",
+    }
+
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa,
+            year_start=2014,
+            year_end=2023,
+            condition=lambda e: e.event_type == EventType.CMP_FINALS,
+        ):
+            async for alliance in tpa.get_event_alliances(event_key=event.key):
+                for tk in alliance.picks:
+                    team = await tpa.get_team(team_key=tk)
+                    if team.country == "USA":
+                        counts[conv.get(team.state_prov, team.state_prov)] += 1
+                    else:
+                        counts[team.country] += 1
+
+    pprint(sorted(counts.items(), key=lambda t: -t[1]))

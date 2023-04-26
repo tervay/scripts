@@ -4,7 +4,8 @@ package tpa;
 import "google/protobuf/empty.proto";
 
 enum Color {
-  RED = 0; BLUE = 1;
+  RED = 0;
+  BLUE = 1;
 }
 
 message API_Status {
@@ -346,8 +347,10 @@ message Match {
     Match_Score_Breakdown_2018 score_breakdown_2018 = 17;
     Match_Score_Breakdown_2019 score_breakdown_2019 = 18;
     Match_Score_Breakdown_2020 score_breakdown_2020 = 19;
+    Match_Score_Breakdown_2022 score_breakdown_2022 = 20;
+    Match_Score_Breakdown_2023 score_breakdown_2023 = 21;
   }
-  reserved 20 to 30;
+  reserved 22 to 30;
 
   int32 red_rp = 31;
   int32 blue_rp = 32;
@@ -660,6 +663,112 @@ message Match_Score_Breakdown_2020_Alliance {
   int32 foulPoints = 32;
   int32 rp = 33;
   int32 totalPoints = 34;
+}
+message Match_Score_Breakdown_2022 {
+  Match_Score_Breakdown_2022_Alliance blue = 1;
+  Match_Score_Breakdown_2022_Alliance red = 2;
+}
+message Match_Score_Breakdown_2022_Alliance {
+  string taxiRobot1 = 1;
+  string endgameRobot1 = 2;
+  string taxiRobot2 = 3;
+  string endgameRobot2 = 4;
+  string taxiRobot3 = 5;
+  string endgameRobot3 = 6;
+  int32 autoCargoLowerNear = 7;
+  int32 autoCargoLowerFar = 8;
+  int32 autoCargoLowerBlue = 9;
+  int32 autoCargoLowerRed = 10;
+  int32 autoCargoUpperNear = 11;
+  int32 autoCargoUpperFar = 12;
+  int32 autoCargoUpperBlue = 13;
+  int32 autoCargoUpperRed = 14;
+  int32 autoCargoTotal = 15;
+  int32 teleopCargoLowerNear = 16;
+  int32 teleopCargoLowerFar = 17;
+  int32 teleopCargoLowerBlue = 18;
+  int32 teleopCargoLowerRed = 19;
+  int32 teleopCargoUpperNear = 20;
+  int32 teleopCargoUpperFar = 21;
+  int32 teleopCargoUpperBlue = 22;
+  int32 teleopCargoUpperRed = 23;
+  int32 teleopCargoTotal = 24;
+  int32 matchCargoTotal = 25;
+  int32 autoTaxiPoints = 26;
+  int32 autoCargoPoints = 27;
+  int32 autoPoints = 28;
+  bool quintetAchieved = 29;
+  int32 teleopCargoPoints = 30;
+  int32 endgamePoints = 31;
+  int32 teleopPoints = 32;
+  bool cargoBonusRankingPoint = 33;
+  bool hangarBonusRankingPoint = 34;
+  int32 foulCount = 35;
+  int32 techFoulCount = 36;
+  int32 adjustPoints = 37;
+  int32 foulPoints = 38;
+  int32 rp = 39;
+  int32 totalPoints = 40;
+}
+message Match_Score_Breakdown_2023 {
+  Match_Score_Breakdown_2023_Alliance blue = 1;
+  Match_Score_Breakdown_2023_Alliance red = 2;
+}
+message Match_Score_Breakdown_2023_Alliance {
+  message Autocommunity {
+    repeated string B = 1;
+    repeated string M = 2;
+    repeated string T = 3;
+  }
+
+  message Links {
+    repeated int32 nodes = 1;
+    string row = 2;
+  }
+
+  message Teleopcommunity {
+    repeated string B = 1;
+    repeated string M = 2;
+    repeated string T = 3;
+  }
+
+  bool activationBonusAchieved = 1;
+  int32 adjustPoints = 2;
+  string autoBridgeState = 3;
+  int32 autoChargeStationPoints = 4;
+  string autoChargeStationRobot1 = 5;
+  string autoChargeStationRobot2 = 6;
+  string autoChargeStationRobot3 = 7;
+  Autocommunity autoCommunity = 8;
+  bool autoDocked = 9;
+  int32 autoGamePieceCount = 10;
+  int32 autoGamePiecePoints = 11;
+  int32 autoMobilityPoints = 12;
+  int32 autoPoints = 13;
+  int32 coopGamePieceCount = 14;
+  bool coopertitionCriteriaMet = 15;
+  string endGameBridgeState = 16;
+  int32 endGameChargeStationPoints = 17;
+  string endGameChargeStationRobot1 = 18;
+  string endGameChargeStationRobot2 = 19;
+  string endGameChargeStationRobot3 = 20;
+  int32 endGameParkPoints = 21;
+  int32 foulCount = 22;
+  int32 foulPoints = 23;
+  int32 linkPoints = 24;
+  repeated Links links = 25;
+  string mobilityRobot1 = 26;
+  string mobilityRobot2 = 27;
+  string mobilityRobot3 = 28;
+  int32 rp = 29;
+  bool sustainabilityBonusAchieved = 30;
+  int32 techFoulCount = 31;
+  Teleopcommunity teleopCommunity = 32;
+  int32 teleopGamePieceCount = 33;
+  int32 teleopGamePiecePoints = 34;
+  int32 teleopPoints = 35;
+  int32 totalChargeStationPoints = 36;
+  int32 totalPoints = 37;
 }
 message Media {
   string type = 1;

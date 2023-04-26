@@ -20,6 +20,8 @@ SBs = {
     2018: (MatchScoreBreakdown2018, MatchScoreBreakdown2018Alliance),
     2019: (MatchScoreBreakdown2019, MatchScoreBreakdown2019Alliance),
     2020: (MatchScoreBreakdown2020, MatchScoreBreakdown2020Alliance),
+    2022: (MatchScoreBreakdown2022, MatchScoreBreakdown2022Alliance),
+    2023: (MatchScoreBreakdown2023, MatchScoreBreakdown2023Alliance),
 }
 
 
@@ -52,6 +54,10 @@ def tba_match_to_tpa_match(m) -> Match:
         m.score_breakdown_2019 = MatchScoreBreakdown2019().from_dict(sb)
     if "2020" in m.event_key:
         m.score_breakdown_2020 = MatchScoreBreakdown2020().from_dict(sb)
+    if "2022" in m.event_key:
+        m.score_breakdown_2022 = MatchScoreBreakdown2022().from_dict(sb)
+    if "2023" in m.event_key:
+        m.score_breakdown_2023 = MatchScoreBreakdown2023().from_dict(sb)
 
     return fix_match(m)
 
@@ -302,7 +308,8 @@ class TPAService(TpaBase):
         self, team_key: str
     ) -> AsyncIterator[ForwardRef("Event")]:
         print_current_args()  #  get_team_events
-        return None
+        for e in tba.team_events(team=team_key):
+            yield fix_event(Event().from_dict(e))
 
     async def get_team_events_by_year(
         self, team_key: str, year: int
@@ -393,7 +400,8 @@ class TPAService(TpaBase):
         self, team_key: str
     ) -> AsyncIterator[ForwardRef("Response")]:
         print_current_args()  #  get_team_years_participated
-        return None
+        for y in tba.team_years(team=team_key):
+            yield Response(int_value=y)
 
     async def get_teams(self, page_num: int) -> AsyncIterator[ForwardRef("Team")]:
         print_current_args()
