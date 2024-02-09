@@ -76,7 +76,7 @@ class Model:
     def object_field_to_proto(self, field_name: str, data: dict, n: int) -> str:
         if "properties" in data and len(data["properties"].keys()) > 0:
             model = Model(inflection.camelize(field_name), data).to_proto()
-            return (
+            return (    
                 f"{model}\n{inflection.camelize(field_name)} {field_name} = " + f"{n};"
             )
 

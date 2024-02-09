@@ -30,6 +30,8 @@ import statbotics
 
 # sb = statbotics.Statbotics()
 
+# sb.get_team_events()
+
 
 @expose
 async def event_info(key: str):

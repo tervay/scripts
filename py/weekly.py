@@ -105,30 +105,30 @@ async def generate():
         #     ["Week", "Match", "Red", "Blue", "Red Pts", "Blue Pts", "Total"],
         # ],
         # [highest_auto, "Highest Auto", ["Week", "Match", "Teams", "Score"]],
-        [
-            fastest_median_match_turnaround,
-            "Fastest Median Match Turnaround Time",
-            ["Week", "Event", "Median Turnaround Mins"],
-        ],
-        [
-            slowest_median_match_turnaround,
-            "Slowest Median Match Turnaround Time",
-            ["Week", "Event", "Median Turnaround Mins"],
-        ],
+        # [
+        #     fastest_median_match_turnaround,
+        #     "Fastest Median Match Turnaround Time",
+        #     ["Week", "Event", "Median Turnaround Mins"],
+        # ],
+        # [
+        #     slowest_median_match_turnaround,
+        #     "Slowest Median Match Turnaround Time",
+        #     ["Week", "Event", "Median Turnaround Mins"],
+        # ],
         # [
         #     most_filled_community,
         #     "Most Filled Community",
         #     ["Week", "Match", "Teams", "Count/27"],
         # ],
-        [
-            highest_median_match_score,
-            "Highest Median Match Score (w/o fouls)",
-            ["Week", "Event", "Median Score"],
-        ],
-        [most_awards, "Most Awards", ["Team", "Awards"]],
-        [most_banners, "Most Banners", ["Team", "Banners"]],
-        [most_district_pts, "Most District Points", ["Team", "E1", "E2", "Total"]],
-        [most_filled_grids, "Most Filled Grids", ["Team", "Count"]],
+        # [
+        #     highest_median_match_score,
+        #     "Highest Median Match Score (w/o fouls)",
+        #     ["Week", "Event", "Median Score"],
+        # ],
+        # [most_awards, "Most Awards", ["Team", "Awards"]],
+        # [most_banners, "Most Banners", ["Team", "Banners"]],
+        # [most_district_pts, "Most District Points", ["Team", "E1", "E2", "Total"]],
+        # [most_filled_grids, "Most Filled Grids", ["Team", "Count"]],
         # [filled_grids, "Filled Grids", ["Week", "Match", "Time", "Teams"]],
     ]
     # await summary()
@@ -229,7 +229,8 @@ async def most_matches_played():
             tpa=tpa,
             year_start=CURRENT_YEAR,
             year_end=CURRENT_YEAR,
-            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+            # condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+            condition=lambda e: True,
         ):
             async for match in tpa.get_event_matches(event_key=event.key):
                 if match.alliances.blue.score == -1 and match.alliances.red.score == -1:
@@ -240,8 +241,10 @@ async def most_matches_played():
                         played[tk] += 1
 
     data = []
+    skips = {f"frc{t}" for t in range(9900, 10000)}
     for t, p in sorted(played.items(), key=lambda t: -t[1]):
-        data.append([t[3:], p])
+        if t not in skips:
+            data.append([t[3:], p])
 
     return take_top_n(data, 10, getter=lambda row: row[1])
 
@@ -253,7 +256,8 @@ async def most_wins():
             tpa=tpa,
             year_start=CURRENT_YEAR,
             year_end=CURRENT_YEAR,
-            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+            # condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+            condition=lambda e: True,
         ):
             async for match in tpa.get_event_matches(event_key=event.key):
                 if match.alliances.blue.score == -1 and match.alliances.red.score == -1:
@@ -265,8 +269,10 @@ async def most_wins():
                     wins[tk] += 1
 
     data = []
+    skips = {f"frc{t}" for t in range(9900, 10000)}
     for t, p in sorted(wins.items(), key=lambda t: -t[1]):
-        data.append([t[3:], p])
+        if t not in skips:
+            data.append([t[3:], p])
 
     return take_top_n(data, 10, getter=lambda row: row[1])
 
@@ -280,7 +286,8 @@ async def best_record():
             tpa=tpa,
             year_start=CURRENT_YEAR,
             year_end=CURRENT_YEAR,
-            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+            # condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+            condition=lambda e: True,
         ):
             async for match in tpa.get_event_matches(event_key=event.key):
                 if match.alliances.blue.score == -1 and match.alliances.red.score == -1:
@@ -301,25 +308,29 @@ async def best_record():
                             records[tk]["t"] += 1
 
     data = []
+    skips = {f"frc{t}" for t in range(9900, 10000)}
     for t, record in wilson_sort(
         records.items(),
         positive=lambda d: d[1]["w"],
         negative=lambda d: d[1]["l"] + d[1]["t"],
         z=z,
     ):
-        data.append(
-            [
-                t[3:],
-                f'{record["w"]}-{record["l"]}-{record["t"]}'
-                if record["t"] > 0
-                else f'{record["w"]}-{record["l"]}',
-                round(100 * record["w"] / sum(record.values()), 1),
-                round(
-                    _confidence(ups=record["w"], downs=record["l"] + record["t"], z=z),
-                    3,
-                ),
-            ]
-        )
+        if t not in skips:
+            data.append(
+                [
+                    t[3:],
+                    f'{record["w"]}-{record["l"]}-{record["t"]}'
+                    if record["t"] > 0
+                    else f'{record["w"]}-{record["l"]}',
+                    round(100 * record["w"] / sum(record.values()), 1),
+                    round(
+                        _confidence(
+                            ups=record["w"], downs=record["l"] + record["t"], z=z
+                        ),
+                        3,
+                    ),
+                ]
+            )
 
     return take_top_n(data, 50, lambda t: t[-1])
 
@@ -461,7 +472,7 @@ async def fastest_median_match_turnaround():
     for t, p in sorted(medians.items(), key=lambda t: t[1]):
         data.append([t[0], t[1], round(p / 60, 2)])
 
-    return take_top_n(data, 10, lambda t: -t[-1])
+    return take_top_n(data, 200, lambda t: -t[-1])
 
 
 @expose
@@ -554,13 +565,16 @@ async def filled_grids():
             tpa=tpa,
             year_start=CURRENT_YEAR,
             year_end=CURRENT_YEAR,
-            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+            condition=lambda e: True,
         ):
             if event.key == "2023gaalb":
                 continue
 
             async for match in tpa.get_event_matches(event_key=event.key):
                 if match.alliances.blue.score == -1 and match.alliances.red.score == -1:
+                    continue
+
+                if not hasattr(match, "score_breakdown_2023"):
                     continue
 
                 for c in ["red", "blue"]:
@@ -607,13 +621,16 @@ async def most_filled_grids():
             tpa=tpa,
             year_start=CURRENT_YEAR,
             year_end=CURRENT_YEAR,
-            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+            condition=lambda e: True,
         ):
             if event.key == "2023gaalb":
                 continue
 
             async for match in tpa.get_event_matches(event_key=event.key):
                 if match.alliances.blue.score == -1 and match.alliances.red.score == -1:
+                    continue
+
+                if not hasattr(match, "score_breakdown_2023"):
                     continue
 
                 for c in ["red", "blue"]:

@@ -2,16 +2,20 @@ from typing import Callable, Dict
 
 import betterproto
 import numpy as np
+import statbotics
 from rich import print
 from rich.pretty import pprint
 from rich.table import Table
 from scipy import optimize
+from scipy.optimize import minimize
+from tqdm import tqdm
 
 from protos.tpa import Match, Schedule
 from py.cli import expose
 from py.tpa.context_manager import tpa_cm
 from py.util import OPPOSITE_COLOR, OPRUtils, make_table, make_table_from_dict
-from scipy.optimize import minimize
+
+sb = statbotics.Statbotics()
 
 
 def opr_component(m: Match, color: str) -> float:
@@ -238,8 +242,29 @@ class optim_dict:
 async def better_opr(event_key: str):
     async with tpa_cm() as tpa:
         matches = [m async for m in tpa.get_event_matches(event_key=event_key)]
-        
+
         def fn(x):
             pass
 
 
+@expose
+async def sb_epa(year: int):
+    with open("out.csv", "w+") as f:
+        for ty in tqdm(sb.get_team_years(year=2023, limit=10000)):
+            f.write(
+                ",".join(
+                    [
+                        str(x)
+                        for x in [
+                            ty["team"],
+                            ty["epa_end"],
+                            ty["auto_epa_end"],
+                            ty["teleop_epa_end"],
+                            ty["endgame_epa_end"],
+                            ty["rp_1_epa_end"],
+                            ty["rp_2_epa_end"],
+                        ]
+                    ]
+                )
+                + "\n"
+            )

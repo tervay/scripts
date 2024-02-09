@@ -3,11 +3,15 @@ from typing import List
 
 from py.cli import expose
 from py.data.writes import (
+    BC2023,
     BOTB2022,
     ILRR2022,
     INRA2022,
     NERD2022,
+    NHBB2023,
+    NHMM2023,
     ONSC2022,
+    WIWI2023,
     Battlecry2021Saturday,
     Battlecry2021Sunday,
     Battlecry2022Eighthfinals,
@@ -15,11 +19,15 @@ from py.data.writes import (
     FMatchResult,
     GovCup2022,
     MayhemInMerrimack2022,
+    Mesh2023,
+    Nerd2023,
     RRMatchResult,
     Ranking2022,
+    Ranking2023,
     RiverRage2021,
     Ruckus2022,
     SummerHeat2022,
+    NHGC2023,
 )
 from py.multiproc.mp import FnArgs, call, sum_
 from collections import namedtuple
@@ -36,7 +44,13 @@ def set_custom(event_key: str):
         auth_secret=auth_secret,
         event_key=event_key,
     )
-    resp = tba.update_event_info({"playoff_type": 10})
+
+    RR_6 = 4
+    DOUBLE_ELIM_8 = 10
+    DOUBLE_ELIM_4 = 11
+    CUSTOM = 8
+
+    resp = tba.update_event_info({"playoff_type": DOUBLE_ELIM_8})
     print(resp.status_code)
     pprint(resp.text)
 
@@ -52,6 +66,9 @@ def round_robin(event_key: str):
             "2022mesh": SummerHeat2022.rr_results,
             "2022bc": Battlecry2022Eighthfinals.rr_results,
             "2022nhmm": MayhemInMerrimack2022.rr_results,
+            "2023bc": BC2023.rr_results,
+            "2023nhmm": NHMM2023.rr_results,
+            "2023nhgc": [],
         }[event_key],
         f_results={
             "2021bc1": Battlecry2021Saturday.f_results,
@@ -60,6 +77,9 @@ def round_robin(event_key: str):
             "2022mesh": SummerHeat2022.f_results,
             "2022bc": [],
             "2022nhmm": MayhemInMerrimack2022.f_results,
+            "2023bc": [],
+            "2023nhmm": NHMM2023.f_results,
+            "2023nhgc": NHGC2023.finals,
         }[event_key],
     )
 
@@ -131,17 +151,27 @@ def write_rr_helper(
 
 @expose
 def rankings(event_key: str):
-    rankings_helper(
+    # rankings_helper_2022(
+    #     event_key=event_key,
+    #     rankings={
+    #         "2022mesh": SummerHeat2022.rankings,
+    #         "2022nhmm": MayhemInMerrimack2022.rankings,
+    #         "2022nhgc": GovCup2022.rankings,
+    #         "2022mabil": NERD2022.rankings,
+    #         "2022nhbb": BOTB2022.rankings,
+    #         "2022nyrr": Ruckus2022.rankings,
+    #         "2022inra": INRA2022.rankings,
+    #         "2022ilrr": ILRR2022.rankings,
+    #     }[event_key],
+    # )
+
+    rankings_helper_2023(
         event_key=event_key,
         rankings={
-            "2022mesh": SummerHeat2022.rankings,
-            "2022nhmm": MayhemInMerrimack2022.rankings,
-            "2022nhgc": GovCup2022.rankings,
-            "2022mabil": NERD2022.rankings,
-            "2022nhbb": BOTB2022.rankings,
-            "2022nyrr": Ruckus2022.rankings,
-            "2022inra": INRA2022.rankings,
-            "2022ilrr": ILRR2022.rankings,
+            "2023wiwi": WIWI2023.rankings,
+            "2023nhmm": NHMM2023.rankings,
+            "2023nhgc": NHGC2023.rankings,
+            "2023nhbb": NHBB2023.rankings,
         }[event_key],
     )
 
@@ -256,7 +286,7 @@ def rankings_2013():
     pprint(resp.text)
 
 
-def rankings_helper(event_key: str, rankings: List[Ranking2022]):
+def rankings_helper_2022(event_key: str, rankings: List[Ranking2022]):
     tba = TBA(
         auth_key=key,
         auth_id=auth_id,
@@ -278,12 +308,50 @@ def rankings_helper(event_key: str, rankings: List[Ranking2022]):
                 "wins": r.wins,
                 "losses": r.losses,
                 "ties": r.ties,
-                "played": r.wins + r.losses + r.ties,
+                "played": r.wins + r.losses + r.ties + r.dq,
                 "dqs": r.dq,
                 "Ranking Score": r.rs,
                 "Avg Match": r.match,
                 "Avg Hangar": r.hangar,
                 "Avg Taxi + Auto Cargo": r.auto,
+            }
+            for i, r in enumerate(rankings, start=1)
+        ],
+    }
+
+    resp = tba.update_event_rankings(to_post)
+    print(resp.status_code)
+    pprint(resp.text)
+
+
+def rankings_helper_2023(event_key: str, rankings: List[Ranking2023]):
+    tba = TBA(
+        auth_key=key,
+        auth_id=auth_id,
+        auth_secret=auth_secret,
+        event_key=event_key,
+    )
+
+    to_post = {
+        "breakdowns": [
+            "Ranking Score",
+            "Avg Match",
+            "Avg Charge Station",
+            "Avg Auto",
+        ],
+        "rankings": [
+            {
+                "team_key": f"frc{r.team}",
+                "rank": i,
+                "wins": r.wins,
+                "losses": r.losses,
+                "ties": r.ties,
+                "played": r.wins + r.losses + r.ties + r.dq,
+                "dqs": r.dq,
+                "Ranking Score": r.rs,
+                "Avg Match": r.match_pts,
+                "Avg Charge Station": r.cs_pts,
+                "Avg Auto": r.auto_pts,
             }
             for i, r in enumerate(rankings, start=1)
         ],
@@ -300,9 +368,9 @@ def delete():
         auth_key=key,
         auth_id=auth_id,
         auth_secret=auth_secret,
-        event_key="2021bc1",
+        event_key="2023mesh",
     )
-    resp = tba.delete_event_matches([f"f1m{n}" for n in range(4, 16)])
+    resp = tba.delete_event_matches([f"ef{n}m2" for n in range(1, 9)])
     print(resp.status_code)
     pprint(resp.text)
 
@@ -313,27 +381,27 @@ def alliances():
         auth_key=key,
         auth_id=auth_id,
         auth_secret=auth_secret,
-        event_key="2022bc",
+        event_key="2023bc",
     )
     f = lambda teams: [f"frc{t}" for t in teams]
     resp = tba.update_event_alliances(
         [
-            f([2168, 7407, 2265, 3182]),  # 1
-            f([88, 6328, 1991]),  # 2
-            f([1468, 238, 5494, 1735]),  # 3
-            f([131, 3467, 2423, 6324]),  # 4
-            f([5813, 195, 716, 467]),  # 5
-            f([8544, 1100, 121, 1155]),  # 6
-            f([4909, 694, 126, 839]),  # 7
-            f([48, 1768, 1740, 190]),  # 8
-            f([78, 319, 7153, 173]),  # 9
-            f([175, 8085, 157]),  # 10
-            f([177, 228, 4122, 7462]),  # 11
-            f([1073, 2370, 4041, 8567]),  # 12
-            f([2877, 1796, 501]),  # 13
-            f([2084, 2713, 2262, 155]),  # 14
-            f([8724, 1058, 4048, 6763]),  # 15
-            f([1474, 166, 1729, 138]),  # 16
+            f([3314, 125, 1058, 558]),  # 1
+            f([694, 7407, 8410, 4575]),  # 2
+            f([1768, 88, 6933, 2262]),  # 3
+            f([3467, 6328, 8708, 190]),  # 4
+            f([4909, 319, 138, 7153]),  # 5
+            f([195, 177, 6324, 8544]),  # 6
+            f([48, 8085, 4122, 2084]),  # 7
+            f([4467, 95, 716, 173]),  # 8
+            f([1073, 2370, 467, 2423]),  # 9
+            f([1468, 78, 6911, 1474]),  # 10
+            f([8567, 4048, 1735, 6731]),  # 11
+            f([157, 238, 1100, 3623]),  # 12
+            f([333, 2713, 2791, 126]),  # 13
+            f([5813, 166, 1729, 501]),  # 14
+            f([4041, 131, 1740, 1880]),  # 15
+            f([2342, 1153, 2877, 175]),  # 16
         ]
     )
     print(resp.status_code)
@@ -356,6 +424,8 @@ def remap_teams(event_key: str):
                 "2022nhmm": MayhemInMerrimack2022.remap_teams,
                 "2022mesh": SummerHeat2022.remap_teams,
                 "2022mabil": NERD2022.remap_teams,
+                "2023mesh": Mesh2023.remap_teams,
+                "2023matb": Nerd2023.remap_teams,
             }[event_key]
         }
     )
@@ -369,6 +439,10 @@ def double_elim(event_key: str):
         event_key=event_key,
         double_elim_matches={
             "2022onsc": ONSC2022.double_elim_results,
+            "2023bc": BC2023.rr_results,
+            "2023wiwi": WIWI2023.elims,
+            "2023nhgc": NHGC2023.matches,
+            "2023nhbb": NHBB2023.qf,
         }[event_key],
     )
 
@@ -411,3 +485,116 @@ def double_elim_helper(
     )
     print(resp.status_code)
     print(resp.text)
+
+
+@expose
+def custom_shit():
+    tba = TBA(
+        auth_key=key,
+        auth_id=auth_id,
+        auth_secret=auth_secret,
+        event_key="2023ctgb",
+    )
+    resp = tba.update_event_matches(
+        [
+            {
+                "actual_time": 1687637069,
+                "alliances": {
+                    "blue": {
+                        "dqs": [],
+                        "score": 75,
+                        "surrogates": [],
+                        "teams": ["frc237", "frc8167", "frc228"],
+                    },
+                    "red": {
+                        "dqs": [],
+                        "score": 147,
+                        "surrogates": [],
+                        "teams": ["frc8085", "frc195", "frc5746"],
+                    },
+                },
+                "comp_level": "sf",
+                "event_key": "2023ctgb",
+                "key": "2023ctgb_sf1m1",
+                "match_number": 1,
+                "predicted_time": None,
+                "set_number": 1,
+                "time": 1687636520,
+                "winning_alliance": "red",
+                "score_breakdown": None,
+            },
+            {
+                "actual_time": 1687637190,
+                "alliances": {
+                    "blue": {
+                        "dqs": [],
+                        "score": 101,
+                        "surrogates": [],
+                        "teams": ["frc155", "frc571", "frc178"],
+                    },
+                    "red": {
+                        "dqs": [],
+                        "score": 161,
+                        "surrogates": [],
+                        "teams": ["frc1740", "frc176", "frc3654"],
+                    },
+                },
+                "comp_level": "sf",
+                "event_key": "2023ctgb",
+                "key": "2023ctgb_sf2m1",
+                "match_number": 1,
+                "predicted_time": None,
+                "set_number": 2,
+                "time": 1687637000,
+                "winning_alliance": "red",
+                "score_breakdown": None,
+            },
+            {
+                "actual_time": 1687637252,
+                "alliances": {
+                    "blue": {
+                        "dqs": [],
+                        "score": 69,
+                        "surrogates": [],
+                        "teams": ["frc8889", "frc1071", "frc999"],
+                    },
+                    "red": {
+                        "dqs": [],
+                        "score": 134,
+                        "surrogates": [],
+                        "teams": ["frc177", "frc230", "frc7694"],
+                    },
+                },
+                "comp_level": "sf",
+                "event_key": "2023ctgb",
+                "key": "2023ctgb_sf3m1",
+                "match_number": 1,
+                "predicted_time": None,
+                "set_number": 3,
+                "time": 1687637480,
+                "winning_alliance": "red",
+                "score_breakdown": None,
+            },
+        ]
+    )
+    print(resp.status_code)
+    print(resp.text)
+
+
+@expose
+def set_winning_alliance(event_key: str, match_key: str, alliance: str):
+    tba = TBA(
+        auth_key=key, auth_id=auth_id, auth_secret=auth_secret, event_key=event_key
+    )
+
+    match_data = tba.match(key=match_key)
+    match_data["winning_alliance"] = alliance
+    match_data['alliances']['blue']['teams'] = match_data['alliances']['blue']['team_keys']
+    match_data['alliances']['red']['teams'] = match_data['alliances']['red']['team_keys']
+    
+
+    pprint(match_data)
+
+    resp = tba.update_event_matches([match_data])
+    pprint(resp.status_code)
+    pprint(resp.text)

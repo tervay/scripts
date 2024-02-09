@@ -9,6 +9,7 @@ from typing import Dict, List
 
 from betterproto import Casing
 from colorama import Fore
+from itertools import groupby
 
 # from rich import print
 from rich.pretty import pprint
@@ -504,3 +505,54 @@ async def create_and_sim_district(in_file: str, n_divs: int, prekey: str):
         k = f"{prekey}{i + 1}"
         create(f"out/divs/{i + 1}.txt", name=k, key=k)
         await sim(f"out/fake_events/{k}/{k}_fe.pb")
+
+
+@expose
+async def cmp_teams_to_file(year: int):
+    count = 0
+    with open("out.txt", "w+") as f:
+        async with tpa_cm() as tpa:
+            async for event in tpa.get_events_by_year(year=year):
+                if event.event_type != EventType.CMP_DIVISION:
+                    continue
+
+                async for team in tpa.get_event_teams(event_key=event.key):
+                    f.write(f"{team.key[3:]}\n")
+                    count += 1
+
+    print(f"Wrote {count} teams")
+
+
+def region(t: Team):
+    if t.country != "USA":
+        return (t.country,)
+
+    else:
+        return (t.state_prov, t.country)
+
+
+@expose
+async def geo_balance(in_file: str, n_divs: int):
+    divs = defaultdict(list)
+    n = 0
+
+    with open(in_file, "r") as f:
+        nums = [int(n.strip()) for n in f.readlines()]
+
+        async with tpa_cm() as tpa:
+            teams = [t async for t in tpa.get_all_teams() if (t.team_number) in nums]
+
+            for region_, teamlist in groupby(
+                sorted(teams, key=lambda t: region(t)),
+                lambda t: region(t),
+            ):
+                teamlist = list(teamlist)
+                random.shuffle(teamlist)
+
+                for team in teamlist:
+                    divs[n % n_divs].append(team.team_number)
+                    n += 1
+
+    with open("out_divs3.txt", "w+") as f:
+        for i in range(n_divs):
+            print(",".join([str(x) for x in divs[i]]), file=f)

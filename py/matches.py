@@ -432,10 +432,14 @@ async def blowout(year: int):
             condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
         ):
             async for match in tpa.get_event_matches(event_key=event.key):
-                if match.alliances.red.score in [
-                    -1,
-                    0,
-                ] or match.alliances.blue.score in [-1, 0]:
+                if (
+                    match.alliances.red.score
+                    in [
+                        -1,
+                        0,
+                    ]
+                    or match.alliances.blue.score in [-1, 0]
+                ):
                     continue
 
                 matches.append(
@@ -463,3 +467,72 @@ async def blowout(year: int):
         print(
             f"{k.rjust(20)} {str(rs).rjust(3)} {str(bs).rjust(3)} {str(diff).rjust(4)}"
         )
+
+
+@expose
+async def lowest_avg_points_per_alliance(year: int):
+    def get_score(sb, year):
+        if sb.total_points != 0 or year < 2016:
+            return sb.total_points
+
+        if hasattr(sb, "adjust_points"):
+            return sb.total_points - sb.adjust_points
+        if hasattr(sb, "adjustPoints"):
+            return sb.total_points - sb.adjustPoints
+
+        raise Exception("fuck if i know what to do here")
+
+    async with tpa_cm() as tpa:
+        scores = defaultdict(list)
+
+        async for event in all_events_with_bar(
+            tpa,
+            year_start=year,
+            year_end=year,
+            condition=lambda e: e.event_type == EventType.CMP_DIVISION
+            # and e.state_prov == "Massachusetts",
+        ):
+            team_to_alliance = {}
+
+            async for alliance in tpa.get_event_alliances(event_key=event.key):
+                for team in alliance.picks:
+                    team_to_alliance[
+                        team
+                    ] = f'{alliance.name} - {"-".join([tk[3:] for tk in alliance.picks])}'
+
+            async for match in tpa.get_event_matches(event_key=event.key):
+                if match.comp_level == "qm":
+                    continue
+
+                for tk, score in zip(
+                    [
+                        match.alliances.red.team_keys[0],
+                        match.alliances.blue.team_keys[0],
+                    ],
+                    [
+                        get_score(
+                            getattr(match, f"score_breakdown_{event.year}").red,
+                            year=event.year,
+                        ),
+                        get_score(
+                            getattr(match, f"score_breakdown_{event.year}").blue,
+                            year=event.year,
+                        ),
+                    ],
+                ):
+                    scores[(event.key, team_to_alliance[tk])].append(score)
+
+        avg = lambda l: sum(l) / max(len(l), 1)
+
+        out = []
+        for ((event_key, alliance_name), score_list) in scores.items():
+            avg_score = avg(score_list)
+            out.append([event_key, alliance_name, avg_score])
+
+        print(f"10 lowest of {event.year}")
+        out.sort(key=lambda r: r[-1])
+        pprint(out[:10])
+
+        print(f"10 highest of {event.year}")
+        out.sort(key=lambda r: -r[-1])
+        pprint(out[:10])

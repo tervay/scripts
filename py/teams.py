@@ -1,3 +1,4 @@
+from itertools import combinations
 import json
 import re
 import statistics
@@ -12,8 +13,9 @@ from tqdm.asyncio import tqdm
 from tqdm.rich import tqdm as tqdm_sync
 from tqdm.rich import trange
 
-from protos.tpa import Color
+from protos.tpa import Color, WltRecord
 from py.cli import expose
+from py.matches import sort_combo
 from py.tba import AwardType, EventType, tba
 from py.tpa import tpa_cm
 from py.util import (
@@ -21,6 +23,7 @@ from py.util import (
     CURRENT_YEAR_RANGE,
     MAX_TEAMS_PAGE_NUM,
     MAX_TEAMS_PAGE_RANGE,
+    OPPOSITE_COLOR,
     all_events_with_bar,
     file_cm,
     filter_completed_events,
@@ -262,6 +265,9 @@ async def costs2(year):
 
 @expose
 async def unused():
+    def prime(n):
+        return not any(n % i == 0 for i in range(2, n))
+
     n = 0
     async with tpa_cm() as tpa:
         for page in trange(MAX_TEAMS_PAGE_RANGE):
@@ -271,8 +277,9 @@ async def unused():
 
                     if (
                         (len(set(str(n))) in [1, 2])
-                        and not any([c in str(n) for c in "04689"])
-                        and n >= 1000
+                        and not any([c in str(n) for c in "0689"])
+                        and n >= 325
+                        and prime(n)
                     ):
                         print(n)
 
@@ -709,7 +716,290 @@ async def consecutive_div_finals():
     f = longest_streak
     for tk, years in sorted(made.items(), key=lambda t: -f(t[1])):
         active = f(years)
-        if active > 3:
+        if active > 2:
             print(
-                f'{tk[3:].rjust(4)} - {", ".join([str(s) for s in years])} ({active})'
+                f'{tk[3:].rjust(4)} - {", ".join([str(s) for s in years[-active:]])} ({active})'
             )
+
+
+@expose
+async def youngest_einstein():
+    ages = defaultdict(list)
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa,
+            year_start=2004,
+            year_end=2023,
+            condition=lambda e: e.event_type == EventType.CMP_DIVISION,
+        ):
+            async for award in tpa.get_event_awards(event_key=event.key):
+                if award.award_type == AwardType.WINNER:
+                    for recipient in award.recipient_list:
+                        team = await tpa.get_team(team_key=recipient.team_key)
+                        ages[event.year - team.rookie_year].append(
+                            [team.team_number, event.year]
+                        )
+
+    for i in range(0, 3):
+        pprint(sorted(ages[i], key=lambda t: (t[1], t[0])))
+
+
+@expose
+async def worst_einstein_record():
+    records = defaultdict(lambda: WltRecord())
+
+    async with tpa_cm() as tpa:
+        for year in range(2000, CURRENT_YEAR_RANGE):
+            for bar, event in tqdm_bar(
+                [
+                    e
+                    async for e in tpa.get_events_by_year(year=year)
+                    if e.event_type == EventType.CMP_FINALS
+                ]
+            ):
+                bar.set_description(event.key)
+                async for match in tpa.get_event_matches(event_key=event.key):
+                    if (
+                        match.alliances.blue.score == -1
+                        and match.alliances.red.score == -1
+                    ):
+                        continue
+
+                    if match.winning_alliance in ["red", "blue"]:
+                        for tk in getattr(
+                            match.alliances, match.winning_alliance
+                        ).team_keys:
+                            records[tk].wins += 1
+                        for tk in getattr(
+                            match.alliances, OPPOSITE_COLOR[match.winning_alliance]
+                        ).team_keys:
+                            records[tk].losses += 1
+                    else:
+                        for c in ["red", "blue"]:
+                            for tk in getattr(match.alliances, c).team_keys:
+                                records[tk].ties += 1
+
+    table = []
+    for combo, record in wilson_sort(
+        records.items(),
+        positive=lambda t: t[1].wins,
+        negative=lambda t: t[1].ties + t[1].losses,
+        z=1.0,
+        minimum_total=4,
+    )[:75]:
+        table.append(
+            [combo[3:]]
+            + [
+                record.wins,
+                record.losses,
+                record.ties,
+                round(
+                    record.wins / (record.wins + record.losses + record.ties) * 100, 2
+                ),
+            ]
+        )
+
+    print(make_table(["T1", "W", "L", "T", "%"], table))
+
+
+@expose
+async def worst_champs_playoffs_records():
+    records = defaultdict(lambda: WltRecord())
+
+    async with tpa_cm() as tpa:
+        for year in range(2000, CURRENT_YEAR_RANGE):
+            for bar, event in tqdm_bar(
+                [
+                    e
+                    async for e in tpa.get_events_by_year(year=year)
+                    # if e.event_type in [EventType.CMP_FINALS, EventType.CMP_DIVISION]
+                    # if e.event_type in EventType.SEASON_EVENT_TYPES
+                    if e.event_type in EventType.NON_CMP_EVENT_TYPES
+                ]
+            ):
+                bar.set_description(event.key)
+                async for match in tpa.get_event_matches(event_key=event.key):
+                    if (
+                        match.alliances.blue.score == -1
+                        and match.alliances.red.score == -1
+                    ) or match.comp_level == "qm":
+                        continue
+
+                    if match.winning_alliance in ["red", "blue"]:
+                        for tk in getattr(
+                            match.alliances, match.winning_alliance
+                        ).team_keys:
+                            records[tk].wins += 1
+                        for tk in getattr(
+                            match.alliances, OPPOSITE_COLOR[match.winning_alliance]
+                        ).team_keys:
+                            records[tk].losses += 1
+                    else:
+                        for c in ["red", "blue"]:
+                            for tk in getattr(match.alliances, c).team_keys:
+                                records[tk].ties += 1
+
+    table = []
+    for combo, record in wilson_sort(
+        records.items(),
+        positive=lambda t: t[1].wins,
+        negative=lambda t: t[1].ties + t[1].losses,
+        z=1.0,
+        minimum_total=20,
+    )[:100]:
+        table.append(
+            [combo[3:]]
+            + [
+                record.wins,
+                record.losses,
+                record.ties,
+                round(
+                    record.wins / (record.wins + record.losses + record.ties) * 100, 2
+                ),
+            ]
+        )
+
+    with open("out.txt", "w+") as f:
+        print(make_table(["T1", "W", "L", "T", "%"], table), file=f)
+
+    print(make_table(["T1", "W", "L", "T", "%"], table))
+
+
+@expose
+async def most_finals_below_seed(seed: int):
+    awards_to_count = [AwardType.FINALIST, AwardType.WINNER]
+    count = defaultdict(lambda: 0)
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa,
+            year_start=2004,
+            year_end=CURRENT_YEAR,
+            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+        ):
+            awards = [a async for a in tpa.get_event_awards(event_key=event.key)]
+            async for alliance in tpa.get_event_alliances(event_key=event.key):
+                try:
+                    a_seed = int(alliance.name[-1])
+                    if a_seed >= seed:
+                        for team_key in alliance.picks:
+                            team_awards = list(
+                                filter(
+                                    lambda a: team_key
+                                    in [r.team_key for r in a.recipient_list]
+                                    and a.award_type in awards_to_count,
+                                    awards,
+                                )
+                            )
+
+                            if len(team_awards) > 0:
+                                count[team_key] += 1
+                except:
+                    break
+
+    pprint(sorted(count.items(), key=lambda t: -t[1])[:100])
+
+
+@expose
+async def highest_einstein_alliance():
+    awards_to_count = [AwardType.WINNER]
+    seeds = defaultdict(list)
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa,
+            year_start=2004,
+            year_end=CURRENT_YEAR,
+            condition=lambda e: e.event_type == EventType.CMP_DIVISION,
+        ):
+            awards = [a async for a in tpa.get_event_awards(event_key=event.key)]
+            async for alliance in tpa.get_event_alliances(event_key=event.key):
+                try:
+                    a_seed = int(alliance.name[-1])
+                    for team_key in alliance.picks:
+                        team_awards = list(
+                            filter(
+                                lambda a: team_key
+                                in [r.team_key for r in a.recipient_list]
+                                and a.award_type in awards_to_count,
+                                awards,
+                            )
+                        )
+
+                        if len(team_awards) > 0:
+                            seeds[team_key].append(a_seed)
+                except:
+                    break
+
+    for k, v in sorted(seeds.items(), key=lambda t: -statistics.mean(t[1])):
+        if len(v) < 2:
+            continue
+
+        print(f"{k} - {v} - {round(statistics.mean(v), 2)}")
+
+
+@expose
+async def most_div_finals_without_win():
+    finalist_count = defaultdict(lambda: 0)
+    win_count = defaultdict(lambda: 0)
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa,
+            year_start=2004,
+            year_end=CURRENT_YEAR,
+            # condition=lambda e: e.event_type == EventType.CMP_DIVISION,
+            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+        ):
+            async for award in tpa.get_event_awards(event_key=event.key):
+                if award.award_type == AwardType.FINALIST:
+                    for recipient in award.recipient_list:
+                        finalist_count[recipient.team_key] += 1
+
+                if award.award_type == AwardType.WINNER:
+                    for recipient in award.recipient_list:
+                        win_count[recipient.team_key] += 1
+
+    for k, v in sorted(finalist_count.items(), key=lambda t: -t[1]):
+        if win_count[k] > 0:
+            continue
+        if v < 4:
+            continue
+
+        print(f"{k[3:]} - {v}")
+
+
+@expose
+async def ca_3():
+    async with tpa_cm() as tpa:
+        async for team in tpa.get_all_teams_by_year(year=2023):
+            if team.state_prov in ["CA", "California"]:
+                events = [
+                    e
+                    async for e in tpa.get_team_events_by_year(
+                        team_key=team.key, year=2023
+                    )
+                    if e.event_type == EventType.REGIONAL
+                ]
+                if len(events) >= 3:
+                    print(f"{team.team_number}, {len(events)}")
+
+
+@expose
+async def nonca_in_ca():
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa,
+            year_start=2023,
+            year_end=2023,
+            condition=lambda e: e.state_prov in ["CA", "California"]
+            and e.event_type == EventType.REGIONAL,
+        ):
+            async for team in tpa.get_event_teams(event_key=event.key):
+                if team.state_prov not in ["CA", "California"]:
+                    events = [
+                        e
+                        async for e in tpa.get_team_events_by_year(
+                            team_key=team.key, year=2023
+                        )
+                        if e.event_type == EventType.REGIONAL
+                    ]
+                    if len(events) >= 3:
+                        print(f"{team.team_number}, {len(events)}")

@@ -1,4 +1,5 @@
 import datetime
+import math
 from contextlib import contextmanager
 from io import TextIOWrapper
 from math import sqrt
@@ -28,7 +29,9 @@ from tqdm.asyncio import tqdm as atqdm
 from tqdm.rich import tqdm
 
 from protos.tpa import (
+    EliminationAlliance,
     Event,
+    EventRanking,
     Match,
     MatchScoreBreakdown2015,
     MatchScoreBreakdown2016,
@@ -510,3 +513,58 @@ class OPRUtils:
                         M[team_id_map[team1[3:]], team_id_map[team2[3:]]] += 1
 
         return np.linalg.pinv(M)
+
+
+def calculate_alliance_pts(
+    alliances: List[EliminationAlliance], team_key: str
+) -> Optional[int]:
+    if len(alliances) != 8:
+        return None
+
+    for a in alliances:
+        if team_key in a.picks:
+            pick_num = a.picks.index(team_key)
+            if pick_num in [0, 1]:
+                return 17 - int(a.name[-1])
+            elif pick_num == 2:
+                return int(a.name[-1])
+            else:
+                return 0
+
+    return 0
+
+
+def inverf(x: float) -> float:
+    if x > 0:
+        s = 1
+    elif x < 0:
+        s = -1
+    else:
+        s = 0
+    a = 0.147
+    y = s * math.sqrt(
+        (
+            math.sqrt(
+                (((2 / (math.pi * a)) + ((math.log(1 - x**2)) / 2)) ** 2)
+                - ((math.log(1 - x**2)) / a)
+            )
+        )
+        - ((2 / (math.pi * a)) + (math.log(1 - x**2)) / 2)
+    )
+    return y
+
+
+def calculate_qual_pts(rankings: EventRanking, team_key: str) -> Optional[int]:
+    num_teams = len(rankings.rankings)
+    alpha = 1.07
+    for r in rankings.rankings:
+        if r.team_key == team_key:
+            return int(
+                math.ceil(
+                    inverf(float(num_teams - 2 * r.rank + 2) / (alpha * num_teams))
+                    * (10.0 / inverf(1.0 / alpha))
+                    + 12
+                )
+            )
+
+    return None

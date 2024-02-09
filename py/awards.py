@@ -347,7 +347,7 @@ async def bcr_finalist_without_win():
     async with tpa_cm() as tpa:
         date_to_events = defaultdict(list)  # type: Dict[str, List[Event]]
         won = defaultdict(lambda: False)
-        for year in trange(1992, 2022):
+        for year in trange(1992, 2023 + 1):
             for event in sort_events(
                 [
                     e
