@@ -4,12 +4,13 @@ import os
 import random
 import statistics
 from collections import defaultdict
-from math import log, ceil
+from itertools import groupby
+from math import ceil, log
 from typing import Dict, List
 
+import statbotics
 from betterproto import Casing
 from colorama import Fore
-from itertools import groupby
 
 # from rich import print
 from rich.pretty import pprint
@@ -46,8 +47,6 @@ from py.util import (
     tqdm_bar,
     tqdm_bar_async,
 )
-
-import statbotics
 
 sb = statbotics.Statbotics()
 
@@ -552,6 +551,73 @@ async def geo_balance(in_file: str, n_divs: int):
                 for team in teamlist:
                     divs[n % n_divs].append(team.team_number)
                     n += 1
+
+    with open("out_divs3.txt", "w+") as f:
+        for i in range(n_divs):
+            print(",".join([str(x) for x in divs[i]]), file=f)
+
+
+@expose
+async def geo_epa_balance(in_file: str, year: int, n_divs: int):
+    n = 0
+
+    with open(in_file, "r") as f:
+        nums = [int(n.strip()) for n in f.readlines()]
+
+    team_epas = sb.get_team_years(year=year, limit=9999)
+    team_epa_lookup = {}
+    for tepa in team_epas:
+        team_epa_lookup[tepa["team"]] = tepa
+
+    async with tpa_cm() as tpa:
+        all_teams = [t async for t in tpa.get_all_teams()]
+
+    with open("out.csv", "w+") as f:
+        good = False
+        x = 0
+        teams = [t for t in all_teams if (t.team_number) in nums]
+
+        while not good:
+            maybe_good = True
+            divs = defaultdict(list)
+            x += 1
+            print(x)
+
+            for region_, teamlist in groupby(
+                sorted(teams, key=lambda t: region(t)),
+                lambda t: region(t),
+            ):
+                teamlist = list(teamlist)
+                random.shuffle(teamlist)
+
+                for team in teamlist:
+                    divs[n % n_divs].append(team.team_number)
+                    n += 1
+
+            median_epas = {}
+            for n in range(n_divs):
+                if not maybe_good:
+                    break
+
+                div = divs[n]
+                epas = [team_epa_lookup[n]["epa_pre_champs"] for n in div]
+                epas.sort()
+                median_epas[n] = statistics.median(epas)
+
+                median = statistics.stdev(epas)
+                if median >= 7:
+                    maybe_good = False
+
+                print(median, end=",", file=f)
+
+            if maybe_good and statistics.stdev(list(median_epas.values())) > 1:
+                maybe_good = False
+
+            good = maybe_good
+            if maybe_good:
+                print(statistics.stdev(list(median_epas.values())), file=f)
+            else:
+                print("")
 
     with open("out_divs3.txt", "w+") as f:
         for i in range(n_divs):

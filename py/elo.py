@@ -35,7 +35,7 @@ async def generate():
         async for event in all_events_with_bar(
             tpa,
             year_start=2009,
-            year_end=2022,
+            year_end=2023,
             condition=is_official_event,
         ):
             if prev_year is not None and event.year != prev_year:
