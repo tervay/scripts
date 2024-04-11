@@ -1,24 +1,30 @@
 from collections import defaultdict
-from py.cli import expose
-from py.tba import AwardType, EventType
-from py.tpa import tpa_cm
+from datetime import datetime
+from pprint import pprint
+from statistics import median
+
+from tabulate import tabulate
+
 from protos.tpa import (
     MatchScoreBreakdown2023AllianceAutocommunity,
     MatchScoreBreakdown2023AllianceTeleopcommunity,
 )
+from py.cli import expose
+from py.tba import AwardType, EventType
+from py.tpa import tpa_cm
 from py.util import (
     CURRENT_YEAR,
     MAX_TEAMS_PAGE_NUM,
     MAX_TEAMS_PAGE_RANGE,
-    all_events_with_bar,
     OPPOSITE_COLOR,
-    wilson_sort,
     _confidence,
+    _confidence_bayes,
+    all_events_with_bar,
+    wilson_sort,
+    bayes_sort,
 )
-from tabulate import tabulate
-from statistics import median
-from datetime import datetime
-from pprint import pprint
+
+import scipy.special as sc
 
 formats = [
     "plain",
@@ -82,13 +88,19 @@ def take_top_n(data, n, getter):
 async def generate():
     to_run = [
         # [undefeated, "Remaining Undefeated Teams", ["Team", "Record"]],
-        [most_matches_played, "Most Matches Played", ["Team", "Played"]],
-        [most_wins, "Most Wins", ["Team", "Wins"]],
+        # [most_matches_played, "Most Matches Played", ["Team", "Played"]],
+        # [most_wins, "Most Wins", ["Team", "Wins"]],
+        # [winners_by_seed, "Winning Alliances by Seed", ["Name", "Count"]],
         [
             best_record,
             "Best Record (via confidence interval)",
             ["Team", "Record", "%", "Confidence"],
         ],
+        # [
+        #     best_record_2,
+        #     "Best Record 2 (via Bayesian)",
+        #     ["Team", "Record", "%", "Confidence"],
+        # ],
         # [
         #     highest_score_minus_fouls,
         #     "Highest Score Minus Fouls",
@@ -99,6 +111,16 @@ async def generate():
         #     "Highest Score Minus Fouls Per District",
         #     ["District", "Week", "Match", "Teams", "Score"],
         # ],
+        [
+            high_scores_by_region,
+            "Highest Score Minus Fouls Per Region",
+            ["Region", "Week", "Match", "Teams", "Score"],
+        ],
+        [
+            median_scores_by_region,
+            "Median Score Minus Fouls Per Region",
+            ["Region", "Events", "Score"],
+        ],
         # [
         #     highest_combined_score_minus_fouls,
         #     "Highest Combined Score Minus Fouls",
@@ -120,16 +142,18 @@ async def generate():
         #     "Most Filled Community",
         #     ["Week", "Match", "Teams", "Count/27"],
         # ],
-        # [
-        #     highest_median_match_score,
-        #     "Highest Median Match Score (w/o fouls)",
-        #     ["Week", "Event", "Median Score"],
-        # ],
-        # [most_awards, "Most Awards", ["Team", "Awards"]],
+        [
+            highest_median_match_score,
+            "Highest Median Match Score (w/o fouls)",
+            ["Week", "Event", "Median Score"],
+        ],
+        [most_awards, "Most Awards", ["Team", "Awards"]],
         # [most_banners, "Most Banners", ["Team", "Banners"]],
         # [most_district_pts, "Most District Points", ["Team", "E1", "E2", "Total"]],
         # [most_filled_grids, "Most Filled Grids", ["Team", "Count"]],
         # [filled_grids, "Filled Grids", ["Week", "Match", "Time", "Teams"]],
+        [most_notes_scored, "Most Total Notes", ["Key", "Teams", "Count"]],
+        [most_teleop_notes_scored, "Most Teleop Notes", ["Key", "Teams", "Count"]],
     ]
     # await summary()
     with open("out.md", "w+") as f:
@@ -140,6 +164,7 @@ async def generate():
             print(f"### {title}\n", file=f)
             print(tabulate(ranked, headers=["N"] + headers, tablefmt="pipe"), file=f)
             print("\n", file=f)
+            f.flush()
 
 
 @expose
@@ -169,7 +194,6 @@ async def summary():
     print(
         f"{len(played)} teams have played. {len(unplayed.difference(played))} are yet to play."
     )
-    pprint(unplayed.difference(played))
 
     for n in [1, 2, 3, 4, 5, 6]:
         count = list(filter(lambda t: len(t[1]) == n, events.items()))
@@ -286,8 +310,8 @@ async def best_record():
             tpa=tpa,
             year_start=CURRENT_YEAR,
             year_end=CURRENT_YEAR,
-            # condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
-            condition=lambda e: True,
+            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+            # condition=lambda e: True,
         ):
             async for match in tpa.get_event_matches(event_key=event.key):
                 if match.alliances.blue.score == -1 and match.alliances.red.score == -1:
@@ -319,13 +343,77 @@ async def best_record():
             data.append(
                 [
                     t[3:],
-                    f'{record["w"]}-{record["l"]}-{record["t"]}'
-                    if record["t"] > 0
-                    else f'{record["w"]}-{record["l"]}',
+                    (
+                        f'{record["w"]}-{record["l"]}-{record["t"]}'
+                        if record["t"] > 0
+                        else f'{record["w"]}-{record["l"]}'
+                    ),
                     round(100 * record["w"] / sum(record.values()), 1),
                     round(
                         _confidence(
                             ups=record["w"], downs=record["l"] + record["t"], z=z
+                        ),
+                        3,
+                    ),
+                ]
+            )
+
+    return take_top_n(data, 50, lambda t: t[-1])
+
+
+@expose
+async def best_record_2():
+    L = 5
+    records = defaultdict(lambda: {"w": 0, "l": 0, "t": 0})
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa=tpa,
+            year_start=CURRENT_YEAR,
+            year_end=CURRENT_YEAR,
+            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+            # condition=lambda e: True,
+        ):
+            async for match in tpa.get_event_matches(event_key=event.key):
+                if match.alliances.blue.score == -1 and match.alliances.red.score == -1:
+                    continue
+
+                if match.winning_alliance in ["red", "blue"]:
+                    for tk in getattr(
+                        match.alliances, match.winning_alliance
+                    ).team_keys:
+                        records[tk]["w"] += 1
+                    for tk in getattr(
+                        match.alliances, OPPOSITE_COLOR[match.winning_alliance]
+                    ).team_keys:
+                        records[tk]["l"] += 1
+                else:
+                    for c in ["red", "blue"]:
+                        for tk in getattr(match.alliances, c).team_keys:
+                            records[tk]["t"] += 1
+
+    data = []
+    skips = {f"frc{t}" for t in range(9900, 10000)}
+    for t, record in bayes_sort(
+        records.items(),
+        positive=lambda d: d[1]["w"],
+        negative=lambda d: d[1]["l"] + d[1]["t"],
+        L=L,
+    ):
+        if t not in skips:
+            data.append(
+                [
+                    t[3:],
+                    (
+                        f'{record["w"]}-{record["l"]}-{record["t"]}'
+                        if record["t"] > 0
+                        else f'{record["w"]}-{record["l"]}'
+                    ),
+                    round(100 * record["w"] / sum(record.values()), 1),
+                    round(
+                        _confidence_bayes(
+                            ups=record["w"],
+                            downs=record["l"] + record["t"],
+                            L=L,
                         ),
                         3,
                     ),
@@ -452,16 +540,22 @@ async def fastest_median_match_turnaround():
 
             turnarounds = []
             last_time = None
-            async for match in tpa.get_event_matches(event_key=event.key):
-                if match.alliances.blue.score == -1 and match.alliances.red.score == -1:
-                    continue
+            try:
+                async for match in tpa.get_event_matches(event_key=event.key):
+                    if (
+                        match.alliances.blue.score == -1
+                        and match.alliances.red.score == -1
+                    ):
+                        continue
 
-                if last_time == None:
+                    if last_time is None:
+                        last_time = match.actual_time
+                        continue
+
+                    turnarounds.append(match.actual_time - last_time)
                     last_time = match.actual_time
-                    continue
-
-                turnarounds.append(match.actual_time - last_time)
-                last_time = match.actual_time
+            except:
+                continue
 
             if len(turnarounds) == 0:
                 continue
@@ -674,12 +768,12 @@ async def highest_median_match_score():
                     continue
 
                 scores.append(
-                    match.score_breakdown_2023.blue.total_points
-                    - match.score_breakdown_2023.blue.foul_points
+                    match.score_breakdown_2024.blue.total_points
+                    - match.score_breakdown_2024.blue.foul_points
                 )
                 scores.append(
-                    match.score_breakdown_2023.red.total_points
-                    - match.score_breakdown_2023.red.foul_points
+                    match.score_breakdown_2024.red.total_points
+                    - match.score_breakdown_2024.red.foul_points
                 )
 
             if len(scores) == 0:
@@ -691,7 +785,7 @@ async def highest_median_match_score():
     for t, p in sorted(medians.items(), key=lambda t: -t[-1]):
         data.append([t[0], t[1], p])
 
-    return take_top_n(data, 20, lambda t: -t[-1])
+    return take_top_n(data, 200, lambda t: -t[-1])
 
 
 @expose
@@ -791,8 +885,8 @@ async def high_scores_by_district():
                             ),
                         )
                     ] = (
-                        getattr(match.score_breakdown_2023, c).total_points
-                        - getattr(match.score_breakdown_2023, c).foul_points
+                        getattr(match.score_breakdown_2024, c).total_points
+                        - getattr(match.score_breakdown_2024, c).foul_points
                     )
 
     data = []
@@ -800,6 +894,89 @@ async def high_scores_by_district():
         scores_ = sorted(scores.items(), key=lambda t: -t[1])
         (wk, key, teams), score = scores_[0]
         data.append([district, wk, key, teams, score])
+
+    return sorted(data, key=lambda r: -r[-1])
+
+
+@expose
+async def high_scores_by_region():
+    pts = defaultdict(lambda: defaultdict(int))
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa=tpa,
+            year_start=CURRENT_YEAR,
+            year_end=CURRENT_YEAR,
+            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+        ):
+            region = event.district.display_name
+            if event.district.display_name == "":
+                if event.country not in ["USA", "Canada"]:
+                    region = event.country
+                else:
+                    region = event.state_prov
+
+            async for match in tpa.get_event_matches(event_key=event.key):
+                if match.alliances.blue.score == -1 and match.alliances.red.score == -1:
+                    continue
+
+                for c in ["red", "blue"]:
+                    pts[region][
+                        (
+                            event.week + 1,
+                            match.key,
+                            "-".join(
+                                [k[3:] for k in getattr(match.alliances, c).team_keys]
+                            ),
+                        )
+                    ] = (
+                        getattr(match.score_breakdown_2024, c).total_points
+                        - getattr(match.score_breakdown_2024, c).foul_points
+                    )
+
+    data = []
+    for district, scores in pts.items():
+        scores_ = sorted(scores.items(), key=lambda t: -t[1])
+        (wk, key, teams), score = scores_[0]
+        data.append([district, wk, key, teams, score])
+
+    return sorted(data, key=lambda r: -r[-1])
+
+
+@expose
+async def median_scores_by_region():
+    pts = defaultdict(list)
+    event_counts = defaultdict(int)
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa=tpa,
+            year_start=CURRENT_YEAR,
+            year_end=CURRENT_YEAR,
+            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+        ):
+            region = event.district.display_name
+            if event.district.display_name == "":
+                if event.country not in ["USA", "Canada"]:
+                    region = event.country
+                else:
+                    region = event.state_prov
+
+            event_counts[region] += 1
+
+            async for match in tpa.get_event_matches(event_key=event.key):
+                if match.alliances.blue.score == -1 and match.alliances.red.score == -1:
+                    continue
+
+                for c in ["red", "blue"]:
+                    pts[region].append(
+                        (
+                            getattr(match.score_breakdown_2024, c).total_points
+                            - getattr(match.score_breakdown_2024, c).foul_points
+                        )
+                    )
+
+    data = []
+    for district, scores in pts.items():
+        data.append([district, event_counts[district], median(scores)])
 
     return sorted(data, key=lambda r: -r[-1])
 
@@ -819,3 +996,120 @@ async def ma():
                 print(
                     f"{team.team_number},{team.nickname},{sorted(yrs)[-1]},{team.city}"
                 )
+
+
+async def winners_by_seed():
+    counts = defaultdict(lambda: 0)
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa=tpa,
+            year_start=CURRENT_YEAR,
+            year_end=CURRENT_YEAR,
+            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+        ):
+            async for alliance in tpa.get_event_alliances(event_key=event.key):
+                if alliance.status.status == "won":
+                    counts[alliance.name] += 1
+                    break
+
+    data = []
+    for a, count in counts.items():
+        data.append([a, count])
+
+    data.sort(key=lambda t: int(t[0][-1]))
+
+    return take_top_n(data, 25, getter=lambda row: row[1])
+
+
+async def most_notes_scored():
+    results = []
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa=tpa,
+            year_start=CURRENT_YEAR,
+            year_end=CURRENT_YEAR,
+            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+        ):
+            async for match in tpa.get_event_matches(event_key=event.key):
+                if match.alliances.blue.score == -1 and match.alliances.red.score == -1:
+                    continue
+
+                if not hasattr(match, "score_breakdown_2024"):
+                    continue
+
+                for c in ["red", "blue"]:
+                    results.append(
+                        [
+                            match.key,
+                            "-".join(
+                                [(k[3:]) for k in getattr(match.alliances, c).team_keys]
+                            ),
+                            sum(
+                                [
+                                    getattr(
+                                        match.score_breakdown_2024, c
+                                    ).auto_amp_note_count,
+                                    getattr(
+                                        match.score_breakdown_2024, c
+                                    ).teleop_amp_note_count,
+                                    getattr(
+                                        match.score_breakdown_2024, c
+                                    ).auto_speaker_note_count,
+                                    getattr(
+                                        match.score_breakdown_2024, c
+                                    ).teleop_speaker_note_count,
+                                    getattr(
+                                        match.score_breakdown_2024, c
+                                    ).teleop_speaker_note_amplified_count,
+                                ]
+                            ),
+                        ]
+                    )
+
+        results.sort(key=lambda t: -t[-1])
+
+    return results[:25]
+
+
+async def most_teleop_notes_scored():
+    results = []
+    async with tpa_cm() as tpa:
+        async for event in all_events_with_bar(
+            tpa=tpa,
+            year_start=CURRENT_YEAR,
+            year_end=CURRENT_YEAR,
+            condition=lambda e: e.event_type in EventType.SEASON_EVENT_TYPES,
+        ):
+            async for match in tpa.get_event_matches(event_key=event.key):
+                if match.alliances.blue.score == -1 and match.alliances.red.score == -1:
+                    continue
+
+                if not hasattr(match, "score_breakdown_2024"):
+                    continue
+
+                for c in ["red", "blue"]:
+                    results.append(
+                        [
+                            match.key,
+                            "-".join(
+                                [(k[3:]) for k in getattr(match.alliances, c).team_keys]
+                            ),
+                            sum(
+                                [
+                                    getattr(
+                                        match.score_breakdown_2024, c
+                                    ).teleop_amp_note_count,
+                                    getattr(
+                                        match.score_breakdown_2024, c
+                                    ).teleop_speaker_note_count,
+                                    getattr(
+                                        match.score_breakdown_2024, c
+                                    ).teleop_speaker_note_amplified_count,
+                                ]
+                            ),
+                        ]
+                    )
+
+        results.sort(key=lambda t: -t[-1])
+
+    return results[:25]

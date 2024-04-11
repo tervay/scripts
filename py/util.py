@@ -21,13 +21,14 @@ import bar_chart_race as bcr
 import numpy as np
 import numpy.typing as npt
 import pandas as pd
-from async_lru import alru_cache
+
+# from async_lru import alru_cache
 from rich import get_console
 from rich.bar import Bar
 from rich.table import Table
 from tqdm.asyncio import tqdm as atqdm
 from tqdm.rich import tqdm
-
+from statistics import median
 from protos.tpa import (
     EliminationAlliance,
     Event,
@@ -45,6 +46,7 @@ from protos.tpa import (
 )
 from py.tba import EventType
 from py.tpa.context_manager import tpa_cm
+import scipy.special as sc
 
 save_dir = "out"
 
@@ -62,8 +64,8 @@ T = TypeVar("T")
 OPPOSITE_COLOR = {"blue": "red", "red": "blue"}
 ENABLE_GEOCODING = False
 
-MAX_TEAMS_PAGE_NUM = 18
-MAX_TEAMS_PAGE_RANGE = 18 + 1
+MAX_TEAMS_PAGE_NUM = 17
+MAX_TEAMS_PAGE_RANGE = MAX_TEAMS_PAGE_NUM + 1
 CURRENT_YEAR = datetime.datetime.today().year
 CURRENT_YEAR_RANGE = CURRENT_YEAR + 1
 
@@ -170,7 +172,6 @@ def get_savepath(fname):
     return f"{save_dir}/{fname}"
 
 
-@alru_cache(maxsize=250)
 async def get_real_event_schedule(event_key: str):
     async with tpa_cm() as tpa:
         teams = [t async for t in tpa.get_event_teams(event_key=event_key)]
@@ -264,10 +265,6 @@ def filter_official_events(events: List[Event]):
     return list(filter(is_official_event, events))
 
 
-def is_official_event(event: Event) -> bool:
-    return event.event_type in EventType.SEASON_EVENT_TYPES
-
-
 def chunkify(a, n):
     k, m = divmod(len(a), n)
     return list(a[i * k + min(i, m) : (i + 1) * k + min(i + 1, m)] for i in range(n))
@@ -359,6 +356,26 @@ def wilson_sort(
     return [
         i
         for i in sorted(objs, key=lambda e: -_confidence(positive(e), negative(e), z=z))
+        if (positive(i) + negative(i)) >= minimum_total
+    ]
+
+
+def _confidence_bayes(ups, downs, L=10):
+    return sc.betaincinv(ups + 1, downs + 1, 1 / (1 + L))
+
+
+def bayes_sort(
+    objs: List[T],
+    positive: Callable[[T], float],
+    negative: Callable[[T], float],
+    minimum_total: float = 0,
+    L: int = 10,
+) -> List[T]:
+    return [
+        i
+        for i in sorted(
+            objs, key=lambda e: -_confidence_bayes(positive(e), negative(e), L=L)
+        )
         if (positive(i) + negative(i)) >= minimum_total
     ]
 

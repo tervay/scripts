@@ -22,6 +22,7 @@ SBs = {
     2020: (MatchScoreBreakdown2020, MatchScoreBreakdown2020Alliance),
     2022: (MatchScoreBreakdown2022, MatchScoreBreakdown2022Alliance),
     2023: (MatchScoreBreakdown2023, MatchScoreBreakdown2023Alliance),
+    2024: (MatchScoreBreakdown2024, MatchScoreBreakdown2024Alliance),
 }
 
 
@@ -58,6 +59,8 @@ def tba_match_to_tpa_match(m) -> Match:
         m.score_breakdown_2022 = MatchScoreBreakdown2022().from_dict(sb)
     if "2023" in m.event_key:
         m.score_breakdown_2023 = MatchScoreBreakdown2023().from_dict(sb)
+    if "2024" in m.event_key:
+        m.score_breakdown_2024 = MatchScoreBreakdown2024().from_dict(sb)
 
     return fix_match(m)
 
@@ -443,6 +446,7 @@ class TPAService(TpaBase):
     async def get_all_teams_by_year(self, year: int) -> AsyncIterator["Team"]:
         print_current_args()
         for pg_num in range(MAX_TEAMS_PAGE_RANGE):
+            print(f'\t{pg_num}')
             team_page = tba.teams(page=pg_num, year=year)
             for team in team_page:
                 yield fix_team(Team().from_dict(team))

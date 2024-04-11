@@ -349,8 +349,9 @@ message Match {
     Match_Score_Breakdown_2020 score_breakdown_2020 = 19;
     Match_Score_Breakdown_2022 score_breakdown_2022 = 20;
     Match_Score_Breakdown_2023 score_breakdown_2023 = 21;
+    Match_Score_Breakdown_2024 score_breakdown_2024 = 22;
   }
-  reserved 22 to 30;
+  reserved 23 to 30;
 
   int32 red_rp = 31;
   int32 blue_rp = 32;
@@ -769,6 +770,64 @@ message Match_Score_Breakdown_2023_Alliance {
   int32 teleopPoints = 35;
   int32 totalChargeStationPoints = 36;
   int32 totalPoints = 37;
+}
+message Match_Score_Breakdown_2024 {
+  Match_Score_Breakdown_2024_Alliance blue = 1;
+  Match_Score_Breakdown_2024_Alliance red = 2;
+}
+message Match_Score_Breakdown_2024_Alliance {
+  uint32 adjustPoints = 1;
+  uint32 autoAmpNoteCount = 2;
+  uint32 autoAmpNotePoints = 3;
+  uint32 autoLeavePoints = 4;
+  string autoLineRobot1 = 5;
+  string autoLineRobot2 = 6;
+  string autoLineRobot3 = 7;
+  uint32 autoPoints = 8;
+  uint32 autoSpeakerNoteCount = 9;
+  uint32 autoSpeakerNotePoints = 10;
+  uint32 autoTotalNotePoints = 11;
+  bool coopNotePlayed = 12;
+  bool coopertitionBonusAchieved = 13;
+  bool coopertitionCriteriaMet = 14;
+  uint32 endGameHarmonyPoints = 15;
+  uint32 endGameNoteInTrapPoints = 16;
+  uint32 endGameOnStagePoints = 17;
+  uint32 endGameParkPoints = 18;
+  string endGameRobot1 = 19;
+  string endGameRobot2 = 20;
+  string endGameRobot3 = 21;
+  uint32 endGameSpotLightBonusPoints = 22;
+  uint32 endGameTotalStagePoints = 23;
+  bool ensembleBonusAchieved = 24;
+  uint32 ensembleBonusOnStageRobotsThreshold = 25;
+  uint32 ensembleBonusStagePointsThreshold = 26;
+  uint32 foulCount = 27;
+  uint32 foulPoints = 28;
+  bool g206Penalty = 29;
+  bool g408Penalty = 30;
+  bool g424Penalty = 31;
+  bool melodyBonusAchieved = 32;
+  uint32 melodyBonusThreshold = 33;
+  uint32 melodyBonusThresholdCoop = 34;
+  uint32 melodyBonusThresholdNonCoop = 35;
+  bool micCenterStage = 36;
+  bool micStageLeft = 37;
+  bool micStageRight = 38;
+  uint32 rp = 39;
+  uint32 techFoulCount = 40;
+  uint32 teleopAmpNoteCount = 41;
+  uint32 teleopAmpNotePoints = 42;
+  uint32 teleopPoints = 43;
+  uint32 teleopSpeakerNoteAmplifiedCount = 44;
+  uint32 teleopSpeakerNoteAmplifiedPoints = 45;
+  uint32 teleopSpeakerNoteCount = 46;
+  uint32 teleopSpeakerNotePoints = 47;
+  uint32 teleopTotalNotePoints = 48;
+  uint32 totalPoints = 49;
+  bool trapCenterStage = 50;
+  bool trapStageLeft = 51;
+  bool trapStageRight = 52;
 }
 message Media {
   string type = 1;

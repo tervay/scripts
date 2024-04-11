@@ -402,16 +402,23 @@ async def fair_divisions_gen(year: int, states: str, fraction: float = 0.35):
 
 
 @expose
-def fair_divisions(in_fp, n_divs: int):
-    with file_cm(in_fp, "r") as f:
-        lines = f.readlines()
+async def fair_divisions(in_fp, n_divs: int):
+    # with file_cm(in_fp, "r") as f:
+    #     lines = f.readlines()
 
     teams = []
     perfs = {}
-    for line in lines:
-        tnum, pts = line.strip().split("\t")
-        perfs[int(tnum)] = float(pts)
-        teams.append(int(tnum))
+    # for line in lines:
+    #     tnum, pts = line.strip().split("\t")
+    #     perfs[int(tnum)] = float(pts)
+    #     teams.append(int(tnum))
+
+    async with tpa_cm() as tpa:
+        rankings = [r async for r in tpa.get_district_rankings(district_key="2024ne")]
+        rankings.sort(key=lambda t: t.point_total, reverse=True)
+        for r in rankings[:96]:
+            perfs[int(r.team_key[3:])] = r.point_total
+            teams.append(int(r.team_key[3:]))
 
     eval_limits = {
         "Average": {
@@ -484,7 +491,7 @@ def fair_divisions(in_fp, n_divs: int):
         n += 1
 
     def sort(x):
-        s = sb.get_team_year(x, 2023)
+        s = sb.get_team_year(x, 2024)
         if s["epa_end"] is None:
             return 0
 
@@ -509,6 +516,7 @@ async def create_and_sim_district(in_file: str, n_divs: int, prekey: str):
 @expose
 async def cmp_teams_to_file(year: int):
     count = 0
+
     with open("out.txt", "w+") as f:
         async with tpa_cm() as tpa:
             async for event in tpa.get_events_by_year(year=year):
@@ -564,7 +572,14 @@ async def geo_epa_balance(in_file: str, year: int, n_divs: int):
     with open(in_file, "r") as f:
         nums = [int(n.strip()) for n in f.readlines()]
 
-    team_epas = sb.get_team_years(year=year, limit=9999)
+    team_epas = [
+        x
+        for xs in [
+            sb.get_team_years(year=year, limit=9999, offset=1000 * i)
+            for i in range(0, 4)
+        ]
+        for x in xs
+    ]
     team_epa_lookup = {}
     for tepa in team_epas:
         team_epa_lookup[tepa["team"]] = tepa
@@ -621,4 +636,7 @@ async def geo_epa_balance(in_file: str, year: int, n_divs: int):
 
     with open("out_divs3.txt", "w+") as f:
         for i in range(n_divs):
-            print(",".join([str(x) for x in divs[i]]), file=f)
+            print(",".join([str(x) for x in sorted(divs[i])]), file=f)
+            if 2713 in divs[i]:
+                for x in sorted(divs[i]):
+                    print(x, file=f)
